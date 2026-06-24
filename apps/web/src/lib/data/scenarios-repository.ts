@@ -1,5 +1,4 @@
 import { isCloudMode } from "./storage-mode";
-import { createServerClient } from "@/lib/supabase/server";
 
 export interface CustomScenario {
   id: string;
@@ -105,6 +104,11 @@ function getDemoScenarios(): CustomScenario[] {
 // Supabase Mode Implementation
 // ===========================================
 
+async function getSupabaseClient() {
+  const { createServerClient } = await import("@/lib/supabase/server");
+  return createServerClient();
+}
+
 async function getCustomScenariosFromSupabase(
   workspaceId?: string
 ): Promise<CustomScenario[]> {
@@ -112,7 +116,7 @@ async function getCustomScenariosFromSupabase(
     return [];
   }
 
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   const { data, error } = await supabase
     .from("custom_scenarios")
@@ -136,7 +140,7 @@ async function createCustomScenarioInSupabase(
     return null;
   }
 
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   const { data, error } = await supabase
     .from("custom_scenarios")
@@ -171,7 +175,7 @@ async function updateCustomScenarioInSupabase(
     return false;
   }
 
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   const updateData: any = {};
   if (input.label) updateData.label = input.label;
@@ -201,7 +205,7 @@ async function deleteCustomScenarioFromSupabase(
     return false;
   }
 
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   const { error } = await supabase
     .from("custom_scenarios")

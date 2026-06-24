@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import { isCloudMode } from "./storage-mode";
-import { createServerClient } from "@/lib/supabase/server";
 
 const ROOT = path.resolve(process.cwd(), "../..");
 
@@ -81,8 +80,13 @@ function getTrainingDatasetsFromLocal(): TrainingDataResult {
 // Supabase Mode Implementation
 // ===========================================
 
+async function getSupabaseClient() {
+  const { createServerClient } = await import("@/lib/supabase/server");
+  return createServerClient();
+}
+
 async function getTrainingDatasetsFromSupabase(): Promise<TrainingDataResult> {
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   const { data, error } = await supabase
     .from("training_datasets")

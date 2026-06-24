@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { getStorageMode, isCloudMode, isLocalMode } from "./storage-mode";
-import { createServerClient } from "@/lib/supabase/server";
+import { isCloudMode } from "./storage-mode";
 
 const ROOT = path.resolve(process.cwd(), "../..");
 
@@ -127,8 +126,13 @@ function getRunByCaseNameFromLocal(caseName: string): RunRecord | null {
 // Supabase Mode Implementation
 // ===========================================
 
+async function getSupabaseClient() {
+  const { createServerClient } = await import("@/lib/supabase/server");
+  return createServerClient();
+}
+
 async function getRunsFromSupabase(): Promise<RunRecord[]> {
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   const { data, error } = await supabase
     .from("runs")
@@ -146,7 +150,7 @@ async function getRunsFromSupabase(): Promise<RunRecord[]> {
 async function getRunByCaseNameFromSupabase(
   caseName: string
 ): Promise<RunRecord | null> {
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   const { data, error } = await supabase
     .from("runs")
@@ -168,7 +172,7 @@ async function createRunInSupabase(input: {
   status?: string;
   workspace_id?: string;
 }): Promise<RunRecord | null> {
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   const { data, error } = await supabase
     .from("runs")
@@ -195,7 +199,7 @@ async function updateRunInSupabase(
   caseName: string,
   input: Partial<RunRecord>
 ): Promise<boolean> {
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   const updateData: any = {};
   if (input.status) updateData.status = input.status;

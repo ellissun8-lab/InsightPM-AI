@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import { isCloudMode } from "./storage-mode";
-import { createServerClient } from "@/lib/supabase/server";
 
 const ROOT = path.resolve(process.cwd(), "../..");
 
@@ -80,10 +79,15 @@ function getArtifactsForRunFromLocal(runId: string): Artifact[] {
 // Supabase Mode Implementation
 // ===========================================
 
+async function getSupabaseClient() {
+  const { createServerClient } = await import("@/lib/supabase/server");
+  return createServerClient();
+}
+
 async function getArtifactsForRunFromSupabase(
   runId: string
 ): Promise<Artifact[]> {
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   const { data, error } = await supabase
     .from("report_artifacts")
@@ -102,7 +106,7 @@ async function getArtifactsForRunFromSupabase(
 async function createArtifactInSupabase(
   input: CreateArtifactInput
 ): Promise<Artifact | null> {
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   const { data, error } = await supabase
     .from("report_artifacts")
@@ -129,7 +133,7 @@ async function createArtifactInSupabase(
 async function getArtifactDownloadUrlFromSupabase(
   artifactId: string
 ): Promise<string | null> {
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   // First, get the artifact record
   const { data: artifact, error } = await supabase

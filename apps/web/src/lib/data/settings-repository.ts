@@ -1,5 +1,4 @@
 import { isCloudMode } from "./storage-mode";
-import { createServerClient } from "@/lib/supabase/server";
 
 export interface WorkspaceSettings {
   workspaceName: string;
@@ -79,6 +78,11 @@ function getDefaultSettings(): WorkspaceSettings {
 // Supabase Mode Implementation
 // ===========================================
 
+async function getSupabaseClient() {
+  const { createServerClient } = await import("@/lib/supabase/server");
+  return createServerClient();
+}
+
 async function getWorkspaceSettingsFromSupabase(
   workspaceId?: string
 ): Promise<WorkspaceSettings> {
@@ -86,7 +90,7 @@ async function getWorkspaceSettingsFromSupabase(
     return getDefaultSettings();
   }
 
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   const { data, error } = await supabase
     .from("workspace_settings")
@@ -109,7 +113,7 @@ async function updateWorkspaceSettingsInSupabase(
     return false;
   }
 
-  const supabase = createServerClient();
+  const supabase = await getSupabaseClient();
 
   const { error } = await supabase.from("workspace_settings").upsert(
     {

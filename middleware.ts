@@ -1,14 +1,22 @@
-import { type NextRequest } from "next/server";
-import { updateSession } from "@/lib/supabase/middleware";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export const runtime = "nodejs";
+// TODO: Supabase Auth 接入时启用真实 middleware
+// import { updateSession } from "@/lib/supabase/middleware";
 
-export async function middleware(request: NextRequest) {
-  return await updateSession(request);
+export function middleware(_request: NextRequest) {
+  // 暂时 pass-through，不拦截任何路由
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/dashboard/:path*",
+    "/new-analysis/:path*",
+    "/runs/:path*",
+    "/analysis-report/:path*",
+    "/training-data/:path*",
+    "/evaluation/:path*",
+    "/settings/:path*",
   ],
 };
