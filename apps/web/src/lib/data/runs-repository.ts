@@ -21,11 +21,11 @@ export interface RunRecord {
 /**
  * Get all runs from the current storage mode.
  */
-export async function getRuns(): Promise<RunRecord[]> {
+export async function getRuns(): Promise<{ data: RunRecord[]; error: any }> {
   if (isCloudMode()) {
     return getRunsFromSupabase();
   }
-  return getRunsFromLocal();
+  return { data: getRunsFromLocal(), error: null };
 }
 
 /**
@@ -110,14 +110,20 @@ async function getSupabaseClient() {
   return createServerClient();
 }
 
-async function getRunsFromSupabase(): Promise<RunRecord[]> {
+async function getRunsFromSupabase(): Promise<{ data: RunRecord[]; error: any }> {
+  console.log("getRunsFromSupabase: PROOFLOOP_STORAGE_MODE =", process.env.PROOFLOOP_STORAGE_MODE);
+  console.log("getRunsFromSupabase: NEXT_PUBLIC_SUPABASE_URL =", process.env.NEXT_PUBLIC_SUPABASE_URL ? "set" : "NOT SET");
+
   const supabase = await getSupabaseClient();
   const { data, error } = await supabase.from("runs").select("*").order("updated_at", { ascending: false });
+
+  console.log("getRunsFromSupabase: data length =", data?.length);
   if (error) {
-    console.error("Error fetching runs from Supabase:", error);
-    return [];
+    console.error("getRunsFromSupabase error:", error);
+    return { data: [], error };
   }
-  return (data || []).map(mapSupabaseRunToRecord);
+
+  return { data: (data || []).map(mapSupabaseRunToRecord), error: null };
 }
 
 async function getRunByCaseNameFromSupabase(caseName: string): Promise<RunRecord | null> {
