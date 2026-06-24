@@ -33,7 +33,14 @@ export async function GET() {
       totalFeedbacks: trainingData.feedbacks,
     };
 
-    return NextResponse.json({ runs, datasets });
+    return NextResponse.json(
+      { runs, datasets },
+      {
+        headers: {
+          "Cache-Control": "no-store, no-cache, must-revalidate",
+        },
+      }
+    );
   } catch (err: any) {
     console.error("/api/runs: unexpected error:", err);
     return NextResponse.json(

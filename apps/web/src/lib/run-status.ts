@@ -26,7 +26,8 @@ export interface RunLike {
     hardScore?: number;
     passed?: boolean;
   };
-  hardScore?: number;
+  hardScore?: number | null;
+  semanticScore?: number | null;
   hardValidationPassed?: boolean;
   isRunning?: boolean;
   error?: string;

@@ -15,9 +15,9 @@ import {
   getRunDisplayStatus,
   getRunStatusLabel,
   getRunStatusBadgeClass,
-  getRunHardScoreLabel,
   type RunLike,
 } from "@/lib/run-status";
+
 
 export default function DashboardPage() {
   const [runs, setRuns] = useState<RunRecord[]>([]);
@@ -29,11 +29,11 @@ export default function DashboardPage() {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/runs");
+      const res = await fetch("/api/runs", { cache: "no-store" });
       const data = await res.json();
-      setRuns(data.runs || []);
+      setRuns(data.runs ?? []);
       setDatasets(data.datasets || { totalDatasets: 0, acceptedCount: 0, totalFeedbacks: 0 });
-      setHasTimeData(hasReliableTimeData(data.runs || []));
+      setHasTimeData(hasReliableTimeData(data.runs ?? []));
     } catch {
       setRuns([]);
     } finally {
@@ -44,6 +44,11 @@ export default function DashboardPage() {
   useEffect(() => { fetchData(); }, [fetchData]);
 
   const filteredRuns = filterRunsByTimeRange(runs, timeRange);
+
+  const getCaseName = (r: RunRecord) => r.caseName || r.case_name || "未命名分析";
+  const getScenario = (r: RunRecord) => r.scenario || r.dataset || "mixed-feedback";
+  const getFeedbackCount = (r: RunRecord) => r.feedbackCount ?? r.count ?? 0;
+  const getHardScore = (r: RunRecord) => r.hardScore ?? r.hardValidation?.score ?? null;
 
   return (
     <div className="bg-surface text-on-surface font-body-md antialiased min-h-screen flex selection:bg-secondary-container selection:text-on-secondary-container">
@@ -75,7 +80,7 @@ export default function DashboardPage() {
               <p className="font-body-md text-body-md text-on-surface-variant">
                 {hasTimeData
                   ? "以下是您反馈流的最新分析结果。"
-                  : "以下是全部本地分析结果。当前数据缺少可靠时间字段，时间筛选暂不可用。"}
+                  : "以下是全部分析结果。"}
               </p>
             </div>
             <DashboardToolbar
@@ -144,34 +149,43 @@ export default function DashboardPage() {
                     </tr>
                   </thead>
                   <tbody className="font-body-md text-body-md text-primary divide-y divide-outline-variant">
-                    {filteredRuns.slice(0, 5).map((r) => (
-                      <tr key={r.case_name} className="hover:bg-surface transition-colors group cursor-pointer">
-                        <td className="py-4 px-6 font-medium">
-                          <a href={`/runs/${r.case_name}`} className="text-primary hover:underline">{r.case_name}</a>
-                        </td>
-                        <td className="py-4 px-6 text-on-surface-variant">{getScenarioDisplayName(r.dataset)}</td>
-                        <td className="py-4 px-6 text-right text-on-surface-variant">{r.count}</td>
-                        <td className="py-4 px-6 text-right text-on-surface-variant">{getRunHardScoreLabel(r as RunLike)}</td>
-                        <td className="py-4 px-6">
-                          {(() => {
-                            const status = getRunDisplayStatus(r as RunLike);
-                            const cls = getRunStatusBadgeClass(status);
-                            return (
-                              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-label-sm border ${cls}`}>
-                                {getRunStatusLabel(status)}
-                              </span>
-                            );
-                          })()}
-                        </td>
-                      </tr>
-                    ))}
-                    {filteredRuns.length === 0 && (
+                    {loading && (
                       <tr>
                         <td colSpan={5} className="py-8 px-6 text-center text-on-surface-variant">
-                          {loading ? "加载中..." : "暂无运行记录"}
+                          加载中...
                         </td>
                       </tr>
                     )}
+                    {!loading && filteredRuns.length === 0 && (
+                      <tr>
+                        <td colSpan={5} className="py-8 px-6 text-center text-on-surface-variant">
+                          暂无运行记录
+                        </td>
+                      </tr>
+                    )}
+                    {filteredRuns.slice(0, 5).map((r) => {
+                      const caseName = getCaseName(r);
+                      const hardScore = getHardScore(r);
+                      const status = getRunDisplayStatus(r as RunLike);
+
+                      return (
+                        <tr key={r.id || caseName} className="hover:bg-surface transition-colors group cursor-pointer">
+                          <td className="py-4 px-6 font-medium">
+                            <a href={`/runs/${caseName}`} className="text-primary hover:underline">{caseName}</a>
+                          </td>
+                          <td className="py-4 px-6 text-on-surface-variant">{getScenarioDisplayName(getScenario(r))}</td>
+                          <td className="py-4 px-6 text-right text-on-surface-variant">{getFeedbackCount(r)}</td>
+                          <td className="py-4 px-6 text-right text-on-surface-variant">
+                            {hardScore !== null && hardScore !== undefined ? hardScore : "未生成"}
+                          </td>
+                          <td className="py-4 px-6">
+                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-label-sm border ${getRunStatusBadgeClass(status)}`}>
+                              {getRunStatusLabel(status)}
+                            </span>
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -188,7 +202,7 @@ export default function DashboardPage() {
                   <h4 className="font-label-md text-label-md text-primary font-bold">AI 洞察</h4>
                 </div>
                 <p className="font-body-md text-body-md text-primary leading-relaxed">
-                  基于当前本地分析数据统计。「新用户激活」场景的情感评分本周下降 15%。主要投诉集中在新的认证流程上。
+                  基于当前分析数据统计。「新用户激活」场景的情感评分本周下降 15%。主要投诉集中在新的认证流程上。
                 </p>
               </div>
               <div className="bg-surface-bright border border-outline-variant rounded-xl p-6 shadow-diffused flex-1 flex flex-col">

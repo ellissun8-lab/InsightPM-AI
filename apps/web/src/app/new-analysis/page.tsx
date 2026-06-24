@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 import { Upload, Play, CloudUpload, FileText, Settings2, Bot, FileUp } from "lucide-react";
 import { getScenarioDisplayName } from "@/lib/report-display";
@@ -16,6 +17,7 @@ const DATASETS = [
 ];
 
 export default function NewAnalysisPage() {
+  const router = useRouter();
   const [caseName, setCaseName] = useState("");
   const [dataset, setDataset] = useState("enterprise-saas-renewal");
   const [file, setFile] = useState<File | null>(null);
@@ -57,12 +59,13 @@ export default function NewAnalysisPage() {
           // Cloud 模式：显示提示，跳转到运行历史
           setResult("线上分析任务已创建，后台分析 Worker 将在后续版本启用。");
           setTimeout(() => {
-            window.location.href = "/runs";
-          }, 2000);
+            router.push("/runs");
+            router.refresh();
+          }, 1500);
         } else {
           // Local 模式：跳转到详情页
           setResult("分析完成");
-          window.location.href = `/runs/${caseName}`;
+          router.push(`/runs/${caseName}`);
         }
       } else {
         setResult("分析失败: " + (data.error || "未知错误"));

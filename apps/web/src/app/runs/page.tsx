@@ -8,20 +8,20 @@ import {
   getRunDisplayStatus,
   getRunStatusLabel,
   getRunStatusBadgeClass,
-  getRunHardScoreLabel,
   type RunLike,
 } from "@/lib/run-status";
+import type { RunListItem } from "@/lib/types/run";
 
 export default function RunsPage() {
-  const [runs, setRuns] = useState<any[]>([]);
+  const [runs, setRuns] = useState<RunListItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchRuns = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/runs");
+      const res = await fetch("/api/runs", { cache: "no-store" });
       const data = await res.json();
-      setRuns(data.runs || []);
+      setRuns(data.runs ?? []);
     } catch {
       setRuns([]);
     } finally {
@@ -30,6 +30,13 @@ export default function RunsPage() {
   }, []);
 
   useEffect(() => { fetchRuns(); }, [fetchRuns]);
+
+  const getCaseName = (r: RunListItem) => r.caseName || r.case_name || "未命名分析";
+  const getScenario = (r: RunListItem) => r.scenario || r.dataset || "mixed-feedback";
+  const getFeedbackCount = (r: RunListItem) => r.feedbackCount ?? r.count ?? 0;
+  const getHardScore = (r: RunListItem) => r.hardScore ?? r.hardValidation?.score ?? null;
+  const getSemanticScore = (r: RunListItem) => r.semanticScore ?? r.semanticValidation?.score ?? null;
+  const getDuration = (r: RunListItem) => r.durationMs ?? r.duration_ms ?? null;
 
   return (
     <div className="flex min-h-screen bg-surface">
@@ -65,9 +72,10 @@ export default function RunsPage() {
             </div>
             <select className="bg-surface-container-lowest border border-outline-variant text-on-surface text-body-md font-body-md rounded-lg px-4 py-2 appearance-none">
               <option value="all">状态：全部</option>
-              <option value="pass">通过</option>
-              <option value="fail">失败</option>
+              <option value="pending">等待中</option>
               <option value="running">运行中</option>
+              <option value="completed">已完成</option>
+              <option value="failed">失败</option>
             </select>
             <select className="bg-surface-container-lowest border border-outline-variant text-on-surface text-body-md font-body-md rounded-lg px-4 py-2 appearance-none">
               <option value="all">场景：全部</option>
@@ -121,65 +129,67 @@ export default function RunsPage() {
                     </td>
                   </tr>
                 )}
-                {runs.map((r: any) => (
-                  <tr
-                    key={r.id || r.caseName}
-                    className="hover:bg-surface-container-low transition-colors group"
-                  >
-                    <td className="py-4 px-lg text-body-md font-body-md text-on-surface font-medium flex items-center gap-2">
-                      <FolderOpen size={16} className="text-on-surface-variant/60" />
-                      {r.caseName}
-                    </td>
-                    <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
-                      {getScenarioDisplayName(r.scenario || r.dataset)}
-                    </td>
-                    <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
-                      {r.feedbackCount}
-                    </td>
-                    <td className="py-4 px-4">
-                      <span className="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high text-primary">
-                        {r.hardScore ?? "未生成"}
-                      </span>
-                    </td>
-                    <td className="py-4 px-4">
-                      <span className="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high text-primary">
-                        {r.semanticScore ?? "未生成"}
-                      </span>
-                    </td>
-                    <td className="py-4 px-4">
-                      {(() => {
-                        const status = getRunDisplayStatus(r as RunLike);
-                        const cls = getRunStatusBadgeClass(status);
-                        return (
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm font-bold border ${cls}`}>
-                            {getRunStatusLabel(status)}
-                          </span>
-                        );
-                      })()}
-                    </td>
-                    <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
-                      {r.durationMs
-                        ? r.durationMs < 1000
-                          ? `${r.durationMs}ms`
-                          : `${(r.durationMs / 1000).toFixed(1)}s`
-                        : "-"}
-                    </td>
-                    <td className="py-4 px-lg text-right">
-                      {r.status === "pending" ? (
-                        <span className="text-on-surface-variant font-label-md">
-                          等待报告
+                {runs.map((r) => {
+                  const caseName = getCaseName(r);
+                  const hardScore = getHardScore(r);
+                  const semanticScore = getSemanticScore(r);
+                  const duration = getDuration(r);
+                  const status = getRunDisplayStatus(r as RunLike);
+
+                  return (
+                    <tr
+                      key={r.id || caseName}
+                      className="hover:bg-surface-container-low transition-colors group"
+                    >
+                      <td className="py-4 px-lg text-body-md font-body-md text-on-surface font-medium flex items-center gap-2">
+                        <FolderOpen size={16} className="text-on-surface-variant/60" />
+                        {caseName}
+                      </td>
+                      <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
+                        {getScenarioDisplayName(getScenario(r))}
+                      </td>
+                      <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
+                        {getFeedbackCount(r)}
+                      </td>
+                      <td className="py-4 px-4">
+                        <span className="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high text-primary">
+                          {hardScore !== null && hardScore !== undefined ? hardScore : "未生成"}
                         </span>
-                      ) : (
-                        <a
-                          href={`/runs/${r.caseName}`}
-                          className="text-primary hover:text-primary font-label-md transition-colors opacity-0 group-hover:opacity-100"
-                        >
-                          查看报告
-                        </a>
-                      )}
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                      <td className="py-4 px-4">
+                        <span className="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high text-primary">
+                          {semanticScore !== null && semanticScore !== undefined ? semanticScore : "未生成"}
+                        </span>
+                      </td>
+                      <td className="py-4 px-4">
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm font-bold border ${getRunStatusBadgeClass(status)}`}>
+                          {getRunStatusLabel(status)}
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
+                        {duration
+                          ? duration < 1000
+                            ? `${duration}ms`
+                            : `${(duration / 1000).toFixed(1)}s`
+                          : "-"}
+                      </td>
+                      <td className="py-4 px-lg text-right">
+                        {r.status === "completed" ? (
+                          <a
+                            href={`/runs/${caseName}`}
+                            className="text-primary hover:text-primary font-label-md transition-colors opacity-0 group-hover:opacity-100"
+                          >
+                            查看报告
+                          </a>
+                        ) : (
+                          <span className="text-on-surface-variant font-label-md">
+                            等待报告
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
