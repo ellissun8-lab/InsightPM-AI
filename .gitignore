@@ -48,13 +48,14 @@ next-env.d.ts
 
 # ===========================================
 # Local Data (不上传到 GitHub)
+# 只忽略根目录的数据目录，不忽略 apps/web/src/app 下的源码路由
 # ===========================================
-runs/
-training-data/
-evaluation-data/
-uploads/
-tmp/
-temp/
+/runs/
+/training-data/
+/evaluation-data/
+/uploads/
+/tmp/
+/temp/
 
 # ===========================================
 # Validation & Training Reports
