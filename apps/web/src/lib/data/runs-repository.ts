@@ -110,6 +110,11 @@ async function getSupabaseClient() {
   return createServerClient();
 }
 
+async function getAdminClient() {
+  const { createAdminClient } = await import("@/lib/supabase/admin");
+  return createAdminClient();
+}
+
 async function getRunsFromSupabase(): Promise<{ data: RunRecord[]; error: any }> {
   console.log("getRunsFromSupabase: PROOFLOOP_STORAGE_MODE =", process.env.PROOFLOOP_STORAGE_MODE);
   console.log("getRunsFromSupabase: NEXT_PUBLIC_SUPABASE_URL =", process.env.NEXT_PUBLIC_SUPABASE_URL ? "set" : "NOT SET");
@@ -141,7 +146,8 @@ async function createRunInSupabase(input: {
   workspace_id?: string;
   metadata?: Record<string, any>;
 }): Promise<{ data: RunRecord | null; error: any }> {
-  const supabase = await getSupabaseClient();
+  // Use admin client to bypass RLS
+  const supabase = await getAdminClient();
   const now = new Date().toISOString();
 
   const { data, error } = await supabase
