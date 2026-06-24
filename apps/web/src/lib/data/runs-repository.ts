@@ -70,13 +70,23 @@ export async function createRun(input: {
 }
 
 /**
- * Update a run record
+ * Update a run record by case name
  */
 export async function updateRun(caseName: string, input: Partial<RunRecord>): Promise<boolean> {
   if (isCloudMode()) {
-    return updateRunInSupabase(caseName, input);
+    return updateRunByCaseNameInSupabase(caseName, input);
   }
   return false;
+}
+
+/**
+ * Update a run record by id
+ */
+export async function updateRunById(id: string, input: Partial<RunRecord>): Promise<{ data: RunRecord | null; error: any }> {
+  if (isCloudMode()) {
+    return updateRunByIdInSupabase(id, input);
+  }
+  return { data: null, error: null };
 }
 
 // Local Mode
@@ -211,7 +221,7 @@ async function createRunInSupabase(input: {
   return { data: mapSupabaseRunToRecord(data), error: null };
 }
 
-async function updateRunInSupabase(caseName: string, input: Partial<RunRecord>): Promise<boolean> {
+async function updateRunByCaseNameInSupabase(caseName: string, input: Partial<RunRecord>): Promise<boolean> {
   const supabase = await getSupabaseClient();
   const updateData: any = {};
   if (input.status) updateData.status = input.status;
@@ -223,6 +233,34 @@ async function updateRunInSupabase(caseName: string, input: Partial<RunRecord>):
 
   const { error } = await supabase.from("runs").update(updateData).eq("case_name", caseName);
   return !error;
+}
+
+async function updateRunByIdInSupabase(id: string, input: Partial<RunRecord>): Promise<{ data: RunRecord | null; error: any }> {
+  // Use admin client to bypass RLS
+  const supabase = await getAdminClient();
+
+  const updateData: any = {};
+  if (input.status !== undefined) updateData.status = input.status;
+  if (input.hardScore !== undefined) updateData.hard_score = input.hardScore;
+  if (input.semanticScore !== undefined) updateData.semantic_score = input.semanticScore;
+  if (input.evidenceBroken !== undefined) updateData.evidence_broken = input.evidenceBroken;
+  if (input.finishedAt !== undefined) updateData.finished_at = input.finishedAt;
+  if (input.updatedAt !== undefined) updateData.updated_at = input.updatedAt;
+  if (input.metadata !== undefined) updateData.metadata = input.metadata;
+
+  const { data, error } = await supabase
+    .from("runs")
+    .update(updateData)
+    .eq("id", id)
+    .select("*")
+    .single();
+
+  if (error) {
+    console.error("updateRunById failed:", error);
+    return { data: null, error };
+  }
+
+  return { data: mapSupabaseRunToRecord(data), error: null };
 }
 
 // Helpers
