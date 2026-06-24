@@ -67,22 +67,16 @@ export async function POST(req: NextRequest) {
 
       if (updateError || !completedRun) {
         console.error("updateRunById failed:", updateError);
-        // 即使更新失败，也返回创建的 run（pending 状态）
-        return NextResponse.json({
-          ok: true,
-          mode: "cloud",
-          status: "pending",
-          message: "分析任务已创建，但状态更新失败。",
-          run: {
-            id: run.id,
-            caseName: run.case_name,
-            scenario: run.dataset,
-            status: run.status,
-            feedbackCount: run.count,
-            createdAt: run.createdAt,
-            updatedAt: run.updatedAt,
+        return NextResponse.json(
+          {
+            ok: false,
+            error: "更新分析结果失败",
+            detail: updateError?.message || "Unknown error",
+            code: updateError?.code,
+            hint: updateError?.hint,
           },
-        });
+          { status: 500 }
+        );
       }
 
       return NextResponse.json({
