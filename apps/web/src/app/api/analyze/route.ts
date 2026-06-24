@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStorageMode } from "@/lib/data/storage-mode";
+import { createRun } from "@/lib/data/runs-repository";
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,22 +16,40 @@ export async function POST(req: NextRequest) {
 
     const mode = getStorageMode();
 
-    // Cloud 模式：不执行本地 pipeline
+    // Cloud 模式：创建 pending run 记录到 Supabase
     if (mode === "cloud") {
-      const run = {
+      const run = await createRun({
         case_name: caseName,
         dataset: dataset || "mixed-feedback",
-        count: count || 124,
+        count: count || 0,
         status: "pending",
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      };
+        metadata: {
+          mode: "cloud",
+          source: "vercel",
+          message: "Cloud analysis worker is not implemented yet.",
+        },
+      });
+
+      if (!run) {
+        return NextResponse.json(
+          { error: "创建分析任务失败" },
+          { status: 500 }
+        );
+      }
 
       return NextResponse.json({
         ok: true,
         mode: "cloud",
-        message: "Cloud analysis worker is not implemented yet.",
-        run,
+        status: "pending",
+        message: "线上分析任务已创建，后台分析 Worker 将在后续版本启用。",
+        run: {
+          caseName: run.case_name,
+          scenario: run.dataset,
+          status: run.status,
+          feedbackCount: run.count,
+          createdAt: run.createdAt,
+          updatedAt: run.updatedAt,
+        },
       });
     }
 

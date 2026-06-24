@@ -20,6 +20,7 @@ export interface RunRecord {
 
 /**
  * Get all runs from the current storage mode.
+ * Returns data compatible with /api/runs response format.
  */
 export async function getRuns(): Promise<RunRecord[]> {
   if (isCloudMode()) {
@@ -31,7 +32,9 @@ export async function getRuns(): Promise<RunRecord[]> {
 /**
  * Get a single run by case name
  */
-export async function getRunByCaseName(caseName: string): Promise<RunRecord | null> {
+export async function getRunByCaseName(
+  caseName: string
+): Promise<RunRecord | null> {
   if (isCloudMode()) {
     return getRunByCaseNameFromSupabase(caseName);
   }
@@ -52,23 +55,32 @@ export async function createRun(input: {
   if (isCloudMode()) {
     return createRunInSupabase(input);
   }
+  // Local mode: runs are created by pipeline, not API
   return null;
 }
 
 /**
  * Update a run record
  */
-export async function updateRun(caseName: string, input: Partial<RunRecord>): Promise<boolean> {
+export async function updateRun(
+  caseName: string,
+  input: Partial<RunRecord>
+): Promise<boolean> {
   if (isCloudMode()) {
     return updateRunInSupabase(caseName, input);
   }
+  // Local mode: runs are updated by pipeline, not API
   return false;
 }
 
-// Local Mode
+// ===========================================
+// Local Mode Implementation
+// ===========================================
+
 function getRunsFromLocal(): RunRecord[] {
   const runsDir = path.join(ROOT, "runs");
   const runs: RunRecord[] = [];
+
   if (!fs.existsSync(runsDir)) return runs;
 
   for (const d of fs.readdirSync(runsDir)) {
@@ -78,8 +90,11 @@ function getRunsFromLocal(): RunRecord[] {
       const s = JSON.parse(fs.readFileSync(summaryPath, "utf-8"));
       const name = s.case_name || s.caseName;
       if (!name) continue;
+
       const createdAt = s.startedAt || s.timestamp || s.date || null;
-      const updatedAt = s.finishedAt || s.startedAt || s.timestamp || s.date || null;
+      const updatedAt =
+        s.finishedAt || s.startedAt || s.timestamp || s.date || null;
+
       runs.push({
         case_name: name,
         dataset: s.dataset || s.datasetName,
@@ -96,7 +111,11 @@ function getRunsFromLocal(): RunRecord[] {
     } catch {}
   }
 
-  return runs.sort((a, b) => new Date(b.updatedAt || 0).getTime() - new Date(a.updatedAt || 0).getTime());
+  return runs.sort(
+    (a, b) =>
+      new Date(b.updatedAt || 0).getTime() -
+      new Date(a.updatedAt || 0).getTime()
+  );
 }
 
 function getRunByCaseNameFromLocal(caseName: string): RunRecord | null {
@@ -104,7 +123,10 @@ function getRunByCaseNameFromLocal(caseName: string): RunRecord | null {
   return runs.find((r) => r.case_name === caseName) || null;
 }
 
-// Supabase Mode
+// ===========================================
+// Supabase Mode Implementation
+// ===========================================
+
 async function getSupabaseClient() {
   const { createServerClient } = await import("@/lib/supabase/server");
   return createServerClient();
@@ -112,18 +134,35 @@ async function getSupabaseClient() {
 
 async function getRunsFromSupabase(): Promise<RunRecord[]> {
   const supabase = await getSupabaseClient();
-  const { data, error } = await supabase.from("runs").select("*").order("updated_at", { ascending: false });
+
+  const { data, error } = await supabase
+    .from("runs")
+    .select("*")
+    .order("updated_at", { ascending: false });
+
   if (error) {
     console.error("Error fetching runs from Supabase:", error);
     return [];
   }
+
   return (data || []).map(mapSupabaseRunToRecord);
 }
 
-async function getRunByCaseNameFromSupabase(caseName: string): Promise<RunRecord | null> {
+async function getRunByCaseNameFromSupabase(
+  caseName: string
+): Promise<RunRecord | null> {
   const supabase = await getSupabaseClient();
-  const { data, error } = await supabase.from("runs").select("*").eq("case_name", caseName).single();
-  if (error || !data) return null;
+
+  const { data, error } = await supabase
+    .from("runs")
+    .select("*")
+    .eq("case_name", caseName)
+    .single();
+
+  if (error || !data) {
+    return null;
+  }
+
   return mapSupabaseRunToRecord(data);
 }
 
@@ -136,6 +175,7 @@ async function createRunInSupabase(input: {
   metadata?: Record<string, any>;
 }): Promise<RunRecord | null> {
   const supabase = await getSupabaseClient();
+
   const now = new Date().toISOString();
 
   const { data, error } = await supabase
@@ -161,24 +201,39 @@ async function createRunInSupabase(input: {
     console.error("Error creating run in Supabase:", error);
     return null;
   }
+
   return mapSupabaseRunToRecord(data);
 }
 
-async function updateRunInSupabase(caseName: string, input: Partial<RunRecord>): Promise<boolean> {
+async function updateRunInSupabase(
+  caseName: string,
+  input: Partial<RunRecord>
+): Promise<boolean> {
   const supabase = await getSupabaseClient();
+
   const updateData: any = {};
   if (input.status) updateData.status = input.status;
   if (input.count) updateData.feedback_count = input.count;
-  if (input.hardValidation?.score) updateData.hard_score = input.hardValidation.score;
-  if (input.semanticValidation?.score) updateData.semantic_score = input.semanticValidation.score;
-  if (input.semanticValidation?.evidenceBroken !== undefined) updateData.evidence_broken = input.semanticValidation.evidenceBroken;
+  if (input.hardValidation?.score)
+    updateData.hard_score = input.hardValidation.score;
+  if (input.semanticValidation?.score)
+    updateData.semantic_score = input.semanticValidation.score;
+  if (input.semanticValidation?.evidenceBroken !== undefined)
+    updateData.evidence_broken = input.semanticValidation.evidenceBroken;
   if (input.updatedAt) updateData.updated_at = input.updatedAt;
 
-  const { error } = await supabase.from("runs").update(updateData).eq("case_name", caseName);
+  const { error } = await supabase
+    .from("runs")
+    .update(updateData)
+    .eq("case_name", caseName);
+
   return !error;
 }
 
+// ===========================================
 // Helpers
+// ===========================================
+
 function mapSupabaseRunToRecord(row: any): RunRecord {
   return {
     case_name: row.case_name,
@@ -186,9 +241,16 @@ function mapSupabaseRunToRecord(row: any): RunRecord {
     count: row.feedback_count || 0,
     status: row.status || "pending",
     validation: null,
-    hardValidation: row.hard_score ? { score: row.hard_score, status: "pass" } : null,
+    hardValidation: row.hard_score
+      ? { score: row.hard_score, status: "pass" }
+      : null,
     semanticValidation: row.semantic_score
-      ? { score: row.semantic_score, evidenceBroken: row.evidence_broken || 0, criticalIssues: 0, status: "pass" }
+      ? {
+          score: row.semantic_score,
+          evidenceBroken: row.evidence_broken || 0,
+          criticalIssues: 0,
+          status: "pass",
+        }
       : null,
     timestamp: row.started_at || row.created_at,
     createdAt: row.created_at,

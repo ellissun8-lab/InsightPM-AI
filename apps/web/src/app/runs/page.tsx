@@ -143,7 +143,7 @@ export default function RunsPage() {
                     </td>
                     <td className="py-4 px-4">
                       <span className="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high text-primary">
-                        {r.semanticValidation?.score ?? "-"}
+                        {r.semanticValidation?.score ?? "未生成"}
                       </span>
                     </td>
                     <td className="py-4 px-4">
@@ -165,12 +165,18 @@ export default function RunsPage() {
                         : "-"}
                     </td>
                     <td className="py-4 px-lg text-right">
-                      <a
-                        href={`/runs/${r.case_name}`}
-                        className="text-primary hover:text-primary font-label-md transition-colors opacity-0 group-hover:opacity-100"
-                      >
-                        查看报告
-                      </a>
+                      {r.status === "pending" ? (
+                        <span className="text-on-surface-variant font-label-md">
+                          等待报告
+                        </span>
+                      ) : (
+                        <a
+                          href={`/runs/${r.case_name}`}
+                          className="text-primary hover:text-primary font-label-md transition-colors opacity-0 group-hover:opacity-100"
+                        >
+                          查看报告
+                        </a>
+                      )}
                     </td>
                   </tr>
                 ))}
