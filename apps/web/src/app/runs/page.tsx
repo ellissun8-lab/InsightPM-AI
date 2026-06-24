@@ -123,27 +123,27 @@ export default function RunsPage() {
                 )}
                 {runs.map((r: any) => (
                   <tr
-                    key={r.case_name}
+                    key={r.id || r.caseName}
                     className="hover:bg-surface-container-low transition-colors group"
                   >
                     <td className="py-4 px-lg text-body-md font-body-md text-on-surface font-medium flex items-center gap-2">
                       <FolderOpen size={16} className="text-on-surface-variant/60" />
-                      {r.case_name}
+                      {r.caseName}
                     </td>
                     <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
-                      {getScenarioDisplayName(r.dataset)}
+                      {getScenarioDisplayName(r.scenario || r.dataset)}
                     </td>
                     <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
-                      {r.count}
+                      {r.feedbackCount}
                     </td>
                     <td className="py-4 px-4">
                       <span className="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high text-primary">
-                        {getRunHardScoreLabel(r as RunLike)}
+                        {r.hardScore ?? "未生成"}
                       </span>
                     </td>
                     <td className="py-4 px-4">
                       <span className="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high text-primary">
-                        {r.semanticValidation?.score ?? "未生成"}
+                        {r.semanticScore ?? "未生成"}
                       </span>
                     </td>
                     <td className="py-4 px-4">
@@ -158,10 +158,10 @@ export default function RunsPage() {
                       })()}
                     </td>
                     <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
-                      {r.duration_ms
-                        ? r.duration_ms < 1000
-                          ? `${r.duration_ms}ms`
-                          : `${(r.duration_ms / 1000).toFixed(1)}s`
+                      {r.durationMs
+                        ? r.durationMs < 1000
+                          ? `${r.durationMs}ms`
+                          : `${(r.durationMs / 1000).toFixed(1)}s`
                         : "-"}
                     </td>
                     <td className="py-4 px-lg text-right">
@@ -171,7 +171,7 @@ export default function RunsPage() {
                         </span>
                       ) : (
                         <a
-                          href={`/runs/${r.case_name}`}
+                          href={`/runs/${r.caseName}`}
                           className="text-primary hover:text-primary font-label-md transition-colors opacity-0 group-hover:opacity-100"
                         >
                           查看报告

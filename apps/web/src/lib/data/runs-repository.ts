@@ -5,17 +5,31 @@ import { isCloudMode } from "./storage-mode";
 const ROOT = path.resolve(process.cwd(), "../..");
 
 export interface RunRecord {
-  case_name: string;
+  // Primary camelCase fields
+  id: string;
+  caseName: string;
+  scenario: string;
   dataset: string;
-  count: number;
   status: string;
-  validation: any;
-  hardValidation: any;
-  semanticValidation: any;
-  timestamp: string | null;
+  feedbackCount: number;
+  hardScore: number | null;
+  semanticScore: number | null;
+  evidenceBroken: number | null;
+  hardValidation: any | null;
+  semanticValidation: any | null;
   createdAt: string | null;
   updatedAt: string | null;
+  startedAt: string | null;
+  finishedAt: string | null;
+  durationMs: number | null;
+  metadata: any | null;
+
+  // Legacy compatibility fields
+  case_name: string;
+  count: number;
+  timestamp: string | null;
   duration_ms: number | null;
+  validation: any;
 }
 
 /**
@@ -80,18 +94,35 @@ function getRunsFromLocal(): RunRecord[] {
       if (!name) continue;
       const createdAt = s.startedAt || s.timestamp || s.date || null;
       const updatedAt = s.finishedAt || s.startedAt || s.timestamp || s.date || null;
+      const feedbackCount = s.count || s.rawCount || 0;
+      const dataset = s.dataset || s.datasetName || "";
+
       runs.push({
-        case_name: name,
-        dataset: s.dataset || s.datasetName,
-        count: s.count || s.rawCount,
-        status: s.status,
-        validation: s.validation,
-        hardValidation: s.hardValidation,
-        semanticValidation: s.semanticValidation,
-        timestamp: createdAt,
+        // Primary camelCase fields
+        id: d,
+        caseName: name,
+        scenario: dataset,
+        dataset,
+        status: s.status || "pending",
+        feedbackCount,
+        hardScore: s.hardValidation?.score ?? null,
+        semanticScore: s.semanticValidation?.score ?? null,
+        evidenceBroken: s.semanticValidation?.evidenceBroken ?? null,
+        hardValidation: s.hardValidation || null,
+        semanticValidation: s.semanticValidation || null,
         createdAt,
         updatedAt,
-        duration_ms: s.duration_ms || s.durationMs,
+        startedAt: createdAt,
+        finishedAt: s.finishedAt || null,
+        durationMs: s.duration_ms || s.durationMs || null,
+        metadata: null,
+
+        // Legacy compatibility
+        case_name: name,
+        count: feedbackCount,
+        timestamp: updatedAt,
+        duration_ms: s.duration_ms || s.durationMs || null,
+        validation: s.validation || null,
       });
     } catch {}
   }
@@ -196,19 +227,36 @@ async function updateRunInSupabase(caseName: string, input: Partial<RunRecord>):
 
 // Helpers
 function mapSupabaseRunToRecord(row: any): RunRecord {
+  const createdAt = row.created_at || null;
+  const updatedAt = row.updated_at || createdAt;
+
   return {
-    case_name: row.case_name,
+    // Primary camelCase fields
+    id: row.id,
+    caseName: row.case_name,
+    scenario: row.scenario || "",
     dataset: row.scenario || "",
-    count: row.feedback_count || 0,
     status: row.status || "pending",
-    validation: null,
-    hardValidation: row.hard_score ? { score: row.hard_score, status: "pass" } : null,
-    semanticValidation: row.semantic_score
+    feedbackCount: row.feedback_count || 0,
+    hardScore: row.hard_score ?? null,
+    semanticScore: row.semantic_score ?? null,
+    evidenceBroken: row.evidence_broken ?? null,
+    hardValidation: row.hard_score != null ? { score: row.hard_score, status: "pass" } : null,
+    semanticValidation: row.semantic_score != null
       ? { score: row.semantic_score, evidenceBroken: row.evidence_broken || 0, criticalIssues: 0, status: "pass" }
       : null,
-    timestamp: row.started_at || row.created_at,
-    createdAt: row.created_at,
-    updatedAt: row.updated_at,
-    duration_ms: row.metadata?.duration_ms || null,
+    createdAt,
+    updatedAt,
+    startedAt: row.started_at || null,
+    finishedAt: row.finished_at || null,
+    durationMs: row.metadata?.duration_ms ?? null,
+    metadata: row.metadata || null,
+
+    // Legacy compatibility
+    case_name: row.case_name,
+    count: row.feedback_count || 0,
+    timestamp: updatedAt,
+    duration_ms: row.metadata?.duration_ms ?? null,
+    validation: null,
   };
 }
