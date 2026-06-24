@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { execSync } from "child_process";
-import path from "path";
-
-const ROOT = path.resolve(process.cwd(), "../..");
+import { getStorageMode } from "@/lib/data/storage-mode";
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,8 +13,33 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const scriptPath = path.join(ROOT, "scripts", "run-pipeline.ts");
+    const mode = getStorageMode();
 
+    // Cloud 模式：不执行本地 pipeline
+    if (mode === "cloud") {
+      const run = {
+        case_name: caseName,
+        dataset: dataset || "mixed-feedback",
+        count: count || 124,
+        status: "pending",
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+
+      return NextResponse.json({
+        ok: true,
+        mode: "cloud",
+        message: "Cloud analysis worker is not implemented yet.",
+        run,
+      });
+    }
+
+    // Local 模式：执行本地 pipeline
+    const { execSync } = await import("child_process");
+    const path = await import("path");
+    const ROOT = path.resolve(process.cwd(), "../..");
+
+    const scriptPath = path.join(ROOT, "scripts", "run-pipeline.ts");
     const cmd = `tsx "${scriptPath}" --case ${caseName} --dataset ${dataset || "mixed-feedback"} --count ${count || 124}`;
 
     const output = execSync(cmd, {
@@ -27,17 +49,17 @@ export async function POST(req: NextRequest) {
       stdio: ["pipe", "pipe", "pipe"],
     });
 
-    // Try to read run summary
+    // 读取 run summary
     const summaryPath = path.join(ROOT, "runs", caseName, "run-summary.json");
     let summary: any = null;
     try {
-      summary = JSON.parse(
-        require("fs").readFileSync(summaryPath, "utf-8")
-      );
+      const fs = await import("fs");
+      summary = JSON.parse(fs.readFileSync(summaryPath, "utf-8"));
     } catch {}
 
     return NextResponse.json({
       ok: true,
+      mode: "local",
       caseName,
       output: output.slice(-2000),
       summary,
