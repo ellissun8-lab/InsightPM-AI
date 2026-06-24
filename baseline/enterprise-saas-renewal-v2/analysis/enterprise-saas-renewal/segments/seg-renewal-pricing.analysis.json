@@ -1,0 +1,136 @@
+{
+  "segment_id": "seg-renewal-pricing",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 24,
+    "cluster_count": 5,
+    "clustered_feedback_count": 24,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-001",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格过高与折扣请求",
+      "summary": "客户普遍认为续约价格过高，直接表达不满并寻求折扣或降价。",
+      "feedback_count": 11,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB3",
+        "FB6",
+        "FB7",
+        "FB9",
+        "FB11",
+        "FB13",
+        "FB16",
+        "FB21",
+        "FB22",
+        "FB2"
+      ],
+      "secondary_themes": [
+        "折扣请求",
+        "价格异议"
+      ],
+      "possible_metrics": [
+        "价格敏感度",
+        "折扣接受率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "提供灵活的定价方案，如阶梯折扣或忠诚度折扣，以降低价格敏感度。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-002",
+      "segment_id": "seg-renewal-pricing",
+      "name": "性价比不匹配",
+      "summary": "客户认为产品价格与提供的价值不匹配，性价比低，可能考虑竞品。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB15",
+        "FB19",
+        "FB4"
+      ],
+      "secondary_themes": [
+        "价值评估",
+        "功能评价一般"
+      ],
+      "possible_metrics": [
+        "客户感知价值",
+        "功能满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "增强产品价值沟通，突出独特功能和ROI，或调整定价以反映价值。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-003",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格决定续约决策",
+      "summary": "价格是客户续约与否的主要决定因素，直接影响决策过程。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB8",
+        "FB17",
+        "FB20"
+      ],
+      "secondary_themes": [
+        "决策障碍",
+        "价格敏感"
+      ],
+      "possible_metrics": [
+        "价格对续约率的影响",
+        "客户流失风险"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "实施价格保护或提供灵活付款选项，以减少价格对续约的负面影响。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-005",
+      "segment_id": "seg-renewal-pricing",
+      "name": "竞品驱动的价格敏感性",
+      "summary": "客户因竞品报价更具吸引力而考虑转向其他方案，价格是主要考量因素。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB14",
+        "FB122",
+        "FB124"
+      ],
+      "secondary_themes": [
+        "竞争压力",
+        "替代方案考虑"
+      ],
+      "possible_metrics": [
+        "竞品价格对标",
+        "客户保留率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "进行竞品价格分析，提供有竞争力的报价或捆绑服务以增强价值主张。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-004",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格上涨不可接受",
+      "summary": "客户对续约价格相比去年上涨表示强烈不满，可能超出预算。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB18"
+      ],
+      "secondary_themes": [
+        "预算超支",
+        "价格异议"
+      ],
+      "possible_metrics": [
+        "价格变化接受度",
+        "续约率变化"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "提供价格调整透明度，或为受影响客户提供补偿性折扣以缓和不满。"
+    }
+  ]
+}

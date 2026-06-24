@@ -1,0 +1,264 @@
+{
+  "status": "warning",
+  "score": 95,
+  "checks": [
+    {
+      "name": "raw_input_required_check",
+      "status": "pass",
+      "message": "Raw input 文件存在: mixed-feedback.csv, mixed-feedback.txt, mixed-feedback.md"
+    },
+    {
+      "name": "raw_input_schema_check",
+      "status": "pass",
+      "message": "Raw input 不包含禁止结构化字段"
+    },
+    {
+      "name": "raw_input_realism_check",
+      "status": "warning",
+      "message": "Raw input 真实性特征较少 (2/4): 短句30条, 来源9个, 重复率0%",
+      "recommendation": "建议增加更多短句反馈、转述反馈、重复反馈和噪声反馈",
+      "details": {
+        "total_texts": 124,
+        "short_feedback": 30,
+        "long_feedback": 0,
+        "duplicate_ratio": 0,
+        "source_count": 9
+      }
+    },
+    {
+      "name": "raw_to_normalized_trace_check",
+      "status": "pass",
+      "message": "所有 124 条 normalized feedback 可追溯到 raw input"
+    },
+    {
+      "name": "no_expected_theme_dependency_check",
+      "status": "pass",
+      "message": "expected_theme 未出现在 pipeline 输出中"
+    },
+    {
+      "name": "segment_count_closure_check",
+      "status": "pass",
+      "message": "总数闭合: 124 + 0 = 124",
+      "details": {
+        "total": 124,
+        "analyzed": 124,
+        "unanalyzed": 0
+      }
+    },
+    {
+      "name": "issue_cluster_count_closure_check",
+      "status": "pass",
+      "message": "聚类闭合: 124 + 0 = 124",
+      "details": {
+        "analyzed": 124,
+        "clustered": 124,
+        "unclustered": 0
+      }
+    },
+    {
+      "name": "unknown_business_opportunity_check",
+      "status": "pass",
+      "message": "seg-unknown 未生成业务机会"
+    },
+    {
+      "name": "unknown_ratio_check",
+      "status": "pass",
+      "message": "seg-unknown 占比 1% (1/124)，在合理范围内"
+    },
+    {
+      "name": "noise_business_opportunity_check",
+      "status": "pass",
+      "message": "seg-noise 未生成业务机会"
+    },
+    {
+      "name": "positive_business_opportunity_check",
+      "status": "pass",
+      "message": "seg-positive 未生成业务机会"
+    },
+    {
+      "name": "evidence_trace_check",
+      "status": "pass",
+      "message": "所有 evidence_feedback_ids 可追溯到 normalized_feedback → raw input"
+    },
+    {
+      "name": "segment_analysis_json_check",
+      "status": "pass",
+      "message": "所有 6 个业务 segment 均有 analysis.json 和 analysis.md"
+    },
+    {
+      "name": "empty_section_check",
+      "status": "pass",
+      "message": "所有必要章节内容完整"
+    },
+    {
+      "name": "placeholder_check",
+      "status": "pass",
+      "message": "未发现占位符"
+    },
+    {
+      "name": "structured_legacy_file_check",
+      "status": "pass",
+      "message": "Raw input 不是旧结构化格式",
+      "details": {
+        "legacy_files_found": true
+      }
+    },
+    {
+      "name": "ecommerce_feedback_count_vs_mention_count_check",
+      "status": "pass",
+      "message": "seg-ecommerce-conversion: Top问题反馈数加总 5 = segment feedback_count 5"
+    },
+    {
+      "name": "missing_analysis_json_check",
+      "status": "pass",
+      "message": "所有 6 个业务 segment 均有完整的 analysis.json 和 analysis.md"
+    },
+    {
+      "name": "unsupported_metric_value_check",
+      "status": "pass",
+      "message": "报告中未发现无基线支撑的具体目标值"
+    },
+    {
+      "name": "overall_markdown_json_consistency_check",
+      "status": "pass",
+      "message": "overall.analysis.md 与 overall.analysis.json 数据一致"
+    },
+    {
+      "name": "segment_markdown_json_consistency_check",
+      "status": "pass",
+      "message": "所有 segment 的 Markdown 与 JSON 完全一致"
+    },
+    {
+      "name": "evidence_count_check",
+      "status": "pass",
+      "message": "所有 issue_cluster 的 feedback_count 与 evidence_feedback_ids.length 一致"
+    },
+    {
+      "name": "duplicate_feedback_assignment_check",
+      "status": "pass",
+      "message": "所有 feedback_id 仅属于一个 primary segment"
+    },
+    {
+      "name": "missing_segment_json_check",
+      "status": "pass",
+      "message": "所有 9 个 segment MD 均有对应的 analysis.json"
+    },
+    {
+      "name": "global_cluster_id_check",
+      "status": "pass",
+      "message": "所有 27 个 cluster_id 全局唯一"
+    },
+    {
+      "name": "duplicate_cluster_name_check",
+      "status": "pass",
+      "message": "同一 segment 内无重复或高度相似的 cluster 名称"
+    },
+    {
+      "name": "strong_claim_without_evidence_check",
+      "status": "pass",
+      "message": "报告中未发现缺乏数据支撑的强断言"
+    },
+    {
+      "name": "overall_business_issue_count_check",
+      "status": "pass",
+      "message": "overall 区分总聚类 27、业务 24、非业务 3"
+    },
+    {
+      "name": "report_structure_check",
+      "status": "pass",
+      "message": "所有业务 segment MD 包含完整的报告结构"
+    },
+    {
+      "name": "evidence_trace_file_check",
+      "status": "pass",
+      "message": "evidence 追溯链路完整: raw → normalized → segment json → evidence_feedback_ids"
+    },
+    {
+      "name": "duplicate_cluster_boundary_check",
+      "status": "pass",
+      "message": "同一 segment 内 cluster 之间无证据重叠"
+    },
+    {
+      "name": "overall_risk_quality_check",
+      "status": "pass",
+      "message": "overall 风险提醒内容有业务针对性"
+    },
+    {
+      "name": "further_validation_question_quality_check",
+      "status": "pass",
+      "message": "进一步验证问题具体、可操作"
+    },
+    {
+      "name": "top_n_explanation_check",
+      "status": "pass",
+      "message": "所有业务 segment 的高频问题章节有明确说明"
+    },
+    {
+      "name": "overall_summary_completeness_check",
+      "status": "pass",
+      "message": "overall summary 包含所有分组类型计数"
+    },
+    {
+      "name": "boss_summary_quality_check",
+      "status": "pass",
+      "message": "老板摘要包含业务判断"
+    },
+    {
+      "name": "overall_segment_score_consistency_check",
+      "status": "pass",
+      "message": "overall 与 segment JSON 的 cluster name 和 opportunity_score 完全一致"
+    },
+    {
+      "name": "cluster_name_consistency_check",
+      "status": "pass",
+      "message": "所有 cluster name 在 JSON 和 MD 中完全一致"
+    },
+    {
+      "name": "global_priority_ranking_check",
+      "status": "pass",
+      "message": "全局 Top 3 排名合理，无低证据问题占据高位"
+    },
+    {
+      "name": "top_n_less_than_3_check",
+      "status": "pass",
+      "message": "聚类数 < 3 时未使用 Top 3 表述"
+    },
+    {
+      "name": "no_validation_needed_phrase_check",
+      "status": "pass",
+      "message": "未出现'暂无需额外验证'表述"
+    },
+    {
+      "name": "low_evidence_p0_check",
+      "status": "pass",
+      "message": "低样本问题未直接作为稳定 P0"
+    },
+    {
+      "name": "cluster_id_canonical_format_check",
+      "status": "pass",
+      "message": "所有 27 个 cluster_id 格式规范 (统一为 {segmentId}-cluster-{NNN})"
+    }
+  ],
+  "failed_checks": [],
+  "warnings": [
+    {
+      "name": "raw_input_realism_check",
+      "status": "warning",
+      "message": "Raw input 真实性特征较少 (2/4): 短句30条, 来源9个, 重复率0%",
+      "recommendation": "建议增加更多短句反馈、转述反馈、重复反馈和噪声反馈",
+      "details": {
+        "total_texts": 124,
+        "short_feedback": 30,
+        "long_feedback": 0,
+        "duplicate_ratio": 0,
+        "source_count": 9
+      }
+    }
+  ],
+  "summary": {
+    "total_checks": 43,
+    "pass_count": 42,
+    "warning_count": 1,
+    "fail_count": 0
+  }
+}

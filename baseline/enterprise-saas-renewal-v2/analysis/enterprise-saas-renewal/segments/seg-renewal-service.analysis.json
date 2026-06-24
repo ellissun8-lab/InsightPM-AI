@@ -1,0 +1,132 @@
+{
+  "segment_id": "seg-renewal-service",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 24,
+    "cluster_count": 5,
+    "clustered_feedback_count": 24,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-service-cluster-001",
+      "segment_id": "seg-renewal-service",
+      "name": "技术支持响应延迟",
+      "summary": "用户多次反馈技术支持响应时间过长，工单处理拖延，导致问题无法及时解决，影响业务运营。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB63",
+        "FB66",
+        "FB67",
+        "FB68",
+        "FB71"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均响应时间",
+        "工单解决时间",
+        "首次响应时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 80,
+      "recommendation": "优化支持流程，增加人力资源，实施自动回复和优先级处理机制，以缩短响应时间。"
+    },
+    {
+      "cluster_id": "seg-renewal-service-cluster-002",
+      "segment_id": "seg-renewal-service",
+      "name": "问题解决不彻底或不专业",
+      "summary": "反馈指出技术支持解决方案不彻底、人员不专业或推卸责任，导致技术问题持续存在，客户满意度下降。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB61",
+        "FB62",
+        "FB72",
+        "FB76"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "问题解决率",
+        "客户满意度评分",
+        "重复问题发生率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "加强技术支持团队培训，建立问题跟踪和升级机制，确保问题彻底解决。"
+    },
+    {
+      "cluster_id": "seg-renewal-service-cluster-003",
+      "segment_id": "seg-renewal-service",
+      "name": "技术支持满意度低",
+      "summary": "用户对技术支持整体不满意，体验不佳影响客户忠诚度和续约意愿，包括响应慢、解决差、渠道少等问题。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB64",
+        "FB65",
+        "FB69",
+        "FB70",
+        "FB73",
+        "FB74",
+        "FB75",
+        "FB77"
+      ],
+      "secondary_themes": [
+        "客户续约影响",
+        "内部批评"
+      ],
+      "possible_metrics": [
+        "支持满意度分数",
+        "NPS",
+        "续约率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "全面改进支持服务，包括响应时间、解决质量和渠道多样性，定期收集反馈并优化。"
+    },
+    {
+      "cluster_id": "seg-renewal-service-cluster-004",
+      "segment_id": "seg-renewal-service",
+      "name": "客户服务态度与沟通问题",
+      "summary": "用户反馈客服服务态度差、沟通方式有意见，并希望改善整体客户服务体验，包括专属客户经理需求。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB127",
+        "FB128",
+        "FB129",
+        "FB132",
+        "FB136"
+      ],
+      "secondary_themes": [
+        "账户管理便捷性",
+        "个性化服务需求"
+      ],
+      "possible_metrics": [
+        "客户服务满意度",
+        "沟通满意度",
+        "客户保留率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "提升客服培训，优化沟通渠道，考虑提供专属客户经理服务以增强客户关系。"
+    },
+    {
+      "cluster_id": "seg-renewal-service-cluster-005",
+      "segment_id": "seg-renewal-service",
+      "name": "邮件通知管理问题",
+      "summary": "用户抱怨邮件通知过多，希望减少或退订相关邮件，影响用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB135",
+        "FB148"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "邮件打开率",
+        "退订率",
+        "用户反馈率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "优化邮件发送频率和内容，提供个性化订阅选项，尊重用户偏好。"
+    }
+  ]
+}

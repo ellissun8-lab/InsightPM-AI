@@ -1,0 +1,85 @@
+{
+  "segment_id": "seg-ai-customer-service",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 13,
+    "cluster_count": 3,
+    "clustered_feedback_count": 13,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-customer-service-cluster-001",
+      "segment_id": "seg-ai-customer-service",
+      "name": "AI客服自然语言理解能力差",
+      "summary": "用户反馈AI客服无法准确理解问题，经常答非所问或听不懂复杂查询，导致体验不佳和满意度下降。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB7",
+        "FB37",
+        "FB54",
+        "FB82",
+        "FB118",
+        "FB100",
+        "FB136"
+      ],
+      "secondary_themes": [
+        "自然语言处理",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "理解准确率",
+        "用户满意度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "升级自然语言处理算法，增加对复杂和口语化查询的训练数据，引入上下文理解功能，并定期进行A/B测试以评估改进效果。"
+    },
+    {
+      "cluster_id": "seg-ai-customer-service-cluster-002",
+      "segment_id": "seg-ai-customer-service",
+      "name": "AI客服响应速度慢",
+      "summary": "用户抱怨AI客服响应延迟，算法处理效率低下，导致等待时间长和用户体验差。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB27",
+        "FB72",
+        "FB108",
+        "FB144"
+      ],
+      "secondary_themes": [
+        "算法优化",
+        "性能监控"
+      ],
+      "possible_metrics": [
+        "平均响应时间",
+        "算法执行效率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化算法计算流程，引入缓存机制减少重复处理，实施性能监控系统并设置响应时间阈值，定期升级硬件或分布式计算资源。"
+    },
+    {
+      "cluster_id": "seg-ai-customer-service-cluster-003",
+      "segment_id": "seg-ai-customer-service",
+      "name": "人工客服转接流程复杂",
+      "summary": "用户反映转人工客服困难，流程繁琐，导致问题无法及时解决并增加抱怨。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB90",
+        "FB126"
+      ],
+      "secondary_themes": [
+        "转人工优化",
+        "客服路由"
+      ],
+      "possible_metrics": [
+        "转人工成功率",
+        "用户等待时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "简化转人工界面，增加一键转人工按钮，优化客服路由算法以快速匹配合适客服，并提供实时状态更新以减少用户焦虑。"
+    }
+  ]
+}

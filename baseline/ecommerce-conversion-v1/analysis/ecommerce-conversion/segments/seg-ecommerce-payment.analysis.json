@@ -1,0 +1,161 @@
+{
+  "segment_id": "seg-ecommerce-payment",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 24,
+    "cluster_count": 7,
+    "clustered_feedback_count": 24,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-001",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付页面加载与显示问题",
+      "summary": "用户在支付过程中遇到页面加载异常、二维码扫描失败、跳转错误或界面显示问题，导致支付中断或无法操作。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB28",
+        "FB29",
+        "FB30",
+        "FB41",
+        "FB44"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "页面加载时间",
+        "跳转成功率",
+        "界面可读性评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化支付页面前端性能，修复跳转逻辑错误，确保二维码扫描组件稳定，并调整字体大小以提高可读性。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-002",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付验证与安全流程障碍",
+      "summary": "用户在支付验证环节遇到密码输入错误无法重试、银行验证码接收失败或支付被拒绝等问题，导致验证失败。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB31",
+        "FB32",
+        "FB45"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "验证成功率",
+        "用户重试率",
+        "支付拒绝率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "改进密码重试机制，提供明确错误提示；优化验证码发送渠道，确保可靠性；加强与银行接口的错误处理和日志记录。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-003",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付金额与优惠券计算错误",
+      "summary": "支付金额显示与实际扣款不一致，或使用优惠券后支付失败，导致用户困惑和潜在财务问题。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB34",
+        "FB35"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "金额错误率",
+        "优惠券应用成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "审核并修复金额计算逻辑，确保优惠券折扣正确应用；在支付前增加金额确认步骤，并提供透明的价格明细。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-004",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付状态与确认不一致",
+      "summary": "支付成功后订单状态未及时更新，或扣款后无订单记录，导致用户信任下降和客服负担增加。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB27",
+        "FB36",
+        "FB38",
+        "FB39"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "订单状态同步延迟",
+        "支付后错误率",
+        "客服咨询量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "优化支付状态同步机制，确保扣款后订单实时确认；增加错误监控和自动恢复功能，并提供用户自助查询状态选项。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-005",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付过程持续失败与超时",
+      "summary": "支付过程中频繁失败、超时、网络中断或余额不足时缺乏提示，直接导致支付失败。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB33",
+        "FB42",
+        "FB43"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "支付成功率",
+        "超时率",
+        "网络中断恢复率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "增强支付过程的稳定性和容错能力，优化超时设置，网络中断时提供重试选项，余额不足时明确提示并引导用户。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-006",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付方式限制与不支持",
+      "summary": "某些支付方式不可用，如礼品卡、海外信用卡或分期付款选项缺失，限制用户支付选择。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB22",
+        "FB37",
+        "FB40"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "支付方式覆盖率",
+        "用户选择率",
+        "支付转化率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "扩展支付渠道支持，优先集成礼品卡、国际信用卡和分期付款选项，并通过测试确保可用性。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-007",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付体验与流程复杂度",
+      "summary": "支付流程步骤多、交互卡顿或与竞品相比体验差，影响用户满意度和转化率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB122",
+        "FB142"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "支付流程步骤数",
+        "用户放弃率",
+        "竞品对比评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "简化支付流程，减少非必要步骤，优化交互设计以提升流畅度，并参考竞品改进用户体验。"
+    }
+  ]
+}

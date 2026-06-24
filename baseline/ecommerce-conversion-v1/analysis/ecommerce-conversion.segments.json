@@ -1,0 +1,325 @@
+{
+  "dataset": "ecommerce-conversion",
+  "is_mixed_dataset": true,
+  "segment_count": 10,
+  "business_segment_count": 7,
+  "noise_segment_count": 1,
+  "positive_segment_count": 1,
+  "segments": [
+    {
+      "segment_id": "seg-ecommerce-checkout",
+      "segment_type": "business",
+      "name": "下单流程问题",
+      "product_type": "ecommerce",
+      "business_goal": "提升下单成功率",
+      "feedback_count": 15,
+      "feedback_ids": [
+        "FB1",
+        "FB2",
+        "FB3",
+        "FB4",
+        "FB8",
+        "FB9",
+        "FB12",
+        "FB13",
+        "FB14",
+        "FB15",
+        "FB16",
+        "FB17",
+        "FB18",
+        "FB21",
+        "FB24"
+      ],
+      "main_themes": [
+        "下单按钮无响应",
+        "地址管理",
+        "页面设计",
+        "购物车管理",
+        "信息填写"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-payment",
+      "segment_type": "business",
+      "name": "支付失败问题",
+      "product_type": "ecommerce",
+      "business_goal": "降低支付失败率",
+      "feedback_count": 24,
+      "feedback_ids": [
+        "FB5",
+        "FB22",
+        "FB26",
+        "FB27",
+        "FB28",
+        "FB29",
+        "FB30",
+        "FB31",
+        "FB32",
+        "FB33",
+        "FB34",
+        "FB35",
+        "FB36",
+        "FB37",
+        "FB38",
+        "FB39",
+        "FB40",
+        "FB41",
+        "FB42",
+        "FB43",
+        "FB44",
+        "FB45",
+        "FB122",
+        "FB142"
+      ],
+      "main_themes": [
+        "支付交互",
+        "支付方式",
+        "支付过程",
+        "支付确认",
+        "第三方支付集成"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-performance",
+      "segment_type": "business",
+      "name": "性能与加载问题",
+      "product_type": "ecommerce",
+      "business_goal": "提升页面加载速度",
+      "feedback_count": 22,
+      "feedback_ids": [
+        "FB6",
+        "FB19",
+        "FB20",
+        "FB46",
+        "FB47",
+        "FB50",
+        "FB51",
+        "FB52",
+        "FB53",
+        "FB54",
+        "FB55",
+        "FB56",
+        "FB57",
+        "FB58",
+        "FB59",
+        "FB60",
+        "FB61",
+        "FB62",
+        "FB63",
+        "FB79",
+        "FB118",
+        "FB145"
+      ],
+      "main_themes": [
+        "页面加载",
+        "页面稳定性",
+        "网络连接",
+        "性能问题",
+        "加载"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-promotion",
+      "segment_type": "business",
+      "name": "促销与优惠问题",
+      "product_type": "ecommerce",
+      "business_goal": "提升促销转化",
+      "feedback_count": 20,
+      "feedback_ids": [
+        "FB7",
+        "FB82",
+        "FB83",
+        "FB84",
+        "FB85",
+        "FB86",
+        "FB87",
+        "FB88",
+        "FB89",
+        "FB90",
+        "FB91",
+        "FB92",
+        "FB93",
+        "FB94",
+        "FB95",
+        "FB96",
+        "FB97",
+        "FB98",
+        "FB99",
+        "FB143"
+      ],
+      "main_themes": [
+        "促销功能",
+        "促销",
+        "促销与忠诚度",
+        "促销活动未生效",
+        "优惠券功能问题"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-mobile",
+      "segment_type": "business",
+      "name": "移动端体验问题",
+      "product_type": "ecommerce",
+      "business_goal": "提升移动端转化",
+      "feedback_count": 11,
+      "feedback_ids": [
+        "FB10",
+        "FB48",
+        "FB115",
+        "FB116",
+        "FB117",
+        "FB119",
+        "FB120",
+        "FB121",
+        "FB124",
+        "FB126",
+        "FB137"
+      ],
+      "main_themes": [
+        "页面跳转",
+        "性能问题",
+        "iOS应用崩溃",
+        "安卓通知问题",
+        "移动端浏览器兼容性"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-data",
+      "segment_type": "business",
+      "name": "数据打通问题",
+      "product_type": "ecommerce",
+      "business_goal": "提升数据一致性",
+      "feedback_count": 17,
+      "feedback_ids": [
+        "FB11",
+        "FB23",
+        "FB25",
+        "FB100",
+        "FB101",
+        "FB102",
+        "FB103",
+        "FB104",
+        "FB105",
+        "FB106",
+        "FB107",
+        "FB109",
+        "FB110",
+        "FB112",
+        "FB113",
+        "FB114",
+        "FB123"
+      ],
+      "main_themes": [
+        "库存管理",
+        "订单生成",
+        "跨端数据同步",
+        "购物车跨端同步",
+        "订单状态同步延迟"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-recommendation",
+      "segment_type": "business",
+      "name": "推荐与搜索问题",
+      "product_type": "ecommerce",
+      "business_goal": "提升推荐准确性",
+      "feedback_count": 20,
+      "feedback_ids": [
+        "FB49",
+        "FB64",
+        "FB65",
+        "FB66",
+        "FB67",
+        "FB68",
+        "FB69",
+        "FB70",
+        "FB71",
+        "FB72",
+        "FB73",
+        "FB74",
+        "FB75",
+        "FB76",
+        "FB77",
+        "FB78",
+        "FB80",
+        "FB81",
+        "FB111",
+        "FB125"
+      ],
+      "main_themes": [
+        "性能问题",
+        "搜索与推荐",
+        "推荐",
+        "搜索",
+        "搜索与浏览"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "segment_type": "noise",
+      "name": "噪声/无效反馈",
+      "product_type": "ecommerce",
+      "business_goal": "unknown",
+      "feedback_count": 4,
+      "feedback_ids": [
+        "FB108",
+        "FB134",
+        "FB136",
+        "FB150"
+      ],
+      "main_themes": [
+        "数据安全",
+        "无关"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "segment_type": "positive",
+      "name": "正向反馈汇总",
+      "product_type": "ecommerce",
+      "business_goal": "unknown",
+      "feedback_count": 13,
+      "feedback_ids": [
+        "FB127",
+        "FB128",
+        "FB129",
+        "FB130",
+        "FB131",
+        "FB132",
+        "FB133",
+        "FB140",
+        "FB141",
+        "FB146",
+        "FB147",
+        "FB148",
+        "FB149"
+      ],
+      "main_themes": [
+        "支付",
+        "推荐搜索",
+        "客服",
+        "促销优惠",
+        "设计"
+      ]
+    },
+    {
+      "segment_id": "seg-unknown",
+      "segment_type": "unknown",
+      "name": "未分类反馈",
+      "product_type": "ecommerce",
+      "business_goal": "unknown",
+      "feedback_count": 4,
+      "feedback_ids": [
+        "FB135",
+        "FB138",
+        "FB139",
+        "FB144"
+      ],
+      "main_themes": [
+        "新功能",
+        "设计",
+        "未知"
+      ]
+    }
+  ]
+}

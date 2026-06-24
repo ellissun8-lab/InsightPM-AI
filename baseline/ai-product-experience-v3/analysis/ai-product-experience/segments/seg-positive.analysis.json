@@ -1,0 +1,50 @@
+{
+  "segment_id": "seg-positive",
+  "segment_type": "positive",
+  "summary": {
+    "feedback_count": 24,
+    "cluster_count": 1,
+    "clustered_feedback_count": 24,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-positive-cluster-001",
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "summary": "正向反馈汇总相关反馈",
+      "feedback_count": 24,
+      "evidence_feedback_ids": [
+        "FB20",
+        "FB22",
+        "FB28",
+        "FB29",
+        "FB41",
+        "FB45",
+        "FB50",
+        "FB52",
+        "FB57",
+        "FB62",
+        "FB74",
+        "FB80",
+        "FB82",
+        "FB87",
+        "FB92",
+        "FB104",
+        "FB122",
+        "FB128",
+        "FB134",
+        "FB136",
+        "FB140",
+        "FB142",
+        "FB147",
+        "FB150"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "保留为产品亮点参考。"
+    }
+  ]
+}

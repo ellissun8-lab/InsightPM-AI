@@ -1,0 +1,201 @@
+{
+  "segment_id": "seg-renewal-features",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 28,
+    "cluster_count": 8,
+    "clustered_feedback_count": 28,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-features-cluster-001",
+      "segment_id": "seg-renewal-features",
+      "name": "API集成问题",
+      "summary": "用户反馈集成第三方工具困难，API文档不清晰，API不稳定，导致集成效率低下。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB67",
+        "FB121",
+        "FB150"
+      ],
+      "secondary_themes": [
+        "API与集成",
+        "API稳定性"
+      ],
+      "possible_metrics": [
+        "集成成功率",
+        "API文档满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 90,
+      "recommendation": "改进API文档清晰度，提供集成指南和示例；优化API稳定性，建立监控机制；简化集成流程，减少用户操作步骤。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-002",
+      "segment_id": "seg-renewal-features",
+      "name": "自定义报表功能缺失",
+      "summary": "用户希望增加自定义报表功能以满足个性化数据分析需求，当前功能无法支持。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB14",
+        "FB68",
+        "FB122"
+      ],
+      "secondary_themes": [
+        "报表与分析",
+        "功能需求"
+      ],
+      "possible_metrics": [
+        "报表自定义使用率",
+        "用户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "开发自定义报表模块，允许用户自定义数据字段、筛选条件和可视化选项；提供模板库以降低使用门槛。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-003",
+      "segment_id": "seg-renewal-features",
+      "name": "界面设计过时",
+      "summary": "用户反映UI设计过时，使用体验不佳，影响操作效率和满意度。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB15",
+        "FB69",
+        "FB123"
+      ],
+      "secondary_themes": [
+        "界面设计",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "UI满意度评分",
+        "任务完成时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "进行UI现代化 redesign，优化布局、颜色和交互设计；开展用户测试以确保易用性；定期收集反馈持续改进。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-004",
+      "segment_id": "seg-renewal-features",
+      "name": "功能定制化能力不足",
+      "summary": "用户认为功能不够灵活，定制化差，自定义要求无法实现，导致需求匹配度低。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB20",
+        "FB39",
+        "FB74",
+        "FB93",
+        "FB128",
+        "FB147"
+      ],
+      "secondary_themes": [
+        "功能定制",
+        "定制化不足",
+        "功能匹配度"
+      ],
+      "possible_metrics": [
+        "定制化功能使用率",
+        "客户流失率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "增强产品定制化能力，提供更多配置选项、自定义字段和灵活的工作流；建立客户反馈循环以快速响应需求。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-005",
+      "segment_id": "seg-renewal-features",
+      "name": "版本更新和功能故障",
+      "summary": "用户遇到更新后功能故障、bug多，以及更新频繁需重新适应，影响正常使用。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB21",
+        "FB51",
+        "FB75",
+        "FB129"
+      ],
+      "secondary_themes": [
+        "系统更新频率",
+        "功能故障"
+      ],
+      "possible_metrics": [
+        "bug发生率",
+        "更新后用户适应时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 80,
+      "recommendation": "加强测试流程，减少更新引入的bug；优化更新策略，如分阶段发布或提供更新日志；建立快速修复机制以处理紧急问题。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-006",
+      "segment_id": "seg-renewal-features",
+      "name": "功能创新缺乏",
+      "summary": "产品功能满足基本需求，但缺乏创新和竞争力，可能影响长期用户留存。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB36",
+        "FB90",
+        "FB144"
+      ],
+      "secondary_themes": [
+        "功能创新",
+        "市场竞争力"
+      ],
+      "possible_metrics": [
+        "创新功能采用率",
+        "市场竞争力评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "进行市场研究和用户调研，识别创新机会；定期推出新功能或增强现有功能；与行业趋势保持同步以保持竞争力。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-007",
+      "segment_id": "seg-renewal-features",
+      "name": "多语言支持缺失",
+      "summary": "用户需要多语言支持以扩展国际化使用，当前只有中文版本，限制了产品适用范围。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB57",
+        "FB111"
+      ],
+      "secondary_themes": [
+        "多语言支持",
+        "国际化需求"
+      ],
+      "possible_metrics": [
+        "国际化用户比例",
+        "多语言需求反馈数"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "优先添加主要目标市场语言支持；建立本地化团队或合作伙伴；逐步扩展语言库以覆盖更多用户群。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-008",
+      "segment_id": "seg-renewal-features",
+      "name": "数据导出格式限制",
+      "summary": "数据导出格式有限，不支持Excel直接导入等常见格式，影响数据处理效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB60",
+        "FB114"
+      ],
+      "secondary_themes": [
+        "数据导出功能",
+        "数据兼容性"
+      ],
+      "possible_metrics": [
+        "数据导出成功率",
+        "用户便利性评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "扩展数据导出格式，支持Excel、CSV、JSON等常见格式；优化导入流程，确保无缝集成；提供批量操作功能以提高效率。"
+    }
+  ]
+}

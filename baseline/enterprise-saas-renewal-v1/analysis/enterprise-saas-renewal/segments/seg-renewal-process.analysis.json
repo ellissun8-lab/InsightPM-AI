@@ -1,0 +1,109 @@
+{
+  "segment_id": "seg-renewal-process",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 13,
+    "cluster_count": 4,
+    "clustered_feedback_count": 13,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-process-cluster-001",
+      "segment_id": "seg-renewal-process",
+      "name": "续约流程复杂性问题",
+      "summary": "用户反馈续约流程繁琐、谈判耗时、审核周期长，导致效率低下，影响续约体验。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB50",
+        "FB126",
+        "FB132",
+        "FB14"
+      ],
+      "secondary_themes": [
+        "process-efficiency",
+        "renewal"
+      ],
+      "possible_metrics": [
+        "续约流程时间",
+        "审核周期时长",
+        "用户满意度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 90,
+      "recommendation": "简化续约流程步骤，引入并行审核机制，减少不必要的谈判环节，并设置明确的流程时间目标。"
+    },
+    {
+      "cluster_id": "seg-renewal-process-cluster-003",
+      "segment_id": "seg-renewal-process",
+      "name": "合同管理障碍",
+      "summary": "合同条款不清晰、变更困难、模板不灵活，且存在法律合规问题，阻碍续约流程。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB42",
+        "FB124",
+        "FB125",
+        "FB26"
+      ],
+      "secondary_themes": [
+        "contract",
+        "compliance",
+        "合同管理"
+      ],
+      "possible_metrics": [
+        "合同条款清晰度评分",
+        "合同变更处理时间",
+        "法律合规率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "更新和标准化合同模板，提供条款解释工具，简化变更流程，并定期进行法律合规审核。"
+    },
+    {
+      "cluster_id": "seg-renewal-process-cluster-002",
+      "segment_id": "seg-renewal-process",
+      "name": "自动化续约缺陷",
+      "summary": "自动续约设置存在问题，合同续签流程自动化不足，导致效率降低和潜在错误。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB129",
+        "FB95"
+      ],
+      "secondary_themes": [
+        "automation",
+        "process"
+      ],
+      "possible_metrics": [
+        "自动化设置成功率",
+        "流程自动化率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "优化自动续约功能，提供清晰的设置指南和验证步骤，确保自动化流程可靠高效。"
+    },
+    {
+      "cluster_id": "seg-renewal-process-cluster-004",
+      "segment_id": "seg-renewal-process",
+      "name": "通知和提醒缺陷",
+      "summary": "续约通知不及时，数据备份提醒不足，影响用户准备和流程效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB123",
+        "FB131"
+      ],
+      "secondary_themes": [
+        "process-reminder",
+        "process-efficiency"
+      ],
+      "possible_metrics": [
+        "通知及时率",
+        "提醒覆盖率",
+        "用户响应时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "增强通知系统，提前设置多级提醒，包括数据备份提示，确保用户及时收到关键信息。"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "segment_id": "seg-bi-dashboard",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 17,
+    "cluster_count": 4,
+    "clustered_feedback_count": 17,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-001",
+      "segment_id": "seg-bi-dashboard",
+      "name": "数据刷新与配置状态未自动更新",
+      "summary": "用户反馈数据刷新后图表未自动更新，或配置状态如列宽在刷新后重置，可能与缓存机制有关，影响数据实时性和用户体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB7",
+        "FB68",
+        "FB93"
+      ],
+      "secondary_themes": [
+        "缓存管理",
+        "状态持久化"
+      ],
+      "possible_metrics": [
+        "数据刷新延迟",
+        "配置丢失率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "优化缓存策略，实现数据源更新后仪表盘组件自动刷新，并确保用户配置如列宽设置在刷新后持久化存储。"
+    },
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-002",
+      "segment_id": "seg-bi-dashboard",
+      "name": "配置界面组件查找与布局管理效率低下",
+      "summary": "仪表盘配置界面组件过多，筛选器选项复杂，布局管理易乱，且存在操作后无法撤销、移动端适配差等问题，显著影响配置效率和易用性。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB22",
+        "FB105",
+        "FB85",
+        "FB99",
+        "FB37",
+        "FB48",
+        "FB146"
+      ],
+      "secondary_themes": [
+        "界面设计",
+        "操作效率"
+      ],
+      "possible_metrics": [
+        "组件查找时间",
+        "操作错误率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "在筛选器和组件选择界面增加搜索和分类功能，提供布局锁定、撤销操作和历史记录，并优化移动端和多分辨率屏幕适配。"
+    },
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-003",
+      "segment_id": "seg-bi-dashboard",
+      "name": "权限配置与共享设置复杂",
+      "summary": "权限管理粒度不足，配置过程复杂，且共享链接有效期设置不灵活，不符合安全审计和管理需求。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB45",
+        "FB94",
+        "FB109"
+      ],
+      "secondary_themes": [
+        "安全审计",
+        "配置复杂性"
+      ],
+      "possible_metrics": [
+        "权限配置时间",
+        "安全合规性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "细化权限控制到图表和字段级别，提供权限配置向导和模板，并允许自定义分享链接有效期以增强灵活性。"
+    },
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-004",
+      "segment_id": "seg-bi-dashboard",
+      "name": "关键功能缺失与系统稳定性bug",
+      "summary": "仪表盘存在筛选器状态丢失、字段不可选、加载白屏等严重bug，且缺乏复制功能等实用特性，影响系统稳定性和用户工作效率。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB66",
+        "FB73",
+        "FB78",
+        "FB120"
+      ],
+      "secondary_themes": [
+        "系统稳定性",
+        "功能完整性"
+      ],
+      "possible_metrics": [
+        "bug发生率",
+        "功能使用率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "优先修复筛选器状态持久化、字段选择器兼容性和页面加载白屏问题，并增加仪表盘复制功能以提升周期性报告的复用效率。"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "segment_id": "seg-internal-training",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 7,
+    "cluster_count": 2,
+    "clustered_feedback_count": 7,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-training-cluster-001",
+      "segment_id": "seg-internal-training",
+      "name": "培训内容与材料实用性不足",
+      "summary": "员工反馈培训内容过于理论化、材料案例陈旧，导致学习效果不佳，倾向于自行摸索而非培训。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB21",
+        "FB43",
+        "FB101",
+        "FB113"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "培训满意度评分",
+        "培训后独立操作率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "立即更新培训材料，使用真实业务场景案例；减少理论讲解，增加实操模拟环节；建立定期反馈机制以持续优化培训内容。"
+    },
+    {
+      "cluster_id": "seg-internal-training-cluster-002",
+      "segment_id": "seg-internal-training",
+      "name": "系统易用性与更新导致学习成本增加",
+      "summary": "系统更新后界面变化和易用性问题突出，新员工培训后仍需大量实操辅导，增加了学习时间和成本。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB73",
+        "FB134"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均学习曲线时间",
+        "辅导支持时长"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "在系统更新前发布变更说明和过渡培训；优化界面设计以提升易用性；为新员工提供分阶段的实操辅导计划和资源包。"
+    }
+  ]
+}

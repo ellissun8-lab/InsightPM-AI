@@ -1,0 +1,286 @@
+{
+  "dataset": "mixed-feedback",
+  "is_mixed_dataset": true,
+  "segment_count": 9,
+  "business_segment_count": 6,
+  "noise_segment_count": 1,
+  "positive_segment_count": 1,
+  "segments": [
+    {
+      "segment_id": "seg-b2b-activation",
+      "segment_type": "business",
+      "name": "B端 SaaS 激活问题",
+      "product_type": "B端 SaaS",
+      "business_goal": "提升激活",
+      "feedback_count": 24,
+      "feedback_ids": [
+        "FB1",
+        "FB7",
+        "FB11",
+        "FB13",
+        "FB16",
+        "FB23",
+        "FB26",
+        "FB28",
+        "FB31",
+        "FB32",
+        "FB35",
+        "FB37",
+        "FB40",
+        "FB46",
+        "FB57",
+        "FB58",
+        "FB61",
+        "FB80",
+        "FB82",
+        "FB91",
+        "FB96",
+        "FB112",
+        "FB115",
+        "FB121"
+      ],
+      "main_themes": [
+        "后台系统响应速度慢",
+        "系统卡顿、性能低下",
+        "激活流程复杂、耗时",
+        "页面加载速度慢",
+        "首页加载性能问题"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-renewal",
+      "segment_type": "business",
+      "name": "BI 工具续费问题",
+      "product_type": "数据/BI 工具",
+      "business_goal": "提升续费",
+      "feedback_count": 23,
+      "feedback_ids": [
+        "FB2",
+        "FB9",
+        "FB15",
+        "FB17",
+        "FB18",
+        "FB27",
+        "FB33",
+        "FB36",
+        "FB47",
+        "FB50",
+        "FB52",
+        "FB53",
+        "FB62",
+        "FB70",
+        "FB73",
+        "FB79",
+        "FB88",
+        "FB94",
+        "FB98",
+        "FB105",
+        "FB113",
+        "FB117",
+        "FB123"
+      ],
+      "main_themes": [
+        "界面复杂、数据定位困难",
+        "报表导出数据错误",
+        "数据看板无法加载",
+        "自定义仪表盘需求",
+        "版本更新导致交互混乱"
+      ]
+    },
+    {
+      "segment_id": "seg-b2b-renewal",
+      "segment_type": "business",
+      "name": "B端 SaaS 续费风险",
+      "product_type": "B端 SaaS",
+      "business_goal": "提升续费 / 降低流失",
+      "feedback_count": 27,
+      "feedback_ids": [
+        "FB3",
+        "FB8",
+        "FB12",
+        "FB14",
+        "FB19",
+        "FB20",
+        "FB24",
+        "FB34",
+        "FB42",
+        "FB45",
+        "FB49",
+        "FB54",
+        "FB55",
+        "FB59",
+        "FB67",
+        "FB68",
+        "FB75",
+        "FB78",
+        "FB81",
+        "FB84",
+        "FB102",
+        "FB106",
+        "FB110",
+        "FB111",
+        "FB118",
+        "FB122",
+        "FB124"
+      ],
+      "main_themes": [
+        "续费价格上涨、成本敏感",
+        "续费价格高、客户流失风险",
+        "与竞品价格对比、性价比",
+        "价格感知高、性价比低",
+        "灵活付费方案需求（按用量计费）"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-experience",
+      "segment_type": "business",
+      "name": "AI 产品体验问题",
+      "product_type": "AI 产品",
+      "business_goal": "改善体验 / 提升留存",
+      "feedback_count": 14,
+      "feedback_ids": [
+        "FB4",
+        "FB10",
+        "FB21",
+        "FB29",
+        "FB39",
+        "FB44",
+        "FB60",
+        "FB65",
+        "FB71",
+        "FB77",
+        "FB89",
+        "FB101",
+        "FB116",
+        "FB119"
+      ],
+      "main_themes": [
+        "AI推荐准确性不足",
+        "AI客服体验差、转人工效率低",
+        "AI报告质量",
+        "功能优先级和稳定性",
+        "AI推荐准确性"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "segment_type": "noise",
+      "name": "噪声/无效反馈",
+      "product_type": "unknown",
+      "business_goal": "unknown",
+      "feedback_count": 4,
+      "feedback_ids": [
+        "FB5",
+        "FB22",
+        "FB30",
+        "FB51"
+      ],
+      "main_themes": [
+        "无明确问题",
+        "不明确",
+        "负面情绪",
+        "无有效信息"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "segment_type": "positive",
+      "name": "正向反馈汇总",
+      "product_type": "unknown",
+      "business_goal": "unknown",
+      "feedback_count": 9,
+      "feedback_ids": [
+        "FB6",
+        "FB43",
+        "FB69",
+        "FB90",
+        "FB99",
+        "FB103",
+        "FB108",
+        "FB114",
+        "FB120"
+      ],
+      "main_themes": [
+        "客服响应速度快、问题解决",
+        "界面设计好评",
+        "客服质量",
+        "数据处理速度、满意度",
+        "UI设计、用户体验"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-cost",
+      "segment_type": "business",
+      "name": "内部系统降本问题",
+      "product_type": "内部系统",
+      "business_goal": "降低运营成本",
+      "feedback_count": 17,
+      "feedback_ids": [
+        "FB25",
+        "FB38",
+        "FB48",
+        "FB63",
+        "FB64",
+        "FB66",
+        "FB74",
+        "FB76",
+        "FB83",
+        "FB85",
+        "FB86",
+        "FB87",
+        "FB92",
+        "FB93",
+        "FB100",
+        "FB104",
+        "FB109"
+      ],
+      "main_themes": [
+        "系统易用性和培训",
+        "审批系统灵活性",
+        "使用成本未显著降低",
+        "系统易用性",
+        "通知管理"
+      ]
+    },
+    {
+      "segment_id": "seg-unknown",
+      "segment_type": "unknown",
+      "name": "未分类反馈",
+      "product_type": "unknown",
+      "business_goal": "unknown",
+      "feedback_count": 1,
+      "feedback_ids": [
+        "FB95"
+      ],
+      "main_themes": [
+        "系统稳定性",
+        "功能体验和性能",
+        "客服响应不及时",
+        "客服电话接入困难",
+        "文档质量差/功能引导不足"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-conversion",
+      "segment_type": "business",
+      "name": "电商转化问题",
+      "product_type": "电商平台",
+      "business_goal": "提升下单转化率",
+      "feedback_count": 5,
+      "feedback_ids": [
+        "FB41",
+        "FB56",
+        "FB72",
+        "FB97",
+        "FB107"
+      ],
+      "main_themes": [
+        "产品效果未达预期（转化率）",
+        "高并发下系统性能下降",
+        "增值服务购买",
+        "数据集成、多渠道数据",
+        "电商转化优化"
+      ]
+    }
+  ]
+}

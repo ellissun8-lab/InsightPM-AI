@@ -1,0 +1,87 @@
+{
+  "segment_id": "seg-b2b-renewal",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 11,
+    "cluster_count": 3,
+    "clustered_feedback_count": 11,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-b2b-renewal",
+      "name": "价格与成本问题导致续费意愿下降",
+      "summary": "用户反馈集中在续费价格高、价格上涨导致预算压力、系统维护成本高以及性价比低，直接影响了续费决策。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB30",
+        "FB107",
+        "FB115",
+        "FB26"
+      ],
+      "secondary_themes": [
+        "定价透明度",
+        "总拥有成本"
+      ],
+      "possible_metrics": [
+        "续费率",
+        "客户流失率",
+        "价格敏感度评分"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "重新评估定价策略，提供分层定价或折扣方案，增强价格透明度；同时优化产品功能以提升性价比，降低客户对成本的负面感知。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-b2b-renewal",
+      "name": "客户服务与支持不足影响续费决策",
+      "summary": "用户反映客服服务差、系统培训不充分，导致客户对续费产生犹豫。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB112"
+      ],
+      "secondary_themes": [
+        "客户成功支持",
+        "培训质量"
+      ],
+      "possible_metrics": [
+        "客户满意度（CSAT）",
+        "续费率",
+        "客户成功团队响应时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "加强客服团队培训，建立标准化的客户成功流程；提供更全面的系统培训资源（如在线课程、一对一指导），提升客户体验。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-b2b-renewal",
+      "name": "产品功能与流程问题阻碍续费",
+      "summary": "用户反馈功能未更新、续费流程复杂、合同条款不合理，以及续费提醒过于频繁，影响了续费意愿。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB14",
+        "FB15",
+        "FB17",
+        "FB25"
+      ],
+      "secondary_themes": [
+        "功能迭代",
+        "流程简化",
+        "合同管理"
+      ],
+      "possible_metrics": [
+        "功能使用率",
+        "续费流程完成率",
+        "客户投诉率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "加快产品功能迭代，定期发布更新日志；简化续费流程，减少步骤和提醒频率；优化合同条款，增加灵活性以降低客户抵触。"
+    }
+  ]
+}

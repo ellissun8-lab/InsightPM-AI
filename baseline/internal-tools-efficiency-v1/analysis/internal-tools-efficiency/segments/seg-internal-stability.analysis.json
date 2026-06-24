@@ -1,0 +1,169 @@
+{
+  "segment_id": "seg-internal-stability",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 32,
+    "cluster_count": 6,
+    "clustered_feedback_count": 32,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-stability-cluster-001",
+      "segment_id": "seg-internal-stability",
+      "name": "系统性能瓶颈与响应延迟",
+      "summary": "系统在启动、API调用、报告生成等操作中出现响应延迟，导致用户体验下降和效率损失。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB5",
+        "FB16",
+        "FB37",
+        "FB49",
+        "FB55",
+        "FB108",
+        "FB115",
+        "FB143"
+      ],
+      "secondary_themes": [
+        "用户体验",
+        "资源管理"
+      ],
+      "possible_metrics": [
+        "启动时间",
+        "API响应时间",
+        "CPU使用率",
+        "I/O等待时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化系统启动流程，减少初始化步骤；增加缓存和连接池配置；实施负载均衡和资源监控，调整并发处理机制；优化报告生成算法。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-002",
+      "segment_id": "seg-internal-stability",
+      "name": "数据同步故障与事务完整性缺陷",
+      "summary": "数据同步过程中出现超时和错误，事务处理不完整导致数据不一致或延迟。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB17",
+        "FB127",
+        "FB28"
+      ],
+      "secondary_themes": [
+        "数据一致性",
+        "可靠性"
+      ],
+      "possible_metrics": [
+        "同步成功率",
+        "事务超时率",
+        "数据延迟时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化数据同步服务，增加重试机制和超时配置；检查事务处理逻辑，确保原子性；验证数据导出模板的版本兼容性。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-003",
+      "segment_id": "seg-internal-stability",
+      "name": "移动端应用崩溃与浏览器兼容性问题",
+      "summary": "移动端应用在特定设备上闪退，浏览器更新导致界面样式错乱，影响可访问性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB22"
+      ],
+      "secondary_themes": [
+        "兼容性",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "崩溃率",
+        "界面渲染错误数"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "加强移动端设备测试和兼容性修复；实施浏览器兼容性测试套件，更新前端样式库；提供降级方案。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-004",
+      "segment_id": "seg-internal-stability",
+      "name": "基础设施与配置管理导致的系统不稳定",
+      "summary": "系统在高负载、配置变更和长期运行中表现出不稳定，如资源不足、死锁和发布错误。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB36",
+        "FB61",
+        "FB67",
+        "FB70",
+        "FB72",
+        "FB83",
+        "FB84",
+        "FB103",
+        "FB149"
+      ],
+      "secondary_themes": [
+        "可扩展性",
+        "运维管理"
+      ],
+      "possible_metrics": [
+        "工单数量",
+        "资源利用率",
+        "发布失败率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 80,
+      "recommendation": "评估并扩容服务器资源；实施灰度发布和回滚机制；优化数据库连接和死锁处理；清理历史数据并监控磁盘空间；逐步添加新功能以确保稳定性。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-005",
+      "segment_id": "seg-internal-stability",
+      "name": "多维度安全漏洞与合规缺陷",
+      "summary": "系统存在会话管理、密码策略、数据保护和注入攻击等多种安全风险，威胁数据安全和合规。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB43",
+        "FB91",
+        "FB99",
+        "FB121",
+        "FB133",
+        "FB146"
+      ],
+      "secondary_themes": [
+        "安全审计",
+        "风险缓解"
+      ],
+      "possible_metrics": [
+        "安全事件数",
+        "漏洞数量",
+        "合规评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "强制密码复杂性和定期更换；加强会话超时管理和安全存储；实施输入验证和SQL注入防护；代码混淆和压缩；完善审计日志功能以满足合规要求。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-006",
+      "segment_id": "seg-internal-stability",
+      "name": "用户操作反馈缺失与系统资源泄漏",
+      "summary": "用户操作缺乏即时反馈，长期运行存在内存泄漏，导致系统变慢和可靠性问题。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB11"
+      ],
+      "secondary_themes": [
+        "用户体验",
+        "系统健康"
+      ],
+      "possible_metrics": [
+        "响应反馈时间",
+        "内存使用增长"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "优化UI设计，添加操作状态提示；排查内存泄漏问题，修复文件上传服务的资源管理；实施定期重启或资源清理机制。"
+    }
+  ]
+}

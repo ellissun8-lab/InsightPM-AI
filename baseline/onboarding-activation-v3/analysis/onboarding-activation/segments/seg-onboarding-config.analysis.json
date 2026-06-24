@@ -1,0 +1,131 @@
+{
+  "segment_id": "seg-onboarding-config",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 17,
+    "cluster_count": 6,
+    "clustered_feedback_count": 17,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-config-cluster-001",
+      "segment_id": "seg-onboarding-config",
+      "name": "配置步骤导致功能限制或安全问题",
+      "summary": "用户反馈初始配置步骤缺失或错误导致功能无法使用或安全担忧，如第三方登录后密码设置不安全、跳过配置导致功能不可用。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB42",
+        "FB103",
+        "FB104"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "功能可用性",
+        "用户安全感"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "优化初始配置流程，确保跳过配置不导致功能限制；为第三方登录用户提供清晰的独立密码设置引导，并测试配置完整性。"
+    },
+    {
+      "cluster_id": "seg-onboarding-config-cluster-002",
+      "segment_id": "seg-onboarding-config",
+      "name": "初始配置流程繁琐耗时",
+      "summary": "用户认为初始配置流程过长、选项过多，希望简化以更快开始使用，并建议提供行业预设方案。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB91",
+        "FB112",
+        "FB146"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置完成时间",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "简化初始配置步骤，减少非必要选项；引入常见行业预设配置模板，允许用户快速选择以降低配置复杂度。"
+    },
+    {
+      "cluster_id": "seg-onboarding-config-cluster-003",
+      "segment_id": "seg-onboarding-config",
+      "name": "配置选项复杂且术语难以理解",
+      "summary": "用户在初始配置中遇到专业术语和复杂选项，如时区设置搜索困难，导致理解和使用障碍。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB105",
+        "FB106"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "选项理解度",
+        "配置错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "用通俗语言解释专业术语，并在选项旁添加帮助提示；为时区等长列表选项增加搜索功能，提升易用性。"
+    },
+    {
+      "cluster_id": "seg-onboarding-config-cluster-004",
+      "segment_id": "seg-onboarding-config",
+      "name": "配置具体要求说明不明确",
+      "summary": "初始配置中如上传Logo或数据存储等选项缺乏清晰的具体要求和说明，导致用户困惑。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB107",
+        "FB114"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "上传成功率",
+        "用户困惑度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "在配置选项旁明确标注具体要求和示例，如Logo的尺寸、格式；为数据存储选项提供简洁的解释和选择建议。"
+    },
+    {
+      "cluster_id": "seg-onboarding-config-cluster-005",
+      "segment_id": "seg-onboarding-config",
+      "name": "配置后引导和修改入口不明显",
+      "summary": "用户完成初始配置后，缺乏明确引导进入主界面，且修改配置的入口隐蔽，影响后续使用。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB94",
+        "FB101",
+        "FB108",
+        "FB111"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置后进入率",
+        "修改入口发现率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "在设置完成后提供醒目的‘开始使用’按钮；将自定义修改入口置于显眼位置，如主界面菜单，并确保公司信息等可轻松修改。"
+    },
+    {
+      "cluster_id": "seg-onboarding-config-cluster-006",
+      "segment_id": "seg-onboarding-config",
+      "name": "配置更改未生效或系统错误",
+      "summary": "用户保存配置后更改未生效，或提交时遇到加载错误，如语言设置失效和服务不可用报错。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB102",
+        "FB110",
+        "FB113"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置保存成功率",
+        "错误发生率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "修复配置保存逻辑，确保更改即时生效；优化系统稳定性，减少加载错误，并为用户提供错误重试和反馈机制。"
+    }
+  ]
+}

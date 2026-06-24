@@ -1,0 +1,122 @@
+{
+  "segment_id": "seg-ecommerce-payment",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 25,
+    "cluster_count": 5,
+    "clustered_feedback_count": 25,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-001",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付网关与页面性能问题",
+      "summary": "包括第三方支付网关错误、页面加载超时和支付页面跳转失败，影响支付流程的顺畅性和成功率。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB27",
+        "FB30",
+        "FB38",
+        "FB143",
+        "FB144",
+        "FB145"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "支付网关成功率",
+        "页面加载时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化第三方支付网关集成，实施页面加载性能监控和自动重试机制，增加备用支付通道以提升容错能力。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-002",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付验证与用户体验问题",
+      "summary": "涉及支付密码验证错误、验证码接收问题、错误提示不明确以及支付流程复杂，导致用户困惑和支付放弃。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB29",
+        "FB32",
+        "FB35",
+        "FB36",
+        "FB45"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "验证错误率",
+        "支付流程完成率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "简化支付验证步骤，确保错误信息清晰且具体显示，优化支付界面设计以减少用户操作步骤和提升易用性。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-003",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "订单与支付同步失败",
+      "summary": "支付成功但订单状态未更新或订单被取消，造成用户资金风险和订单管理混乱。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB33",
+        "FB39",
+        "FB142"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "订单同步成功率",
+        "支付后订单状态更新延迟"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "加强支付系统与订单系统的实时数据同步，引入事务一致性检查和错误恢复机制，确保支付状态与订单状态一致。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-004",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付工具与方式限制问题",
+      "summary": "支付方式选择失败、信用卡被拒、支付限额限制以及积分兑换失败，限制用户支付选择和体验。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB28",
+        "FB40",
+        "FB95"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "支付方式覆盖率",
+        "信用卡拒绝率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "扩展支持的支付方式，与发卡银行合作优化信用卡接受率，调整支付限额策略，并改进积分兑换支付流程的可靠性。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-005",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "技术性支付故障",
+      "summary": "包括网络错误、App崩溃、语言乱码、会话中断和退款问题等技术故障，直接导致支付失败和用户不满。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB31",
+        "FB34",
+        "FB37",
+        "FB41",
+        "FB42",
+        "FB44"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "支付系统可用性",
+        "错误率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "增强系统稳定性和性能，进行网络和App的压力测试，改进错误处理、用户通知和退款流程，以降低技术故障发生率。"
+    }
+  ]
+}

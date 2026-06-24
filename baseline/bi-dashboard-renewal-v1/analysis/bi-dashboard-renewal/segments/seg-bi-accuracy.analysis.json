@@ -1,0 +1,111 @@
+{
+  "segment_id": "seg-bi-accuracy",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 19,
+    "cluster_count": 4,
+    "clustered_feedback_count": 19,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-accuracy-cluster-001",
+      "segment_id": "seg-bi-accuracy",
+      "name": "跨系统数据不一致",
+      "summary": "BI仪表盘数据与源系统（如财务总账、业务系统）或历史数据存在显著差异，导致用户对数据可信度产生怀疑。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB89",
+        "FB108",
+        "FB114",
+        "FB148",
+        "FB60"
+      ],
+      "secondary_themes": [
+        "数据同步问题",
+        "数据溯源困难"
+      ],
+      "possible_metrics": [
+        "数据差异率",
+        "跨系统数据对账成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "1. 建立关键数据指标的跨系统对账机制，并将对账结果作为仪表盘的健康状态指标展示。2. 在数据异常时，为用户提供数据溯源链路查看功能，快速定位差异环节。"
+    },
+    {
+      "cluster_id": "seg-bi-accuracy-cluster-002",
+      "segment_id": "seg-bi-accuracy",
+      "name": "计算逻辑错误或不透明",
+      "summary": "报表中的关键指标（如毛利率、同比环比、百分比）存在计算公式错误、逻辑不清晰或基期定义不明确等问题，引发计算结果错误。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB50",
+        "FB106",
+        "FB127",
+        "FB135"
+      ],
+      "secondary_themes": [
+        "公式管理问题",
+        "历史数据回算缺失"
+      ],
+      "possible_metrics": [
+        "计算错误率",
+        "用户对公式理解的明确度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "1. 建立中心化的指标和公式管理库，所有计算逻辑必须文档化并支持版本管理。2. 对于公式变更，增加数据重算功能并明确通知受影响的用户。3. 在UI上提供指标公式的透明化查看入口。"
+    },
+    {
+      "cluster_id": "seg-bi-accuracy-cluster-004",
+      "segment_id": "seg-bi-accuracy",
+      "name": "笼统的数据准确性担忧",
+      "summary": "用户泛泛地反馈数据不准确，可能源于多个未具体化的痛点，反映出对整体数据质量缺乏信任。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB32",
+        "FB54",
+        "FB75",
+        "FB119",
+        "FB141"
+      ],
+      "secondary_themes": [
+        "用户信任度低",
+        "反馈路径不清晰"
+      ],
+      "possible_metrics": [
+        "数据质量用户满意度",
+        "笼统投诉率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "1. 设计并推广数据质量反馈的标准化模板，引导用户提供具体信息（如指标名称、错误值、预期值、截图）。2. 建立数据质量监控看板，主动暴露数据校验结果，并与用户进行透明化沟通。"
+    },
+    {
+      "cluster_id": "seg-bi-accuracy-cluster-003",
+      "segment_id": "seg-bi-accuracy",
+      "name": "数据更新与映射延迟",
+      "summary": "仪表盘未能及时反映最新的数据状态，包括维度映射（如城市代码）未更新、报表数据陈旧、时间戳不准确等。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB46",
+        "FB96"
+      ],
+      "secondary_themes": [
+        "ETL流程问题",
+        "缓存策略不当"
+      ],
+      "possible_metrics": [
+        "数据延迟时间",
+        "维度映射更新及时率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "1. 优化数据刷新流程，建立端到端的数据延迟监控，并在仪表盘显眼位置展示数据最后更新时间。2. 对于维度表等元数据，应触发式的即时同步，而非依赖固定调度。"
+    }
+  ]
+}

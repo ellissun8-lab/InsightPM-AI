@@ -1,0 +1,84 @@
+{
+  "segment_id": "seg-ecommerce-recommendation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 21,
+    "cluster_count": 3,
+    "clustered_feedback_count": 21,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-001",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "推荐算法准确性不足",
+      "summary": "用户反馈推荐商品不相关、不符合个人喜好、存在重复推荐，导致点击率低和体验差。",
+      "feedback_count": 11,
+      "evidence_feedback_ids": [
+        "FB65",
+        "FB68",
+        "FB70",
+        "FB72",
+        "FB73",
+        "FB76",
+        "FB78",
+        "FB80",
+        "FB130",
+        "FB136",
+        "FB144"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "推荐点击率(CTR)",
+        "推荐转化率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化推荐算法，集成用户行为数据和机器学习模型，实施个性化推荐策略；通过A/B测试评估效果，并定期更新模型以减少重复推荐。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-002",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "搜索结果质量问题",
+      "summary": "搜索功能返回不相关结果、排序混乱、未能返回结果或过滤器失效，影响用户体验和搜索转化率。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB64",
+        "FB66",
+        "FB67",
+        "FB71",
+        "FB74",
+        "FB77",
+        "FB79"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "搜索转化率",
+        "搜索结果相关性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "改进搜索索引和排序算法，确保结果相关性；添加模糊匹配和容错功能；修复过滤器bug；分析搜索日志以识别并满足未覆盖的用户需求。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-003",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "算法竞争力与竞品差距",
+      "summary": "用户指出竞品的推荐和搜索功能更智能、更精准，如支持模糊匹配，我方产品在功能上相对落后。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB69",
+        "FB75",
+        "FB81"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户满意度",
+        "功能对比评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "分析竞品推荐和搜索功能，优先实现模糊匹配等关键特性；增强算法智能性，通过用户反馈和测试提升精准度。"
+    }
+  ]
+}

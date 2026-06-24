@@ -1,0 +1,29 @@
+{
+  "segment_id": "seg-noise",
+  "segment_type": "noise",
+  "summary": {
+    "feedback_count": 3,
+    "cluster_count": 1,
+    "clustered_feedback_count": 3,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-noise-cluster-001",
+      "segment_id": "seg-noise",
+      "name": "无效/噪声反馈",
+      "summary": "包含无效内容、情绪表达、无法归因的反馈",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB19",
+        "FB21",
+        "FB46"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "不进入核心问题排序，保留为低置信度样本。"
+    }
+  ]
+}

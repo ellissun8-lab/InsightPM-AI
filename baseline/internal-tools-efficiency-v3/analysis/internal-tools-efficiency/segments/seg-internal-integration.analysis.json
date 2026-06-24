@@ -1,0 +1,93 @@
+{
+  "segment_id": "seg-internal-integration",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 13,
+    "cluster_count": 4,
+    "clustered_feedback_count": 13,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-integration-cluster-001",
+      "segment_id": "seg-internal-integration",
+      "name": "集成错误和失败频发",
+      "summary": "用户反馈集成过程中错误频繁发生，导致集成失败和系统不稳定。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB117",
+        "FB121",
+        "FB122",
+        "FB128",
+        "FB145"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "集成错误率",
+        "集成成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "增强集成测试和错误处理机制，提供详细的错误日志和故障排除指南，并监控集成成功率指标以改进可靠性。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-003",
+      "segment_id": "seg-internal-integration",
+      "name": "集成过程复杂且兼容性差",
+      "summary": "用户反映集成过程复杂，工具兼容性差，接口存在多种问题，导致集成困难。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB119",
+        "FB120",
+        "FB124",
+        "FB127"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "集成完成时间",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "简化集成流程，提供步骤化向导和文档；改进工具兼容性，标准化API接口设计，减少用户操作复杂度。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-002",
+      "segment_id": "seg-internal-integration",
+      "name": "数据同步和一致性问题",
+      "summary": "集成后数据出现同步问题和不一致，影响数据完整性和准确性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB118",
+        "FB123"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "数据同步延迟",
+        "数据一致性错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化数据同步算法，增加实时数据验证和一致性检查功能，确保数据在集成系统间准确同步。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-004",
+      "segment_id": "seg-internal-integration",
+      "name": "技术支持不足和系统效率下降",
+      "summary": "集成问题导致系统效率下降，用户需要更多技术支持来解决问题。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB125",
+        "FB126"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "系统响应时间",
+        "支持请求量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "增加技术支持渠道，如在线聊天和知识库；优化系统性能，通过代码优化和资源管理提升集成后效率。"
+    }
+  ]
+}

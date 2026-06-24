@@ -1,0 +1,140 @@
+{
+  "segment_id": "seg-ecommerce-promotion",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 19,
+    "cluster_count": 5,
+    "clustered_feedback_count": 19,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-001",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "优惠券应用与有效性故障",
+      "summary": "用户反馈优惠券在下单时无法自动应用、支付后未抵扣、有效期显示错误、优惠码无效、不支持叠加使用等问题，导致优惠券使用受阻，影响促销转化。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB43",
+        "FB82",
+        "FB86",
+        "FB90",
+        "FB149"
+      ],
+      "secondary_themes": [
+        "Coupon Auto-Application Failure",
+        "Promotions & Discounts",
+        "优惠券有效性",
+        "优惠码使用",
+        "优惠券使用规则",
+        "coupon"
+      ],
+      "possible_metrics": [
+        "coupon_usage_rate",
+        "checkout_error_rate"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "优化优惠券系统逻辑，确保优惠券在下单时自动检测和应用；修复有效期显示错误，提供准确的状态反馈；支持优惠券叠加使用，并简化优惠码验证流程。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-002",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "促销价格显示与计算错误",
+      "summary": "用户遇到商品折扣价格显示错误、组合优惠计算方式复杂导致错误、以及优惠后价格异常（如比原价高）等问题，引发对促销真实性的质疑。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB84",
+        "FB88",
+        "FB94"
+      ],
+      "secondary_themes": [
+        "价格显示",
+        "优惠计算",
+        "促销计算"
+      ],
+      "possible_metrics": [
+        "pricing_accuracy_rate",
+        "calculation_error_rate"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "简化优惠计算逻辑，提供透明且易懂的折扣说明；在商品详情页实时验证和显示准确价格，避免计算错误；增加价格异常检测机制，确保优惠后价格合理。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-003",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "促销活动规则设计与变化问题",
+      "summary": "用户反映满减活动参与条件过于苛刻、活动规则变化频繁难以跟上、以及优惠券领取人数限制过严，导致参与度降低和用户体验下降。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB83",
+        "FB91",
+        "FB97"
+      ],
+      "secondary_themes": [
+        "促销活动设计",
+        "促销活动",
+        "促销规则"
+      ],
+      "possible_metrics": [
+        "promotion_participation_rate",
+        "rule_change_frequency"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "优化活动规则设计，降低参与门槛以提升转化；减少规则变化频率，提前通知用户并保持稳定性；放宽优惠券领取限制，增加用户获取机会。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-004",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "库存管理与活动时间准确性",
+      "summary": "用户反馈促销商品库存瞬间售罄、限时抢购活动开始时间不准确，导致错过优惠机会，影响活动公平性和用户信任。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB85",
+        "FB87"
+      ],
+      "secondary_themes": [
+        "库存管理",
+        "活动时间管理"
+      ],
+      "possible_metrics": [
+        "stock_availability_rate",
+        "event_timing_accuracy"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "改善库存预警和分配机制，确保促销商品供应充足并防囤货；严格校准活动服务器时间，避免时间不准确；提供实时库存更新和倒计时显示。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-005",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "促销信息展示与页面可用性",
+      "summary": "用户遇到促销页面无法打开、会员折扣未显示、促销详情页缺少说明、促销提醒未收到、移动端优惠信息不明显等问题，导致信息获取不畅和转化流失。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB89",
+        "FB92",
+        "FB93",
+        "FB96",
+        "FB125"
+      ],
+      "secondary_themes": [
+        "促销页面可用性",
+        "会员与促销",
+        "促销信息",
+        "促销触达",
+        "promotion"
+      ],
+      "possible_metrics": [
+        "page_load_success_rate",
+        "information_visibility_score"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化页面加载性能和稳定性，确保促销页面可访问；在商品详情页和会员页面清晰展示折扣信息；改进推送通知系统，确保促销提醒及时送达；优化移动端UI，突出优惠信息并提高可见性。"
+    }
+  ]
+}

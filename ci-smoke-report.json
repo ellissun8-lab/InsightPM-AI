@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-06-23T10:08:13.330Z",
+  "status": "pass",
+  "checks": [
+    {
+      "name": "hard_fail_zero",
+      "status": "pass",
+      "message": "OK",
+      "durationMs": 0
+    },
+    {
+      "name": "semantic_score_min_85",
+      "status": "pass",
+      "message": "OK",
+      "durationMs": 0
+    },
+    {
+      "name": "critical_issues_zero",
+      "status": "pass",
+      "message": "OK",
+      "durationMs": 22
+    },
+    {
+      "name": "evidence_broken_zero",
+      "status": "pass",
+      "message": "OK",
+      "durationMs": 0
+    },
+    {
+      "name": "consistency_guard_passed",
+      "status": "pass",
+      "message": "OK",
+      "durationMs": 0
+    },
+    {
+      "name": "dataset_index_generatable",
+      "status": "pass",
+      "message": "OK",
+      "durationMs": 338
+    },
+    {
+      "name": "evaluation_smoke",
+      "status": "pass",
+      "message": "OK",
+      "durationMs": 341
+    }
+  ],
+  "passedCount": 7,
+  "failedCount": 0
+}

@@ -1,0 +1,116 @@
+{
+  "segment_id": "seg-bi-value",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 14,
+    "cluster_count": 5,
+    "clustered_feedback_count": 14,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-value-cluster-001",
+      "segment_id": "seg-bi-value",
+      "name": "智能预警误报及报表准确性缺陷",
+      "summary": "用户反馈智能预警功能误报频繁，报表导出和数据准确性存在核心缺陷，直接影响续费决策。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB10"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "预警误报率",
+        "报表导出错误率",
+        "数据准确性评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "优化智能预警算法以减少误报，引入用户反馈机制进行迭代；改进报表导出功能，确保数据准确性和稳定性，提供准确性报告或认证。"
+    },
+    {
+      "cluster_id": "seg-bi-value-cluster-002",
+      "segment_id": "seg-bi-value",
+      "name": "产品易用性差及培训支持不足",
+      "summary": "产品使用难度高，培训成本大，新员工上手慢，影响组织采纳和续费意愿。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB23",
+        "FB98"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户培训完成率",
+        "产品使用深度",
+        "新员工上手时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "简化用户界面设计，降低学习曲线；提供免费或低成本的实战培训课程、视频教程和最佳实践指南，增强用户赋能。"
+    },
+    {
+      "cluster_id": "seg-bi-value-cluster-003",
+      "segment_id": "seg-bi-value",
+      "name": "性价比质疑与竞争对手压力",
+      "summary": "用户认为产品价格高，核心功能使用率低，竞争对手提供有吸引力的替代方案，影响续费价值感知。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB44",
+        "FB57",
+        "FB74",
+        "FB84"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "续费率",
+        "价格敏感度",
+        "功能使用率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "重新评估定价策略，推出灵活套餐或折扣方案；突出产品独特价值如数据集成能力，加强与竞争对手的差异化营销。"
+    },
+    {
+      "cluster_id": "seg-bi-value-cluster-004",
+      "segment_id": "seg-bi-value",
+      "name": "高级分析功能需求未满足",
+      "summary": "用户需要预测性和规范性分析功能，产品当前能力有限，影响深度使用和长期续费。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB115",
+        "FB150"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "高级功能使用率",
+        "需求满足度",
+        "产品深度使用指数"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "投资研发预测分析模型或集成第三方AI工具，提供API接口或插件支持；与用户合作试点高级功能，收集反馈以指导产品路线图。"
+    },
+    {
+      "cluster_id": "seg-bi-value-cluster-005",
+      "segment_id": "seg-bi-value",
+      "name": "数据安全、集成价值及迭代稳定性",
+      "summary": "数据安全认证、数据准备流程集成价值、产品迭代稳定性是续费的重要前提和考量因素。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB128",
+        "FB134",
+        "FB140",
+        "FB145"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "安全事件数",
+        "集成使用率",
+        "更新稳定性评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "持续维护并宣传安全认证，强化数据准备流程的集成优势；优化产品更新流程，确保向后兼容性，提供更新影响评估工具；考虑推出打包定价方案以促进大规模采用。"
+    }
+  ]
+}

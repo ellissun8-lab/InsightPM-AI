@@ -1,0 +1,127 @@
+{
+  "segment_id": "seg-internal-integration",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 14,
+    "cluster_count": 5,
+    "clustered_feedback_count": 14,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-integration-cluster-001",
+      "segment_id": "seg-internal-integration",
+      "name": "集成接口稳定性与配置不一致问题",
+      "summary": "系统集成接口频繁中断和SSO会话超时设置不一致，导致可用性下降和用户频繁重新登录。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB7",
+        "FB120",
+        "FB79"
+      ],
+      "secondary_themes": [
+        "接口中断",
+        "会话超时"
+      ],
+      "possible_metrics": [
+        "接口可用性",
+        "会话超时设置一致性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "加强接口监控和自动重试机制，统一SSO配置标准，并定期检查集成点的健康状态。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-002",
+      "segment_id": "seg-internal-integration",
+      "name": "数据同步不一致与完整性不足",
+      "summary": "系统间数据同步存在单向性、不一致性和冲突未提示等问题，导致数据质量下降和人工核对负担。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB14",
+        "FB76",
+        "FB94",
+        "FB111"
+      ],
+      "secondary_themes": [
+        "数据不一致",
+        "同步冲突"
+      ],
+      "possible_metrics": [
+        "数据一致性率",
+        "同步成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "实施双向数据同步机制，添加冲突检测和提示功能，定期进行数据校验和清理。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-003",
+      "segment_id": "seg-internal-integration",
+      "name": "API权限限制与文档不清晰",
+      "summary": "API权限管理不足和文档更新不及时，影响集成开发效率和自研应用稳定性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB45"
+      ],
+      "secondary_themes": [
+        "API权限",
+        "API文档"
+      ],
+      "possible_metrics": [
+        "API使用效率",
+        "文档覆盖率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化API权限管理，支持批量操作；建立API文档版本管理和变更通知机制，确保开发者及时更新。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-004",
+      "segment_id": "seg-internal-integration",
+      "name": "新系统与功能集成需求",
+      "summary": "用户希望集成日程同步、云存储预览和消息推送等功能，以提升自动化和用户体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB48",
+        "FB66",
+        "FB71"
+      ],
+      "secondary_themes": [
+        "日程集成",
+        "云存储集成",
+        "消息集成"
+      ],
+      "possible_metrics": [
+        "新功能采用率",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "评估并优先集成高需求功能，如日历同步和消息推送；提供云存储API集成指南，支持第三方服务接入。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-005",
+      "segment_id": "seg-internal-integration",
+      "name": "集成导致效率下降与性能问题",
+      "summary": "系统集成度低或多导致操作效率下降和性能下降，影响用户体验和系统响应。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB81",
+        "FB130"
+      ],
+      "secondary_themes": [
+        "多屏切换",
+        "系统臃肿"
+      ],
+      "possible_metrics": [
+        "操作步骤数",
+        "系统启动时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化集成架构，减少不必要的集成点；提升核心系统集成度，减少用户切换；进行性能测试和优化。"
+    }
+  ]
+}

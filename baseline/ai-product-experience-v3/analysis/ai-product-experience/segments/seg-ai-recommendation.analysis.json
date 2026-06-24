@@ -1,0 +1,100 @@
+{
+  "segment_id": "seg-ai-recommendation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 16,
+    "cluster_count": 4,
+    "clustered_feedback_count": 16,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-001",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐准确性不足",
+      "summary": "用户普遍反映推荐内容不准确，无法匹配实际需求，导致时间浪费和项目错误。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB21",
+        "FB38",
+        "FB61",
+        "FB112",
+        "FB94",
+        "FB98"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "推荐准确率",
+        "用户任务完成率",
+        "错误推荐率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化推荐算法模型，整合实时用户行为数据，定期进行A/B测试以验证准确性，并引入用户反馈机制进行迭代改进。"
+    },
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-002",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐个性化缺失",
+      "summary": "推荐系统未能充分理解用户个人习惯、当前兴趣和能力成长，导致推荐不相关和脱节。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB15",
+        "FB33",
+        "FB42",
+        "FB51",
+        "FB72"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "个性化推荐准确率",
+        "用户参与度",
+        "兴趣匹配度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "引入更精细的用户画像技术，实时跟踪用户兴趣和行为变化，并基于用户能力水平动态调整推荐策略，以增强个性化体验。"
+    },
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-003",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐算法智能性不足",
+      "summary": "推荐算法逻辑死板，缺乏智能关联推荐，无法有效利用用户数据提升推荐质量。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB68"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "推荐多样性",
+        "算法效率",
+        "关联推荐成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "升级推荐算法，采用混合推荐方法（如协同过滤和内容结合），增强对用户历史数据的智能分析，以提供更相关的关联推荐。"
+    },
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-004",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐内容过时与同质化",
+      "summary": "推荐内容时效性差，包含大量过时信息，且同质化严重，缺乏多样性和新鲜度。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB103",
+        "FB119"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "内容更新频率",
+        "推荐多样性指数",
+        "过时内容比例"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "建立内容审核和定期更新机制，过滤过时信息，并引入多样性推荐策略（如探索-利用平衡）以减少同质化，确保推荐内容新鲜相关。"
+    }
+  ]
+}

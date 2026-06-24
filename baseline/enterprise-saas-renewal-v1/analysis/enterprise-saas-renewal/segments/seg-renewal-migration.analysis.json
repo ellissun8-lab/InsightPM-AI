@@ -1,0 +1,102 @@
+{
+  "segment_id": "seg-renewal-migration",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 9,
+    "cluster_count": 4,
+    "clustered_feedback_count": 9,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-migration-cluster-001",
+      "segment_id": "seg-renewal-migration",
+      "name": "数据迁移错误与数据不准确",
+      "summary": "用户反馈迁移过程中出现错误，迁移后数据不准确，影响数据完整性和可靠性。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB7",
+        "FB27",
+        "FB51"
+      ],
+      "secondary_themes": [
+        "data",
+        "migration",
+        "accuracy"
+      ],
+      "possible_metrics": [
+        "数据迁移成功率",
+        "数据准确性率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "加强数据验证机制，提供迁移前数据备份和自动校验工具，确保迁移后数据一致性。"
+    },
+    {
+      "cluster_id": "seg-renewal-migration-cluster-002",
+      "segment_id": "seg-renewal-migration",
+      "name": "迁移工具使用困难与格式转换问题",
+      "summary": "用户反馈迁移工具不好用，数据格式转换麻烦，增加了迁移操作复杂度和门槛。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB43",
+        "FB138"
+      ],
+      "secondary_themes": [
+        "迁移工具",
+        "migration-operation"
+      ],
+      "possible_metrics": [
+        "工具易用性评分",
+        "格式转换成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化迁移工具用户界面，简化数据格式转换流程，提供预设模板和向导功能。"
+    },
+    {
+      "cluster_id": "seg-renewal-migration-cluster-003",
+      "segment_id": "seg-renewal-migration",
+      "name": "迁移中断与测试不充分",
+      "summary": "用户反馈迁移过程中断，集成测试不充分，导致迁移不稳定和潜在问题未及时发现。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB139",
+        "FB140"
+      ],
+      "secondary_themes": [
+        "migration-stability",
+        "migration-testing"
+      ],
+      "possible_metrics": [
+        "迁移过程稳定性指标",
+        "测试覆盖率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "增强迁移过程监控和错误恢复机制，增加自动化测试用例和覆盖率，确保迁移可靠性。"
+    },
+    {
+      "cluster_id": "seg-renewal-migration-cluster-004",
+      "segment_id": "seg-renewal-migration",
+      "name": "迁移支持不足与数据安全威胁",
+      "summary": "用户反馈迁移支持不足，数据安全在迁移中受威胁，影响用户信任和迁移信心。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB136",
+        "FB141"
+      ],
+      "secondary_themes": [
+        "migration-support",
+        "migration-security"
+      ],
+      "possible_metrics": [
+        "支持响应时间",
+        "安全事件发生率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "提供更全面的迁移支持服务，如实时聊天和专家咨询；加强数据加密、访问控制和安全审计流程。"
+    }
+  ]
+}

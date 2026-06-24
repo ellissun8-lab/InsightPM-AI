@@ -1,0 +1,141 @@
+{
+  "segment_id": "seg-onboarding-registration",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 41,
+    "cluster_count": 4,
+    "clustered_feedback_count": 41,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-001",
+      "segment_id": "seg-onboarding-registration",
+      "name": "注册流程可用性与易用性问题",
+      "summary": "用户在实际注册操作中，频繁遇到页面无反应、指引缺失、设计不直观、步骤不明确、无法后退修改等交互、设计和流程障碍，严重影响首次体验和转化。",
+      "feedback_count": 16,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB2",
+        "FB4",
+        "FB5",
+        "FB9",
+        "FB10",
+        "FB12",
+        "FB15",
+        "FB17",
+        "FB18",
+        "FB19",
+        "FB20",
+        "FB24",
+        "FB25",
+        "FB141",
+        "FB150"
+      ],
+      "secondary_themes": [
+        "用户界面设计",
+        "表单流程优化",
+        "移动端适配"
+      ],
+      "possible_metrics": [
+        "注册页面跳出率",
+        "表单完成率",
+        "单步平均耗时",
+        "用户求助率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "1. 对注册流程进行全面的可用性测试，修复如按钮无响应（FB1）、页面空白（FB4）、无法后退（FB20）等阻断性Bug。2. 简化注册表单，将非必要信息移至注册后（FB25），并为必填字段（如公司名称FB2、行业分类FB17）提供实时示例或下拉选项。3. 优化UI设计：增强按钮（FB5）和勾选框（FB24）的视觉显著性与点击区域，在流程中明确步骤和进度（FB19）。4. 确保注册页面在主流设备（如iPad FB18）和浏览器上的响应式布局与兼容性。"
+    },
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-002",
+      "segment_id": "seg-onboarding-registration",
+      "name": "登录失败与会话管理问题",
+      "summary": "用户遭遇登录失败、密码验证错误、会话管理冲突、以及密码重置流程不畅等问题，导致无法顺利进入产品，产生挫败感和不信任。",
+      "feedback_count": 13,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB27",
+        "FB29",
+        "FB30",
+        "FB31",
+        "FB32",
+        "FB37",
+        "FB40",
+        "FB41",
+        "FB45",
+        "FB46",
+        "FB138",
+        "FB142"
+      ],
+      "secondary_themes": [
+        "身份验证",
+        "会话持久性",
+        "安全策略"
+      ],
+      "possible_metrics": [
+        "登录成功率",
+        "密码重置完成率",
+        "平均登录尝试次数",
+        "会话冲突频率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 80,
+      "recommendation": "1. 修复登录基础功能Bug，如登录按钮失效（FB29）、服务器错误（FB142）。2. 优化错误提示：当密码错误（FB26）或因大小写问题（FB41）时，给出明确、友好的提示，而非笼统失败。3. 审查会话管理策略：评估多设备登录（FB31）和自动登录失效（FB37）的场景，提供清晰的选项或说明。4. 改善密码找回流程：确保重置链接（FB27， FB138）长期有效，并检查邮件发送延迟（FB47）问题。5. 修复界面元素，如密码显示图标（FB40）。"
+    },
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-004",
+      "segment_id": "seg-onboarding-registration",
+      "name": "验证延迟与密码找回障碍",
+      "summary": "核心验证环节存在严重延迟和失效问题，包括短信/邮件验证码发送慢、被拦截、有效期过短，以及密码找回邮件延迟，直接阻断用户注册与登录进程。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB6",
+        "FB21",
+        "FB23",
+        "FB28",
+        "FB34",
+        "FB35",
+        "FB47",
+        "FB136"
+      ],
+      "secondary_themes": [
+        "通信可靠性",
+        "邮件可送达性",
+        "验证策略"
+      ],
+      "possible_metrics": [
+        "验证码平均送达时间",
+        "验证邮件到达率",
+        "密码重置邮件响应时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "1. 立即优化验证码发送通道，确保短信（FB3， FB23）和邮件（FB21）能快速、稳定送达。2. 延长验证码有效期（FB35），并提供便捷的重发机制。3. 解决邮件被垃圾箱过滤（FB6， FB34）和企业防火墙拦截（FB21）问题：检查邮件内容、域名信誉，并提供明确的“查看垃圾箱”引导或备用验证方式。4. 优化验证码图片清晰度（FB28）。5. 解决密码找回邮件延迟（FB47）的发送队列或服务问题。"
+    },
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-003",
+      "segment_id": "seg-onboarding-registration",
+      "name": "第三方登录与跨平台集成问题",
+      "summary": "通过微信、谷歌等第三方账号登录时出现授权失败、流程回环或服务不可用的问题，同时存在跨设备（手机App与网页）登录账号不互通的情况，阻碍了便捷登录。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB39",
+        "FB44"
+      ],
+      "secondary_themes": [
+        "API集成",
+        "跨平台一致性"
+      ],
+      "possible_metrics": [
+        "第三方登录成功率",
+        "跨平台账号同步率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "1. 排查并修复第三方登录（微信FB8， FB39；谷歌FB44）的授权流程与集成接口，确保授权成功后能正常创建或关联账号。2. 对于受地区网络限制的服务（如谷歌），考虑提供替代登录方案或在页面明确提示。3. 解决手机App与网页端（FB46）的账号系统不互通问题，确保用户使用同一邮箱/手机号能在所有平台登录同一账户。"
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "segment_id": "seg-ecommerce-recommendation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 19,
+    "cluster_count": 6,
+    "clustered_feedback_count": 19,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-001",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "搜索结果准确性低",
+      "summary": "用户搜索特定商品时，返回大量不相关或错误的结果，影响搜索体验和后续推荐。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB64",
+        "FB74",
+        "FB147",
+        "FB70",
+        "FB65",
+        "FB71"
+      ],
+      "secondary_themes": [
+        "搜索准确性",
+        "语音搜索准确性"
+      ],
+      "possible_metrics": [
+        "搜索结果相关性得分",
+        "语音搜索识别准确率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化搜索算法，结合语义理解和商品属性匹配，提高关键词搜索准确性；针对语音搜索，集成先进的语音识别模型并定期训练。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-006",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "搜索结果页体验不佳",
+      "summary": "搜索结果排序不合理，页面可能空白，广告过多，且无结果时提示不友好，损害用户满意度。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB69",
+        "FB72",
+        "FB77",
+        "FB80"
+      ],
+      "secondary_themes": [
+        "搜索排序",
+        "搜索结果展示",
+        "搜索结果页体验",
+        "搜索结果处理"
+      ],
+      "possible_metrics": [
+        "搜索结果页用户停留时间",
+        "广告点击率",
+        "无结果页面跳出率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化搜索排序算法以提升相关性，控制广告数量和位置，设计友好的无结果页面并提供替代建议或筛选选项。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-002",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "推荐算法价格偏见",
+      "summary": "推荐系统持续偏向高价商品，导致价格超出用户预算，存在算法公平性问题。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB81",
+        "FB146",
+        "FB76"
+      ],
+      "secondary_themes": [
+        "推荐公平性",
+        "推荐价格相关性"
+      ],
+      "possible_metrics": [
+        "推荐商品价格分布",
+        "用户预算匹配率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "在推荐算法中加入价格敏感性因子，基于用户历史购买和浏览行为平衡推荐商品的价格范围，避免价格偏见。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-003",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "推荐内容重复且更新慢",
+      "summary": "推荐列表内容重复，相关推荐不更新，缺乏多样性和新鲜度，降低用户参与度。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB68",
+        "FB78"
+      ],
+      "secondary_themes": [
+        "推荐多样性",
+        "推荐更新频率"
+      ],
+      "possible_metrics": [
+        "推荐列表唯一商品数",
+        "推荐更新时间间隔"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "引入多样性约束到推荐算法中，定期刷新推荐内容，基于用户实时行为动态调整列表。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-004",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "推荐系统透明度和个性化不足",
+      "summary": "推荐算法不透明，用户无法理解推荐理由，且未充分利用跨平台数据，个性化程度低。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB73",
+        "FB107"
+      ],
+      "secondary_themes": [
+        "推荐透明度",
+        "个性化推荐"
+      ],
+      "possible_metrics": [
+        "用户对推荐理由的理解度",
+        "个性化推荐覆盖率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "提供推荐理由简要说明，并整合跨平台用户行为数据（如浏览、购买历史），增强个性化推荐模型。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-005",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "搜索建议功能缺陷",
+      "summary": "搜索框输入时缺乏提示或建议，且现有建议词不准确，影响搜索效率和用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB66",
+        "FB75"
+      ],
+      "secondary_themes": [
+        "搜索功能",
+        "搜索建议"
+      ],
+      "possible_metrics": [
+        "搜索建议点击率",
+        "建议词相关性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "改进搜索建议算法，基于热门搜索、用户上下文和商品类别提供实时、准确的建议词，并确保建议功能可用。"
+    }
+  ]
+}

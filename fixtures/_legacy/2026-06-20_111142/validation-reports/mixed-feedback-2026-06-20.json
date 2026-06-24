@@ -1,0 +1,52 @@
+{
+  "dataset": "mixed-feedback",
+  "status": "warning",
+  "score": 77,
+  "model_roles": {
+    "generator": "mimo",
+    "validator": "deepseek-v4-pro"
+  },
+  "summary": {
+    "feedback_count": 124,
+    "cluster_count": 24,
+    "invalid_evidence_count": 0,
+    "forbidden_metric_count": 0,
+    "hallucination_count": 0,
+    "over_inference_count": 1
+  },
+  "warning_types": [
+    "count_mismatch",
+    "markdown_json_mixed",
+    "missing_analysis_json",
+    "over_inference"
+  ],
+  "score_breakdown": {
+    "data_realism": 10,
+    "theme_coverage": 10,
+    "cluster_accuracy": 10,
+    "evidence_accuracy": 15,
+    "metric_fit": 10,
+    "format_compliance": 7,
+    "conclusion_credibility": 8,
+    "no_hallucination": 7
+  },
+  "training_decision": {
+    "usable_for_training": false,
+    "usable_for_testing": true,
+    "usable_for_regression": true,
+    "requires_human_review": true
+  },
+  "failed_checks": [
+    "count_mismatch: seg-b2b-renewal segment feedback_count=18 but cluster feedback counts sum to 17"
+  ],
+  "warnings": [
+    "Markdown and JSON are mixed in the report body (markdown_json_mixed)",
+    "No standalone analysis.json file provided (missing_analysis_json)",
+    "The 'cross-segment high priority issues' list contains '用户引导缺失与功能发现困难' which is specific to seg-b2b-activation and not truly cross-segment, indicating over_inference"
+  ],
+  "recommendations": [
+    "Fix the feedback count inconsistency in B2B SaaS renewal segment so that cluster totals match the segment count",
+    "Separate the analysis JSON from the Markdown report into distinct files",
+    "Refine the cross-segment problem identification to only include issues with evidence spanning multiple segments"
+  ]
+}

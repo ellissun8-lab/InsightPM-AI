@@ -1,0 +1,342 @@
+{
+  "dataset": "enterprise-saas-renewal",
+  "is_mixed_dataset": true,
+  "segment_count": 11,
+  "business_segment_count": 8,
+  "noise_segment_count": 1,
+  "positive_segment_count": 1,
+  "segments": [
+    {
+      "segment_id": "seg-renewal-pricing",
+      "segment_type": "business",
+      "name": "续约价格与性价比",
+      "product_type": "enterprise-saas",
+      "business_goal": "提升续约率 / 降低价格敏感度",
+      "feedback_count": 29,
+      "feedback_ids": [
+        "FB1",
+        "FB2",
+        "FB10",
+        "FB22",
+        "FB38",
+        "FB58",
+        "FB59",
+        "FB60",
+        "FB63",
+        "FB64",
+        "FB65",
+        "FB66",
+        "FB67",
+        "FB68",
+        "FB69",
+        "FB70",
+        "FB71",
+        "FB72",
+        "FB73",
+        "FB74",
+        "FB75",
+        "FB76",
+        "FB77",
+        "FB78",
+        "FB79",
+        "FB115",
+        "FB122",
+        "FB128",
+        "FB137"
+      ],
+      "main_themes": [
+        "price",
+        "price, value",
+        "price, cost",
+        "price, renewal",
+        "价格, 预算"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-features",
+      "segment_type": "business",
+      "name": "产品功能与需求匹配",
+      "product_type": "enterprise-saas",
+      "business_goal": "提升功能满意度 / 降低流失",
+      "feedback_count": 26,
+      "feedback_ids": [
+        "FB3",
+        "FB11",
+        "FB15",
+        "FB18",
+        "FB23",
+        "FB30",
+        "FB39",
+        "FB48",
+        "FB80",
+        "FB81",
+        "FB82",
+        "FB83",
+        "FB84",
+        "FB85",
+        "FB86",
+        "FB87",
+        "FB88",
+        "FB89",
+        "FB90",
+        "FB91",
+        "FB92",
+        "FB93",
+        "FB97",
+        "FB130",
+        "FB134",
+        "FB142"
+      ],
+      "main_themes": [
+        "features, usability",
+        "features, fit",
+        "integration, features",
+        "compliance, features",
+        "features, customization"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-performance",
+      "segment_type": "business",
+      "name": "系统性能与稳定性",
+      "product_type": "enterprise-saas",
+      "business_goal": "提升系统满意度 / 降低性能投诉",
+      "feedback_count": 20,
+      "feedback_ids": [
+        "FB4",
+        "FB12",
+        "FB24",
+        "FB40",
+        "FB47",
+        "FB54",
+        "FB61",
+        "FB96",
+        "FB98",
+        "FB99",
+        "FB101",
+        "FB102",
+        "FB104",
+        "FB105",
+        "FB106",
+        "FB107",
+        "FB108",
+        "FB110",
+        "FB111",
+        "FB135"
+      ],
+      "main_themes": [
+        "performance, stability",
+        "performance, speed",
+        "performance, upgrade",
+        "性能, 稳定性",
+        "性能, 服务支持"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-service",
+      "segment_type": "business",
+      "name": "技术支持与服务质量",
+      "product_type": "enterprise-saas",
+      "business_goal": "提升服务满意度 / 降低支持投诉",
+      "feedback_count": 20,
+      "feedback_ids": [
+        "FB5",
+        "FB13",
+        "FB25",
+        "FB41",
+        "FB49",
+        "FB62",
+        "FB100",
+        "FB103",
+        "FB109",
+        "FB112",
+        "FB113",
+        "FB114",
+        "FB116",
+        "FB117",
+        "FB118",
+        "FB119",
+        "FB120",
+        "FB121",
+        "FB127",
+        "FB133"
+      ],
+      "main_themes": [
+        "service, support",
+        "service, attitude",
+        "服务支持",
+        "服务响应",
+        "客服无法接通"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-process",
+      "segment_type": "business",
+      "name": "续约流程与合同",
+      "product_type": "enterprise-saas",
+      "business_goal": "简化续约流程 / 提升续约效率",
+      "feedback_count": 13,
+      "feedback_ids": [
+        "FB6",
+        "FB14",
+        "FB26",
+        "FB42",
+        "FB50",
+        "FB95",
+        "FB123",
+        "FB124",
+        "FB125",
+        "FB126",
+        "FB129",
+        "FB131",
+        "FB132"
+      ],
+      "main_themes": [
+        "process, renewal",
+        "contract, process",
+        "process, renewal, automation",
+        "合同管理",
+        "续约流程"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-migration",
+      "segment_type": "business",
+      "name": "数据迁移与集成",
+      "product_type": "enterprise-saas",
+      "business_goal": "降低迁移门槛 / 提升数据集成满意度",
+      "feedback_count": 9,
+      "feedback_ids": [
+        "FB7",
+        "FB27",
+        "FB43",
+        "FB51",
+        "FB136",
+        "FB138",
+        "FB139",
+        "FB140",
+        "FB141"
+      ],
+      "main_themes": [
+        "data, migration",
+        "data, migration, accuracy",
+        "迁移工具",
+        "数据迁移",
+        "migration-support"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-training",
+      "segment_type": "business",
+      "name": "用户培训与上手",
+      "product_type": "enterprise-saas",
+      "business_goal": "降低上手难度 / 提升培训效率",
+      "feedback_count": 13,
+      "feedback_ids": [
+        "FB8",
+        "FB16",
+        "FB28",
+        "FB44",
+        "FB52",
+        "FB94",
+        "FB143",
+        "FB144",
+        "FB145",
+        "FB146",
+        "FB147",
+        "FB148",
+        "FB149"
+      ],
+      "main_themes": [
+        "training, onboarding",
+        "onboarding, training",
+        "training, effectiveness",
+        "新用户引导",
+        "培训支持"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-competition",
+      "segment_type": "business",
+      "name": "竞品对比",
+      "product_type": "enterprise-saas",
+      "business_goal": "提升竞争力 / 降低竞品流失",
+      "feedback_count": 6,
+      "feedback_ids": [
+        "FB9",
+        "FB17",
+        "FB29",
+        "FB45",
+        "FB53",
+        "FB150"
+      ],
+      "main_themes": [
+        "competitor, features",
+        "competitor, price",
+        "competitor, service",
+        "竞品比较, 市场趋势",
+        "竞品比较"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "segment_type": "noise",
+      "name": "噪声/无效反馈",
+      "product_type": "enterprise-saas",
+      "business_goal": "unknown",
+      "feedback_count": 3,
+      "feedback_ids": [
+        "FB19",
+        "FB21",
+        "FB46"
+      ],
+      "main_themes": [
+        "noise",
+        "noise, decision",
+        "外部因素, 公司决策"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "segment_type": "positive",
+      "name": "正向反馈汇总",
+      "product_type": "enterprise-saas",
+      "business_goal": "unknown",
+      "feedback_count": 9,
+      "feedback_ids": [
+        "FB20",
+        "FB31",
+        "FB32",
+        "FB33",
+        "FB35",
+        "FB36",
+        "FB37",
+        "FB56",
+        "FB57"
+      ],
+      "main_themes": [
+        "positive",
+        "易用性",
+        "客户服务",
+        "性能, 服务支持",
+        "功能完整性"
+      ]
+    },
+    {
+      "segment_id": "seg-unknown",
+      "segment_type": "unknown",
+      "name": "未分类反馈",
+      "product_type": "enterprise-saas",
+      "business_goal": "unknown",
+      "feedback_count": 2,
+      "feedback_ids": [
+        "FB34",
+        "FB55"
+      ],
+      "main_themes": [
+        "续约决策, 价值否定",
+        "整体不满"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "segment_id": "seg-internal-config",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 13,
+    "cluster_count": 4,
+    "clustered_feedback_count": 13,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-config-cluster-001",
+      "segment_id": "seg-internal-config",
+      "name": "配置流程过于复杂",
+      "summary": "用户反馈流程配置步骤繁多、选项复杂，导致调整困难和容易出错，团队抱怨配置是难题。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB66",
+        "FB67",
+        "FB68",
+        "FB82",
+        "FB146"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置步骤数",
+        "用户错误率",
+        "配置时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "简化配置流程，减少步骤数量，引入配置向导或预设模板，并提供清晰的文档和培训，以降低用户学习成本和操作难度。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-002",
+      "segment_id": "seg-internal-config",
+      "name": "配置灵活性不足",
+      "summary": "配置选项限制业务发展，工具缺乏灵活性，流程死板无法调整，影响业务需求满足。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB69",
+        "FB77",
+        "FB79"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置自定义程度",
+        "业务适应性评分",
+        "用户调整需求频率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "增加配置的灵活性和自定义选项，允许用户根据业务需求调整流程参数，引入规则引擎或高级配置模式，以提升适应性。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-003",
+      "segment_id": "seg-internal-config",
+      "name": "配置工具可靠性低",
+      "summary": "配置工具经常失败，日志显示配置错误频繁，错误率高，影响系统稳定性和用户体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB70",
+        "FB76",
+        "FB80"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置错误率",
+        "工具成功率",
+        "系统稳定性指标"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "改进配置工具的稳定性和错误处理机制，加强日志监控和报警，定期进行工具测试和优化，并提供错误恢复功能。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-004",
+      "segment_id": "seg-internal-config",
+      "name": "配置易用性差",
+      "summary": "配置自定义困难，不满足用户需求，且流程需要简化，用户界面不友好，导致配置效率低下。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB74",
+        "FB78"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户满意度",
+        "配置易用性评分",
+        "配置完成时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化配置界面设计，提供更直观的自定义选项和简化流程，进行用户测试收集反馈，并集成帮助功能以提升易用性。"
+    }
+  ]
+}

@@ -1,0 +1,546 @@
+<!DOCTYPE html><html class="light" lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>分析报告 - ProofLoop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#f9f9ff",
+                        "inverse-primary": "#b4c5ff",
+                        "secondary-container": "#8a4cfc",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "outline-variant": "#c3c6d7",
+                        "on-surface-variant": "#434655",
+                        "tertiary": "#006242",
+                        "on-background": "#141b2b",
+                        "surface-container": "#e9edff",
+                        "inverse-surface": "#293040",
+                        "secondary-fixed": "#eaddff",
+                        "surface-variant": "#dce2f7",
+                        "surface-container-highest": "#dce2f7",
+                        "surface-tint": "#0053db",
+                        "primary-container": "#2563eb",
+                        "on-secondary-fixed": "#25005a",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f1f3ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-container": "#bdffdb",
+                        "surface-container-high": "#e1e8fd",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary": "#ffffff",
+                        "outline": "#737686",
+                        "surface": "#f9f9ff",
+                        "error": "#ba1a1a",
+                        "on-surface": "#141b2b",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "primary": "#004ac6",
+                        "tertiary-container": "#007d55",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "secondary": "#712ae2",
+                        "surface-dim": "#d3daef",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-primary-container": "#eeefff",
+                        "primary-fixed": "#dbe1ff",
+                        "inverse-on-surface": "#edf0ff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#002113",
+                        "on-secondary-container": "#fffbff",
+                        "on-primary-fixed": "#00174b"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "xl": "32px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "sm": "8px",
+                        "sidebar-width": "260px",
+                        "md": "16px",
+                        "xs": "4px"
+                    },
+                    fontFamily: {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 4px rgba(0,0,0,0.02), 0 12px 24px rgba(37, 99, 235, 0.04)',
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #F7F8FB; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="font-body-md text-on-surface antialiased bg-[#F7F8FB] h-screen overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="w-[260px] h-full fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-md overflow-y-auto z-50">
+<div class="px-lg mb-8 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-lg">P</div>
+<div>
+<h1 class="text-title-lg font-title-lg font-bold text-primary">ProofLoop</h1>
+<p class="text-label-md text-on-surface-variant opacity-80">AI Feedback Analysis</p>
+</div>
+</div>
+<ul class="flex-1 px-4 space-y-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="text-body-md font-body-md">控制台</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-xl">add_chart</span>
+<span class="text-body-md font-body-md">新建分析</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-xl">history</span>
+<span class="text-body-md font-body-md">运行历史</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-primary bg-primary-container/10 border-l-2 border-primary font-bold transition-transform hover:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-xl">assessment</span>
+<span class="text-body-md font-body-md">分析报告</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-xl">fact_check</span>
+<span class="text-body-md font-body-md">评估校验</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-xl">storage</span>
+<span class="text-body-md font-body-md">训练数据</span>
+</a>
+</li>
+<li class="pt-4 mt-4 border-t border-outline-variant/50">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="text-body-md font-body-md">系统设置</span>
+</a>
+</li>
+</ul>
+<div class="p-4 mt-auto">
+<div class="flex items-center gap-3 px-3 py-2">
+<img alt="User Profile Avatar" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-5OwJnXXmvaHBnPJ1sD2ngJCxq7oqza79fFhKeuoIgnScCdaUCud5tdCvBGt_H7SParGxkaOhXl7dkBvISWd34qq2vzKuwz1ZVyycAcIJCASGK-2it2JzPTdxtB--jkVBn8lFCOhwqR1mXb1GYceZ5-_7ep2S099sI-fEFOON1uniDAw180DhWcUn8QFShJgPxXx93Tre4rzna_Sj4EuyAXf47X7IPrRR6dNbS5x_5WcuS52UAxGVrUCzif25BZ377Oo4gt1kO_DA">
+<div class="flex-1 min-w-0">
+<p class="text-label-md font-medium text-on-surface truncate">Admin User</p>
+<p class="text-[10px] text-on-surface-variant truncate">admin@proofloop.ai</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="h-16 w-[calc(100%-260px)] fixed top-0 right-0 z-40 bg-surface border-b border-outline-variant flex justify-between items-center px-lg shadow-sm">
+<div class="flex-1 flex items-center">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all" placeholder="搜索反馈、标签或问题..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high/50 rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high/50 rounded-full transition-all">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[260px] mt-16 p-margin-desktop w-[calc(100%-260px)] h-[calc(100vh-64px)] overflow-y-auto bg-[#F7F8FB]">
+<!-- Header Section -->
+<div class="mb-8">
+<div class="flex items-start justify-between mb-4">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<h2 class="text-headline-md font-headline-md text-on-surface">mixed-feedback-realism-v1</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-tertiary/10 text-tertiary text-label-md border border-tertiary/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> 通过
+                        </span>
+</div>
+<!-- Metrics Bar -->
+<div class="flex items-center gap-6 text-label-md text-on-surface-variant mt-3 bg-white px-4 py-2 rounded-lg border border-outline-variant/50 shadow-soft inline-flex">
+<div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-outline">forum</span> Feedback: <strong class="text-on-surface">130</strong></div>
+<div class="w-px h-4 bg-outline-variant/50"></div>
+<div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-outline">pie_chart</span> Segments: <strong class="text-on-surface">9</strong></div>
+<div class="w-px h-4 bg-outline-variant/50"></div>
+<div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-outline">hub</span> Clusters: <strong class="text-on-surface">27</strong></div>
+<div class="w-px h-4 bg-outline-variant/50"></div>
+<div class="flex items-center gap-1.5 text-tertiary"><span class="material-symbols-outlined text-[16px]">verified</span> Hard Score: <strong>100</strong></div>
+<div class="w-px h-4 bg-outline-variant/50"></div>
+<div class="flex items-center gap-1.5 text-primary"><span class="material-symbols-outlined text-[16px]">psychology</span> Semantic Score: <strong>97</strong></div>
+<div class="w-px h-4 bg-outline-variant/50"></div>
+<div class="flex items-center gap-1.5 text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">link_off</span> Evidence Broken: <strong>0</strong></div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 bg-white border border-outline-variant rounded-lg text-body-md font-medium text-on-surface hover:bg-surface-container transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">data_object</span> 导出 JSON
+                    </button>
+<button class="px-4 py-2 bg-white border border-outline-variant rounded-lg text-body-md font-medium text-on-surface hover:bg-surface-container transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">fact_check</span> 查看验证
+                    </button>
+<button class="px-4 py-2 bg-primary-container text-on-primary rounded-lg text-body-md font-medium hover:bg-primary transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span> 下载报告
+                    </button>
+</div>
+</div>
+<!-- Tabs -->
+<div class="border-b border-outline-variant mt-6">
+<nav class="flex gap-8">
+<button class="pb-3 text-body-md font-medium text-primary border-b-2 border-primary relative">
+                        问题列表
+                    </button>
+<button class="pb-3 text-body-md font-medium text-on-surface-variant hover:text-on-surface transition-colors">
+                        分组视图
+                    </button>
+<button class="pb-3 text-body-md font-medium text-on-surface-variant hover:text-on-surface transition-colors">
+                        证据链
+                    </button>
+<button class="pb-3 text-body-md font-medium text-on-surface-variant hover:text-on-surface transition-colors">
+                        完整 Markdown
+                    </button>
+<button class="pb-3 text-body-md font-medium text-on-surface-variant hover:text-on-surface transition-colors">
+                        下载
+                    </button>
+</nav>
+</div>
+</div>
+<!-- Tab Content: 问题列表 -->
+<div class="space-y-8 pb-12">
+<!-- Issue Cards Grid -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-title-lg font-title-lg text-on-surface">Top 产品问题</h3>
+<span class="text-label-md text-on-surface-variant">共识别 27 个问题簇</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-white rounded-xl border border-outline-variant/60 p-lg shadow-soft hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-error"></div>
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-error/10 text-error border border-error/20">P0</span>
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">B2B Renewal</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-tertiary/10 text-tertiary text-[10px] font-medium border border-tertiary/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified</span> 证据完整
+                            </span>
+</div>
+<h4 class="text-body-lg font-bold text-on-surface mb-4">续费价值感知不足</h4>
+<div class="space-y-3 mb-5">
+<div class="bg-error/5 p-3 rounded-lg border border-error/10">
+<p class="text-label-md text-error font-medium mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">warning</span> Impact</p>
+<p class="text-body-md text-on-surface">客户认为功能价值不足，续费风险升高.</p>
+</div>
+<div class="bg-primary/5 p-3 rounded-lg border border-primary/10">
+<p class="text-label-md text-primary font-medium mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">lightbulb</span> Action</p>
+<p class="text-body-md text-on-surface">优先补齐 ROI 证明和续费前价值信息.</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/40 mt-auto">
+<div class="flex items-center gap-4 text-label-md">
+<span class="flex items-center gap-1 text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">forum</span> 27 Feedback</span>
+<span class="flex items-center gap-1 text-secondary"><span class="material-symbols-outlined text-[14px]">psychology</span> Score 92</span>
+</div>
+<button class="text-primary text-label-md font-medium hover:underline flex items-center gap-1">
+                                查看详情 <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-xl border border-outline-variant/60 p-lg shadow-soft hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-error"></div>
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-error/10 text-error border border-error/20">P0</span>
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">B2B Activation</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-tertiary/10 text-tertiary text-[10px] font-medium border border-tertiary/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified</span> 证据完整
+                            </span>
+</div>
+<h4 class="text-body-lg font-bold text-on-surface mb-4">激活流程摩擦过高</h4>
+<div class="space-y-3 mb-5">
+<div class="bg-error/5 p-3 rounded-lg border border-error/10">
+<p class="text-label-md text-error font-medium mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">warning</span> Impact</p>
+<p class="text-body-md text-on-surface">新用户在注册、邀请和首次使用中流失.</p>
+</div>
+<div class="bg-primary/5 p-3 rounded-lg border border-primary/10">
+<p class="text-label-md text-primary font-medium mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">lightbulb</span> Action</p>
+<p class="text-body-md text-on-surface">简化激活路径，补充新手引导和权限提示.</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/40 mt-auto">
+<div class="flex items-center gap-4 text-label-md">
+<span class="flex items-center gap-1 text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">forum</span> 24 Feedback</span>
+<span class="flex items-center gap-1 text-secondary"><span class="material-symbols-outlined text-[14px]">psychology</span> Score 88</span>
+</div>
+<button class="text-primary text-label-md font-medium hover:underline flex items-center gap-1">
+                                查看详情 <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-xl border border-outline-variant/60 p-lg shadow-soft hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-[#F59E0B]"></div>
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#F59E0B]/10 text-[#D97706] border border-[#F59E0B]/20">P1</span>
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">AI Experience</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-tertiary/10 text-tertiary text-[10px] font-medium border border-tertiary/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified</span> 证据完整
+                            </span>
+</div>
+<h4 class="text-body-lg font-bold text-on-surface mb-4">AI 输出可信度不足</h4>
+<div class="space-y-3 mb-5">
+<div class="bg-surface-variant/30 p-3 rounded-lg border border-outline-variant/40">
+<p class="text-label-md text-on-surface-variant font-medium mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">warning</span> Impact</p>
+<p class="text-body-md text-on-surface">用户担心 AI 结论不可解释，影响采用.</p>
+</div>
+<div class="bg-surface-variant/30 p-3 rounded-lg border border-outline-variant/40">
+<p class="text-label-md text-on-surface-variant font-medium mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">lightbulb</span> Action</p>
+<p class="text-body-md text-on-surface">增加证据引用和置信度展示.</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/40 mt-auto">
+<div class="flex items-center gap-4 text-label-md">
+<span class="flex items-center gap-1 text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">forum</span> 14 Feedback</span>
+<span class="flex items-center gap-1 text-secondary"><span class="material-symbols-outlined text-[14px]">psychology</span> Score 82</span>
+</div>
+<button class="text-primary text-label-md font-medium hover:underline flex items-center gap-1">
+                                查看详情 <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white rounded-xl border border-outline-variant/60 p-lg shadow-soft hover:shadow-md transition-shadow relative overflow-hidden group xl:col-start-1">
+<div class="absolute top-0 left-0 w-1 h-full bg-[#F59E0B]"></div>
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#F59E0B]/10 text-[#D97706] border border-[#F59E0B]/20">P1</span>
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">BI Renewal</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-tertiary/10 text-tertiary text-[10px] font-medium border border-tertiary/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified</span> 证据完整
+                            </span>
+</div>
+<h4 class="text-body-lg font-bold text-on-surface mb-4">报表导出与数据准确性问题</h4>
+<div class="space-y-3 mb-5">
+<div class="bg-surface-variant/30 p-3 rounded-lg border border-outline-variant/40">
+<p class="text-label-md text-on-surface-variant font-medium mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">warning</span> Impact</p>
+<p class="text-body-md text-on-surface">数据团队需要额外人工校验.</p>
+</div>
+<div class="bg-surface-variant/30 p-3 rounded-lg border border-outline-variant/40">
+<p class="text-label-md text-on-surface-variant font-medium mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">lightbulb</span> Action</p>
+<p class="text-body-md text-on-surface">优先修复导出格式和口径一致性.</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/40 mt-auto">
+<div class="flex items-center gap-4 text-label-md">
+<span class="flex items-center gap-1 text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">forum</span> 23 Feedback</span>
+<span class="flex items-center gap-1 text-secondary"><span class="material-symbols-outlined text-[14px]">psychology</span> Score 79</span>
+</div>
+<button class="text-primary text-label-md font-medium hover:underline flex items-center gap-1">
+                                查看详情 <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-white rounded-xl border border-outline-variant/60 p-lg shadow-soft hover:shadow-md transition-shadow relative overflow-hidden group opacity-80">
+<div class="absolute top-0 left-0 w-1 h-full bg-outline"></div>
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-outline/10 text-outline border border-outline/20">P2</span>
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">Noise / Unknown</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-variant/50 text-on-surface-variant text-[10px] font-medium border border-outline-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">block</span> 非业务机会
+                            </span>
+</div>
+<h4 class="text-body-lg font-bold text-on-surface mb-4 text-on-surface-variant">噪声反馈需人工复核</h4>
+<div class="space-y-3 mb-5">
+<div class="bg-surface-variant/20 p-3 rounded-lg border border-outline-variant/20">
+<p class="text-label-md text-outline font-medium mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">info</span> Impact</p>
+<p class="text-body-md text-on-surface-variant">低信息反馈不应进入排序.</p>
+</div>
+<div class="bg-surface-variant/20 p-3 rounded-lg border border-outline-variant/20">
+<p class="text-label-md text-outline font-medium mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">action_key</span> Action</p>
+<p class="text-body-md text-on-surface-variant">保留抽检，不进入产品机会排序.</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/40 mt-auto">
+<div class="flex items-center gap-4 text-label-md">
+<span class="flex items-center gap-1 text-outline"><span class="material-symbols-outlined text-[14px]">forum</span> 17 Feedback</span>
+<span class="flex items-center gap-1 text-outline"><span class="material-symbols-outlined text-[14px]">psychology</span> Score —</span>
+</div>
+<button class="text-outline text-label-md font-medium hover:underline flex items-center gap-1">
+                                查看详情 <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Tables Section -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+<!-- Left Table: 分层概览 -->
+<div class="bg-white rounded-xl border border-outline-variant/60 shadow-soft overflow-hidden flex flex-col">
+<div class="p-4 border-b border-outline-variant/60 bg-surface-container-lowest">
+<h3 class="text-title-lg font-title-lg text-on-surface">分层概览</h3>
+</div>
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/40">
+<th class="px-4 py-3 text-label-sm uppercase text-on-surface-variant font-semibold">Segment</th>
+<th class="px-4 py-3 text-label-sm uppercase text-on-surface-variant font-semibold text-right">Total Feedback</th>
+<th class="px-4 py-3 text-label-sm uppercase text-on-surface-variant font-semibold text-right">P0 Count</th>
+<th class="px-4 py-3 text-label-sm uppercase text-on-surface-variant font-semibold">Status</th>
+</tr>
+</thead>
+<tbody class="text-body-md">
+<tr class="border-b border-outline-variant/20 hover:bg-[#F7F8FB] transition-colors">
+<td class="px-4 py-3 font-medium">B2B Renewal</td>
+<td class="px-4 py-3 text-right">42</td>
+<td class="px-4 py-3 text-right text-error font-semibold">12</td>
+<td class="px-4 py-3">
+<span class="px-2 py-1 rounded-md bg-tertiary/10 text-tertiary text-[11px] font-medium border border-tertiary/20">Valid</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/20 hover:bg-[#F7F8FB] transition-colors">
+<td class="px-4 py-3 font-medium">B2B Activation</td>
+<td class="px-4 py-3 text-right">38</td>
+<td class="px-4 py-3 text-right text-error font-semibold">8</td>
+<td class="px-4 py-3">
+<span class="px-2 py-1 rounded-md bg-tertiary/10 text-tertiary text-[11px] font-medium border border-tertiary/20">Valid</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/20 hover:bg-[#F7F8FB] transition-colors">
+<td class="px-4 py-3 font-medium">AI Experience</td>
+<td class="px-4 py-3 text-right">29</td>
+<td class="px-4 py-3 text-right text-on-surface-variant">0</td>
+<td class="px-4 py-3">
+<span class="px-2 py-1 rounded-md bg-tertiary/10 text-tertiary text-[11px] font-medium border border-tertiary/20">Valid</span>
+</td>
+</tr>
+<tr class="hover:bg-[#F7F8FB] transition-colors text-on-surface-variant">
+<td class="px-4 py-3">Noise</td>
+<td class="px-4 py-3 text-right">21</td>
+<td class="px-4 py-3 text-right">0</td>
+<td class="px-4 py-3">
+<span class="px-2 py-1 rounded-md bg-outline-variant/30 text-outline text-[11px] font-medium border border-outline-variant/50">Ignored</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Right Table: 证据追踪预览 -->
+<div class="bg-white rounded-xl border border-outline-variant/60 shadow-soft overflow-hidden flex flex-col">
+<div class="p-4 border-b border-outline-variant/60 bg-surface-container-lowest flex justify-between items-center">
+<h3 class="text-title-lg font-title-lg text-on-surface">证据追踪预览</h3>
+<button class="text-primary text-label-md hover:underline">查看全部</button>
+</div>
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/40">
+<th class="px-4 py-3 text-label-sm uppercase text-on-surface-variant font-semibold w-1/3">Cluster</th>
+<th class="px-4 py-3 text-label-sm uppercase text-on-surface-variant font-semibold">Evidence / Example</th>
+<th class="px-4 py-3 text-label-sm uppercase text-on-surface-variant font-semibold w-24">Trace</th>
+</tr>
+</thead>
+<tbody class="text-body-md">
+<tr class="border-b border-outline-variant/20 hover:bg-[#F7F8FB] transition-colors">
+<td class="px-4 py-3 font-medium truncate max-w-[150px]" title="续费价值感知不足">续费价值感知不足</td>
+<td class="px-4 py-3">
+<div class="text-xs text-on-surface-variant line-clamp-2">"We don't see the ROI clearly before the renewal date..."</div>
+</td>
+<td class="px-4 py-3">
+<span class="material-symbols-outlined text-tertiary text-[18px]">link</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/20 hover:bg-[#F7F8FB] transition-colors">
+<td class="px-4 py-3 font-medium truncate max-w-[150px]" title="激活流程摩擦过高">激活流程摩擦过高</td>
+<td class="px-4 py-3">
+<div class="text-xs text-on-surface-variant line-clamp-2">"Too many steps to invite my team during onboarding."</div>
+</td>
+<td class="px-4 py-3">
+<span class="material-symbols-outlined text-tertiary text-[18px]">link</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/20 hover:bg-[#F7F8FB] transition-colors">
+<td class="px-4 py-3 font-medium truncate max-w-[150px]" title="报表导出准确性">报表导出准确性</td>
+<td class="px-4 py-3">
+<div class="text-xs text-on-surface-variant line-clamp-2">"The exported CSV numbers don't match the dashboard view."</div>
+</td>
+<td class="px-4 py-3">
+<span class="material-symbols-outlined text-tertiary text-[18px]">link</span>
+</td>
+</tr>
+<tr class="hover:bg-[#F7F8FB] transition-colors">
+<td class="px-4 py-3 font-medium truncate max-w-[150px]" title="AI 输出可信度">AI 输出可信度</td>
+<td class="px-4 py-3">
+<div class="text-xs text-on-surface-variant line-clamp-2">"How did the AI reach this conclusion? Need citations."</div>
+</td>
+<td class="px-4 py-3">
+<span class="material-symbols-outlined text-tertiary text-[18px]">link</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

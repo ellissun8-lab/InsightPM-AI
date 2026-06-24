@@ -1,0 +1,120 @@
+{
+  "segment_id": "seg-ecommerce-data",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 17,
+    "cluster_count": 4,
+    "clustered_feedback_count": 17,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-004",
+      "segment_id": "seg-ecommerce-data",
+      "name": "其他关键业务数据一致性缺失",
+      "summary": "包括商品库存前后端不同步、优惠券跨平台不通用、移动端余额显示错误、个性化设置不保存等，反映了多个业务模块在数据同步与一致性保障上存在系统性缺陷。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB102",
+        "FB105",
+        "FB106",
+        "FB109",
+        "FB123"
+      ],
+      "secondary_themes": [
+        "库存管理",
+        "优惠券跨平台通用性",
+        "移动端余额显示错误",
+        "个性化设置丢失"
+      ],
+      "possible_metrics": [
+        "库存数据前端缓存与后端API一致性",
+        "优惠券核销成功率（跨端）",
+        "关键用户设置项持久化成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "1. 对于库存等高频变更数据，引入缓存双删策略或使用Redis发布订阅模式，强制前后端缓存与数据库保持一致。\n2. 统一优惠券服务，将规则、库存、核销记录集中管理，通过统一API向各端（App/Web/H5）提供服务，确保规则通用。\n3. 全面排查并修复前端存储（如LocalStorage）和接口调用逻辑，确保用户设置（包括余额展示）在后端正确存储并在前端可靠加载。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-001",
+      "segment_id": "seg-ecommerce-data",
+      "name": "跨设备用户数据同步失败",
+      "summary": "用户在移动端与PC端等多设备间使用时，购物车、浏览历史、收藏夹等核心用户数据无法实时、准确同步，导致跨设备体验割裂，并可能引发重复下单或数据丢失。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB25",
+        "FB100",
+        "FB103",
+        "FB110"
+      ],
+      "secondary_themes": [
+        "跨端数据同步",
+        "购物车跨端同步",
+        "浏览历史跨端同步",
+        "跨设备数据丢失"
+      ],
+      "possible_metrics": [
+        "跨设备数据同步成功率",
+        "数据同步延迟时间",
+        "用户跨设备会话接续率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "1. 统一并强化用户中心服务，将购物车、收藏夹、浏览历史等数据归集至统一的用户数据存储层。\n2. 实现基于WebSocket或MQTT的实时数据同步服务，确保用户在任意设备操作后，变更能及时推送到其他已登录设备。\n3. 在客户端增加数据同步状态提示与冲突解决机制（如‘最新修改优先’或‘合并’选项），提升用户体验。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-003",
+      "segment_id": "seg-ecommerce-data",
+      "name": "订单与交易数据生命周期不一致",
+      "summary": "在订单创建、状态更新、导出及售后等全生命周期中，数据存在不一致、延迟或功能故障，影响交易流程的顺畅性与数据可信度。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB23",
+        "FB101",
+        "FB107",
+        "FB113"
+      ],
+      "secondary_themes": [
+        "订单生成",
+        "订单状态同步延迟",
+        "订单导出功能故障",
+        "退货流程数据断裂"
+      ],
+      "possible_metrics": [
+        "订单创建到状态同步平均延迟",
+        "订单导出文件可用率",
+        "退货信息录入及时率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "1. 重构订单核心流程，采用分布式事务（如Saga模式）确保‘下单-扣减库存-生成订单’的最终一致性，避免购物车清空但订单失败。\n2. 优化订单状态同步机制，采用事件驱动架构，确保状态变更事件可靠发布与消费，并缩短延迟。\n3. 修复订单导出功能，检查文件生成脚本的编码和格式兼容性，并提供导出任务队列与进度查询功能。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-002",
+      "segment_id": "seg-ecommerce-data",
+      "name": "用户偏好与配置数据同步问题",
+      "summary": "地址簿、支付方式、个性化设置及客服沟通记录等用户配置和偏好数据，在更新或同步过程中出现失败、不一致或延迟，影响用户操作效率和服务体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB104",
+        "FB112",
+        "FB114"
+      ],
+      "secondary_themes": [
+        "地址簿同步问题",
+        "支付方式同步",
+        "客服记录同步问题"
+      ],
+      "possible_metrics": [
+        "用户配置更新成功率",
+        "客服记录上下文完整率",
+        "地址簿调用一次成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "1. 对地址簿、支付方式等关键配置的写入操作实施事务保证，确保数据库更新与缓存刷新原子性，并增加同步重试队列。\n2. 为客服系统建立统一的、基于会话ID的上下文存储服务，客服介入时自动拉取历史记录。\n3. 为用户提供一个集中的‘账户设置同步中心’页面，清晰展示各配置项的同步状态，并提供手动触发同步的按钮。"
+    }
+  ]
+}

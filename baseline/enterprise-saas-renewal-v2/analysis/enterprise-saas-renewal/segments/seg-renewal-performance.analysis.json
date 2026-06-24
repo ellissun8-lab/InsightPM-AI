@@ -1,0 +1,81 @@
+{
+  "segment_id": "seg-renewal-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 17,
+    "cluster_count": 3,
+    "clustered_feedback_count": 17,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-performance-cluster-001",
+      "segment_id": "seg-renewal-performance",
+      "name": "系统崩溃与故障",
+      "summary": "用户频繁报告系统崩溃、闪退和故障，严重影响正常使用和业务连续性。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB45",
+        "FB48",
+        "FB53",
+        "FB55",
+        "FB149"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "崩溃率",
+        "故障恢复时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "深入分析崩溃日志，修复根本原因，实施监控和警报系统以快速响应故障。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-002",
+      "segment_id": "seg-renewal-performance",
+      "name": "系统响应速度慢",
+      "summary": "系统卡顿、加载时间长，响应速度下降，导致用户效率降低和潜在成本增加。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB47",
+        "FB49",
+        "FB54",
+        "FB56",
+        "FB57",
+        "FB58"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均响应时间",
+        "页面加载时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化前端和后端性能，使用缓存机制，定期进行性能测试和优化。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-003",
+      "segment_id": "seg-renewal-performance",
+      "name": "系统稳定性问题",
+      "summary": "系统在高并发时出错，uptime不达标，稳定性差导致数据丢失风险，影响客户续约意愿。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB46",
+        "FB50",
+        "FB51",
+        "FB52",
+        "FB59",
+        "FB60"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "系统可用性",
+        "错误率",
+        "uptime百分比"
+      ],
+      "priority": "P0",
+      "opportunity_score": 88,
+      "recommendation": "加强系统监控，提升架构弹性，进行压力测试，确保高可用性和数据安全。"
+    }
+  ]
+}

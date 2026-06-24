@@ -1,0 +1,167 @@
+{
+  "segment_id": "seg-ai-output-quality",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 35,
+    "cluster_count": 6,
+    "clustered_feedback_count": 35,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-001",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出不准确或答非所问",
+      "summary": "用户反馈AI输出经常不准确，答非所问，或质量下降，导致无法信任输出结果。",
+      "feedback_count": 11,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB13",
+        "FB21",
+        "FB51",
+        "FB60",
+        "FB69",
+        "FB96",
+        "FB105",
+        "FB132",
+        "FB141",
+        "FB42"
+      ],
+      "secondary_themes": [
+        "准确性",
+        "可靠性"
+      ],
+      "possible_metrics": [
+        "输出准确率",
+        "错误率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "优化模型训练数据，增加对常见问题和错误的纠正机制，实施定期准确性测试和监控。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-003",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出质量不稳定，一致性差",
+      "summary": "用户反馈AI输出时好时坏，质量不稳定，缺乏一致性，影响可靠性。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB33",
+        "FB50",
+        "FB78",
+        "FB86",
+        "FB114",
+        "FB122",
+        "FB150"
+      ],
+      "secondary_themes": [
+        "一致性",
+        "可靠性"
+      ],
+      "possible_metrics": [
+        "输出一致性评分",
+        "稳定性指标"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "分析导致输出不稳定的原因，如模型版本或输入变化，实施质量保证检查点。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-005",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出质量差，无法使用",
+      "summary": "用户普遍认为AI输出质量低，无法满足需求，导致失望和放弃使用。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB22",
+        "FB34",
+        "FB68",
+        "FB87",
+        "FB104",
+        "FB123",
+        "FB140"
+      ],
+      "secondary_themes": [
+        "整体质量",
+        "用户满意度"
+      ],
+      "possible_metrics": [
+        "用户满意度",
+        "输出可用性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "进行全面的质量审计，识别主要缺陷，优先修复高频率问题。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-002",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出格式混乱，可读性差",
+      "summary": "用户抱怨AI输出的格式混乱，难以阅读和理解，影响使用体验。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB24",
+        "FB61",
+        "FB97",
+        "FB133"
+      ],
+      "secondary_themes": [
+        "可读性",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "格式一致性",
+        "可读性评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "改进输出格式化逻辑，确保输出结构清晰，使用适当的标题、列表和分段。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-004",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出存在错别字或不专业",
+      "summary": "用户指出AI输出中有错别字或不专业的内容，降低了可信度。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB14",
+        "FB79",
+        "FB115"
+      ],
+      "secondary_themes": [
+        "专业性",
+        "可信度"
+      ],
+      "possible_metrics": [
+        "错别字率",
+        "专业性评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "集成拼写和语法检查工具，在输出前进行自动校对。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-006",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出风格机械或有偏见",
+      "summary": "用户反馈AI输出过于机械，缺乏人性化，或存在偏见，需要改进公平性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB43"
+      ],
+      "secondary_themes": [
+        "人性化",
+        "公平性"
+      ],
+      "possible_metrics": [
+        "风格自然度",
+        "偏见指标"
+      ],
+      "priority": "P2",
+      "opportunity_score": 40,
+      "recommendation": "调整模型以产生更自然的文本，增加公平性训练数据，定期审核输出偏见。"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "segment_id": "seg-ai-usage",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 13,
+    "cluster_count": 2,
+    "clustered_feedback_count": 13,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-usage-cluster-001",
+      "segment_id": "seg-ai-usage",
+      "name": "配额容量不足导致用户使用受限",
+      "summary": "用户普遍反馈配额太小，使用几次就耗尽，限制过多，尤其企业用户额度不够用，建议增加配额或调整策略。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB28",
+        "FB55",
+        "FB73",
+        "FB91",
+        "FB109",
+        "FB119",
+        "FB127",
+        "FB145"
+      ],
+      "secondary_themes": [
+        "资源限制",
+        "资源灵活性"
+      ],
+      "possible_metrics": [
+        "配额使用率",
+        "用户配额耗尽频率",
+        "企业用户满意度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "重新评估配额策略，为个人和企业用户提供更合理的额度，增加免费试用额度或推出灵活的付费配额套餐，并定期收集用户反馈调整。"
+    },
+    {
+      "cluster_id": "seg-ai-usage-cluster-002",
+      "segment_id": "seg-ai-usage",
+      "name": "配额计算与管理不透明引发用户困惑",
+      "summary": "用户反映使用量管理不清晰，配额计算方式复杂，无法实时了解剩余使用量，导致体验不透明和困惑。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB18",
+        "FB38",
+        "FB101",
+        "FB137"
+      ],
+      "secondary_themes": [
+        "用户体验",
+        "资源管理"
+      ],
+      "possible_metrics": [
+        "配额管理透明度评分",
+        "用户困惑率",
+        "支持查询次数"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化配额管理界面，提供直观的剩余使用量实时显示、详细的配额计算说明文档，并增加使用量预警提醒功能以提高透明度。"
+    }
+  ]
+}

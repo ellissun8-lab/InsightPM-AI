@@ -1,0 +1,39 @@
+{
+  "segment_id": "seg-onboarding-activation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 5,
+    "cluster_count": 1,
+    "clustered_feedback_count": 5,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-activation-cluster-001",
+      "segment_id": "seg-onboarding-activation",
+      "name": "注册后引导缺失与首次体验复杂化",
+      "summary": "用户在注册后未收到欢迎邮件，导致对后续步骤感到困惑；首次体验按钮直接跳转到复杂界面，缺乏简单引导，影响用户上手效率。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB18",
+        "FB97",
+        "FB138",
+        "FB145",
+        "FB147"
+      ],
+      "secondary_themes": [
+        "邮件送达",
+        "用户引导",
+        "首次使用体验"
+      ],
+      "possible_metrics": [
+        "欢迎邮件送达率",
+        "首次任务完成时间",
+        "引导步骤完成率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "立即优化邮件发送流程，确保注册后自动发送欢迎邮件并监控送达率；在首次体验前增加一个可交互的简单引导模块，逐步介绍核心功能和下一步操作。"
+    }
+  ]
+}

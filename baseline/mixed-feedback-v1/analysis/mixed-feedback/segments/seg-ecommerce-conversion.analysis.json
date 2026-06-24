@@ -1,0 +1,63 @@
+{
+  "segment_id": "seg-ecommerce-conversion",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 5,
+    "cluster_count": 2,
+    "clustered_feedback_count": 5,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-conversion-cluster-001",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "转化率优化不足",
+      "summary": "用户反馈产品在提升电商转化率方面未达预期，且客服收到相关优化咨询，表明核心功能需加强。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB41",
+        "FB107"
+      ],
+      "secondary_themes": [
+        "产品效果评估",
+        "用户期望管理"
+      ],
+      "possible_metrics": [
+        "转化率提升幅度",
+        "用户咨询频率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "深入分析转化率瓶颈，优化产品功能如A/B测试工具和个性化推荐，并提供实时转化率监控和报告。建议先确认问题是否普遍存在。",
+      "needs_validation": true,
+      "confidence_note": "2 条反馈，需验证转化率问题的普遍性"
+    },
+    {
+      "cluster_id": "seg-ecommerce-conversion-cluster-002",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "系统性能与数据集成问题",
+      "summary": "高并发下系统延迟、增值服务权益未实时生效及多渠道数据未打通，可能影响用户体验和转化效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB56",
+        "FB72",
+        "FB97"
+      ],
+      "secondary_themes": [
+        "系统稳定性",
+        "数据实时性",
+        "渠道整合"
+      ],
+      "possible_metrics": [
+        "系统响应时间",
+        "权益生效延迟",
+        "数据同步成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化系统架构以支持高并发，确保增值服务权益即时生效，并集成门店与电商数据源实现统一查看。建议先确认高并发场景的触发频率。",
+      "needs_validation": true,
+      "confidence_note": "3 条反馈，需验证系统性能问题的影响范围"
+    }
+  ]
+}

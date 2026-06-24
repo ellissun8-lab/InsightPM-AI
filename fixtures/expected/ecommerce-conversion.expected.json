@@ -1,0 +1,36 @@
+{
+  "dataset": "ecommerce-conversion",
+  "project": {
+    "name": "优选商城",
+    "product_type": "电商",
+    "business_goal": "提升转化",
+    "target_user": "C端消费者",
+    "key_metric": "下单转化率"
+  },
+  "expected_top_themes": [
+    "支付流程问题",
+    "商品搜索差",
+    "物流体验差"
+  ],
+  "allowed_metrics": [
+    "转化率",
+    "客单价",
+    "复购率",
+    "退货率",
+    "GMV"
+  ],
+  "forbidden_metrics": [
+    "续费率",
+    "留存率",
+    "DAU",
+    "NPS"
+  ],
+  "minimum_requirements": {
+    "min_feedback_count": 100,
+    "min_cluster_count": 5,
+    "max_cluster_count": 12,
+    "min_evidence_per_cluster": 2,
+    "min_top_theme_recall": 0.6,
+    "max_hallucinated_metric_count": 0
+  }
+}

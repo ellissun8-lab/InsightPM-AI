@@ -1,0 +1,91 @@
+{
+  "segment_id": "seg-ecommerce-data",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 18,
+    "cluster_count": 3,
+    "clustered_feedback_count": 18,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-001",
+      "segment_id": "seg-ecommerce-data",
+      "name": "多端数据同步延迟与状态更新滞后",
+      "summary": "用户反馈在不同设备（如App、网页版）或不同环节（如订单、物流）间的数据同步存在显著延迟，导致信息无法实时查看，影响体验和决策。",
+      "feedback_count": 11,
+      "evidence_feedback_ids": [
+        "FB100",
+        "FB101",
+        "FB102",
+        "FB105",
+        "FB108",
+        "FB110",
+        "FB111",
+        "FB113",
+        "FB135",
+        "FB142",
+        "FB148"
+      ],
+      "secondary_themes": [
+        "数据同步时效性",
+        "竞品对比"
+      ],
+      "possible_metrics": [
+        "跨端数据同步延迟率",
+        "订单/物流状态更新延迟时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "1. 优化核心数据（订单、地址、物流）的同步机制，缩短同步间隔或采用事件驱动、实时推送技术。\n2. 针对订单、物流等关键状态变更，向用户同步设备发送更新通知。\n3. 优先修复地址同步失败（如FB113）等阻断性同步问题。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-002",
+      "segment_id": "seg-ecommerce-data",
+      "name": "跨端数据展示不一致",
+      "summary": "用户在不同客户端（App、网站）上查看同一信息（如订单记录、优惠券、账户信息）时发现内容不一致，损害信任感并增加客服咨询量。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB103",
+        "FB104",
+        "FB107",
+        "FB112"
+      ],
+      "secondary_themes": [
+        "数据一致性",
+        "客服工单"
+      ],
+      "possible_metrics": [
+        "跨端信息展示一致性错误率",
+        "因数据不一致导致的客服工单量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "1. 建立统一的数据源和同步逻辑，确保优惠券、账户信息等在所有端的展示均从同一权威数据源读取。\n2. 增加数据一致性校验逻辑，在同步后或展示前进行抽样对比。\n3. 为客服提供快速排查数据不一致问题的内部工具。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-003",
+      "segment_id": "seg-ecommerce-data",
+      "name": "订单与账户数据丢失或错误",
+      "summary": "用户遭遇历史订单数据丢失、订单状态显示错误等数据准确性及完整性问题，直接导致无法查询历史记录或产生错误判断（如误以为未支付）。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB106",
+        "FB109",
+        "FB114"
+      ],
+      "secondary_themes": [
+        "数据完整性",
+        "数据准确性"
+      ],
+      "possible_metrics": [
+        "历史订单数据丢失率",
+        "订单状态显示错误率",
+        "数据同步错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "1. 立即排查并修复导致历史订单数据丢失的技术缺陷，确保数据归档和查询功能可靠。\n2. 严格审查订单状态同步的准确性，修正如“已发货显示未支付”（FB114）等逻辑错误。\n3. 建立数据同步错误监控和报警机制，降低错误率（如FB109）。"
+    }
+  ]
+}

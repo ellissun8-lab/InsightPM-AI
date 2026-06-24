@@ -1,0 +1,105 @@
+{
+  "segment_id": "seg-ai-usage",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 21,
+    "cluster_count": 4,
+    "clustered_feedback_count": 21,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-usage-cluster-001",
+      "segment_id": "seg-ai-usage",
+      "name": "使用量透明度和管理体验",
+      "summary": "用户反映配额管理不透明，使用量统计不准确，报表界面不直观，导致困惑和体验不佳。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB19",
+        "FB64",
+        "FB77",
+        "FB83",
+        "FB91"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配额透明度评分",
+        "使用量统计准确率",
+        "报表使用满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化配额管理界面，提供清晰的使用量分解和消耗明细；改进统计系统，引入实时数据验证和错误检测；重新设计使用量报表，增加直观图表和搜索功能，便于用户快速查找信息。"
+    },
+    {
+      "cluster_id": "seg-ai-usage-cluster-002",
+      "segment_id": "seg-ai-usage",
+      "name": "配额设计和定价策略不合理",
+      "summary": "用户抱怨配额额度不足、套餐档位设计不灵活、对新用户不友好，以及定价策略不合理。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB26",
+        "FB35",
+        "FB47",
+        "FB71",
+        "FB120",
+        "FB144",
+        "FB149"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "套餐满意度评分",
+        "配额使用率",
+        "新用户转化率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "重新评估配额设计，提供更灵活的套餐选项，如增加中间档或按需付费模式；为新用户提供试用期或引导配额，确保体验到产品价值；改进计费方式，从按次计算改为基于任务或时间，以减少用户不满。"
+    },
+    {
+      "cluster_id": "seg-ai-usage-cluster-003",
+      "segment_id": "seg-ai-usage",
+      "name": "配额提醒和预警机制不完善",
+      "summary": "用户指出配额用尽提醒不及时，缺乏预警功能，且提醒邮件过于频繁。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB40",
+        "FB54",
+        "FB126"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "提醒及时性评分",
+        "用户预警设置率",
+        "提醒邮件满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "实施智能提醒系统，在配额剩余20%和10%时通过应用内通知和邮件提醒；允许用户自定义预警阈值；优化提醒频率，例如每天最多发送一次邮件，避免骚扰用户。"
+    },
+    {
+      "cluster_id": "seg-ai-usage-cluster-004",
+      "segment_id": "seg-ai-usage",
+      "name": "配额机制改进建议和清晰度",
+      "summary": "用户建议改进配额机制以支持企业账户，并关注配额用尽后功能可用性和续费说明。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB99",
+        "FB108",
+        "FB113",
+        "FB131"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "企业功能支持度",
+        "配额用尽后体验评分",
+        "续费政策清晰度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "开发企业账户管理功能，支持主子账号间的配额分配和监控；明确配额用尽后的行为策略，如功能降级或排队处理，避免用户疑虑；在续费流程中清晰说明历史对话功能的恢复政策，并在文档中详细解释。"
+    }
+  ]
+}

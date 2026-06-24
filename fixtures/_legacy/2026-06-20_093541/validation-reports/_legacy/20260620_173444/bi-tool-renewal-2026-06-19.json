@@ -1,0 +1,66 @@
+{
+  "dataset": "bi-tool-renewal",
+  "status": "fail",
+  "score": 50,
+  "model_roles": {
+    "generator": "mimo",
+    "validator": "deepseek-v4-pro"
+  },
+  "summary": {
+    "feedback_count": 121,
+    "cluster_count": 6,
+    "invalid_evidence_count": 0,
+    "forbidden_metric_count": 0,
+    "hallucination_count": 1,
+    "over_inference_count": 2
+  },
+  "warning_types": [
+    "count_mismatch",
+    "partial_sample_overclaim",
+    "over_inference"
+  ],
+  "score_breakdown": {
+    "data_realism": 0,
+    "theme_coverage": 5,
+    "cluster_accuracy": 12,
+    "evidence_accuracy": 10,
+    "metric_fit": 9,
+    "format_compliance": 9,
+    "conclusion_credibility": 3,
+    "no_hallucination": 2
+  },
+  "training_decision": {
+    "usable_for_training": false,
+    "usable_for_testing": false,
+    "usable_for_regression": false,
+    "requires_human_review": true
+  },
+  "failed_checks": [
+    {
+      "type": "count_mismatch",
+      "detail": "报告声明已归类121条、未归类0条，但六个问题簇的反馈数之和仅为80（18+15+14+12+11+10=80），存在41条反馈未归类，与声明严重冲突。"
+    },
+    {
+      "type": "partial_sample_overclaim",
+      "detail": "报告声称基于全部121条反馈进行分析，实际仅对80条反馈进行了聚类和量化，属于用部分样本冒充全量结论。"
+    },
+    {
+      "type": "over_inference",
+      "detail": "摘要声称‘超过30%的投诉直指数据不一致’，但18/121≈14.9%，远低于30%，存在夸大推断。"
+    },
+    {
+      "type": "hallucination",
+      "detail": "结构化JSON中summary.clustered_feedback_count为121，与各簇反馈数之和80不符，且未归类数标为0，属于凭空捏造数据。"
+    }
+  ],
+  "warnings": [
+    "未能验证evidence_feedback_ids是否全部存在于原始数据集中，但因格式合规暂时接受。",
+    "报告未覆盖的41条反馈可能蕴含其他重要主题，当前结论的可信度与覆盖度受损。"
+  ],
+  "recommendations": [
+    "修正反馈计数，将未归类反馈如实标注，并补充缺失的聚类或说明那些反馈为何无法归类。",
+    "量化比例时严格基于实际分析样本计算，避免夸大陈述。",
+    "结构化JSON中的summary字段必须与各簇feedback_count之和一致，不得虚假填报。",
+    "若实际只分析了80条，则‘核心结论’部分应明确限定基于80条样本，而非暗示为全量。"
+  ]
+}

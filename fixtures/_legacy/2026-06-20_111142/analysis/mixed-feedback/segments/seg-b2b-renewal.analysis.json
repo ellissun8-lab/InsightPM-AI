@@ -1,0 +1,102 @@
+{
+  "segment_id": "seg-b2b-renewal",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 18,
+    "cluster_count": 4,
+    "clustered_feedback_count": 18,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-b2b-renewal",
+      "name": "续费价格过高与缺乏灵活性",
+      "summary": "客户普遍反映续费价格超出预算或预期，直接与竞争对手对比，并缺乏折扣、分期等灵活支付方式，构成续约的首要障碍。",
+      "feedback_count": 10,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB12",
+        "FB17",
+        "FB28",
+        "FB46",
+        "FB56",
+        "FB61",
+        "FB73",
+        "FB82",
+        "FB117"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "续费率",
+        "价格异议率",
+        "折扣接受率",
+        "竞品价格对比提及率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "1. 立即进行市场价格竞争力分析，并针对不同客户生命周期阶段（如老客、高价值客）设计差异化的阶梯折扣或忠诚度奖励计划。2. 推出季度付、分期付等灵活付款方案，降低客户一次性支付压力。3. 在续费沟通中，提前、清晰地进行价值重申与ROI测算，缓解价格敏感度。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-b2b-renewal",
+      "name": "付款方式灵活性不足",
+      "summary": "客户（尤其是中小企业）倾向于更灵活的付款周期和方式，以匹配自身的现金流状况，当前单一的年度付费模式构成续费阻碍。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB40",
+        "FB96"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "灵活付款选项采纳率",
+        "分期付款订单占比"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "1. 产品与财务侧协同，开发并上线按季度、半年的付费选项，以及信用卡分期等支付接口。2. 在续费引导页面明确展示多种付款方式，满足不同客户的资金规划需求。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-b2b-renewal",
+      "name": "产品价值感知不足",
+      "summary": "部分客户认为产品功能（如CRM易用性）、新版本升级或附加服务的价值与续费价格不匹配，导致续费意愿降低。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB37",
+        "FB87",
+        "FB104"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "功能使用活跃度",
+        "新功能使用率",
+        "客户对产品价值的满意度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "1. 针对高频使用的痛点功能（如线索标记）进行用户体验优化，降低操作复杂度。2. 在续费前，主动向客户推送价值报告，展示其使用数据、带来的业务成果及新功能演示。3. 考虑将基础版本升级、关键培训作为续费权益的一部分，提升感知价值。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-b2b-renewal",
+      "name": "客户服务与支持响应延迟",
+      "summary": "客户在账号权限、系统故障等服务问题上遇到响应慢或处理不及时的情况，影响使用体验和续费信心。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB56",
+        "FB110"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "客户服务首次响应时长",
+        "问题平均解决时长",
+        "服务工单满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "1. 建立针对续费周期内客户问题的升级响应机制，确保关键问题在24小时内得到跟进。2. 优化内部工单系统流程，特别是权限审批等跨部门流程，提升效率。3. 对系统登录等高频故障进行根因分析和稳定性优化。"
+    }
+  ]
+}

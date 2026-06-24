@@ -1,0 +1,151 @@
+{
+  "segment_id": "seg-renewal-training",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 16,
+    "cluster_count": 6,
+    "clustered_feedback_count": 16,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-training-cluster-001",
+      "segment_id": "seg-renewal-training",
+      "name": "培训材料过时",
+      "summary": "用户反馈培训材料陈旧，未及时更新，导致新员工上手慢和培训效果不佳。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB34",
+        "FB88",
+        "FB142"
+      ],
+      "secondary_themes": [
+        "培训更新",
+        "材料过时"
+      ],
+      "possible_metrics": [
+        "培训材料更新频率",
+        "用户满意度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "定期审查和更新培训材料，确保内容与产品最新功能保持同步，并建立更新机制。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-002",
+      "segment_id": "seg-renewal-training",
+      "name": "培训师讲授速度过快",
+      "summary": "用户反映培训师讲解速度太快，难以跟上培训内容，影响学习效果。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB22",
+        "FB76",
+        "FB130"
+      ],
+      "secondary_themes": [
+        "培训节奏不当",
+        "培训质量"
+      ],
+      "possible_metrics": [
+        "培训完成率",
+        "培训后测试通过率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "调整培训节奏，提供可调速的视频教程和互动练习，允许学员自主控制学习进度。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-003",
+      "segment_id": "seg-renewal-training",
+      "name": "培训课程收费与上手难度问题",
+      "summary": "用户认为培训课程收费不公平，且产品上手难度大，增加了使用障碍和成本。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB40",
+        "FB94",
+        "FB148"
+      ],
+      "secondary_themes": [
+        "培训费用",
+        "上手难度",
+        "培训成本"
+      ],
+      "possible_metrics": [
+        "培训参与率",
+        "用户流失率",
+        "成本满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "评估培训课程定价策略，提供更多免费或低成本培训资源；优化产品设计以降低上手难度。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-004",
+      "segment_id": "seg-renewal-training",
+      "name": "培训资源不足",
+      "summary": "用户指出培训资源有限，特别是视频教程少，影响自我学习和培训效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB49",
+        "FB103"
+      ],
+      "secondary_themes": [
+        "培训资源",
+        "视频教程"
+      ],
+      "possible_metrics": [
+        "培训资源覆盖度",
+        "用户自学成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "增加培训视频和教程的数量，覆盖更多产品功能和常见使用场景。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-005",
+      "segment_id": "seg-renewal-training",
+      "name": "产品上手难度大",
+      "summary": "用户反馈产品功能齐全但上手慢，学习曲线陡峭，影响新用户激活和培训效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB54",
+        "FB108"
+      ],
+      "secondary_themes": [
+        "上手难度",
+        "学习曲线",
+        "培训更新"
+      ],
+      "possible_metrics": [
+        "新用户激活时间",
+        "培训需求时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 90,
+      "recommendation": "改进产品用户界面和引导流程，提供新手指南和快速入门教程，降低学习门槛。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-006",
+      "segment_id": "seg-renewal-training",
+      "name": "培训后支持不足",
+      "summary": "用户培训后仍不会使用产品，希望获得一对一辅导等额外支持，影响培训效果。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB61",
+        "FB115"
+      ],
+      "secondary_themes": [
+        "培训支持不足",
+        "培训效果"
+      ],
+      "possible_metrics": [
+        "培训后支持请求量",
+        "用户自助服务率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "建立培训后支持体系，如提供在线客服、社区论坛或可选的一对一辅导服务。"
+    }
+  ]
+}

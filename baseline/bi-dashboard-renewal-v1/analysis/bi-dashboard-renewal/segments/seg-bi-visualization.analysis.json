@@ -1,0 +1,80 @@
+{
+  "segment_id": "seg-bi-visualization",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 9,
+    "cluster_count": 3,
+    "clustered_feedback_count": 9,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-visualization-cluster-001",
+      "segment_id": "seg-bi-visualization",
+      "name": "图表配置复杂性与复用需求",
+      "summary": "用户反馈图表样式配置不直观，颜色配置复杂，且缺乏模板复用功能，同时目标线配置入口难找。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB30",
+        "FB97",
+        "FB149",
+        "FB70",
+        "FB83"
+      ],
+      "secondary_themes": [
+        "图表样式配置",
+        "可视化配置与复用"
+      ],
+      "possible_metrics": [
+        "配置时间",
+        "用户错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "简化颜色配置流程，引入一键配置和模板保存功能，并提供更直观的目标线配置入口。"
+    },
+    {
+      "cluster_id": "seg-bi-visualization-cluster-002",
+      "segment_id": "seg-bi-visualization",
+      "name": "地图可视化显示与性能问题",
+      "summary": "地图组件存在边界线显示不全和加载缓慢的问题，影响用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB43",
+        "FB138"
+      ],
+      "secondary_themes": [
+        "地图可视化"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "地图完整性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "优化地图数据加载机制，支持缓存和离线地图选项，并修复边界线渲染问题。"
+    },
+    {
+      "cluster_id": "seg-bi-visualization-cluster-003",
+      "segment_id": "seg-bi-visualization",
+      "name": "图表显示异常与标签重叠",
+      "summary": "趋势线在数据点少时显示异常，折线图数据标签重叠导致难以阅读。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB55",
+        "FB122"
+      ],
+      "secondary_themes": [
+        "趋势线图表",
+        "可视化图表"
+      ],
+      "possible_metrics": [
+        "数据标签可读性",
+        "趋势线准确性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "改进趋势线算法，增加自定义选项，并优化数据标签布局以避免重叠。"
+    }
+  ]
+}

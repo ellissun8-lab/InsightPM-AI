@@ -1,0 +1,130 @@
+{
+  "segment_id": "seg-bi-value",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 18,
+    "cluster_count": 5,
+    "clustered_feedback_count": 18,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-value-cluster-002",
+      "segment_id": "seg-bi-value",
+      "name": "功能未充分利用与价值狭窄",
+      "summary": "客户反映产品功能使用不足、应用场景有限、缺乏行业模板，导致续费价值感知降低。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB15",
+        "FB45",
+        "FB59",
+        "FB71",
+        "FB77",
+        "FB132"
+      ],
+      "secondary_themes": [
+        "易用性",
+        "功能覆盖"
+      ],
+      "possible_metrics": [
+        "功能使用率",
+        "客户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "开发更多开箱即用的行业模板，改进自助分析功能易用性，并提供高级功能使用培训。"
+    },
+    {
+      "cluster_id": "seg-bi-value-cluster-001",
+      "segment_id": "seg-bi-value",
+      "name": "价格与性价比质疑",
+      "summary": "客户对价格上涨、功能提升不足以及竞品价格优势表示不满，影响续费价值感知。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB9",
+        "FB22",
+        "FB89",
+        "FB95",
+        "FB144"
+      ],
+      "secondary_themes": [
+        "竞品比较",
+        "成本效益"
+      ],
+      "possible_metrics": [
+        "价格敏感性",
+        "续费率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "进行市场定价对标分析，优化产品功能以匹配价格提升，并推出老客户忠诚折扣计划。"
+    },
+    {
+      "cluster_id": "seg-bi-value-cluster-003",
+      "segment_id": "seg-bi-value",
+      "name": "产品路线图中的关键功能需求",
+      "summary": "客户对AI助手和移动端优化有强烈期望，这些功能被视为续费的关键驱动因素。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB65",
+        "FB83"
+      ],
+      "secondary_themes": [
+        "未来规划",
+        "移动访问"
+      ],
+      "possible_metrics": [
+        "路线图执行进度",
+        "功能采纳率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "优先开发AI助手和移动端优化功能，并在续费沟通中展示路线图进展以增强价值感知。"
+    },
+    {
+      "cluster_id": "seg-bi-value-cluster-004",
+      "segment_id": "seg-bi-value",
+      "name": "服务保障与合同条款期望",
+      "summary": "客户要求更明确的服务级别协议保障和长期合同优惠，以增加价值感知和安全感。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB126",
+        "FB150"
+      ],
+      "secondary_themes": [
+        "合同灵活性",
+        "服务可靠性"
+      ],
+      "possible_metrics": [
+        "SLA合规率",
+        "合同续签率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "在合同中明确SLA条款，提供长期合同优惠选项，并加强服务保障沟通。"
+    },
+    {
+      "cluster_id": "seg-bi-value-cluster-005",
+      "segment_id": "seg-bi-value",
+      "name": "使用频率低与预算约束",
+      "summary": "客户因产品使用频率低和预算限制而考虑降级或不续费，需要提升使用价值和ROI证明。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB36",
+        "FB138"
+      ],
+      "secondary_themes": [
+        "使用习惯",
+        "预算管理"
+      ],
+      "possible_metrics": [
+        "用户活跃度",
+        "ROI评估完成率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "提供使用最佳实践培训，展示成功案例和ROI数据，并考虑灵活的定价或套餐选项以匹配预算。"
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "segment_id": "seg-renewal-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 25,
+    "cluster_count": 7,
+    "clustered_feedback_count": 25,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-performance-cluster-003",
+      "segment_id": "seg-renewal-performance",
+      "name": "系统稳定性和卡顿问题",
+      "summary": "用户报告系统偶尔卡顿和频繁报错，影响使用流畅性和可靠性。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB30",
+        "FB84",
+        "FB38",
+        "FB92",
+        "FB138",
+        "FB146",
+        "FB2"
+      ],
+      "secondary_themes": [
+        "系统稳定性",
+        "卡顿"
+      ],
+      "possible_metrics": [
+        "错误率",
+        "卡顿频率",
+        "用户满意度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "进行系统稳定性测试，修复常见错误，优化资源使用以减少卡顿。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-001",
+      "segment_id": "seg-renewal-performance",
+      "name": "系统崩溃和服务中断",
+      "summary": "用户反馈系统频繁崩溃，导致服务中断，甚至数据丢失，严重影响业务连续性和信任度。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB66",
+        "FB120",
+        "FB55",
+        "FB109"
+      ],
+      "secondary_themes": [
+        "系统稳定性",
+        "数据丢失"
+      ],
+      "possible_metrics": [
+        "崩溃率",
+        "平均恢复时间(MTTR)",
+        "数据完整性"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "加强系统监控和容错机制，实施定期备份和灾难恢复计划，减少崩溃频率。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-002",
+      "segment_id": "seg-renewal-performance",
+      "name": "系统响应速度慢",
+      "summary": "客户抱怨系统响应缓慢，影响工作效率，导致用户体验下降。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB65",
+        "FB119",
+        "FB6"
+      ],
+      "secondary_themes": [
+        "性能",
+        "响应速度"
+      ],
+      "possible_metrics": [
+        "平均响应时间",
+        "页面加载时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "优化系统代码和数据库查询，考虑增加缓存或升级硬件以提升响应速度。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-004",
+      "segment_id": "seg-renewal-performance",
+      "name": "数据同步延迟",
+      "summary": "数据同步延迟严重，影响用户及时决策和业务操作。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB24",
+        "FB78",
+        "FB132"
+      ],
+      "secondary_themes": [
+        "数据延迟",
+        "同步问题"
+      ],
+      "possible_metrics": [
+        "同步延迟时间",
+        "数据一致性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化数据同步算法，增加带宽或使用更高效的同步机制。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-005",
+      "segment_id": "seg-renewal-performance",
+      "name": "高峰时段性能下降",
+      "summary": "系统在高峰时段性能明显下降，影响用户体验和业务处理能力。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB80",
+        "FB134"
+      ],
+      "secondary_themes": [
+        "高峰时段",
+        "性能下降"
+      ],
+      "possible_metrics": [
+        "高峰时段响应时间",
+        "并发用户处理能力"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "实施负载均衡和自动扩展策略，以应对高峰时段的流量激增。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-006",
+      "segment_id": "seg-renewal-performance",
+      "name": "API集成稳定性问题",
+      "summary": "集成现有CRM系统时API不稳定，导致集成失败或数据不同步。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB42",
+        "FB96"
+      ],
+      "secondary_themes": [
+        "API集成",
+        "稳定性"
+      ],
+      "possible_metrics": [
+        "API成功率",
+        "集成错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "改进API文档和测试，确保API的稳定性和兼容性，提供集成支持。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-007",
+      "segment_id": "seg-renewal-performance",
+      "name": "报表加载性能慢",
+      "summary": "报表加载缓慢，影响工作效率和数据洞察。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB43",
+        "FB97"
+      ],
+      "secondary_themes": [
+        "报表加载",
+        "系统性能"
+      ],
+      "possible_metrics": [
+        "报表加载时间",
+        "查询效率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "优化数据库查询和报表生成逻辑，考虑预计算或缓存常用报表。"
+    }
+  ]
+}

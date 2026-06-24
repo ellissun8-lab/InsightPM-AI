@@ -1,0 +1,120 @@
+{
+  "segment_id": "seg-onboarding-invitation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 21,
+    "cluster_count": 4,
+    "clustered_feedback_count": 21,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-001",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "邀请链接和邮件发送失败",
+      "summary": "用户在邀请过程中遇到链接失效、邮件被误判为垃圾邮件、邮件显示乱码或无法接收、浏览器不兼容或过期时间不可设置等问题，导致邀请流程中断。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB33",
+        "FB60",
+        "FB89",
+        "FB102",
+        "FB109",
+        "FB138"
+      ],
+      "secondary_themes": [
+        "邮件送达",
+        "链接兼容性",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "邀请链接点击率",
+        "邮件送达率",
+        "邀请流程完成时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "优化邮件发送基础设施，使用专业邮件服务提升送达率并避免垃圾邮件过滤；确保邀请链接兼容主流浏览器并提供备用方案；允许用户自定义链接过期时间；添加邮件发送状态追踪和自动重发机制。"
+    },
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-002",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "邀请流程界面不清晰和状态显示问题",
+      "summary": "用户在邀请成员时找不到邀请码输入或批量导入入口，邀请后状态显示卡住或成员列表不显示，造成操作困惑和效率低下。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB64",
+        "FB72",
+        "FB116"
+      ],
+      "secondary_themes": [
+        "用户界面设计",
+        "状态同步"
+      ],
+      "possible_metrics": [
+        "邀请流程完成率",
+        "用户支持请求量",
+        "界面导航错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "重新设计邀请界面，将邀请码输入和批量导入功能置于明显位置；优化邀请状态同步机制，提供实时进度指示和解决卡住问题的自助工具（如重试按钮）；简化成员列表显示逻辑。"
+    },
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-003",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "权限配置和访问控制缺陷",
+      "summary": "权限设置复杂、默认过于严格或存在逻辑错误，导致文件共享失效、误删数据或移除成员后仍能访问，影响团队协作效率和数据安全。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB21",
+        "FB49",
+        "FB94",
+        "FB96"
+      ],
+      "secondary_themes": [
+        "权限管理",
+        "安全审计",
+        "协作效率"
+      ],
+      "possible_metrics": [
+        "权限配置错误率",
+        "数据泄露事件数",
+        "协作满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "简化权限配置流程，提供预设模板和清晰说明以降低复杂度；调整默认权限设置，平衡安全与协作效率（如为小团队提供宽松选项）；确保成员移除后立即撤销所有访问权限；添加权限变更审计日志和即时通知。"
+    },
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-004",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "邀请限制和系统配置错误",
+      "summary": "系统错误提示账号上限、域名限制处理不佳、工作区设置冲突或邮箱冲突，导致邀请失败、配置困难或误判，阻碍团队扩展和协作。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB40",
+        "FB46",
+        "FB81",
+        "FB129",
+        "FB133"
+      ],
+      "secondary_themes": [
+        "配额管理",
+        "域名处理",
+        "外部协作"
+      ],
+      "possible_metrics": [
+        "邀请失败率",
+        "配置支持请求量",
+        "外部用户加入成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "修正配额检查逻辑，与用户购买信息实时同步并提供清晰错误解释；优化域名限制处理，提供自动化验证和解决方案（如白名单设置）；改进工作区设置，避免冲突并增加提示；简化外部用户邀请流程，支持项目级别访问而不暴露整个工作区。"
+    }
+  ]
+}

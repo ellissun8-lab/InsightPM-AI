@@ -1,0 +1,89 @@
+{
+  "segment_id": "seg-ai-hallucination",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 16,
+    "cluster_count": 3,
+    "clustered_feedback_count": 16,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-hallucination-cluster-001",
+      "segment_id": "seg-ai-hallucination",
+      "name": "AI推荐虚假产品与信息误导用户决策",
+      "summary": "AI幻觉导致推荐虚假产品、广告或信息，误导消费者购买和决策，引起用户后悔和错误选择。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB15",
+        "FB25",
+        "FB52",
+        "FB70",
+        "FB88",
+        "FB106",
+        "FB124",
+        "FB142"
+      ],
+      "secondary_themes": [
+        "产品推荐准确性",
+        "信息真实性"
+      ],
+      "possible_metrics": [
+        "推荐错误率",
+        "用户投诉率",
+        "决策影响度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化推荐算法，集成实时事实核查系统；建立用户反馈机制快速识别虚假推荐；对高风险推荐内容增加人工审核，并定期审核数据源。"
+    },
+    {
+      "cluster_id": "seg-ai-hallucination-cluster-002",
+      "segment_id": "seg-ai-hallucination",
+      "name": "AI虚构历史事件误导学习",
+      "summary": "AI幻觉生成虚构历史事件或人物，误导学生和历史学习者的学习过程。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB44",
+        "FB80",
+        "FB116"
+      ],
+      "secondary_themes": [
+        "历史信息准确性",
+        "教育误导"
+      ],
+      "possible_metrics": [
+        "历史事实准确性",
+        "学习内容可信度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "对历史相关查询接入权威历史数据库；实施事实验证层，确保生成内容基于可靠来源；教育用户识别AI生成内容的局限性，并提供来源标注。"
+    },
+    {
+      "cluster_id": "seg-ai-hallucination-cluster-003",
+      "segment_id": "seg-ai-hallucination",
+      "name": "AI生成虚假数据与案例影响专业报告",
+      "summary": "AI幻觉生成虚假数据、案例和新闻，影响研究报告和商业决策的准确性。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB35",
+        "FB62",
+        "FB98",
+        "FB134"
+      ],
+      "secondary_themes": [
+        "数据生成准确性",
+        "报告可靠性"
+      ],
+      "possible_metrics": [
+        "数据生成错误率",
+        "报告可信度评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "加强数据生成任务的校验机制，使用可信数据集进行训练；在输出前添加验证步骤，如交叉核对或人工审核；提供数据来源透明度并设置警告标签。"
+    }
+  ]
+}

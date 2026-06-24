@@ -1,0 +1,86 @@
+{
+  "segment_id": "seg-onboarding-invitation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 20,
+    "cluster_count": 3,
+    "clustered_feedback_count": 20,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-001",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "邀请链接与邮件传递问题",
+      "summary": "邀请流程中链接生成、邮件发送、过期设置、域名限制等环节存在问题，导致用户无法成功邀请或进入错误工作区，影响团队协作效率。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB9",
+        "FB47",
+        "FB48",
+        "FB52",
+        "FB56",
+        "FB57",
+        "FB60",
+        "FB62"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "邀请成功率",
+        "邮件到达率",
+        "链接使用率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 80,
+      "recommendation": "优化邮件模板以避免被误判为垃圾邮件；允许管理员自定义邀请链接过期时间；支持外部邮箱邀请以兼容合作伙伴；添加邀请链接撤回功能；确保新成员数据同步实时更新。"
+    },
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-002",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "权限配置与管理复杂性",
+      "summary": "权限设置逻辑复杂、定义模糊，默认权限不当，且缺少细粒度控制和审计功能，导致管理员操作困难、用户权限错误，增加安全风险和效率低下。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB49",
+        "FB53",
+        "FB54",
+        "FB55",
+        "FB59",
+        "FB65",
+        "FB66",
+        "FB67"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "权限设置时间",
+        "权限错误率",
+        "管理员满意度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "简化权限设置界面，提供预设权限模板（如默认权限模板）；明确权限层级定义（如“可编辑”与“可管理”区别）；添加角色降级和调整功能；支持细粒度权限控制（如“仅评论”权限）；增强审计日志以追踪邀请和权限变更。"
+    },
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-003",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "协作工具与功能缺失",
+      "summary": "用户反馈缺少批量邀请功能、内容所有权管理逻辑不清、审计日志功能缺失，以及协作界面图标不直观，影响团队协作效率和工具易用性。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB50",
+        "FB61",
+        "FB63",
+        "FB96"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "批量邀请使用率",
+        "协作工具使用频率",
+        "用户操作错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "开发批量邀请功能以简化操作；明确成员移除后内容所有权转移逻辑；添加审计日志功能以记录邀请和权限事件；优化协作工具栏图标设计，提供更直观的UI和帮助文档。"
+    }
+  ]
+}

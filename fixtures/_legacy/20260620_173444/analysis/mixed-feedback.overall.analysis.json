@@ -1,0 +1,783 @@
+{
+  "project_id": "",
+  "analysis_run_id": "",
+  "summary": {
+    "total_feedback_count": 120,
+    "analyzed_feedback_count": 120,
+    "clustered_feedback_count": 120,
+    "unclustered_feedback_count": 0,
+    "unanalyzed_feedback_count": 0,
+    "segment_count": 8,
+    "business_segment_count": 6,
+    "noise_segment_count": 1,
+    "cluster_count": 28,
+    "is_mixed_dataset": true
+  },
+  "segments": [
+    {
+      "segment_id": "seg-unknown",
+      "name": "未分类反馈",
+      "feedback_count": 24,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "cluster-seg-unknown-001"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "name": "噪声/无效反馈",
+      "feedback_count": 5,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "cluster-seg-noise-001"
+      ]
+    },
+    {
+      "segment_id": "seg-b2b-renewal",
+      "name": "B端 SaaS 续费风险",
+      "feedback_count": 11,
+      "business_goal": "提升续费 / 降低流失",
+      "issue_cluster_ids": [
+        "cluster-001",
+        "cluster-002",
+        "cluster-003",
+        "cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-b2b-activation",
+      "name": "B端 SaaS 激活问题",
+      "feedback_count": 24,
+      "business_goal": "提升激活",
+      "issue_cluster_ids": [
+        "cluster-001",
+        "cluster-002",
+        "cluster-003",
+        "cluster-004",
+        "cluster-005"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "电商转化问题",
+      "feedback_count": 12,
+      "business_goal": "提升下单转化率",
+      "issue_cluster_ids": [
+        "cluster-001",
+        "cluster-002",
+        "cluster-003",
+        "cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-experience",
+      "name": "AI 产品体验问题",
+      "feedback_count": 22,
+      "business_goal": "改善体验 / 提升留存",
+      "issue_cluster_ids": [
+        "cluster-001",
+        "cluster-002",
+        "cluster-003",
+        "cluster-004",
+        "cluster-005"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-renewal",
+      "name": "BI 工具续费问题",
+      "feedback_count": 15,
+      "business_goal": "提升续费",
+      "issue_cluster_ids": [
+        "cluster-001",
+        "cluster-002",
+        "cluster-003",
+        "cluster-004",
+        "cluster-005"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-cost",
+      "name": "内部系统降本问题",
+      "feedback_count": 7,
+      "business_goal": "降低运营成本",
+      "issue_cluster_ids": [
+        "cluster-001",
+        "cluster-002",
+        "cluster-003"
+      ]
+    }
+  ],
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-seg-unknown-001",
+      "segment_id": "seg-unknown",
+      "name": "未分类反馈",
+      "summary": "无法明确归类的反馈，需要人工复核",
+      "feedback_count": 24,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB3",
+        "FB5"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "需要人工复核，尝试重新归类到具体业务分组。"
+    },
+    {
+      "cluster_id": "cluster-seg-noise-001",
+      "segment_id": "seg-noise",
+      "name": "无效/噪声反馈",
+      "summary": "包含无效内容、情绪表达、无法归因的反馈",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB4",
+        "FB6"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "不进入核心问题排序，保留为低置信度样本。"
+    },
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-b2b-renewal",
+      "name": "价格与成本问题",
+      "summary": "客户普遍反映续费价格过高、价格上涨导致预算压力大、系统维护成本高、性价比低，认为产品价格体系不清晰透明。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB26",
+        "FB30",
+        "FB107",
+        "FB115"
+      ],
+      "secondary_themes": [
+        "定价策略",
+        "续费成本",
+        "系统总拥有成本",
+        "产品价值与定价"
+      ],
+      "possible_metrics": [
+        "续费率",
+        "客户流失率",
+        "价格敏感度评分",
+        "客户生命周期价值"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "重新评估定价策略，提供分层定价或折扣方案，明确价格构成与价值对应关系，降低客户对成本的负面感知。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-b2b-renewal",
+      "name": "客户服务与支持不足",
+      "summary": "客户反馈客服服务差、系统培训不充分，影响续费决策。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB112"
+      ],
+      "secondary_themes": [
+        "客服质量影响续费",
+        "客户服务与培训"
+      ],
+      "possible_metrics": [
+        "客户满意度",
+        "客服响应时间",
+        "培训完成率",
+        "续费率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "加强客服团队培训，建立标准化服务流程，提供系统化培训资源，提升客户支持体验。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-b2b-renewal",
+      "name": "产品功能与更新问题",
+      "summary": "客户认为产品功能未更新，缺乏新价值，导致续费意愿下降。",
+      "feedback_count": 1,
+      "evidence_feedback_ids": [
+        "FB14"
+      ],
+      "secondary_themes": [
+        "功能更新和续费意愿"
+      ],
+      "possible_metrics": [
+        "功能更新频率",
+        "客户留存率",
+        "产品使用活跃度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "加快产品迭代节奏，定期发布功能更新，并通过沟通渠道向客户展示新增价值。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-b2b-renewal",
+      "name": "续费流程与合同问题",
+      "summary": "客户反映续费流程复杂、合同条款不合理、续费提醒过于频繁，影响续费体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB15",
+        "FB17",
+        "FB25"
+      ],
+      "secondary_themes": [
+        "合同问题",
+        "续费流程优化",
+        "续费流程"
+      ],
+      "possible_metrics": [
+        "续费转化率",
+        "续费流程耗时",
+        "客户投诉率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "简化续费流程，优化合同条款使其更灵活，调整续费提醒频率，提升续费体验。"
+    },
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-b2b-activation",
+      "name": "激活流程复杂且步骤过多",
+      "summary": "用户普遍反映产品激活流程步骤多、时间长、设计复杂不直观，导致激活困难。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB33",
+        "FB40",
+        "FB50",
+        "FB32"
+      ],
+      "secondary_themes": [
+        "初始设置繁琐",
+        "激活步骤不直观"
+      ],
+      "possible_metrics": [
+        "激活完成率",
+        "平均激活时长",
+        "激活步骤流失率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "简化激活流程，减少不必要的步骤，提供清晰的进度指示和分步引导，优化初始配置体验，降低用户操作门槛。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-b2b-activation",
+      "name": "注册环节体验差",
+      "summary": "用户在注册过程中遇到失败、卡顿、信息填写过多、验证邮件收不到等问题，影响激活。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB31",
+        "FB35",
+        "FB39",
+        "FB43",
+        "FB48"
+      ],
+      "secondary_themes": [
+        "注册失败",
+        "注册表单问题",
+        "验证邮件延迟"
+      ],
+      "possible_metrics": [
+        "注册成功率",
+        "注册表单完成率",
+        "验证邮件到达率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 88,
+      "recommendation": "优化注册流程，减少必填字段，增强表单验证和错误提示，确保验证邮件及时发送，提升注册环节的稳定性和流畅性。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-b2b-activation",
+      "name": "激活后引导不足",
+      "summary": "用户完成激活后缺乏清晰的引导，不清楚如何使用核心功能，感到困惑，导致使用不活跃。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB34",
+        "FB38",
+        "FB41",
+        "FB44",
+        "FB49"
+      ],
+      "secondary_themes": [
+        "新手引导缺失",
+        "功能入口难找",
+        "激活后使用不活跃"
+      ],
+      "possible_metrics": [
+        "激活后次日留存率",
+        "核心功能使用率",
+        "新手引导完成率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 82,
+      "recommendation": "设计交互式新手引导，在激活后立即展示核心功能入口和操作路径，提供上下文帮助和示例，降低用户上手难度。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-b2b-activation",
+      "name": "培训与材料效果不佳",
+      "summary": "用户反馈培训不充分、培训视频讲解不清晰、新手指南无实际帮助，导致产品使用困难。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB23",
+        "FB37",
+        "FB41"
+      ],
+      "secondary_themes": [
+        "培训视频不清晰",
+        "新手指南无效"
+      ],
+      "possible_metrics": [
+        "培训完成率",
+        "培训后问题解决率",
+        "用户满意度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "重新评估培训内容，制作更清晰、更场景化的培训视频和图文指南，增加互动问答环节，确保培训材料能真正解决用户痛点。"
+    },
+    {
+      "cluster_id": "cluster-005",
+      "segment_id": "seg-b2b-activation",
+      "name": "功能与激活状态问题",
+      "summary": "用户激活后部分功能被锁定、找不到功能入口、功能缺失无法满足需求，影响激活价值感知。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB20",
+        "FB36",
+        "FB44"
+      ],
+      "secondary_themes": [
+        "功能缺失",
+        "功能锁定",
+        "功能入口难找"
+      ],
+      "possible_metrics": [
+        "功能激活率",
+        "功能使用覆盖率",
+        "功能缺失反馈率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 78,
+      "recommendation": "明确功能激活状态和权限说明，优化功能解锁逻辑，确保用户激活后能立即使用核心功能，同时根据反馈补充关键功能。"
+    },
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "支付流程问题",
+      "summary": "用户在支付环节遇到多种问题，包括支付失败、支付方式少、结账流程复杂以及结账时出现错误，导致转化率下降。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB92",
+        "FB94",
+        "FB99",
+        "FB104"
+      ],
+      "secondary_themes": [
+        "支付可靠性",
+        "支付选项",
+        "结账流程"
+      ],
+      "possible_metrics": [
+        "支付成功率",
+        "结账完成率",
+        "支付方式覆盖率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "优化支付网关稳定性，增加主流支付方式（如支付宝、微信、信用卡），简化结账步骤并减少表单字段，同时加强支付错误提示和重试机制。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "购物车与优惠券功能缺陷",
+      "summary": "购物车频繁清空和优惠券无法使用，直接阻碍用户完成购买，导致弃单。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB91",
+        "FB96"
+      ],
+      "secondary_themes": [
+        "购物车功能",
+        "优惠券功能"
+      ],
+      "possible_metrics": [
+        "购物车保留率",
+        "优惠券使用成功率",
+        "弃单率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "修复购物车数据持久化问题，确保用户登录后购物车内容不丢失；检查优惠券系统逻辑，确保优惠券能正常应用并显示明确的使用条件。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "页面性能与数据准确性",
+      "summary": "页面加载慢导致高弃单率，同时库存显示不准和物流信息更新慢，影响用户购买信心。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB95",
+        "FB97",
+        "FB100"
+      ],
+      "secondary_themes": [
+        "页面性能",
+        "库存数据",
+        "物流信息"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "库存准确率",
+        "物流信息更新时效",
+        "弃单率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化前端性能（如压缩图片、启用CDN），提升服务器响应速度；同步库存系统与ERP，确保实时更新；对接物流API，提高物流跟踪信息刷新频率。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "价格与客服体验问题",
+      "summary": "价格高于竞争对手导致用户流失，客服响应慢进一步影响购买决策。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB16",
+        "FB98"
+      ],
+      "secondary_themes": [
+        "价格比较",
+        "客服响应"
+      ],
+      "possible_metrics": [
+        "价格竞争力指数",
+        "客服平均响应时间",
+        "转化率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "进行竞品价格分析，实施动态定价或促销策略；增加客服人力或引入智能客服机器人，将响应时间缩短至30秒以内，并在关键购买环节提供主动帮助。"
+    },
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-ai-experience",
+      "name": "AI推荐与响应准确性不足",
+      "summary": "用户普遍反馈AI推荐不准确、识别错误多、预测功能失败，且响应结果不准确，严重影响使用体验。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB51",
+        "FB55",
+        "FB63",
+        "FB68",
+        "FB93"
+      ],
+      "secondary_themes": [
+        "推荐算法智能性不足",
+        "识别错误率高"
+      ],
+      "possible_metrics": [
+        "推荐准确率",
+        "识别错误率",
+        "预测成功率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "优化AI推荐算法模型，增加训练数据量和多样性，引入用户反馈闭环机制，定期评估并迭代模型准确性。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-ai-experience",
+      "name": "AI功能实用性差且不满足业务需求",
+      "summary": "用户和客户普遍认为AI功能不实用、建议笼统无价值，且无法满足具体业务需求，导致功能如同鸡肋。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB52",
+        "FB59",
+        "FB64",
+        "FB69",
+        "FB103"
+      ],
+      "secondary_themes": [
+        "功能多余",
+        "建议过于笼统"
+      ],
+      "possible_metrics": [
+        "功能使用率",
+        "用户满意度评分",
+        "业务需求匹配度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 88,
+      "recommendation": "深入调研目标用户业务场景，重新设计AI功能以解决实际痛点，提供可定制化的建议输出，并增加场景化引导。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-ai-experience",
+      "name": "AI性能与稳定性问题",
+      "summary": "用户反馈AI回答速度慢、反馈不及时、功能不稳定且经常崩溃，影响日常使用流畅度。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB53",
+        "FB56",
+        "FB58",
+        "FB67"
+      ],
+      "secondary_themes": [
+        "响应延迟",
+        "更新后体验下降"
+      ],
+      "possible_metrics": [
+        "平均响应时间",
+        "系统崩溃率",
+        "版本回退率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 82,
+      "recommendation": "优化后端推理引擎性能，增加缓存机制和负载均衡，建立自动化监控与告警系统，确保更新前充分测试。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-ai-experience",
+      "name": "AI界面与交互体验不佳",
+      "summary": "用户反映AI功能界面复杂难用、设计丑陋，且学习曲线陡峭，导致上手困难。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB54",
+        "FB61",
+        "FB70",
+        "FB62"
+      ],
+      "secondary_themes": [
+        "界面复杂",
+        "自动化水平不足"
+      ],
+      "possible_metrics": [
+        "任务完成时间",
+        "用户首次使用成功率",
+        "界面满意度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 78,
+      "recommendation": "简化AI功能界面，采用渐进式引导设计，增加自动化操作流程，并优化视觉设计以提升整体体验。"
+    },
+    {
+      "cluster_id": "cluster-005",
+      "segment_id": "seg-ai-experience",
+      "name": "AI数据与集成基础问题",
+      "summary": "内部团队和客户反馈AI模型训练数据不足，集成过程困难，且产品整体需要改进。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB57",
+        "FB60",
+        "FB65",
+        "FB66"
+      ],
+      "secondary_themes": [
+        "数据量不足",
+        "集成困难"
+      ],
+      "possible_metrics": [
+        "数据覆盖率",
+        "集成成功率",
+        "客户抱怨率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "扩大数据采集渠道，建立数据标注与清洗流程，提供标准API和详细集成文档，并设立专门技术支持团队。"
+    },
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-bi-renewal",
+      "name": "价格与性价比问题",
+      "summary": "用户认为续费价格过高，且整体性价比不高，导致续费意愿下降。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB71",
+        "FB80",
+        "FB88"
+      ],
+      "secondary_themes": [
+        "续费提醒体验差"
+      ],
+      "possible_metrics": [
+        "续费率",
+        "价格敏感度",
+        "NPS"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "重新评估定价策略，提供分层定价或折扣方案；优化续费提醒频率和方式，减少用户反感。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-bi-renewal",
+      "name": "报表功能与性能问题",
+      "summary": "用户反馈报表功能薄弱、生成速度慢、加载慢，且定制化操作困难，影响使用体验。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB72",
+        "FB75",
+        "FB79",
+        "FB87"
+      ],
+      "secondary_themes": [
+        "报表定制化"
+      ],
+      "possible_metrics": [
+        "报表加载时间",
+        "功能满意度",
+        "定制化使用率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "加速报表引擎优化，提升生成和加载速度；增强报表定制化能力，提供拖拽式编辑和模板库。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-bi-renewal",
+      "name": "产品易用性与学习成本问题",
+      "summary": "用户认为BI工具学习成本高，数据可视化效果不佳，且功能过时，导致满意度低。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB73",
+        "FB74",
+        "FB77",
+        "FB89"
+      ],
+      "secondary_themes": [
+        "功能现代性",
+        "可视化效果"
+      ],
+      "possible_metrics": [
+        "用户上手时间",
+        "可视化满意度",
+        "功能更新频率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "简化操作流程，提供交互式教程和引导；升级可视化组件库，引入现代图表类型；加快功能迭代节奏。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-bi-renewal",
+      "name": "数据质量与导入问题",
+      "summary": "用户反映数据导入过程存在问题，且对数据准确性有担忧，影响信任度。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB76",
+        "FB78"
+      ],
+      "secondary_themes": [
+        "数据准确性"
+      ],
+      "possible_metrics": [
+        "数据导入成功率",
+        "数据错误率",
+        "用户信任评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化数据导入流程，增加数据校验和清洗功能；提供数据溯源和审计日志，增强数据透明度。"
+    },
+    {
+      "cluster_id": "cluster-005",
+      "segment_id": "seg-bi-renewal",
+      "name": "客户支持与更新问题",
+      "summary": "用户认为BI工具更新慢，且客户支持差，影响续费决策。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB82",
+        "FB84"
+      ],
+      "secondary_themes": [
+        "软件更新"
+      ],
+      "possible_metrics": [
+        "客户支持响应时间",
+        "版本更新频率",
+        "客户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "建立定期更新计划，发布版本路线图；加强客户支持团队培训，提供多渠道支持（如在线客服、社区论坛）。"
+    },
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-internal-cost",
+      "name": "内部系统成本过高问题",
+      "summary": "内部系统在采购、运营和维护方面成本较高，管理层要求降低成本，同时系统性能和稳定性问题也间接增加了运营负担。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB85",
+        "FB118",
+        "FB120"
+      ],
+      "secondary_themes": [
+        "成本控制",
+        "运营成本优化"
+      ],
+      "possible_metrics": [
+        "系统总拥有成本(TCO)",
+        "每用户运营成本"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "对现有内部系统进行成本审计，识别高成本模块，评估是否可通过开源替代方案或优化架构降低采购和运营成本，同时制定成本控制指标并定期监控。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-internal-cost",
+      "name": "内部系统性能与响应延迟问题",
+      "summary": "内部系统运行缓慢、响应存在延迟，影响员工工作效率，与成本问题共同构成运营负担。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB106",
+        "FB113"
+      ],
+      "secondary_themes": [
+        "系统性能与效率",
+        "系统响应速度"
+      ],
+      "possible_metrics": [
+        "平均响应时间",
+        "系统可用性百分比"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "对系统进行性能瓶颈分析，优化数据库查询和缓存策略，必要时升级硬件或迁移至更高性能的云服务，以提升响应速度。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-internal-cost",
+      "name": "内部系统质量与更新管理问题",
+      "summary": "内部工具存在较多缺陷，且更新过于频繁干扰正常工作，影响员工体验和系统稳定性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB111",
+        "FB114"
+      ],
+      "secondary_themes": [
+        "软件质量与稳定性",
+        "系统更新管理"
+      ],
+      "possible_metrics": [
+        "缺陷密度",
+        "更新频率与用户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "建立更严格的测试流程，减少缺陷发布；优化更新策略，采用灰度发布或非工作时间更新，降低对正常工作的干扰。"
+    }
+  ],
+  "report_path": "fixtures/analysis/mixed-feedback.overall.analysis.md"
+}

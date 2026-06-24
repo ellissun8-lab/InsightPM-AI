@@ -1,0 +1,81 @@
+{
+  "segment_id": "seg-onboarding-first-use",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 9,
+    "cluster_count": 3,
+    "clustered_feedback_count": 9,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-first-use-cluster-001",
+      "segment_id": "seg-onboarding-first-use",
+      "name": "引导完成后缺乏后续指引",
+      "summary": "用户在完成引导或示例项目后，不知道下一步该做什么，界面缺少明确的后续操作提示，导致首次使用中断。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB78",
+        "FB82",
+        "FB90",
+        "FB141"
+      ],
+      "secondary_themes": [
+        "onboarding",
+        "user guidance"
+      ],
+      "possible_metrics": [
+        "引导完成率",
+        "任务启动率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "在引导或示例项目完成后，自动弹出建议任务列表或引导用户开始自己的项目，例如添加‘开始新项目’按钮或视频教程链接。"
+    },
+    {
+      "cluster_id": "seg-onboarding-first-use-cluster-003",
+      "segment_id": "seg-onboarding-first-use",
+      "name": "首次使用中的误操作和繁琐流程",
+      "summary": "用户在首次使用中容易误操作（如创建错误项目类型），部分流程（如创建客户档案）过于繁琐，且搜索结果操作割裂，影响体验效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB88",
+        "FB89",
+        "FB102"
+      ],
+      "secondary_themes": [
+        "UI design",
+        "workflow optimization"
+      ],
+      "possible_metrics": [
+        "错误操作率",
+        "任务完成时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "优化界面交互设计：为关键操作（如删除或创建）添加确认对话框或撤销功能；简化客户档案创建流程，减少非必要字段；改进搜索结果页，支持内联预览和快速操作按钮。"
+    },
+    {
+      "cluster_id": "seg-onboarding-first-use-cluster-002",
+      "segment_id": "seg-onboarding-first-use",
+      "name": "首次登录时仪表盘空导致迷茫",
+      "summary": "新用户首次登录后，面对空仪表盘感到迷茫，缺乏明确起点，难以发现和使用核心功能。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB91",
+        "FB94"
+      ],
+      "secondary_themes": [
+        "first-time user experience",
+        "dashboard design"
+      ],
+      "possible_metrics": [
+        "首次登录留存率",
+        "功能探索深度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "为新用户提供仪表盘入门向导或预设模板，例如自动推荐常见任务（如创建看板或邀请团队），并高亮显示关键功能入口。"
+    }
+  ]
+}

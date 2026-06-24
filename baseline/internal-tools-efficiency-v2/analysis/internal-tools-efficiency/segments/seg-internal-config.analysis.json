@@ -1,0 +1,110 @@
+{
+  "segment_id": "seg-internal-config",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 12,
+    "cluster_count": 4,
+    "clustered_feedback_count": 12,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-config-cluster-001",
+      "segment_id": "seg-internal-config",
+      "name": "业务自助配置能力不足，高度依赖IT支持",
+      "summary": "用户普遍反映流程配置（如条件分支、字段定义）过于复杂，缺乏直观、易用的配置工具，导致简单的业务需求（如自定义字段、权限配置）也必须依赖IT人员编写脚本或进行复杂操作，业务部门无法自主、快速地完成配置，严重影响了敏捷性和工作效率。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB19",
+        "FB56",
+        "FB82",
+        "FB89",
+        "FB137",
+        "FB144"
+      ],
+      "secondary_themes": [
+        "流程配置复杂",
+        "权限管理颗粒度",
+        "业务自主能力"
+      ],
+      "possible_metrics": [
+        "业务自助配置率",
+        "IT支持工单中配置类占比",
+        "平均配置任务完成时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "1. **引入低代码/无代码配置界面**：设计可视化、表单化的流程与规则配置器，将脚本编写转化为勾选、拖拽等操作。2. **预置业务模板与组件库**：为常见场景（如请假附加字段、部门数据权限）提供开箱即用的配置模板。3. **建立“配置沙箱”与引导式文档**：提供安全的测试环境和清晰的步骤指引，赋能业务用户进行配置尝试。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-002",
+      "segment_id": "seg-internal-config",
+      "name": "配置变更生效慢与环境不一致",
+      "summary": "配置管理存在效率和质量风险。流程或配置的修改需要较长时间（如次日）才能生效，影响测试和迭代效率。同时，测试环境与生产环境的配置存在不一致，导致经过验证的功能在上线后出现问题，增加了运维和回滚的风险。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB34",
+        "FB46"
+      ],
+      "secondary_themes": [
+        "流程生效延迟",
+        "环境一致性"
+      ],
+      "possible_metrics": [
+        "配置变更平均生效时间",
+        "环境配置差异告警次数",
+        "因环境问题导致的线上缺陷数"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "1. **实现配置热部署与版本管理**：支持配置即时生效或在可控时间窗口内生效，并记录版本历史，便于回溯和回滚。2. **强化环境配置同步机制**：开发或引入配置中心，确保测试、预发、生产环境的核心配置（如流程定义、权限规则）可一键同步或严格校验差异。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-003",
+      "segment_id": "seg-internal-config",
+      "name": "流程状态与进度对用户不透明",
+      "summary": "流程执行（如审批）过程中，系统仅提供模糊的“处理中”状态，缺乏关键的进度信息（如预计完成时间、当前环节停留时长、处理人），导致发起人无法预估时间，产生焦虑，也影响了跨部门协作的效率和对流程的信任度。",
+      "feedback_count": 1,
+      "evidence_feedback_ids": [
+        "FB2"
+      ],
+      "secondary_themes": [
+        "审批进度可视性",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "用户因进度问题产生的查询工单数",
+        "平均流程完成时间",
+        "用户对流程效率的满意度评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "1. **增加流程进度条与关键节点提示**：在流程详情页可视化展示流程图、当前节点及历史审批记录。2. **提供预估时间与SLA提醒**：基于历史数据或配置的SLA，展示预计处理时间，并在超时前向处理人及发起人发送提醒。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-004",
+      "segment_id": "seg-internal-config",
+      "name": "其他配置与模板功能限制",
+      "summary": "系统在催办机制、特定模块（日报）的模板灵活性、以及相关业务模块（如文件版本管理）的配置能力上存在不足，导致功能效用打折扣或无法满足个性化管理需求。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB74",
+        "FB111",
+        "FB117"
+      ],
+      "secondary_themes": [
+        "催办机制",
+        "模板自定义",
+        "文件版本管理"
+      ],
+      "possible_metrics": [
+        "催办后流程实际加速比例",
+        "模板自定义使用率",
+        "因文件版本问题导致的错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 45,
+      "recommendation": "1. **优化催办功能**：增强催办的可见性和强制性，如通过消息强提醒、短信通知，或允许发起人设置升级规则。2. **增强模板可配置性**：允许管理员对日报等模块的字段、布局进行自定义配置。3. **完善文件版本控制**：为关联文档引入清晰的版本号、修订历史和状态标签功能。"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "segment_id": "seg-renewal-features",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 32,
+    "cluster_count": 4,
+    "clustered_feedback_count": 32,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-features-cluster-002",
+      "segment_id": "seg-renewal-features",
+      "name": "Feature Enhancement and Customization Demands",
+      "summary": "Users seek enhancements like mobile support, custom workflows, improved data analytics, and better report export options to better adapt to their business processes.",
+      "feedback_count": 14,
+      "evidence_feedback_ids": [
+        "FB24",
+        "FB28",
+        "FB30",
+        "FB31",
+        "FB33",
+        "FB35",
+        "FB38",
+        "FB39",
+        "FB40",
+        "FB41",
+        "FB42",
+        "FB44",
+        "FB23",
+        "FB25"
+      ],
+      "secondary_themes": [
+        "功能增强需求",
+        "功能定制需求",
+        "功能改进需求"
+      ],
+      "possible_metrics": [
+        "新功能采用率",
+        "用户定制满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "Gather detailed enhancement requests, prioritize high-impact features based on user feedback, and introduce customization options to increase flexibility and satisfaction."
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-003",
+      "segment_id": "seg-renewal-features",
+      "name": "Integration and API Challenges",
+      "summary": "Users face difficulties integrating third-party tools, lack of API interfaces, and unclear documentation, hindering system extensibility and workflow efficiency.",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB27",
+        "FB29",
+        "FB37",
+        "FB94",
+        "FB97",
+        "FB99",
+        "FB101",
+        "FB102",
+        "FB104"
+      ],
+      "secondary_themes": [
+        "集成功能缺失",
+        "扩展性需求",
+        "documentation"
+      ],
+      "possible_metrics": [
+        "集成成功率",
+        "API使用率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 82,
+      "recommendation": "Enhance integration capabilities by expanding API offerings, improving documentation clarity, and providing dedicated support to facilitate seamless tool connections."
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-001",
+      "segment_id": "seg-renewal-features",
+      "name": "Core Feature Gaps and Mismatches",
+      "summary": "Users report missing critical features such as reporting, multilingual support, and basic functionalities, leading to unmet business needs and potential churn.",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB32",
+        "FB34",
+        "FB36",
+        "FB43",
+        "FB109",
+        "FB131"
+      ],
+      "secondary_themes": [
+        "功能缺失",
+        "需求不匹配",
+        "功能不足"
+      ],
+      "possible_metrics": [
+        "功能覆盖率",
+        "需求匹配度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "Prioritize development of missing core features, conduct thorough needs analysis to ensure alignment with user requirements, and communicate roadmaps to address gaps."
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-004",
+      "segment_id": "seg-renewal-features",
+      "name": "User Interface Complexity",
+      "summary": "Users find the interface complex and difficult to navigate, with concerns about aesthetic elements like icons, impacting overall user experience and adoption.",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB147",
+        "FB133"
+      ],
+      "secondary_themes": [
+        "user-interface",
+        "界面图标美观度"
+      ],
+      "possible_metrics": [
+        "用户界面满意度",
+        "学习曲线时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "Simplify the user interface through usability testing, redesign icons for better aesthetics, and provide guided onboarding to reduce complexity and improve engagement."
+    }
+  ]
+}

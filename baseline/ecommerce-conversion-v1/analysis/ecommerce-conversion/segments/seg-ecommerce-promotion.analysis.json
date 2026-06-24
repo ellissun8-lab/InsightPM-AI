@@ -1,0 +1,142 @@
+{
+  "segment_id": "seg-ecommerce-promotion",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 20,
+    "cluster_count": 5,
+    "clustered_feedback_count": 20,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-001",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "优惠券功能可用性问题",
+      "summary": "用户在使用优惠券时遇到查找困难、状态异常、门槛过高、分享失效等问题，影响优惠券的获取和使用。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB7",
+        "FB82",
+        "FB86",
+        "FB92",
+        "FB96"
+      ],
+      "secondary_themes": [
+        "促销功能",
+        "优惠券功能问题",
+        "优惠券可发现性"
+      ],
+      "possible_metrics": [
+        "优惠券使用率",
+        "促销转化率",
+        "用户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化优惠券输入框的显著位置和视觉引导；实现实时状态同步，确保优惠券过期状态准确显示；简化使用门槛，提供清晰说明；修复分享功能，测试链接有效性。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-002",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "促销规则与显示不清晰",
+      "summary": "促销活动规则复杂、折扣价显示异常、倒计时不准确、折扣计算错误，导致用户困惑和误解。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB83",
+        "FB85",
+        "FB87",
+        "FB94",
+        "FB95"
+      ],
+      "secondary_themes": [
+        "促销",
+        "折扣计算问题",
+        "促销规则管理"
+      ],
+      "possible_metrics": [
+        "活动参与率",
+        "错误订单率",
+        "客服咨询量"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "简化活动规则描述，使用清晰语言和示例；修复前端显示逻辑，确保折扣价和倒计时实时准确；提供规则对比或计算器工具；建立规则变更通知机制，减少用户困惑。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-003",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "促销活动未按预期生效",
+      "summary": "积分兑换失败、买一送一活动不生效、预售商品无优惠等，导致促销承诺未兑现，直接影响转化。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB90",
+        "FB91",
+        "FB97"
+      ],
+      "secondary_themes": [
+        "促销与忠诚度",
+        "促销活动未生效",
+        "预售促销未生效"
+      ],
+      "possible_metrics": [
+        "促销履约率",
+        "用户投诉率",
+        "转化流失率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "加强系统测试和监控，确保促销逻辑（如积分兑换、买赠、预售折扣）在上线前正确执行；建立自动化告警机制，及时发现和修复活动故障；提供客服快速响应流程。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-004",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "促销履约与管理问题",
+      "summary": "参与促销的商品无预警下架、赠品不发货、商品评价被删，损害用户信任和品牌形象。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB88",
+        "FB98",
+        "FB99"
+      ],
+      "secondary_themes": [
+        "促销",
+        "评价管理问题",
+        "促销赠品未履约"
+      ],
+      "possible_metrics": [
+        "用户信任度",
+        "退货率",
+        "在线口碑"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "制定明确的促销商品管理政策，避免无预警下架，提供提前通知；确保赠品库存和物流跟踪，建立履约检查机制；保护用户评价，避免随意删除，鼓励真实反馈。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-005",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "界面可访问性与通知体验问题",
+      "summary": "促销页面访问失败、会员优惠未展示、通知过多、价格竞争力不足，影响整体用户体验和购买意愿。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB84",
+        "FB89",
+        "FB93",
+        "FB143"
+      ],
+      "secondary_themes": [
+        "促销",
+        "通知骚扰",
+        "促销优惠"
+      ],
+      "possible_metrics": [
+        "页面跳出率",
+        "通知 opt-out 率",
+        "价格竞争力指数"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "优化服务器和CDN配置，确保促销页面高可用；修复会员信息展示逻辑，确保专属优惠可见；个性化通知频率和内容，提供用户控制选项；定期进行价格调研，调整促销策略保持竞争力。"
+    }
+  ]
+}

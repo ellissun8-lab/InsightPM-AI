@@ -1,0 +1,143 @@
+{
+  "segment_id": "seg-ai-experience",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 22,
+    "cluster_count": 5,
+    "clustered_feedback_count": 22,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-ai-experience",
+      "name": "AI推荐与回答准确性不足",
+      "summary": "用户普遍反馈AI推荐不准确、识别错误多、预测失败，导致体验差，影响留存。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB51",
+        "FB55",
+        "FB63",
+        "FB68",
+        "FB93"
+      ],
+      "secondary_themes": [
+        "推荐系统",
+        "AI响应准确性",
+        "AI预测准确性"
+      ],
+      "possible_metrics": [
+        "推荐准确率",
+        "识别错误率",
+        "预测成功率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "优化推荐算法模型，增加训练数据量，引入用户反馈闭环机制，定期评估并迭代模型准确性。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-ai-experience",
+      "name": "AI功能实用性与价值感低",
+      "summary": "用户认为AI功能不实用、建议笼统、不满足业务需求，被视为鸡肋，缺乏实际价值。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB52",
+        "FB59",
+        "FB64",
+        "FB69",
+        "FB103"
+      ],
+      "secondary_themes": [
+        "AI功能实用性",
+        "AI功能与业务需求匹配度",
+        "推荐算法智能性"
+      ],
+      "possible_metrics": [
+        "功能使用率",
+        "用户满意度评分",
+        "业务需求覆盖率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 88,
+      "recommendation": "深入调研用户业务场景，定制化AI功能，提供更具体、可操作的建议，并增加用户引导以提升感知价值。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-ai-experience",
+      "name": "AI响应速度与稳定性问题",
+      "summary": "用户反馈AI回答速度慢、响应不及时、功能不稳定甚至崩溃，影响使用流畅度。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB53",
+        "FB56",
+        "FB58",
+        "FB67"
+      ],
+      "secondary_themes": [
+        "AI功能体验",
+        "AI更新质量"
+      ],
+      "possible_metrics": [
+        "响应时间",
+        "系统崩溃率",
+        "服务可用性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 82,
+      "recommendation": "优化后端性能，增加服务器资源，实施灰度发布机制，加强更新前后的稳定性测试。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-ai-experience",
+      "name": "AI界面复杂与学习成本高",
+      "summary": "用户认为AI界面过于复杂、设计丑陋，学习曲线陡峭，导致使用门槛高。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB54",
+        "FB61",
+        "FB70",
+        "FB66"
+      ],
+      "secondary_themes": [
+        "AI学习曲线",
+        "AI界面设计",
+        "AI集成"
+      ],
+      "possible_metrics": [
+        "用户首次完成率",
+        "界面易用性评分",
+        "集成成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 78,
+      "recommendation": "简化界面设计，提供交互式引导和教程，优化集成流程，降低用户学习成本。"
+    },
+    {
+      "cluster_id": "cluster-005",
+      "segment_id": "seg-ai-experience",
+      "name": "AI数据与自动化能力不足",
+      "summary": "内部团队和用户反馈AI训练数据不足、自动化水平低，且整体体验抱怨较多，需改进。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB57",
+        "FB60",
+        "FB62",
+        "FB65"
+      ],
+      "secondary_themes": [
+        "AI自动化程度",
+        "产品改进",
+        "AI功能体验"
+      ],
+      "possible_metrics": [
+        "数据量增长率",
+        "自动化覆盖率",
+        "用户抱怨率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "扩大数据采集范围，引入更多标注数据，提升自动化处理能力，并建立持续改进机制。"
+    }
+  ]
+}

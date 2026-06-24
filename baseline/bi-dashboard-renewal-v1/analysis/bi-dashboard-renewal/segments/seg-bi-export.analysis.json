@@ -1,0 +1,200 @@
+{
+  "segment_id": "seg-bi-export",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 29,
+    "cluster_count": 8,
+    "clustered_feedback_count": 29,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-export-cluster-001",
+      "segment_id": "seg-bi-export",
+      "name": "导出内容保真度问题",
+      "summary": "用户反馈导出后的文件（Excel、PDF、CSV）在格式、编码和数据转换上出现严重失真，导致文件不可直接使用或排序。问题包括表头数据错位、中文字符乱码、日期格式被错误转换、单元格格式丢失、以及排序规则损坏。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB9",
+        "FB12",
+        "FB112",
+        "FB129",
+        "FB139"
+      ],
+      "secondary_themes": [
+        "数据准确性",
+        "可用性"
+      ],
+      "possible_metrics": [
+        "导出文件保真度错误率",
+        "用户因格式问题导致的二次处理时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "1. 对Excel导出引擎进行优化，重点修复表头对齐和单元格格式映射（如数字、日期、货币格式）的规则。2. 为PDF导出组件集成完整的字符集支持，确保Unicode中文字符正确显示。3. 在CSV导出逻辑中增加‘原始数据格式保留’选项，避免自动转换日期等格式。4. 增加导出前的‘格式预览’和‘数据样例检查’功能。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-002",
+      "segment_id": "seg-bi-export",
+      "name": "导出功能无响应或失败",
+      "summary": "用户在使用导出功能时，频繁遭遇点击按钮后无反应、进程永久转圈、或直接报告失败的情况，导致基础功能不可用，严重影响用户体验和任务完成。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB31",
+        "FB87",
+        "FB137"
+      ],
+      "secondary_themes": [
+        "可靠性",
+        "可用性"
+      ],
+      "possible_metrics": [
+        "导出操作失败率",
+        "导出操作平均响应时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 78,
+      "recommendation": "1. 建立异步导出任务队列，将大数据量或复杂报表的导出转为后台任务，并生成唯一任务ID供用户查询。2. 在前端实现明确的进度反馈（如进度条、预估剩余时间），消除‘永久转圈’的体验。3. 在后端增加详细的错误日志和用户友好的错误提示代码，帮助用户和运维快速定位失败原因（如超时、内存不足、权限问题）。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-003",
+      "segment_id": "seg-bi-export",
+      "name": "导出性能效率不足",
+      "summary": "用户普遍反映导出操作耗时过长，缺乏进度反馈。对于大体积文件（如超100MB的CSV），系统无法处理并直接报错，缺乏分卷或优化机制，无法满足大数据量导出的需求。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB18",
+        "FB123",
+        "FB131",
+        "FB143"
+      ],
+      "secondary_themes": [
+        "效率",
+        "可扩展性"
+      ],
+      "possible_metrics": [
+        "不同数据量级下的平均导出时间",
+        "大文件导出成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 72,
+      "recommendation": "1. 优化核心查询和数据序列化性能，采用流式处理降低内存峰值。2. 开发‘分卷导出’功能，允许用户设置单文件大小上限（如50MB/100MB），系统自动将大数据分割为多个压缩包。3. 在前端增加动态进度条，反映真实的导出处理阶段。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-004",
+      "segment_id": "seg-bi-export",
+      "name": "导出数据缺乏筛选上下文",
+      "summary": "用户导出报表后，文件仅包含最终数据，缺少导出时的筛选条件、时间范围等关键上下文信息，导致接收者无法理解数据来源和范围，降低了报表的可读性和可信度。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB21",
+        "FB40",
+        "FB71",
+        "FB95"
+      ],
+      "secondary_themes": [
+        "信息完整性",
+        "协作"
+      ],
+      "possible_metrics": [
+        "包含筛选条件的导出文件占比"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "1. 在导出配置中增加‘附加筛选条件’的选项，可将其作为独立Sheet、文档首页或PPT备注页嵌入。2. 提供选项让用户选择是导出‘当前筛选后数据’还是‘全量数据’。3. 对于PDF/PPT，设计标准模板，在页面固定位置（如页眉/页脚）自动记录核心筛选条件。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-005",
+      "segment_id": "seg-bi-export",
+      "name": "导出后图表与图像质量下降",
+      "summary": "导出后的图表、图片和图例在清晰度、布局和完整性上出现问题，如图片模糊、图例位置错乱或丢失，严重影响报告的视觉呈现和专业度，尤其影响打印效果。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB25",
+        "FB47",
+        "FB81",
+        "FB117"
+      ],
+      "secondary_themes": [
+        "视觉保真度",
+        "专业性"
+      ],
+      "possible_metrics": [
+        "导出图像分辨率",
+        "图表元素完整度评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "1. 为图片和图表导出提供分辨率选项（如72dpi, 150dpi, 300dpi），默认采用适合屏幕和打印的高质量选项。2. 重构图表导出引擎，确保图例、标签等元素在静态文件中的布局逻辑与在线仪表盘保持一致。3. 对导出前的图表进行矢量化或高精度栅格化处理。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-007",
+      "segment_id": "seg-bi-export",
+      "name": "导出环境的兼容性与异常处理",
+      "summary": "导出功能在不同浏览器中表现不一致，并存在权限控制（按钮不可用）和附件管理（包含旧记录）的异常，影响功能的普适性和可靠性。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB52",
+        "FB56",
+        "FB76"
+      ],
+      "secondary_themes": [
+        "兼容性",
+        "稳定性"
+      ],
+      "possible_metrics": [
+        "跨浏览器功能一致性",
+        "权限错误发生率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 68,
+      "recommendation": "1. 建立完善的跨浏览器（Chrome， Firefox， Edge， Safari）自动化测试矩阵，确保核心导出流程表现一致。2. 审核导出功能的权限模型，在前端对无权限状态给出明确的提示和引导，而非仅置灰按钮。3. 排查并修复附件缓存管理逻辑，确保每次导出都是独立、干净的生成过程。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-006",
+      "segment_id": "seg-bi-export",
+      "name": "导出功能与灵活性不足",
+      "summary": "用户反馈缺乏批量合并导出多个仪表盘的功能，以及导出文件过大时的自动压缩或分割处理能力，限制了大规模、组合式数据分发场景下的使用。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB28",
+        "FB34"
+      ],
+      "secondary_themes": [
+        "效率",
+        "高级功能"
+      ],
+      "possible_metrics": [
+        "支持批量/合并导出的功能使用率",
+        "大文件自动处理成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "1. 开发‘批量导出’功能，允许用户选择多个仪表盘或报表，合并生成一个PDF或压缩包。2. 在导出设置中增加‘自动压缩’选项，当附件大小超过邮件系统或用户设定的阈值时，自动压缩为ZIP文件。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-008",
+      "segment_id": "seg-bi-export",
+      "name": "导出功能可扩展性建议",
+      "summary": "用户提出了增强导出功能生态的建议，包括增加导出历史记录以便文件找回，以及提升报表订阅和邮件推送的灵活性，以增强产品的粘性和价值。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB65",
+        "FB77"
+      ],
+      "secondary_themes": [
+        "产品粘性",
+        "高级功能"
+      ],
+      "possible_metrics": [
+        "用户活跃度",
+        "续费率相关性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "1. 规划并开发‘导出历史’模块，在用户账户下记录最近N次导出操作，提供临时文件下载链接（设定有效期）。2. 在订阅管理中增加更精细的触发条件（如数据变化后触发、特定日期）和收件人规则（如按部门、角色），将导出与推送结合成自动化工作流。"
+    }
+  ]
+}

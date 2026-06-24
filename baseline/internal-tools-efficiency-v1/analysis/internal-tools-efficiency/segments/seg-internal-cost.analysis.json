@@ -1,0 +1,62 @@
+{
+  "segment_id": "seg-internal-cost",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 6,
+    "cluster_count": 2,
+    "clustered_feedback_count": 6,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-cost-cluster-001",
+      "segment_id": "seg-internal-cost",
+      "name": "软件和设备投资回报率不足",
+      "summary": "用户质疑系统维护费、升级费和专用设备的投入产出比，认为许多功能未被使用或设备使用率低，导致成本节约效果存疑。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB15",
+        "FB39"
+      ],
+      "secondary_themes": [
+        "ROI",
+        "设备使用率"
+      ],
+      "possible_metrics": [
+        "功能使用率",
+        "设备利用率",
+        "投资回报率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "对系统功能进行审计，识别并优化未使用功能；重新评估专用设备需求，通过共享或租赁提高利用率，或终止采购。"
+    },
+    {
+      "cluster_id": "seg-internal-cost-cluster-002",
+      "segment_id": "seg-internal-cost",
+      "name": "运营成本隐含与资源规划低效",
+      "summary": "反馈指出电费、冷却费和人力成本未纳入降本计算，云服务费用增长与用户增长不匹配，服务器资源波动大影响容量规划。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB58",
+        "FB64",
+        "FB112",
+        "FB141"
+      ],
+      "secondary_themes": [
+        "总拥有成本",
+        "云服务成本",
+        "资源规划"
+      ],
+      "possible_metrics": [
+        "总拥有成本(TCO)",
+        "人力成本",
+        "云服务费用增长率",
+        "服务器资源利用率波动"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "实施全面的TCO分析，包括所有运营成本；优化云服务资源，使用自动伸缩策略；改进服务器监控和容量规划工具，以平滑资源使用。"
+    }
+  ]
+}

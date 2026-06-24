@@ -1,0 +1,119 @@
+{
+  "segment_id": "seg-internal-stability",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 24,
+    "cluster_count": 4,
+    "clustered_feedback_count": 24,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-stability-cluster-004",
+      "segment_id": "seg-internal-stability",
+      "name": "系统稳定性综合影响",
+      "summary": "用户普遍反馈系统不稳定，影响日常工作、业务连续性和响应性能，急需整体改进。",
+      "feedback_count": 12,
+      "evidence_feedback_ids": [
+        "FB85",
+        "FB86",
+        "FB87",
+        "FB92",
+        "FB96",
+        "FB99",
+        "FB100",
+        "FB101",
+        "FB133",
+        "FB138",
+        "FB147",
+        "FB148"
+      ],
+      "secondary_themes": [
+        "user-experience",
+        "business-impact"
+      ],
+      "possible_metrics": [
+        "用户满意度",
+        "业务中断时间",
+        "系统响应时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "建立全面的稳定性监控体系，定期进行系统健康检查和性能优化，制定应急预案以最小化业务中断。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-001",
+      "segment_id": "seg-internal-stability",
+      "name": "系统频繁崩溃和不可用",
+      "summary": "用户反馈系统经常崩溃、宕机或卡死，导致服务不可用，影响业务连续性。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB84",
+        "FB88",
+        "FB93",
+        "FB94",
+        "FB95",
+        "FB97"
+      ],
+      "secondary_themes": [
+        "reliability",
+        "availability"
+      ],
+      "possible_metrics": [
+        "崩溃频率",
+        "平均故障间隔时间(MTBF)",
+        "系统可用性百分比"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "实施崩溃监控和自动恢复机制，优化系统资源使用以减少宕机时间，并定期进行压力测试以预防崩溃。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-002",
+      "segment_id": "seg-internal-stability",
+      "name": "错误率高和系统故障",
+      "summary": "用户报告系统错误率高，故障频繁，日志堆积，影响系统可靠性和用户体验。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB60",
+        "FB89",
+        "FB91",
+        "FB98"
+      ],
+      "secondary_themes": [
+        "error-handling",
+        "logging"
+      ],
+      "possible_metrics": [
+        "错误率",
+        "故障率",
+        "日志处理效率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "加强错误监控和告警，优化日志管理策略，定期清理和分析错误日志以快速定位和修复故障。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-003",
+      "segment_id": "seg-internal-stability",
+      "name": "配置问题和连接不稳定",
+      "summary": "反馈指出配置错误导致系统不稳定，以及工具经常断线，影响数据传输和可用性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB75",
+        "FB90"
+      ],
+      "secondary_themes": [
+        "configuration",
+        "connectivity"
+      ],
+      "possible_metrics": [
+        "配置错误频率",
+        "连接成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "实施配置验证和自动检查工具，监控网络连接状态，确保配置正确和连接稳定，并提供配置管理培训。"
+    }
+  ]
+}

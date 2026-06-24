@@ -1,0 +1,136 @@
+{
+  "segment_id": "seg-ai-usage",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 24,
+    "cluster_count": 5,
+    "clustered_feedback_count": 24,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-usage-cluster-003",
+      "segment_id": "seg-ai-usage",
+      "name": "使用量数据准确性与报表功能待提升",
+      "summary": "用户反映使用量统计有时不准，预测功能参考价值低，且报表导出和精细化需求未得到满足。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB71",
+        "FB83",
+        "FB101",
+        "FB119",
+        "FB131",
+        "FB149",
+        "FB11",
+        "FB17",
+        "FB59"
+      ],
+      "secondary_themes": [
+        "数据不准",
+        "报表功能不足"
+      ],
+      "possible_metrics": [
+        "数据统计准确率",
+        "报表使用频率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化数据统计算法，增加数据校验机制；提供Excel导出功能和分模块消耗视图；改进预测模型并明确说明历史数据保留政策。"
+    },
+    {
+      "cluster_id": "seg-ai-usage-cluster-004",
+      "segment_id": "seg-ai-usage",
+      "name": "配额设置灵活性与套餐选择有限",
+      "summary": "用户对配额月底清零、套餐档位不足、用尽后服务选择少表示不满，需要更灵活的配额管理选项。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB35",
+        "FB47",
+        "FB65",
+        "FB89",
+        "FB95",
+        "FB125"
+      ],
+      "secondary_themes": [
+        "套餐不灵活",
+        "服务降级问题"
+      ],
+      "possible_metrics": [
+        "配额套餐使用率",
+        "用户灵活度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "引入按需付费选项，允许配额累积或提供短期临时购买包；增加套餐档位，并在配额用尽时提供暂停或降级服务的自定义选择。"
+    },
+    {
+      "cluster_id": "seg-ai-usage-cluster-002",
+      "segment_id": "seg-ai-usage",
+      "name": "配额提醒机制不完善",
+      "summary": "用户指出配额提醒不及时、方式单一，希望在使用量接近上限时获得多样通知以避免超用。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB23",
+        "FB53",
+        "FB107",
+        "FB137"
+      ],
+      "secondary_themes": [
+        "提醒不及时",
+        "通知渠道少"
+      ],
+      "possible_metrics": [
+        "提醒到达率",
+        "超用发生率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "实现多渠道提醒（如短信、邮件、App推送），允许用户自定义提醒阈值和频率；在用量达到80%、90%和100%时自动触发提醒。"
+    },
+    {
+      "cluster_id": "seg-ai-usage-cluster-001",
+      "segment_id": "seg-ai-usage",
+      "name": "配额申请与定价透明度不足",
+      "summary": "用户反馈申请配额流程过于复杂，套餐外价格不清晰，缺乏透明对比，导致使用困扰。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB29",
+        "FB113"
+      ],
+      "secondary_themes": [
+        "流程复杂",
+        "价格不透明"
+      ],
+      "possible_metrics": [
+        "配额申请转化率",
+        "价格透明度评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "简化配额申请步骤，提供在线一键申请功能；增加价格对比页面和实时费用计算器，明确展示套餐内外价格差异。"
+    },
+    {
+      "cluster_id": "seg-ai-usage-cluster-005",
+      "segment_id": "seg-ai-usage",
+      "name": "配额政策稳定性与试用期缺失",
+      "summary": "用户感到配额政策频繁变化缺乏安全感，且系统缺乏试用期或退款政策，影响信任度。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB77",
+        "FB143"
+      ],
+      "secondary_themes": [
+        "政策不稳定",
+        "缺乏试用"
+      ],
+      "possible_metrics": [
+        "政策变更频率",
+        "试用期转化率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "稳定配额政策，减少频繁变更并提前通知；引入免费试用期或退款政策，以降低用户使用门槛并增强信任。"
+    }
+  ]
+}

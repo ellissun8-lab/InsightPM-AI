@@ -1,0 +1,151 @@
+{
+  "segment_id": "seg-b2b-renewal",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 25,
+    "cluster_count": 5,
+    "clustered_feedback_count": 25,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-b2b-renewal",
+      "name": "定价与价值感知问题",
+      "summary": "客户反馈产品价格过高、性价比低，或与竞争对手相比缺乏竞争力，影响续费意愿和决策。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB16",
+        "FB31",
+        "FB40",
+        "FB56",
+        "FB89",
+        "FB96",
+        "FB107"
+      ],
+      "secondary_themes": [
+        "竞争对手分析",
+        "计费模式质疑",
+        "用户采纳低"
+      ],
+      "possible_metrics": [
+        "续费率",
+        "价格满意度得分",
+        "客户流失率",
+        "用户使用率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "进行市场定价调研，评估竞争对手价格策略；引入灵活的计费模式（如按年付费、阶梯定价）；加强价值沟通，突出产品独特优势和ROI；通过培训和客户成功团队提升用户采纳率。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-b2b-renewal",
+      "name": "续费流程与提醒问题",
+      "summary": "用户反馈续费流程复杂、提醒不准确或缺失，以及合同条款难以理解，导致续费障碍和不满。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB15",
+        "FB27",
+        "FB36",
+        "FB63",
+        "FB77",
+        "FB92",
+        "FB115"
+      ],
+      "secondary_themes": [
+        "自动续费管理",
+        "发票服务",
+        "合同清晰度"
+      ],
+      "possible_metrics": [
+        "续费流程完成率",
+        "提醒送达率",
+        "客户咨询量",
+        "合同签署率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "简化续费界面，确保续费按钮易找到；优化提醒逻辑，避免错误提醒；提供清晰的合同条款和自助服务选项；加强客户成功团队跟进，及时响应续费季需求。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-b2b-renewal",
+      "name": "系统性能与访问问题",
+      "summary": "客户反馈系统运行卡顿、访问速度慢，或续费后无法访问，影响使用体验和续费信心。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB20",
+        "FB119"
+      ],
+      "secondary_themes": [
+        "服务器位置",
+        "账户访问",
+        "性能优化"
+      ],
+      "possible_metrics": [
+        "系统响应时间",
+        "可用性SLA",
+        "登录成功率",
+        "页面加载速度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化系统性能，减少卡顿和延迟；部署CDN或增加服务器节点改善访问速度；确保续费后账户状态同步，避免登录问题；定期监控和报告性能指标。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-b2b-renewal",
+      "name": "产品功能与期望不符",
+      "summary": "用户反映产品功能与销售描述不符、新功能缺失或升级路径不清晰，导致失望和退款请求。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB21",
+        "FB46",
+        "FB85"
+      ],
+      "secondary_themes": [
+        "退款请求",
+        "功能更新",
+        "易用性"
+      ],
+      "possible_metrics": [
+        "功能满意度",
+        "期望管理评分",
+        "退款率",
+        "升级转化率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "对齐销售承诺与产品交付，确保透明沟通；清晰展示功能路线图和更新计划；优化产品界面，使升级和功能访问更便捷；建立反馈机制以持续改进产品。"
+    },
+    {
+      "cluster_id": "cluster-005",
+      "segment_id": "seg-b2b-renewal",
+      "name": "数据导出与安全问题",
+      "summary": "客户关注数据导出流程和数据安全完整性，影响合同解除决策和信任度。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB65",
+        "FB71"
+      ],
+      "secondary_themes": [
+        "合同解除",
+        "数据篡改",
+        "合规性"
+      ],
+      "possible_metrics": [
+        "数据导出成功率",
+        "安全事件数",
+        "客户信任度",
+        "合规审计结果"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "提供便捷的数据导出工具，确保数据完整性和易用性；加强数据安全措施，如加密和访问控制，防止篡改；明确数据管理政策，定期进行安全审计以增强客户信心。"
+    }
+  ]
+}

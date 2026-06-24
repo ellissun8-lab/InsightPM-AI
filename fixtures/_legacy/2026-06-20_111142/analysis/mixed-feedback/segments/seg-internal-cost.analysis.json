@@ -1,0 +1,68 @@
+{
+  "segment_id": "seg-internal-cost",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 9,
+    "cluster_count": 2,
+    "clustered_feedback_count": 9,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-internal-cost",
+      "name": "内部系统成本削减策略",
+      "summary": "用户反馈强调通过替代方案、优化资源和砍掉低效功能来降低内部系统运营成本，直接响应降本目标。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB22",
+        "FB44",
+        "FB78",
+        "FB100"
+      ],
+      "secondary_themes": [
+        "成本优化",
+        "运维成本",
+        "资源管理",
+        "功能裁剪"
+      ],
+      "possible_metrics": [
+        "年度成本节约百分比",
+        "服务器资源利用率",
+        "低使用率功能数量"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "进行成本效益分析，优先实施高回报措施：优化服务器资源配置以降低运维成本，评估并裁剪低使用率功能，探索外包或更经济的替代方案。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-internal-cost",
+      "name": "内部系统易用性与流程优化",
+      "summary": "反馈指出系统易用性、流程灵活性、通知管理、任务分配和集成需求问题，以提升效率和减少错误，间接支持降本。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB54",
+        "FB71",
+        "FB88",
+        "FB107"
+      ],
+      "secondary_themes": [
+        "系统易用性",
+        "审批流程自定义",
+        "通知频率",
+        "工单分配",
+        "系统集成"
+      ],
+      "possible_metrics": [
+        "用户满意度评分",
+        "流程完成时间减少率",
+        "手动操作错误率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "改进用户界面和交互设计，实现审批流自定义功能，调整通知策略以减少干扰优化工单分配算法，并推动内部系统与ERP自动集成以减少手动录入。"
+    }
+  ]
+}

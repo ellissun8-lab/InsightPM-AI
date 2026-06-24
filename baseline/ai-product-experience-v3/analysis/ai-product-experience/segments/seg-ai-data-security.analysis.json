@@ -1,0 +1,128 @@
+{
+  "segment_id": "seg-ai-data-security",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 15,
+    "cluster_count": 5,
+    "clustered_feedback_count": 15,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-data-security-cluster-001",
+      "segment_id": "seg-ai-data-security",
+      "name": "数据安全措施不明确与透明度不足",
+      "summary": "用户反映数据安全措施描述模糊，要求更明确的隐私条款和透明度，以建立信任。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB7",
+        "FB16",
+        "FB88",
+        "FB100",
+        "FB105",
+        "FB123"
+      ],
+      "secondary_themes": [
+        "隐私政策",
+        "用户信任"
+      ],
+      "possible_metrics": [
+        "隐私政策清晰度评分",
+        "用户信任度调查"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "立即更新隐私政策，提供详细、易懂的数据安全措施说明，并在产品界面增加透明度提示，如数据流向和用途说明。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-003",
+      "segment_id": "seg-ai-data-security",
+      "name": "用户要求更强的技术加密和保障措施",
+      "summary": "用户询问端到端加密、具体加密算法，并请求更多技术保障措施以保护隐私。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB36",
+        "FB67",
+        "FB133"
+      ],
+      "secondary_themes": [
+        "加密技术",
+        "安全措施"
+      ],
+      "possible_metrics": [
+        "加密技术覆盖率",
+        "安全措施实施率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "实施端到端加密，并在产品文档中详细说明使用的加密算法（如AES-256、TLS 1.3），定期更新安全技术栈。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-002",
+      "segment_id": "seg-ai-data-security",
+      "name": "用户数据可能被用于模型训练的担忧",
+      "summary": "用户担心上传的数据或对话内容被用于训练其他模型，要求明确保证。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB30",
+        "FB49"
+      ],
+      "secondary_themes": [
+        "数据用途",
+        "模型训练"
+      ],
+      "possible_metrics": [
+        "数据使用政策明确性",
+        "用户对数据用途的知晓率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "公开声明并承诺用户数据不会被用于训练其他模型，在隐私政策中明确数据使用范围，并考虑技术隔离措施。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-004",
+      "segment_id": "seg-ai-data-security",
+      "name": "用户要求第三方安全审计和渗透测试报告",
+      "summary": "用户希望有独立的安全审计报告和渗透测试报告来验证数据安全措施的有效性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB60",
+        "FB141"
+      ],
+      "secondary_themes": [
+        "安全审计",
+        "合规验证"
+      ],
+      "possible_metrics": [
+        "第三方审计频率",
+        "安全漏洞修复时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "定期邀请第三方安全机构进行审计和渗透测试，并公开报告摘要或认证标志，以增强用户信任。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-005",
+      "segment_id": "seg-ai-data-security",
+      "name": "数据存储地点、删除策略与合规性疑问",
+      "summary": "用户对数据存储地点（国内/国外）、数据删除策略和留存期有疑问，涉及合规问题。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB79",
+        "FB115"
+      ],
+      "secondary_themes": [
+        "数据存储",
+        "数据生命周期",
+        "合规性"
+      ],
+      "possible_metrics": [
+        "数据存储合规性评分",
+        "数据删除策略清晰度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "明确说明数据存储地点（如仅限国内服务器），制定并公开数据删除策略和留存期，确保符合相关法规（如GDPR、CCPA）。"
+    }
+  ]
+}

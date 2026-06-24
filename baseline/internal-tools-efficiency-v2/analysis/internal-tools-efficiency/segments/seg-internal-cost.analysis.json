@@ -1,0 +1,35 @@
+{
+  "segment_id": "seg-internal-cost",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 2,
+    "cluster_count": 1,
+    "clustered_feedback_count": 2,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-cost-cluster-001",
+      "segment_id": "seg-internal-cost",
+      "name": "工具投资回报率低，效率提升不明显",
+      "summary": "用户反馈工具成本高昂，但日常工作效率提升未达预期，导致对投资回报产生质疑。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB79",
+        "FB140"
+      ],
+      "secondary_themes": [
+        "成本效益",
+        "投资回报"
+      ],
+      "possible_metrics": [
+        "用户效率提升评分",
+        "工具使用频率",
+        "投资回报率（ROI）"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "进行用户访谈和工具使用数据分析，识别效率瓶颈；优化工具功能以提升易用性，并提供针对性培训，以增强用户对效率提升的感知。"
+    }
+  ]
+}

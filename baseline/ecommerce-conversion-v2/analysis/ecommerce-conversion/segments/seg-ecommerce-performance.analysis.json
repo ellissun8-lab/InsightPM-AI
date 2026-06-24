@@ -1,0 +1,101 @@
+{
+  "segment_id": "seg-ecommerce-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 29,
+    "cluster_count": 3,
+    "clustered_feedback_count": 29,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-002",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "多页面加载速度缓慢",
+      "summary": "商品详情页、首页、搜索结果等关键页面加载时间过长，图片加载失败或模糊，滚动卡顿，严重影响用户浏览和转化率。",
+      "feedback_count": 19,
+      "evidence_feedback_ids": [
+        "FB46",
+        "FB47",
+        "FB48",
+        "FB49",
+        "FB50",
+        "FB51",
+        "FB52",
+        "FB53",
+        "FB54",
+        "FB55",
+        "FB56",
+        "FB57",
+        "FB58",
+        "FB59",
+        "FB61",
+        "FB62",
+        "FB63",
+        "FB132",
+        "FB149"
+      ],
+      "secondary_themes": [
+        "性能"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "图片加载成功率",
+        "滚动性能评分"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "压缩和优化图片资源，实施懒加载和CDN加速，优化JavaScript和CSS捆绑以减少渲染阻塞，进行前端性能监控并设置加载时间阈值告警。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-001",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "结账流程加载缓慢与错误",
+      "summary": "用户在下单、确认订单等结账环节频繁遇到加载延迟、卡顿或服务器错误，导致购买流程中断和体验下降。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB2",
+        "FB8",
+        "FB9",
+        "FB14",
+        "FB19",
+        "FB25"
+      ],
+      "secondary_themes": [
+        "checkout_performance"
+      ],
+      "possible_metrics": [
+        "结账完成时间",
+        "订单提交成功率",
+        "用户流失率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化结账API响应时间，实施前端加载状态指示器和错误重试机制，减少结账页面的非必要资源加载，并监控服务器错误日志以快速定位问题。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-003",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "App和移动端性能卡顿",
+      "summary": "移动应用和移动端网页运行卡顿严重，加载速度明显慢于PC端，需要频繁重启才能恢复，影响移动端用户体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB60",
+        "FB124",
+        "FB125"
+      ],
+      "secondary_themes": [
+        "性能与加载"
+      ],
+      "possible_metrics": [
+        "App启动时间",
+        "移动端页面加载时间",
+        "内存使用率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "针对移动端进行专项性能优化，减少内存占用和CPU使用，优化网络请求和缓存策略，实现平滑滚动和快速渲染，并提供崩溃恢复机制。"
+    }
+  ]
+}

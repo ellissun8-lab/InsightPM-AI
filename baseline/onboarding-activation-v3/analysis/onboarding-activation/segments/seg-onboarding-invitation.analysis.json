@@ -1,0 +1,114 @@
+{
+  "segment_id": "seg-onboarding-invitation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 19,
+    "cluster_count": 4,
+    "clustered_feedback_count": 19,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-001",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "邀请邮件发送与链接失效问题",
+      "summary": "用户报告邀请邮件未送达、链接失效、模板设计不佳，导致邀请流程中断，影响团队协作效率。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB48",
+        "FB50",
+        "FB67",
+        "FB143"
+      ],
+      "secondary_themes": [
+        "邀请流程",
+        "邀请邮件"
+      ],
+      "possible_metrics": [
+        "邮件送达率",
+        "邀请链接点击率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "优化邮件发送系统，确保链接有效性和送达率；改进邮件模板设计，增加清晰度和专业性，提供明确操作指引。"
+    },
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-002",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "权限设置复杂与实施错误",
+      "summary": "用户反映权限管理后台复杂、权限设置错误、延迟生效、角色定制不足，影响团队协作的权限控制效率。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB49",
+        "FB53",
+        "FB56",
+        "FB62",
+        "FB64",
+        "FB69",
+        "FB149"
+      ],
+      "secondary_themes": [
+        "权限管理",
+        "权限实施",
+        "权限角色定制需求"
+      ],
+      "possible_metrics": [
+        "权限设置成功率",
+        "权限更改生效时间",
+        "权限细粒度满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "简化权限管理界面，提供预设角色如'审阅者'和'只读'选项；确保权限更改实时生效并增加确认提示；开发批量管理功能和更细粒度的权限控制。"
+    },
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-003",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "邀请流程繁琐与信息缺失",
+      "summary": "用户反馈邀请码查找困难、邀请确认信息不足、注册后未自动加入团队、免费版限制过低等问题，降低邀请效率和用户体验。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB14",
+        "FB54",
+        "FB57",
+        "FB59",
+        "FB65",
+        "FB61"
+      ],
+      "secondary_themes": [
+        "邀请流程",
+        "邀请配额",
+        "邀请权限查询"
+      ],
+      "possible_metrics": [
+        "邀请成功率",
+        "用户自助解决问题率",
+        "邀请流程满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "简化邀请流程，去除或明确邀请码步骤；优化邀请确认弹窗，显示详细信息；实现注册后自动加入团队；提高免费版邀请限制或提供灵活升级选项；提升客服响应速度和自助帮助文档。"
+    },
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-004",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "轻量级文档分享需求",
+      "summary": "用户希望无需添加团队成员即可分享文件夹或文档链接给外部客户或同事，以简化外部协作流程。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB58",
+        "FB66"
+      ],
+      "secondary_themes": [
+        "分享功能"
+      ],
+      "possible_metrics": [
+        "外部分享使用率",
+        "分享流程满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 45,
+      "recommendation": "开发轻量级分享功能，允许用户生成临时或永久分享链接，无需接收者加入团队；提供安全控制和权限设置，确保外部分享的便捷与安全。"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "dataset": "mixed-feedback",
+  "total_raw_feedback_count": 124,
+  "normalized_feedback_count": 124,
+  "is_mixed_dataset": true,
+  "detected_product_types": [
+    "B端 SaaS",
+    "AI 产品",
+    "数据/BI 工具",
+    "电商平台",
+    "内部系统"
+  ],
+  "detected_business_goals": [
+    "提升激活",
+    "提升续费 / 降低流失",
+    "改善体验 / 提升留存",
+    "提升续费",
+    "提升下单转化率",
+    "降低运营成本"
+  ],
+  "detected_sources": [
+    "客服工单",
+    "销售转述",
+    "微信群",
+    "问卷",
+    "App评论",
+    "用户访谈",
+    "运营记录",
+    "客户成功",
+    "老板转述",
+    "客户成功部门"
+  ],
+  "unknown_count": 0,
+  "noise_count": 11,
+  "confidence_distribution": {
+    "high": 117,
+    "medium": 6,
+    "low": 1
+  },
+  "notes": [
+    "噪声反馈已作为 seg-noise 独立分组处理。"
+  ]
+}

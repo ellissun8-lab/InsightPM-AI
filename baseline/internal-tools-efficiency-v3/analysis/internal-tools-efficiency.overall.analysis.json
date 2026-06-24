@@ -1,0 +1,746 @@
+{
+  "project_id": "",
+  "analysis_run_id": "",
+  "summary": {
+    "total_feedback_count": 150,
+    "analyzed_feedback_count": 150,
+    "clustered_feedback_count": 150,
+    "unclustered_feedback_count": 0,
+    "unanalyzed_feedback_count": 0,
+    "segment_count": 9,
+    "business_segment_count": 7,
+    "noise_segment_count": 1,
+    "positive_segment_count": 1,
+    "cluster_count": 26,
+    "is_mixed_dataset": true
+  },
+  "segments": [
+    {
+      "segment_id": "seg-internal-efficiency",
+      "name": "系统效率问题",
+      "feedback_count": 29,
+      "business_goal": "提升工作效率",
+      "issue_cluster_ids": [
+        "seg-internal-efficiency-cluster-001",
+        "seg-internal-efficiency-cluster-004",
+        "seg-internal-efficiency-cluster-002",
+        "seg-internal-efficiency-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-cost",
+      "name": "成本与降本问题",
+      "feedback_count": 22,
+      "business_goal": "降低运营成本",
+      "issue_cluster_ids": [
+        "seg-internal-cost-cluster-001",
+        "seg-internal-cost-cluster-002",
+        "seg-internal-cost-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-adoption",
+      "name": "员工使用与采纳",
+      "feedback_count": 18,
+      "business_goal": "提升系统使用率",
+      "issue_cluster_ids": [
+        "seg-internal-adoption-cluster-001",
+        "seg-internal-adoption-cluster-002"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-training",
+      "name": "培训成本问题",
+      "feedback_count": 18,
+      "business_goal": "降低培训成本",
+      "issue_cluster_ids": [
+        "seg-internal-training-cluster-001",
+        "seg-internal-training-cluster-002",
+        "seg-internal-training-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-stability",
+      "name": "系统稳定性问题",
+      "feedback_count": 24,
+      "business_goal": "提升系统可用性",
+      "issue_cluster_ids": [
+        "seg-internal-stability-cluster-004",
+        "seg-internal-stability-cluster-001",
+        "seg-internal-stability-cluster-002",
+        "seg-internal-stability-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-config",
+      "name": "流程配置问题",
+      "feedback_count": 13,
+      "business_goal": "简化配置管理",
+      "issue_cluster_ids": [
+        "seg-internal-config-cluster-001",
+        "seg-internal-config-cluster-002",
+        "seg-internal-config-cluster-003",
+        "seg-internal-config-cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-integration",
+      "name": "集成与打通问题",
+      "feedback_count": 13,
+      "business_goal": "提升系统集成度",
+      "issue_cluster_ids": [
+        "seg-internal-integration-cluster-001",
+        "seg-internal-integration-cluster-003",
+        "seg-internal-integration-cluster-002",
+        "seg-internal-integration-cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "name": "噪声/无效反馈",
+      "feedback_count": 5,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-noise-cluster-001"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "feedback_count": 8,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-positive-cluster-001"
+      ]
+    }
+  ],
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-001",
+      "segment_id": "seg-internal-efficiency",
+      "name": "系统响应延迟和加载缓慢",
+      "summary": "用户频繁报告系统加载时间过长、响应速度慢，影响工作效率。",
+      "feedback_count": 15,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB2",
+        "FB3",
+        "FB4",
+        "FB6",
+        "FB7",
+        "FB9",
+        "FB11",
+        "FB12",
+        "FB17",
+        "FB21",
+        "FB22",
+        "FB15",
+        "FB20",
+        "FB131"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均加载时间",
+        "响应时间百分位"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化前端资源加载（如压缩图片、启用缓存），并监控服务器性能以减少数据库查询延迟。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-004",
+      "segment_id": "seg-internal-efficiency",
+      "name": "整体效率未达预期",
+      "summary": "团队反馈系统效率低下，工具未能有效提升工作效率，甚至有时降低效率。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB13",
+        "FB14",
+        "FB18",
+        "FB19",
+        "FB23",
+        "FB24"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "任务完成时间",
+        "用户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "开展用户访谈以识别具体痛点，迭代优化工具功能并针对常见工作流进行定制化改进。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-002",
+      "segment_id": "seg-internal-efficiency",
+      "name": "系统崩溃和超时错误",
+      "summary": "反馈中提到系统频繁崩溃、超时错误和高CPU使用率，导致工作流程中断。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB10",
+        "FB16",
+        "FB25"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "错误率",
+        "崩溃频率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "进行代码审查以修复内存泄漏，增加服务器资源监控并设置自动恢复机制。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-003",
+      "segment_id": "seg-internal-efficiency",
+      "name": "操作流程繁琐和配置复杂",
+      "summary": "用户指出操作步骤多、配置流程繁琐，增加了操作时间，降低效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB62",
+        "FB72",
+        "FB73"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "操作步骤数",
+        "配置时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "简化用户界面，减少非必要步骤，并提供一键式配置模板或自动化向导。"
+    },
+    {
+      "cluster_id": "seg-internal-cost-cluster-001",
+      "segment_id": "seg-internal-cost",
+      "name": "工具成本过高与预算不符",
+      "summary": "用户反馈工具成本过高，经常超出预算，性价比低，导致财务压力。",
+      "feedback_count": 11,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB28",
+        "FB29",
+        "FB31",
+        "FB33",
+        "FB34",
+        "FB36",
+        "FB41",
+        "FB44",
+        "FB38",
+        "FB141"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "总拥有成本(TCO)",
+        "预算偏差率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "重新评估工具定价策略，与供应商谈判降低许可费用，并探索开源或更经济的替代方案。"
+    },
+    {
+      "cluster_id": "seg-internal-cost-cluster-002",
+      "segment_id": "seg-internal-cost",
+      "name": "降本效果未达预期",
+      "summary": "反馈表明工具在降低运营成本方面效果有限，未能实现预期的成本节省。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB27",
+        "FB32",
+        "FB37",
+        "FB39",
+        "FB42",
+        "FB43"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "成本节省率",
+        "投资回报率(ROI)"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化工具使用流程，提供用户培训以提高效率，并调整功能以更好地支持成本节约目标。"
+    },
+    {
+      "cluster_id": "seg-internal-cost-cluster-003",
+      "segment_id": "seg-internal-cost",
+      "name": "资源、维护及流程配置成本高企",
+      "summary": "问题涉及资源使用率高、服务器成本上升、维护成本高以及流程配置需要专业IT支持，导致整体运营成本增加。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB30",
+        "FB35",
+        "FB40",
+        "FB45",
+        "FB71"
+      ],
+      "secondary_themes": [
+        "dependency"
+      ],
+      "possible_metrics": [
+        "服务器利用率",
+        "维护成本占比",
+        "配置成本"
+      ],
+      "priority": "P1",
+      "opportunity_score": 60,
+      "recommendation": "实施资源监控和优化策略（如自动缩放、缓存），简化流程配置以减少IT依赖，并定期审查维护合同以降低成本。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-001",
+      "segment_id": "seg-internal-adoption",
+      "name": "用户界面复杂性和易用性差",
+      "summary": "员工普遍反馈工具界面不友好、操作复杂，导致学习曲线陡峭、频繁出错和低使用率，影响整体采纳。",
+      "feedback_count": 16,
+      "evidence_feedback_ids": [
+        "FB46",
+        "FB47",
+        "FB48",
+        "FB49",
+        "FB50",
+        "FB52",
+        "FB53",
+        "FB55",
+        "FB56",
+        "FB58",
+        "FB59",
+        "FB61",
+        "FB63",
+        "FB65",
+        "FB81",
+        "FB83"
+      ],
+      "secondary_themes": [
+        "usability",
+        "simplicity"
+      ],
+      "possible_metrics": [
+        "user_adoption_rate",
+        "error_rate",
+        "learning_time"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "进行用户界面重设计以提高直观性，简化导航和操作步骤；实施用户测试和交互式培训计划，降低学习曲线并减少出错。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-002",
+      "segment_id": "seg-internal-adoption",
+      "name": "功能不足和手动处理需求",
+      "summary": "工具功能缺失，无法满足员工需求，导致经常需要手动处理，浪费时间并降低效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB51",
+        "FB57"
+      ],
+      "secondary_themes": [
+        "functionality"
+      ],
+      "possible_metrics": [
+        "manual_work_hours",
+        "feature_satisfaction"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "收集并分析用户需求，优先开发关键缺失功能；集成自动化工具或流程，减少手动干预，提升工作效率和用户满意度。"
+    },
+    {
+      "cluster_id": "seg-internal-training-cluster-001",
+      "segment_id": "seg-internal-training",
+      "name": "培训成本过高与负担",
+      "summary": "员工反馈培训成本高、费用贵、时间长，导致业务负担重，影响效率。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB64",
+        "FB102",
+        "FB107",
+        "FB108",
+        "FB109",
+        "FB112",
+        "FB113",
+        "FB114",
+        "FB142"
+      ],
+      "secondary_themes": [
+        "成本优化",
+        "时间效率"
+      ],
+      "possible_metrics": [
+        "培训费用",
+        "培训时间",
+        "成本效益比"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化培训流程，提供在线自助学习模块以减少培训时间；引入成本控制措施，如批量培训或简化内容，降低单次培训费用。"
+    },
+    {
+      "cluster_id": "seg-internal-training-cluster-002",
+      "segment_id": "seg-internal-training",
+      "name": "培训效果不佳",
+      "summary": "培训后员工仍无法熟练使用工具，错误率未降，培训内容不实用，导致效果有限。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB103",
+        "FB104",
+        "FB106",
+        "FB110",
+        "FB111"
+      ],
+      "secondary_themes": [
+        "学习成果",
+        "错误率"
+      ],
+      "possible_metrics": [
+        "培训后错误率",
+        "员工熟练度评分",
+        "培训满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "重新设计培训材料，增加实际案例和动手练习；建立培训后跟踪机制，收集反馈并定期更新内容，确保实用性。"
+    },
+    {
+      "cluster_id": "seg-internal-training-cluster-003",
+      "segment_id": "seg-internal-training",
+      "name": "培训资源与支持不足",
+      "summary": "培训资源不足、支持改进需求大，资源使用率低，导致培训难以满足需求。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB54",
+        "FB105",
+        "FB115",
+        "FB116"
+      ],
+      "secondary_themes": [
+        "资源可用性",
+        "支持系统"
+      ],
+      "possible_metrics": [
+        "资源访问率",
+        "支持响应时间",
+        "培训资源覆盖率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "扩充培训资源库，提供更多样化的学习材料（如视频、指南）；改进培训支持工具，集成即时帮助功能，并监控资源使用率以优化分配。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-004",
+      "segment_id": "seg-internal-stability",
+      "name": "系统稳定性综合影响",
+      "summary": "用户普遍反馈系统不稳定，影响日常工作、业务连续性和响应性能，急需整体改进。",
+      "feedback_count": 12,
+      "evidence_feedback_ids": [
+        "FB85",
+        "FB86",
+        "FB87",
+        "FB92",
+        "FB96",
+        "FB99",
+        "FB100",
+        "FB101",
+        "FB133",
+        "FB138",
+        "FB147",
+        "FB148"
+      ],
+      "secondary_themes": [
+        "user-experience",
+        "business-impact"
+      ],
+      "possible_metrics": [
+        "用户满意度",
+        "业务中断时间",
+        "系统响应时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "建立全面的稳定性监控体系，定期进行系统健康检查和性能优化，制定应急预案以最小化业务中断。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-001",
+      "segment_id": "seg-internal-stability",
+      "name": "系统频繁崩溃和不可用",
+      "summary": "用户反馈系统经常崩溃、宕机或卡死，导致服务不可用，影响业务连续性。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB84",
+        "FB88",
+        "FB93",
+        "FB94",
+        "FB95",
+        "FB97"
+      ],
+      "secondary_themes": [
+        "reliability",
+        "availability"
+      ],
+      "possible_metrics": [
+        "崩溃频率",
+        "平均故障间隔时间(MTBF)",
+        "系统可用性百分比"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "实施崩溃监控和自动恢复机制，优化系统资源使用以减少宕机时间，并定期进行压力测试以预防崩溃。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-002",
+      "segment_id": "seg-internal-stability",
+      "name": "错误率高和系统故障",
+      "summary": "用户报告系统错误率高，故障频繁，日志堆积，影响系统可靠性和用户体验。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB60",
+        "FB89",
+        "FB91",
+        "FB98"
+      ],
+      "secondary_themes": [
+        "error-handling",
+        "logging"
+      ],
+      "possible_metrics": [
+        "错误率",
+        "故障率",
+        "日志处理效率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "加强错误监控和告警，优化日志管理策略，定期清理和分析错误日志以快速定位和修复故障。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-003",
+      "segment_id": "seg-internal-stability",
+      "name": "配置问题和连接不稳定",
+      "summary": "反馈指出配置错误导致系统不稳定，以及工具经常断线，影响数据传输和可用性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB75",
+        "FB90"
+      ],
+      "secondary_themes": [
+        "configuration",
+        "connectivity"
+      ],
+      "possible_metrics": [
+        "配置错误频率",
+        "连接成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "实施配置验证和自动检查工具，监控网络连接状态，确保配置正确和连接稳定，并提供配置管理培训。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-001",
+      "segment_id": "seg-internal-config",
+      "name": "配置流程过于复杂",
+      "summary": "用户反馈流程配置步骤繁多、选项复杂，导致调整困难和容易出错，团队抱怨配置是难题。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB66",
+        "FB67",
+        "FB68",
+        "FB82",
+        "FB146"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置步骤数",
+        "用户错误率",
+        "配置时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "简化配置流程，减少步骤数量，引入配置向导或预设模板，并提供清晰的文档和培训，以降低用户学习成本和操作难度。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-002",
+      "segment_id": "seg-internal-config",
+      "name": "配置灵活性不足",
+      "summary": "配置选项限制业务发展，工具缺乏灵活性，流程死板无法调整，影响业务需求满足。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB69",
+        "FB77",
+        "FB79"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置自定义程度",
+        "业务适应性评分",
+        "用户调整需求频率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "增加配置的灵活性和自定义选项，允许用户根据业务需求调整流程参数，引入规则引擎或高级配置模式，以提升适应性。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-003",
+      "segment_id": "seg-internal-config",
+      "name": "配置工具可靠性低",
+      "summary": "配置工具经常失败，日志显示配置错误频繁，错误率高，影响系统稳定性和用户体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB70",
+        "FB76",
+        "FB80"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置错误率",
+        "工具成功率",
+        "系统稳定性指标"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "改进配置工具的稳定性和错误处理机制，加强日志监控和报警，定期进行工具测试和优化，并提供错误恢复功能。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-004",
+      "segment_id": "seg-internal-config",
+      "name": "配置易用性差",
+      "summary": "配置自定义困难，不满足用户需求，且流程需要简化，用户界面不友好，导致配置效率低下。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB74",
+        "FB78"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户满意度",
+        "配置易用性评分",
+        "配置完成时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化配置界面设计，提供更直观的自定义选项和简化流程，进行用户测试收集反馈，并集成帮助功能以提升易用性。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-001",
+      "segment_id": "seg-internal-integration",
+      "name": "集成错误和失败频发",
+      "summary": "用户反馈集成过程中错误频繁发生，导致集成失败和系统不稳定。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB117",
+        "FB121",
+        "FB122",
+        "FB128",
+        "FB145"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "集成错误率",
+        "集成成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "增强集成测试和错误处理机制，提供详细的错误日志和故障排除指南，并监控集成成功率指标以改进可靠性。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-003",
+      "segment_id": "seg-internal-integration",
+      "name": "集成过程复杂且兼容性差",
+      "summary": "用户反映集成过程复杂，工具兼容性差，接口存在多种问题，导致集成困难。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB119",
+        "FB120",
+        "FB124",
+        "FB127"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "集成完成时间",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "简化集成流程，提供步骤化向导和文档；改进工具兼容性，标准化API接口设计，减少用户操作复杂度。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-002",
+      "segment_id": "seg-internal-integration",
+      "name": "数据同步和一致性问题",
+      "summary": "集成后数据出现同步问题和不一致，影响数据完整性和准确性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB118",
+        "FB123"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "数据同步延迟",
+        "数据一致性错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化数据同步算法，增加实时数据验证和一致性检查功能，确保数据在集成系统间准确同步。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-004",
+      "segment_id": "seg-internal-integration",
+      "name": "技术支持不足和系统效率下降",
+      "summary": "集成问题导致系统效率下降，用户需要更多技术支持来解决问题。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB125",
+        "FB126"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "系统响应时间",
+        "支持请求量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "增加技术支持渠道，如在线聊天和知识库；优化系统性能，通过代码优化和资源管理提升集成后效率。"
+    },
+    {
+      "cluster_id": "seg-noise-cluster-001",
+      "segment_id": "seg-noise",
+      "name": "无效/噪声反馈",
+      "summary": "噪声/无效反馈相关反馈",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB129",
+        "FB134",
+        "FB139",
+        "FB144",
+        "FB149"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "不进入核心问题排序。"
+    },
+    {
+      "cluster_id": "seg-positive-cluster-001",
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "summary": "正向反馈汇总相关反馈",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB130",
+        "FB132",
+        "FB135",
+        "FB136",
+        "FB137",
+        "FB140",
+        "FB143",
+        "FB150"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "保留为产品亮点参考。"
+    }
+  ],
+  "report_path": ""
+}

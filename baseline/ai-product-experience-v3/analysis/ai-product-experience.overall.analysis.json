@@ -1,0 +1,862 @@
+{
+  "project_id": "",
+  "analysis_run_id": "",
+  "summary": {
+    "total_feedback_count": 150,
+    "analyzed_feedback_count": 150,
+    "clustered_feedback_count": 150,
+    "unclustered_feedback_count": 0,
+    "unanalyzed_feedback_count": 0,
+    "segment_count": 10,
+    "business_segment_count": 7,
+    "noise_segment_count": 1,
+    "positive_segment_count": 1,
+    "cluster_count": 32,
+    "is_mixed_dataset": true
+  },
+  "segments": [
+    {
+      "segment_id": "seg-ai-output-quality",
+      "name": "AI 输出质量问题",
+      "feedback_count": 21,
+      "business_goal": "提升输出准确性",
+      "issue_cluster_ids": [
+        "seg-ai-output-quality-cluster-003",
+        "seg-ai-output-quality-cluster-002",
+        "seg-ai-output-quality-cluster-001",
+        "seg-ai-output-quality-cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐准确性问题",
+      "feedback_count": 16,
+      "business_goal": "提升推荐相关性",
+      "issue_cluster_ids": [
+        "seg-ai-recommendation-cluster-001",
+        "seg-ai-recommendation-cluster-002",
+        "seg-ai-recommendation-cluster-003",
+        "seg-ai-recommendation-cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-hallucination",
+      "name": "AI 幻觉与错误",
+      "feedback_count": 18,
+      "business_goal": "降低幻觉率",
+      "issue_cluster_ids": [
+        "seg-ai-hallucination-cluster-001",
+        "seg-ai-hallucination-cluster-002",
+        "seg-ai-hallucination-cluster-003",
+        "seg-ai-hallucination-cluster-004",
+        "seg-ai-hallucination-cluster-005"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-performance",
+      "name": "AI 响应速度",
+      "feedback_count": 15,
+      "business_goal": "提升响应效率",
+      "issue_cluster_ids": [
+        "seg-ai-performance-cluster-001",
+        "seg-ai-performance-cluster-003",
+        "seg-ai-performance-cluster-004",
+        "seg-ai-performance-cluster-002"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-customer-service",
+      "name": "AI 客服体验",
+      "feedback_count": 17,
+      "business_goal": "提升客服满意度",
+      "issue_cluster_ids": [
+        "seg-ai-customer-service-cluster-001",
+        "seg-ai-customer-service-cluster-002",
+        "seg-ai-customer-service-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-usage",
+      "name": "使用量与配额",
+      "feedback_count": 21,
+      "business_goal": "优化使用量管理",
+      "issue_cluster_ids": [
+        "seg-ai-usage-cluster-001",
+        "seg-ai-usage-cluster-002",
+        "seg-ai-usage-cluster-003",
+        "seg-ai-usage-cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-data-security",
+      "name": "数据安全与隐私",
+      "feedback_count": 15,
+      "business_goal": "提升数据安全信任",
+      "issue_cluster_ids": [
+        "seg-ai-data-security-cluster-001",
+        "seg-ai-data-security-cluster-003",
+        "seg-ai-data-security-cluster-002",
+        "seg-ai-data-security-cluster-004",
+        "seg-ai-data-security-cluster-005"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "feedback_count": 24,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-positive-cluster-001"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "name": "噪声/无效反馈",
+      "feedback_count": 2,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-noise-cluster-001"
+      ]
+    },
+    {
+      "segment_id": "seg-unknown",
+      "name": "未分类反馈",
+      "feedback_count": 1,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-unknown-cluster-001"
+      ]
+    }
+  ],
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-003",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出内容质量低与格式问题",
+      "summary": "AI输出内容冗长、模板化、格式混乱或存在乱码，需要大量人工修正才能达到使用标准，降低用户效率。",
+      "feedback_count": 10,
+      "evidence_feedback_ids": [
+        "FB9",
+        "FB55",
+        "FB81",
+        "FB89",
+        "FB97",
+        "FB124",
+        "FB117",
+        "FB69",
+        "FB75",
+        "FB110"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户修正时间",
+        "输出可读性评分",
+        "格式错误率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化生成算法以产生更简洁、多样化的输出，添加自动格式清理和多语言处理功能，并支持用户自定义输出风格。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-002",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出质量不稳定与一致性差",
+      "summary": "AI输出质量波动大，同一提示词生成结果差异显著，缺乏一致性，增加用户后期审核和修正工作量。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB25",
+        "FB39",
+        "FB139",
+        "FB146",
+        "FB130"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "输出一致性指数",
+        "质量波动系数"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "实施输出标准化流程和一致性检查算法，引入缓存或模板功能以提高稳定性，并提供用户反馈循环以优化模型。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-001",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出事实性错误与数据不准确",
+      "summary": "AI输出存在事实性错误、数据计算错误或翻译错误，导致内容失实，严重影响可靠性和安全性。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB13",
+        "FB31",
+        "FB127"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "事实错误率",
+        "数据准确性评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "集成实时事实核查和数据验证机制，优化模型训练数据以减少错误，并在输出中添加来源引用和准确性提示。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-004",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出实用性不足与用户门槛高",
+      "summary": "AI输出方案脱离实际可行性，且对用户提示词能力要求高，影响输出质量的稳定性和易用性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB107",
+        "FB59"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "方案可行性评分",
+        "提示词复杂度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "增强模型对实际业务场景的理解，提供提示词优化建议和模板，并评估输出方案的资源需求以提升实用性。"
+    },
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-001",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐准确性不足",
+      "summary": "用户普遍反映推荐内容不准确，无法匹配实际需求，导致时间浪费和项目错误。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB21",
+        "FB38",
+        "FB61",
+        "FB112",
+        "FB94",
+        "FB98"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "推荐准确率",
+        "用户任务完成率",
+        "错误推荐率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化推荐算法模型，整合实时用户行为数据，定期进行A/B测试以验证准确性，并引入用户反馈机制进行迭代改进。"
+    },
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-002",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐个性化缺失",
+      "summary": "推荐系统未能充分理解用户个人习惯、当前兴趣和能力成长，导致推荐不相关和脱节。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB15",
+        "FB33",
+        "FB42",
+        "FB51",
+        "FB72"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "个性化推荐准确率",
+        "用户参与度",
+        "兴趣匹配度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "引入更精细的用户画像技术，实时跟踪用户兴趣和行为变化，并基于用户能力水平动态调整推荐策略，以增强个性化体验。"
+    },
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-003",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐算法智能性不足",
+      "summary": "推荐算法逻辑死板，缺乏智能关联推荐，无法有效利用用户数据提升推荐质量。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB68"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "推荐多样性",
+        "算法效率",
+        "关联推荐成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "升级推荐算法，采用混合推荐方法（如协同过滤和内容结合），增强对用户历史数据的智能分析，以提供更相关的关联推荐。"
+    },
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-004",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐内容过时与同质化",
+      "summary": "推荐内容时效性差，包含大量过时信息，且同质化严重，缺乏多样性和新鲜度。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB103",
+        "FB119"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "内容更新频率",
+        "推荐多样性指数",
+        "过时内容比例"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "建立内容审核和定期更新机制，过滤过时信息，并引入多样性推荐策略（如探索-利用平衡）以减少同质化，确保推荐内容新鲜相关。"
+    },
+    {
+      "cluster_id": "seg-ai-hallucination-cluster-001",
+      "segment_id": "seg-ai-hallucination",
+      "name": "生成虚构或不存在的具体信息（如引用、来源、地点、事件）",
+      "summary": "AI在回答中自信地生成了完全不存在的具体信息，包括伪造的引用来源、数据报告、案例编号、餐厅地址或虚构的事件细节，导致信息严重失真且难以察觉。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB23",
+        "FB27",
+        "FB37",
+        "FB53",
+        "FB78",
+        "FB121",
+        "FB135"
+      ],
+      "secondary_themes": [
+        "数据伪造",
+        "事实捏造"
+      ],
+      "possible_metrics": [
+        "虚构信息发生率",
+        "引用核查失败率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "1. 强制要求AI在提供具体事实（如研究、案例、地址）时，必须标注来源。2. 开发内部事实核查API，对生成的特定实体（机构、地点、案例号）进行实时或后处理校验，并对无法核实的内容进行自动标识警告。3. 在输出界面增加“核实此信息”的快捷入口，鼓励用户参与验证。"
+    },
+    {
+      "cluster_id": "seg-ai-hallucination-cluster-002",
+      "segment_id": "seg-ai-hallucination",
+      "name": "输出中的事实性错误与计算逻辑错误",
+      "summary": "AI在提供信息时出现基础事实错误（如历史日期、时间线）或执行计算、逻辑推理时出现错误，尤其在涉及数字、日期、配置步骤和代码逻辑时，可能导致业务风险或操作失败。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB93",
+        "FB101"
+      ],
+      "secondary_themes": [
+        "计算错误",
+        "逻辑漏洞"
+      ],
+      "possible_metrics": [
+        "事实准确性",
+        "代码/逻辑测试通过率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "1. 针对高风险领域（如金融计算、技术配置、历史知识），构建专门的事实知识图谱或接入权威数据库进行增强生成（RAG）。2. 在生成代码或数学计算步骤时，引入“沙盒”环境进行自动测试验证，并对复杂逻辑增加分步解释。3. 为用户提供标记“事实错误”或“计算错误”的反馈通道，用于模型微调。"
+    },
+    {
+      "cluster_id": "seg-ai-hallucination-cluster-003",
+      "segment_id": "seg-ai-hallucination",
+      "name": "输出内容风格或语境不恰当",
+      "summary": "AI在生成内容时，未能准确判断使用场景，输出了与预期语境严重不符的内容，例如在严肃商业场景中插入不相关的评价或在正式报告中添加诗意表达，虽非事实错误，但影响专业性和适用性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB111",
+        "FB3"
+      ],
+      "secondary_themes": [
+        "场景适配性",
+        "内容风格控制"
+      ],
+      "possible_metrics": [
+        "场景适配准确率",
+        "不恰当内容投诉率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "1. 强化模型对用户意图和场景的识别能力，允许用户在输入时明确指定输出风格（如“正式”、“创意”、“技术性”）。2. 建立内容安全与风格过滤器，对明显不匹配场景的风格化表达进行后处理过滤或警告。3. 提供输出风格的选项让用户预先选择。"
+    },
+    {
+      "cluster_id": "seg-ai-hallucination-cluster-004",
+      "segment_id": "seg-ai-hallucination",
+      "name": "幻觉问题引发用户信任危机与操作负担",
+      "summary": "频繁或严重的幻觉问题导致用户对AI整体输出失去信任，迫使其投入额外精力进行人工核查，尤其在涉及关键数据和决策时，体验和效率严重受损。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB46",
+        "FB63",
+        "FB70",
+        "FB148"
+      ],
+      "secondary_themes": [
+        "用户信任",
+        "额外核查成本"
+      ],
+      "possible_metrics": [
+        "用户信任度评分",
+        "需人工核查的输出比例"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "1. 通过UI设计，在输出中清晰展示AI的置信度或不确定性（如用不同颜色标记高风险、可能需核实的信息），帮助用户快速定位潜在问题。2. 提供便捷的一键反馈与纠错工具，让用户能快速报告幻觉，形成闭环改进。3. 在产品内透明沟通模型的局限性，并通过定期发布准确率报告来管理用户预期。"
+    },
+    {
+      "cluster_id": "seg-ai-hallucination-cluster-005",
+      "segment_id": "seg-ai-hallucination",
+      "name": "缺乏内置的幻觉检测与可靠性验证机制",
+      "summary": "用户询问或期望AI系统具备自动化的可靠性检查机制，能对自身输出的事实、数据进行核查，而不仅仅依赖用户事后发现，反映出对系统内在安全与可信功能的需求。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB85",
+        "FB143"
+      ],
+      "secondary_themes": [
+        "自动化核查",
+        "系统可靠性"
+      ],
+      "possible_metrics": [
+        "内置核查机制覆盖率",
+        "自动拦截的幻觉比例"
+      ],
+      "priority": "P2",
+      "opportunity_score": 45,
+      "recommendation": "1. 规划并开发“可信AI”功能模块，包括事实核查、引用验证、逻辑一致性检查等子功能。2. 可从最关键的领域（如引用来源）开始试点，实现自动化验证并在UI中展示验证结果（如“来源可查证”、“来源未找到”）。3. 将此作为产品的核心安全特性进行宣传，增强用户信心。"
+    },
+    {
+      "cluster_id": "seg-ai-performance-cluster-001",
+      "segment_id": "seg-ai-performance",
+      "name": "AI响应速度不稳定",
+      "summary": "用户反映AI响应速度忽快忽慢，体验不一致，影响信任度和使用流畅性。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB58",
+        "FB76",
+        "FB34",
+        "FB66",
+        "FB95",
+        "FB106"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "响应时间标准差",
+        "请求成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "实施响应时间监控和自动负载均衡机制，优化服务器资源分配以减少速度波动。"
+    },
+    {
+      "cluster_id": "seg-ai-performance-cluster-003",
+      "segment_id": "seg-ai-performance",
+      "name": "AI响应速度普遍较慢",
+      "summary": "用户多次反馈AI响应需等待数秒，降低工作效率，是当前的主要瓶颈。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB17",
+        "FB114"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均响应时间",
+        "P95响应时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "优化AI模型推理性能，采用模型压缩、量化或升级硬件以提升基础响应速度。"
+    },
+    {
+      "cluster_id": "seg-ai-performance-cluster-004",
+      "segment_id": "seg-ai-performance",
+      "name": "特定功能响应延迟",
+      "summary": "在加载历史对话、处理表格图表或统计页面等特定操作时，响应速度明显变慢。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB84",
+        "FB129",
+        "FB137"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "功能特定响应时间",
+        "页面加载时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "针对高延迟功能进行代码优化，实施预加载、缓存或异步处理以改善用户体验。"
+    },
+    {
+      "cluster_id": "seg-ai-performance-cluster-002",
+      "segment_id": "seg-ai-performance",
+      "name": "时段性响应性能下降",
+      "summary": "在晚高峰等特定时段，AI响应速度显著变慢，用户遇到卡顿，影响体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB24",
+        "FB48"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "时段平均响应时间",
+        "高峰时段错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "分析流量峰值模式，引入弹性伸缩和队列系统，优化资源调度以应对高负载。"
+    },
+    {
+      "cluster_id": "seg-ai-customer-service-cluster-001",
+      "segment_id": "seg-ai-customer-service",
+      "name": "AI客服自然语言理解能力不足",
+      "summary": "用户反馈AI客服无法理解复杂问题、答非所问，且缺乏个性化上下文理解，导致交互无效。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB43",
+        "FB56",
+        "FB73",
+        "FB90",
+        "FB96",
+        "FB138"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "自然语言理解准确率",
+        "复杂问题解决率",
+        "上下文保持率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化AI自然语言处理模型，增加针对复杂场景和用户操作历史的训练数据，实现上下文跟踪和个性化回答。"
+    },
+    {
+      "cluster_id": "seg-ai-customer-service-cluster-002",
+      "segment_id": "seg-ai-customer-service",
+      "name": "AI客服回答无效或不实用",
+      "summary": "AI客服经常提供重复、模糊或无关的回答，缺乏同理心和后续跟进，导致用户无法解决问题。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB18",
+        "FB32",
+        "FB109",
+        "FB118",
+        "FB125",
+        "FB132",
+        "FB145"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户满意度评分",
+        "回答相关性评分",
+        "问题首次解决率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "重新设计回答策略，确保提供具体、可操作的信息，增加同理心表达，并建立问题跟进机制以提升回答的实用性和灵活性。"
+    },
+    {
+      "cluster_id": "seg-ai-customer-service-cluster-003",
+      "segment_id": "seg-ai-customer-service",
+      "name": "转人工客服体验不佳",
+      "summary": "转人工过程中存在排队时间长、上下文丢失和入口难找的问题，影响用户连贯体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB14",
+        "FB65",
+        "FB102"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均转人工等待时间",
+        "上下文传递成功率",
+        "转接入口点击率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化转人工队列管理以减少等待时间，实现AI与人工客服之间的上下文自动传递，并改进界面设计使转接入口更直观易找。"
+    },
+    {
+      "cluster_id": "seg-ai-usage-cluster-001",
+      "segment_id": "seg-ai-usage",
+      "name": "使用量透明度和管理体验",
+      "summary": "用户反映配额管理不透明，使用量统计不准确，报表界面不直观，导致困惑和体验不佳。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB19",
+        "FB64",
+        "FB77",
+        "FB83",
+        "FB91"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配额透明度评分",
+        "使用量统计准确率",
+        "报表使用满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化配额管理界面，提供清晰的使用量分解和消耗明细；改进统计系统，引入实时数据验证和错误检测；重新设计使用量报表，增加直观图表和搜索功能，便于用户快速查找信息。"
+    },
+    {
+      "cluster_id": "seg-ai-usage-cluster-002",
+      "segment_id": "seg-ai-usage",
+      "name": "配额设计和定价策略不合理",
+      "summary": "用户抱怨配额额度不足、套餐档位设计不灵活、对新用户不友好，以及定价策略不合理。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB26",
+        "FB35",
+        "FB47",
+        "FB71",
+        "FB120",
+        "FB144",
+        "FB149"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "套餐满意度评分",
+        "配额使用率",
+        "新用户转化率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "重新评估配额设计，提供更灵活的套餐选项，如增加中间档或按需付费模式；为新用户提供试用期或引导配额，确保体验到产品价值；改进计费方式，从按次计算改为基于任务或时间，以减少用户不满。"
+    },
+    {
+      "cluster_id": "seg-ai-usage-cluster-003",
+      "segment_id": "seg-ai-usage",
+      "name": "配额提醒和预警机制不完善",
+      "summary": "用户指出配额用尽提醒不及时，缺乏预警功能，且提醒邮件过于频繁。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB40",
+        "FB54",
+        "FB126"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "提醒及时性评分",
+        "用户预警设置率",
+        "提醒邮件满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "实施智能提醒系统，在配额剩余20%和10%时通过应用内通知和邮件提醒；允许用户自定义预警阈值；优化提醒频率，例如每天最多发送一次邮件，避免骚扰用户。"
+    },
+    {
+      "cluster_id": "seg-ai-usage-cluster-004",
+      "segment_id": "seg-ai-usage",
+      "name": "配额机制改进建议和清晰度",
+      "summary": "用户建议改进配额机制以支持企业账户，并关注配额用尽后功能可用性和续费说明。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB99",
+        "FB108",
+        "FB113",
+        "FB131"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "企业功能支持度",
+        "配额用尽后体验评分",
+        "续费政策清晰度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "开发企业账户管理功能，支持主子账号间的配额分配和监控；明确配额用尽后的行为策略，如功能降级或排队处理，避免用户疑虑；在续费流程中清晰说明历史对话功能的恢复政策，并在文档中详细解释。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-001",
+      "segment_id": "seg-ai-data-security",
+      "name": "数据安全措施不明确与透明度不足",
+      "summary": "用户反映数据安全措施描述模糊，要求更明确的隐私条款和透明度，以建立信任。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB7",
+        "FB16",
+        "FB88",
+        "FB100",
+        "FB105",
+        "FB123"
+      ],
+      "secondary_themes": [
+        "隐私政策",
+        "用户信任"
+      ],
+      "possible_metrics": [
+        "隐私政策清晰度评分",
+        "用户信任度调查"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "立即更新隐私政策，提供详细、易懂的数据安全措施说明，并在产品界面增加透明度提示，如数据流向和用途说明。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-003",
+      "segment_id": "seg-ai-data-security",
+      "name": "用户要求更强的技术加密和保障措施",
+      "summary": "用户询问端到端加密、具体加密算法，并请求更多技术保障措施以保护隐私。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB36",
+        "FB67",
+        "FB133"
+      ],
+      "secondary_themes": [
+        "加密技术",
+        "安全措施"
+      ],
+      "possible_metrics": [
+        "加密技术覆盖率",
+        "安全措施实施率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "实施端到端加密，并在产品文档中详细说明使用的加密算法（如AES-256、TLS 1.3），定期更新安全技术栈。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-002",
+      "segment_id": "seg-ai-data-security",
+      "name": "用户数据可能被用于模型训练的担忧",
+      "summary": "用户担心上传的数据或对话内容被用于训练其他模型，要求明确保证。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB30",
+        "FB49"
+      ],
+      "secondary_themes": [
+        "数据用途",
+        "模型训练"
+      ],
+      "possible_metrics": [
+        "数据使用政策明确性",
+        "用户对数据用途的知晓率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "公开声明并承诺用户数据不会被用于训练其他模型，在隐私政策中明确数据使用范围，并考虑技术隔离措施。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-004",
+      "segment_id": "seg-ai-data-security",
+      "name": "用户要求第三方安全审计和渗透测试报告",
+      "summary": "用户希望有独立的安全审计报告和渗透测试报告来验证数据安全措施的有效性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB60",
+        "FB141"
+      ],
+      "secondary_themes": [
+        "安全审计",
+        "合规验证"
+      ],
+      "possible_metrics": [
+        "第三方审计频率",
+        "安全漏洞修复时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "定期邀请第三方安全机构进行审计和渗透测试，并公开报告摘要或认证标志，以增强用户信任。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-005",
+      "segment_id": "seg-ai-data-security",
+      "name": "数据存储地点、删除策略与合规性疑问",
+      "summary": "用户对数据存储地点（国内/国外）、数据删除策略和留存期有疑问，涉及合规问题。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB79",
+        "FB115"
+      ],
+      "secondary_themes": [
+        "数据存储",
+        "数据生命周期",
+        "合规性"
+      ],
+      "possible_metrics": [
+        "数据存储合规性评分",
+        "数据删除策略清晰度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "明确说明数据存储地点（如仅限国内服务器），制定并公开数据删除策略和留存期，确保符合相关法规（如GDPR、CCPA）。"
+    },
+    {
+      "cluster_id": "seg-positive-cluster-001",
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "summary": "正向反馈汇总相关反馈",
+      "feedback_count": 24,
+      "evidence_feedback_ids": [
+        "FB20",
+        "FB22",
+        "FB28",
+        "FB29",
+        "FB41",
+        "FB45",
+        "FB50",
+        "FB52",
+        "FB57",
+        "FB62",
+        "FB74",
+        "FB80",
+        "FB82",
+        "FB87",
+        "FB92",
+        "FB104",
+        "FB122",
+        "FB128",
+        "FB134",
+        "FB136",
+        "FB140",
+        "FB142",
+        "FB147",
+        "FB150"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "保留为产品亮点参考。"
+    },
+    {
+      "cluster_id": "seg-noise-cluster-001",
+      "segment_id": "seg-noise",
+      "name": "无效/噪声反馈",
+      "summary": "噪声/无效反馈相关反馈",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB44",
+        "FB116"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "不进入核心问题排序。"
+    },
+    {
+      "cluster_id": "seg-unknown-cluster-001",
+      "segment_id": "seg-unknown",
+      "name": "未分类反馈",
+      "summary": "未分类反馈相关反馈",
+      "feedback_count": 1,
+      "evidence_feedback_ids": [
+        "FB86"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "需要人工复核。"
+    }
+  ],
+  "report_path": ""
+}

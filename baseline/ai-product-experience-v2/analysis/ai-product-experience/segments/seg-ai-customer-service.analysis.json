@@ -1,0 +1,87 @@
+{
+  "segment_id": "seg-ai-customer-service",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 22,
+    "cluster_count": 3,
+    "clustered_feedback_count": 22,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-customer-service-cluster-001",
+      "segment_id": "seg-ai-customer-service",
+      "name": "AI客服理解与响应质量低下",
+      "summary": "用户反馈AI客服无法有效理解用户意图，回答刻板、答非所问，沟通体验差。",
+      "feedback_count": 13,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB22",
+        "FB40",
+        "FB52",
+        "FB58",
+        "FB82",
+        "FB100",
+        "FB112",
+        "FB118",
+        "FB124",
+        "FB64",
+        "FB94",
+        "FB136"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "意图识别准确率",
+        "回答相关性评分",
+        "用户满意度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化自然语言处理模型以提高意图识别准确性；引入上下文理解机制；定期更新对话脚本以避免刻板回答；增加情感分析模块以提升对话人性化。"
+    },
+    {
+      "cluster_id": "seg-ai-customer-service-cluster-002",
+      "segment_id": "seg-ai-customer-service",
+      "name": "人工转接流程困难与支持不足",
+      "summary": "用户反映AI客服转人工困难，人工客服排队时间长，支持系统接入障碍。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB34",
+        "FB70",
+        "FB76",
+        "FB88",
+        "FB130",
+        "FB142"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "人工转接成功率",
+        "平均等待时间",
+        "转接流程步骤数"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "简化转人工流程，设置智能判断自动转接复杂问题；增加人工客服资源或优化排队系统；提供明确的转接指引和预计等待时间。"
+    },
+    {
+      "cluster_id": "seg-ai-customer-service-cluster-003",
+      "segment_id": "seg-ai-customer-service",
+      "name": "AI客服解决问题效率与成功率低",
+      "summary": "AI客服处理问题耗时长、成功率低，用户体验形同虚设。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB28",
+        "FB106"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "问题解决率",
+        "平均处理时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "针对常见问题优化AI知识库和训练数据；设置问题复杂度评估机制，复杂问题直接转人工；提高AI处理算法的效率。"
+    }
+  ]
+}

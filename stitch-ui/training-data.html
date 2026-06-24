@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Training Data - ProofLoop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#bdffdb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#006242",
+                        "surface-tint": "#0053db",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#dce2f7",
+                        "surface": "#f9f9ff",
+                        "on-surface-variant": "#434655",
+                        "inverse-on-surface": "#edf0ff",
+                        "on-primary-fixed": "#00174b",
+                        "on-secondary-container": "#fffbff",
+                        "tertiary-container": "#007d55",
+                        "surface-container": "#e9edff",
+                        "inverse-surface": "#293040",
+                        "surface-bright": "#f9f9ff",
+                        "outline": "#737686",
+                        "background": "#f9f9ff",
+                        "on-secondary-fixed": "#25005a",
+                        "inverse-primary": "#b4c5ff",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "secondary-container": "#8a4cfc",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-surface": "#141b2b",
+                        "on-background": "#141b2b",
+                        "surface-container-high": "#e1e8fd",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-primary": "#ffffff",
+                        "primary": "#004ac6",
+                        "outline-variant": "#c3c6d7",
+                        "surface-dim": "#d3daef",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dbe1ff",
+                        "secondary": "#712ae2",
+                        "on-primary-container": "#eeefff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-variant": "#dce2f7",
+                        "primary-container": "#2563eb",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f1f3ff",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#eaddff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "sidebar-width": "260px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #F7F8FB; /* Base Layer */
+        }
+        .card-shadow {
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.02), 0 12px 24px rgba(37, 99, 235, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden min-h-screen">
+<!-- SideNavBar -->
+<nav class="w-[260px] h-full fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-md overflow-y-auto z-50">
+<div class="px-lg mb-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[28px] fill">all_inclusive</span>
+<div class="flex flex-col">
+<span class="text-title-lg font-title-lg font-bold text-primary tracking-tight">ProofLoop</span>
+<span class="text-label-sm font-label-sm text-outline">AI Feedback Analysis</span>
+</div>
+</div>
+<ul class="flex-1 px-sm space-y-1">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-body-md font-body-md font-medium">控制台</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">add_chart</span>
+<span class="text-body-md font-body-md font-medium">新建分析</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="text-body-md font-body-md font-medium">运行历史</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">assessment</span>
+<span class="text-body-md font-body-md font-medium">分析报告</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">fact_check</span>
+<span class="text-body-md font-body-md font-medium">评估校验</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-primary bg-primary-container/10 border-l-2 border-primary font-bold scale-[0.99] transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px] fill">storage</span>
+<span class="text-body-md font-body-md">训练数据</span>
+</a>
+</li>
+<li class="mt-xl">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-body-md font-body-md font-medium">系统设置</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- TopAppBar -->
+<header class="h-16 w-[calc(100%-260px)] fixed top-0 right-0 z-40 bg-surface flex justify-between items-center px-lg border-b border-outline-variant">
+<div class="flex-1 flex items-center max-w-md">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-body-md font-body-md text-on-surface focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-colors" placeholder="Search datasets..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-sm ml-auto">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high/50 rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high/50 rounded-full transition-all">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center ml-2 overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="A small circular user avatar image showing a professional headshot of a corporate employee in a bright, modern office setting. Light mode aesthetic, minimalist and clean." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvJcrZjBmfxi6d8mpvZ8oz5IRpG4zbOpqkH0zFtlEHMZoUQr1_6lwAzcF8y8Vas3kdhcdC04YKklzN9HHbqgtLa2cVVqGKqZ7iJ4pvSTz8PN-ZEPH5h7iXdQSBih2Gb-gH5Cl40xOWNYo9nkHrtjbMbTmwRBD-d7dZBBTQ9Nu5THAwAkInoGKhJCJ1kJeifQUC6hN9xl5OU-fehSwsEWL02Rj3_6tta9cRmmAKwIqgreCe1Et_CrnRm_VPosGJ8kVIkTL_sPCn90iH"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-[260px] pt-16 min-h-screen p-margin-desktop bg-[#F7F8FB]">
+<div class="max-w-[1400px] mx-auto">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h1 class="text-headline-lg font-headline-lg text-on-background mb-1">训练数据</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">管理已通过验证的高质量反馈数据集。</p>
+</div>
+<button class="bg-primary hover:bg-primary-fixed-variant text-white px-lg py-2 rounded-lg text-body-md font-body-md font-medium shadow-sm transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+                    Upload New Dataset
+                </button>
+</div>
+<!-- Bento Grid of Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-md mb-xl">
+<!-- Total Datasets -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md card-shadow col-span-1 lg:col-span-2">
+<div class="flex items-center gap-sm mb-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+<h3 class="text-label-md font-label-md uppercase tracking-wider">Total Datasets</h3>
+</div>
+<p class="text-display-lg font-display-lg text-on-surface">20</p>
+</div>
+<!-- Accepted -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md card-shadow col-span-1">
+<div class="flex items-center gap-sm mb-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-tertiary">check_circle</span>
+<h3 class="text-label-md font-label-md uppercase tracking-wider">Accepted</h3>
+</div>
+<p class="text-headline-md font-headline-md text-tertiary">20</p>
+</div>
+<!-- Pending -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md card-shadow col-span-1">
+<div class="flex items-center gap-sm mb-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-outline">pending</span>
+<h3 class="text-label-md font-label-md uppercase tracking-wider">Pending</h3>
+</div>
+<p class="text-headline-md font-headline-md text-on-surface-variant">0</p>
+</div>
+<!-- Total Feedback -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md card-shadow col-span-1 lg:col-span-2">
+<div class="flex items-center gap-sm mb-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">forum</span>
+<h3 class="text-label-md font-label-md uppercase tracking-wider">Total Feedback</h3>
+</div>
+<p class="text-headline-md font-headline-md text-on-surface">2,957</p>
+</div>
+<!-- Heldout Eval Sets -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md card-shadow col-span-1 lg:col-span-2 xl:col-span-2">
+<div class="flex items-center gap-sm mb-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-secondary">model_training</span>
+<h3 class="text-label-md font-label-md uppercase tracking-wider">Heldout Eval Sets</h3>
+</div>
+<p class="text-headline-md font-headline-md text-secondary">8</p>
+</div>
+</div>
+<!-- Main Content: Datasets Table -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg card-shadow overflow-hidden">
+<div class="px-lg py-md border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<h2 class="text-title-lg font-title-lg text-on-surface">Dataset Directory</h2>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest border-b border-outline-variant">
+<th class="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider w-[15%]">Dataset ID</th>
+<th class="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider w-[20%]">Category</th>
+<th class="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider w-[15%] text-right">Records</th>
+<th class="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider w-[15%]">Quality Score</th>
+<th class="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider w-[20%]">Last Updated</th>
+<th class="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider w-[15%] text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md text-on-surface">
+<!-- Row 1 -->
+<tr class="border-b border-outline-variant hover:bg-[#F7F8FB] transition-colors group">
+<td class="px-lg py-md font-medium text-primary">DS-2023-11A</td>
+<td class="px-lg py-md">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">support_agent</span>
+                                        Customer Support
+                                    </span>
+</td>
+<td class="px-lg py-md text-right">1,240</td>
+<td class="px-lg py-md">
+<div class="inline-flex items-center px-2 py-1 rounded-sm bg-tertiary-container/10 text-tertiary text-label-md font-label-md">
+<span class="material-symbols-outlined text-[14px] mr-1">verified</span> 98%
+                                    </div>
+</td>
+<td class="px-lg py-md text-on-surface-variant">Nov 12, 2023</td>
+<td class="px-lg py-md text-right">
+<button class="text-on-surface-variant border border-outline-variant bg-surface-container-lowest hover:bg-surface-container px-3 py-1.5 rounded-md text-label-md font-label-md transition-colors flex items-center gap-1 ml-auto opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[16px]">download</span> Export
+                                    </button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-outline-variant hover:bg-[#F7F8FB] transition-colors group">
+<td class="px-lg py-md font-medium text-primary">DS-2023-10C</td>
+<td class="px-lg py-md">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">shopping_cart</span>
+                                        E-commerce Checkout
+                                    </span>
+</td>
+<td class="px-lg py-md text-right">856</td>
+<td class="px-lg py-md">
+<div class="inline-flex items-center px-2 py-1 rounded-sm bg-tertiary-container/10 text-tertiary text-label-md font-label-md">
+<span class="material-symbols-outlined text-[14px] mr-1">verified</span> 95%
+                                    </div>
+</td>
+<td class="px-lg py-md text-on-surface-variant">Oct 28, 2023</td>
+<td class="px-lg py-md text-right">
+<button class="text-on-surface-variant border border-outline-variant bg-surface-container-lowest hover:bg-surface-container px-3 py-1.5 rounded-md text-label-md font-label-md transition-colors flex items-center gap-1 ml-auto opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[16px]">download</span> Export
+                                    </button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-outline-variant hover:bg-[#F7F8FB] transition-colors group">
+<td class="px-lg py-md font-medium text-primary">DS-2023-10A</td>
+<td class="px-lg py-md">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">bug_report</span>
+                                        Bug Reports
+                                    </span>
+</td>
+<td class="px-lg py-md text-right">432</td>
+<td class="px-lg py-md">
+<div class="inline-flex items-center px-2 py-1 rounded-sm bg-tertiary-container/10 text-tertiary text-label-md font-label-md">
+<span class="material-symbols-outlined text-[14px] mr-1">verified</span> 92%
+                                    </div>
+</td>
+<td class="px-lg py-md text-on-surface-variant">Oct 15, 2023</td>
+<td class="px-lg py-md text-right">
+<button class="text-on-surface-variant border border-outline-variant bg-surface-container-lowest hover:bg-surface-container px-3 py-1.5 rounded-md text-label-md font-label-md transition-colors flex items-center gap-1 ml-auto opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[16px]">download</span> Export
+                                    </button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="border-b border-outline-variant hover:bg-[#F7F8FB] transition-colors group">
+<td class="px-lg py-md font-medium text-primary">DS-2023-09B</td>
+<td class="px-lg py-md">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">rocket_launch</span>
+                                        Feature Requests
+                                    </span>
+</td>
+<td class="px-lg py-md text-right">429</td>
+<td class="px-lg py-md">
+<div class="inline-flex items-center px-2 py-1 rounded-sm bg-tertiary-container/10 text-tertiary text-label-md font-label-md">
+<span class="material-symbols-outlined text-[14px] mr-1">verified</span> 94%
+                                    </div>
+</td>
+<td class="px-lg py-md text-on-surface-variant">Sep 30, 2023</td>
+<td class="px-lg py-md text-right">
+<button class="text-on-surface-variant border border-outline-variant bg-surface-container-lowest hover:bg-surface-container px-3 py-1.5 rounded-md text-label-md font-label-md transition-colors flex items-center gap-1 ml-auto opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[16px]">download</span> Export
+                                    </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-lg py-sm border-t border-outline-variant flex items-center justify-between bg-surface-container-lowest text-body-md text-on-surface-variant">
+<span>Showing 1 to 4 of 20 entries</span>
+<div class="flex gap-1">
+<button class="p-1 rounded hover:bg-surface-container disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary-container/10 text-primary font-medium flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container flex items-center justify-center">2</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container flex items-center justify-center">...</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container flex items-center justify-center">5</button>
+<button class="p-1 rounded hover:bg-surface-container">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

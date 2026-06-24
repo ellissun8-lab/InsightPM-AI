@@ -1,0 +1,114 @@
+{
+  "segment_id": "seg-b2b-activation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 17,
+    "cluster_count": 4,
+    "clustered_feedback_count": 17,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-b2b-activation",
+      "name": "激活流程繁琐或失败",
+      "summary": "用户反馈激活流程步骤过多、教程难懂、链接失效、验证码问题等，导致高流失率和激活失败。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB9",
+        "FB19",
+        "FB50",
+        "FB78",
+        "FB87"
+      ],
+      "secondary_themes": [
+        "用户引导",
+        "注册流程",
+        "账号激活"
+      ],
+      "possible_metrics": [
+        "激活完成率",
+        "流程步骤数",
+        "验证失败率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "简化激活流程，减少步骤至最少；优化教程和实时引导；延长激活链接有效期并增强验证码可靠性。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-b2b-activation",
+      "name": "激活后引导与初始体验不足",
+      "summary": "用户激活后缺乏新手引导，初始设置不符合本地习惯，数据导入和迁移困难，导致学习成本高、效率低下。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB29",
+        "FB39",
+        "FB59",
+        "FB68",
+        "FB72",
+        "FB108"
+      ],
+      "secondary_themes": [
+        "新手引导",
+        "本地化",
+        "数据迁移"
+      ],
+      "possible_metrics": [
+        "引导完成率",
+        "初始设置时间",
+        "用户支持请求率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "设计交互式新手引导流程；本地化初始设置模板；提供自动化数据导入工具和详细迁移教程。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-b2b-activation",
+      "name": "账号安全与验证问题",
+      "summary": "用户账号被无故锁定或验证方式失效（如手机号更改受阻），影响激活和正常使用。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB41",
+        "FB53"
+      ],
+      "secondary_themes": [
+        "账号安全",
+        "安全验证"
+      ],
+      "possible_metrics": [
+        "账号锁定率",
+        "验证成功恢复率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化账号安全策略，提供多因素验证选项；简化账号恢复和绑定信息更新流程。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-b2b-activation",
+      "name": "功能与定价限制",
+      "summary": "用户反馈产品功能范围有限、无法匹配业务场景，或定价模式对小企业不友好，影响激活决策。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB49",
+        "FB55",
+        "FB67"
+      ],
+      "secondary_themes": [
+        "产品功能",
+        "定价模式"
+      ],
+      "possible_metrics": [
+        "试用转化率",
+        "功能使用满意度",
+        "定价接受度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "收集用户功能需求，优先开发关键特性；评估定价结构，推出灵活套餐以适配不同规模企业。"
+    }
+  ]
+}

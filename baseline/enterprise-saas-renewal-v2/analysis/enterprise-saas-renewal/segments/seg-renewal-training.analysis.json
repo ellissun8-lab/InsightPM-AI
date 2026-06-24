@@ -1,0 +1,107 @@
+{
+  "segment_id": "seg-renewal-training",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 11,
+    "cluster_count": 4,
+    "clustered_feedback_count": 11,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-training-cluster-001",
+      "segment_id": "seg-renewal-training",
+      "name": "培训材料过时或不足",
+      "summary": "用户反馈培训资料老旧、不全面或缺乏如视频教程等资源，需要更新和更丰富的培训材料以降低学习曲线。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB105",
+        "FB110",
+        "FB113"
+      ],
+      "secondary_themes": [
+        "training-materials"
+      ],
+      "possible_metrics": [
+        "培训材料更新频率",
+        "用户对培训材料的满意度评分",
+        "在线课程使用率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "定期审查和更新培训材料，引入视频教程和互动式在线课程，确保内容与产品最新版本同步。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-002",
+      "segment_id": "seg-renewal-training",
+      "name": "产品上手难度高",
+      "summary": "反馈显示用户或客户觉得产品上手困难，影响新用户快速采纳和使用。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB106",
+        "FB112"
+      ],
+      "secondary_themes": [
+        "onboarding"
+      ],
+      "possible_metrics": [
+        "新用户上手时间",
+        "首次使用成功率",
+        "用户流失率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "简化产品用户界面和流程，提供步骤式引导和快速入门指南，优化新用户 onboarding 体验。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-003",
+      "segment_id": "seg-renewal-training",
+      "name": "培训支持和资源不足",
+      "summary": "客户要求改善培训支持，反馈培训资源不够全面，需要更多帮助渠道。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB111",
+        "FB114"
+      ],
+      "secondary_themes": [
+        "training-support",
+        "training-resources"
+      ],
+      "possible_metrics": [
+        "培训支持请求量",
+        "资源可用性评分",
+        "支持响应时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "扩展培训支持渠道，如增加在线帮助中心、FAQ 和实时聊天支持，并提供更多样化的培训资源。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-004",
+      "segment_id": "seg-renewal-training",
+      "name": "培训效率低和整体改进需求",
+      "summary": "反馈指出培训不足、时间长、需改进，显示培训效率低，用户培训是关注焦点。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB107",
+        "FB108",
+        "FB115",
+        "FB116"
+      ],
+      "secondary_themes": [
+        "training-gap",
+        "training-efficiency",
+        "training-focus",
+        "training-improvement"
+      ],
+      "possible_metrics": [
+        "培训完成时间",
+        "培训效果评估分数",
+        "新员工培训效率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化培训流程，缩短培训时间，定期评估培训效果，并基于反馈持续改进培训计划。"
+    }
+  ]
+}

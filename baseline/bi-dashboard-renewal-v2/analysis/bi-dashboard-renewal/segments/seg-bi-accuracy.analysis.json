@@ -1,0 +1,77 @@
+{
+  "segment_id": "seg-bi-accuracy",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 14,
+    "cluster_count": 3,
+    "clustered_feedback_count": 14,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-accuracy-cluster-001",
+      "segment_id": "seg-bi-accuracy",
+      "name": "数据一致性与准确性问题",
+      "summary": "反馈指出数据在不同上下文（如导出、仪表盘、用户视图）中不一致，或自定义计算字段丢失，严重影响数据可信度。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB21",
+        "FB52",
+        "FB63",
+        "FB67"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "数据一致性率",
+        "数据偏差率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "实施自动化的数据一致性校验机制，确保导出数据与仪表盘显示实时同步；增加数据验证规则，防止计算字段莫名丢失；优化沙盒测试环境与生产环境的一致性，避免上线后问题。"
+    },
+    {
+      "cluster_id": "seg-bi-accuracy-cluster-002",
+      "segment_id": "seg-bi-accuracy",
+      "name": "计算逻辑与算法错误",
+      "summary": "反馈涉及聚合逻辑错误、节假日调休计算不准确、数据缺失月份处理不当及日期时区处理出错，导致数据计算结果不准确。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB7",
+        "FB26",
+        "FB85",
+        "FB107"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "计算准确率",
+        "算法错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "审查并修正聚合逻辑配置，确保求和等操作正确无误；优化节假日和时区处理算法，增加自适应调整功能；针对数据缺失情况完善同比环比计算逻辑；提供更灵活的日期字段处理选项。"
+    },
+    {
+      "cluster_id": "seg-bi-accuracy-cluster-003",
+      "segment_id": "seg-bi-accuracy",
+      "name": "数据治理与功能缺失",
+      "summary": "反馈指出计算字段函数不足、数据血缘追溯困难、备份恢复机制不明确、审计日志薄弱及聚合规则配置界面不合理，影响数据管理和可信度。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB38",
+        "FB48",
+        "FB49",
+        "FB55",
+        "FB94"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "功能完整度",
+        "数据可追溯性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 60,
+      "recommendation": "扩展计算函数库，增加移动平均等基础函数以提升计算能力；改进数据血缘关系图的可视化和交互功能，便于追溯指标来源；明确文档化备份与恢复流程，增强数据安全性；增强日志审计功能，追踪数据访问记录；优化聚合规则配置界面设计，减少设置错误。"
+    }
+  ]
+}

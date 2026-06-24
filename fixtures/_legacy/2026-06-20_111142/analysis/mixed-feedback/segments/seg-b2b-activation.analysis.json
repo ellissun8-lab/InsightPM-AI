@@ -1,0 +1,99 @@
+{
+  "segment_id": "seg-b2b-activation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 15,
+    "cluster_count": 4,
+    "clustered_feedback_count": 15,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-b2b-activation",
+      "name": "系统响应与加载速度慢",
+      "summary": "用户反馈系统响应缓慢和后台加载卡顿，尤其在数据量大时影响工作效率，可能导致激活过程中的挫败感。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB7"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "系统响应时间",
+        "页面加载时间",
+        "用户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化服务器基础设施和代码效率，实施性能监控和缓存策略，减少响应延迟和加载时间。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-b2b-activation",
+      "name": "激活流程复杂且存在技术障碍",
+      "summary": "激活流程步骤繁琐、验证方式（如人脸识别、短信验证码）存在障碍，邀请码机制低效，导致高流失率和用户体验下降。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB19",
+        "FB29",
+        "FB36",
+        "FB52",
+        "FB70",
+        "FB119"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "激活完成率",
+        "流程流失率",
+        "步骤完成时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "简化激活步骤，提供多种验证选项（如备用验证码），优化邀请码管理工具，并增加流程错误提示和帮助文档。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-b2b-activation",
+      "name": "用户激活后引导不足与转化率低",
+      "summary": "新用户激活后缺乏清晰引导和默认配置，导致不知如何使用系统、留存率下降和首次关键行为转化率低。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB60",
+        "FB85",
+        "FB94",
+        "FB106"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "7日留存率",
+        "首次关键行为转化率",
+        "用户参与度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "设计交互式新手引导流程，提供视频教程和上下文帮助，优化系统默认配置以突出核心功能，定期收集用户反馈迭代。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-b2b-activation",
+      "name": "定价与部署方式影响激活决策",
+      "summary": "用户认为产品定价缺乏市场竞争力，且对数据安全敏感，询问私有化部署选项，这可能阻碍潜在客户的激活。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB24",
+        "FB32"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "市场定价对比",
+        "客户获取成本",
+        "部署选项采纳率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "进行市场调研调整定价策略，提供灵活的部署方案（如云部署、私有化部署），并加强数据安全宣传以消除顾虑。"
+    }
+  ]
+}

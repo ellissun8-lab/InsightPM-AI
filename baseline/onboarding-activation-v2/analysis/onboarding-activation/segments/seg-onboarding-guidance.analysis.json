@@ -1,0 +1,86 @@
+{
+  "segment_id": "seg-onboarding-guidance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 19,
+    "cluster_count": 3,
+    "clustered_feedback_count": 19,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-001",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "引导流程用户体验缺陷",
+      "summary": "用户反馈新手引导过长且无法跳过、导航混乱（如气泡引导位置不明）、媒体控制不便（如视频无法静音）、缺乏个性化选项，导致上手体验差。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB68",
+        "FB69",
+        "FB70",
+        "FB75",
+        "FB77"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "onboarding_completion_rate",
+        "user_satisfaction_score",
+        "time_to_first_value"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "1. 优化引导流程：添加“跳过”按钮，允许用户随时退出。2. 改进导航设计：确保引导气泡按逻辑顺序出现，并提供清晰的指示。3. 增强媒体控制：为引导视频添加静音/音量控制。4. 实现个性化引导：根据用户注册时选择的角色（如销售/技术/运营）显示定制化内容。5. 使用真实业务数据示例：替换虚构数据为用户行业相关的示例。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-002",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "文档可用性与质量问题",
+      "summary": "用户遇到文档链接失效、搜索功能差、内容更新延迟、语言障碍（如英文文档不友好）、排版混乱、缺乏高级功能指南和交互式示例，影响自学和支持效率。",
+      "feedback_count": 12,
+      "evidence_feedback_ids": [
+        "FB71",
+        "FB73",
+        "FB74",
+        "FB76",
+        "FB79",
+        "FB80",
+        "FB81",
+        "FB83",
+        "FB85",
+        "FB86",
+        "FB87",
+        "FB101"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "documentation_usage_rate",
+        "search_success_rate",
+        "support_ticket_volume",
+        "content_freshness_score"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "1. 修复文档链接：定期审核并修复404错误，确保所有链接有效。2. 优化搜索功能：改进知识库搜索算法，使用更精准的关键词和过滤选项。3. 及时更新文档：建立文档更新流程，确保新功能上线后一周内更新相关文档。4. 提供多语言支持：翻译关键文档为中文，并优化翻译质量。5. 改善排版和响应式设计：优化文档布局，确保在移动端易读。6. 丰富文档形式：添加视频教程、交互式API示例和PDF手册，并确保高级功能（如自动化）有清晰的学习路径。7. 加强集成指南：补充第三方工具（如GitHub）集成文档的步骤，避免缺失。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-003",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "早期注册与安全引导不足",
+      "summary": "用户反馈注册环节字段引导模糊（如“姓名”字段含义不清），且缺乏安全合规说明链接，导致初期信任度降低和操作困惑。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB17",
+        "FB22"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "registration_completion_rate",
+        "trust_indicators",
+        "early_stage_engagement"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "1. 澄清注册字段：在“姓名”字段旁添加提示文本，明确说明应填个人姓名或公司名称，并提供示例。2. 增强安全合规引导：在注册页面添加安全合规说明链接或弹窗，简要概述数据保护措施，并链接到详细政策。3. 简化引导：在注册成功后的欢迎邮件或初始引导中，重申安全承诺。"
+    }
+  ]
+}

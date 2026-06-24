@@ -1,0 +1,105 @@
+{
+  "segment_id": "seg-renewal-service",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 13,
+    "cluster_count": 4,
+    "clustered_feedback_count": 13,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-service-cluster-001",
+      "segment_id": "seg-renewal-service",
+      "name": "技术支持响应慢与渠道不畅",
+      "summary": "客户反映客服响应时间长，技术支持渠道如电话和在线聊天难以及时连接，导致服务延迟和不满。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB58",
+        "FB112"
+      ],
+      "secondary_themes": [
+        "响应时间",
+        "渠道可用性"
+      ],
+      "possible_metrics": [
+        "平均响应时间",
+        "渠道成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化客服资源配置，引入自动化工具提升响应速度，并确保多渠道畅通。"
+    },
+    {
+      "cluster_id": "seg-renewal-service-cluster-002",
+      "segment_id": "seg-renewal-service",
+      "name": "技术支持效率低下",
+      "summary": "客户投诉技术支持问题解决率低，经常拖延，即使响应快也无法有效解决问题。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB17",
+        "FB31",
+        "FB71",
+        "FB85",
+        "FB125",
+        "FB139"
+      ],
+      "secondary_themes": [
+        "解决质量",
+        "支持有效性"
+      ],
+      "possible_metrics": [
+        "问题解决率",
+        "平均解决时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "强化技术团队能力培训，优化问题处理流程，确保快速且彻底地解决客户问题。"
+    },
+    {
+      "cluster_id": "seg-renewal-service-cluster-003",
+      "segment_id": "seg-renewal-service",
+      "name": "技术支持态度问题",
+      "summary": "客户反馈技术支持人员服务态度不佳，语气不好，影响整体服务体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB47",
+        "FB101"
+      ],
+      "secondary_themes": [
+        "沟通技巧",
+        "客户满意度"
+      ],
+      "possible_metrics": [
+        "服务态度评分",
+        "投诉率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "开展服务态度培训，建立客户反馈机制，提升员工服务意识。"
+    },
+    {
+      "cluster_id": "seg-renewal-service-cluster-004",
+      "segment_id": "seg-renewal-service",
+      "name": "数据安全担忧",
+      "summary": "客户在续约过程中表达对数据安全的担忧，可能影响续约意愿。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB56",
+        "FB110"
+      ],
+      "secondary_themes": [
+        "信息安全",
+        "客户信任"
+      ],
+      "possible_metrics": [
+        "数据安全合规率",
+        "续约率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "加强数据安全宣传，提供安全认证报告，增强客户对数据保护的信心。"
+    }
+  ]
+}

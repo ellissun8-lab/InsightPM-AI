@@ -1,0 +1,28 @@
+{
+  "segment_id": "seg-unknown",
+  "segment_type": "unknown",
+  "summary": {
+    "feedback_count": 24,
+    "cluster_count": 1,
+    "clustered_feedback_count": 24,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-seg-unknown-001",
+      "segment_id": "seg-unknown",
+      "name": "未分类反馈",
+      "summary": "无法明确归类的反馈，需要人工复核",
+      "feedback_count": 24,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB3",
+        "FB5"
+      ],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "需要人工复核，尝试重新归类到具体业务分组。"
+    }
+  ]
+}

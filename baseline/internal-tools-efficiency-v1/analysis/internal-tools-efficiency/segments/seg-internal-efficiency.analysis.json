@@ -1,0 +1,99 @@
+{
+  "segment_id": "seg-internal-efficiency",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 19,
+    "cluster_count": 3,
+    "clustered_feedback_count": 19,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-001",
+      "segment_id": "seg-internal-efficiency",
+      "name": "数据库查询与缓存性能瓶颈",
+      "summary": "多个查询和缓存策略导致系统响应延迟，查询耗时长和缓存命中率下降，成为性能瓶颈，影响整体操作效率。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB18",
+        "FB30",
+        "FB139",
+        "FB85",
+        "FB97",
+        "FB63"
+      ],
+      "secondary_themes": [
+        "查询优化",
+        "缓存管理",
+        "资源调度"
+      ],
+      "possible_metrics": [
+        "查询平均响应时间",
+        "缓存命中率",
+        "系统负载均衡度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "为常用查询添加索引优化数据库性能；审查并调整缓存策略，提升缓存命中率；将高负载后台任务（如数据归档）调度到业务低峰期，减少系统压力。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-002",
+      "segment_id": "seg-internal-efficiency",
+      "name": "报表与数据可视化效率低下",
+      "summary": "数据看板刷新慢、报表导出性能差及数据准确性不足，导致实时数据需求无法满足，影响管理决策的及时性和可靠性。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB34",
+        "FB87",
+        "FB144",
+        "FB147"
+      ],
+      "secondary_themes": [
+        "数据准确性",
+        "报表性能",
+        "实时数据"
+      ],
+      "possible_metrics": [
+        "数据看板刷新时间",
+        "报表导出成功率",
+        "数据一致性评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化数据查询和报表生成算法，引入缓存机制；实现报表异步导出功能，避免大数据量操作失败；统一数据来源并透明化清洗规则，提高数据可信度。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-003",
+      "segment_id": "seg-internal-efficiency",
+      "name": "手动流程与任务管理效率问题",
+      "summary": "流程自动化不足、任务提醒机制缺失及工具操作复杂，导致工作效率低下、错误率增加，并依赖人工干预。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB31",
+        "FB33",
+        "FB105",
+        "FB118",
+        "FB119",
+        "FB102",
+        "FB123",
+        "FB136",
+        "FB93"
+      ],
+      "secondary_themes": [
+        "流程自动化",
+        "任务提醒",
+        "用户界面简化",
+        "技术支持响应"
+      ],
+      "possible_metrics": [
+        "流程自动化率",
+        "任务逾期率",
+        "操作步骤数",
+        "支持响应时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "自动化重复流程（如离职员工归档），减少手动操作；实现任务提醒通知功能，通过系统推送避免遗忘；简化工具操作界面，提供批量处理和一键已读功能；优化技术支持流程，缩短响应时间。"
+    }
+  ]
+}

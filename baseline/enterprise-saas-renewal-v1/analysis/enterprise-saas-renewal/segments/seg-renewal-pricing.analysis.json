@@ -1,0 +1,182 @@
+{
+  "segment_id": "seg-renewal-pricing",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 29,
+    "cluster_count": 7,
+    "clustered_feedback_count": 29,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-001",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格过高与预算限制",
+      "summary": "客户反馈续约价格过高，超出预算，导致续约意愿下降。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB38",
+        "FB59",
+        "FB60",
+        "FB66",
+        "FB71",
+        "FB72",
+        "FB77"
+      ],
+      "secondary_themes": [
+        "价格敏感度",
+        "流失风险"
+      ],
+      "possible_metrics": [
+        "价格敏感度指数",
+        "预算匹配率",
+        "续约率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "提供价格分级或套餐选项，允许客户根据预算选择；引入折扣或忠诚度优惠。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-002",
+      "segment_id": "seg-renewal-pricing",
+      "name": "费用增长与涨幅不合理",
+      "summary": "客户抱怨费用大幅增加，认为涨幅不合理，影响性价比。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB63"
+      ],
+      "secondary_themes": [
+        "费用控制",
+        "价格公平性"
+      ],
+      "possible_metrics": [
+        "费用增长率",
+        "客户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "透明化费用调整原因，提供提前通知和解释；考虑平滑价格上涨或基于价值增加收费。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-003",
+      "segment_id": "seg-renewal-pricing",
+      "name": "性价比不足与价值不匹配",
+      "summary": "客户认为产品价格与提供的功能价值不匹配，性价比低。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB58",
+        "FB64",
+        "FB69",
+        "FB79"
+      ],
+      "secondary_themes": [
+        "功能价值",
+        "产品定位"
+      ],
+      "possible_metrics": [
+        "价值感知分数",
+        "功能使用率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化产品功能，确保核心价值突出；提供定制化套餐，让客户只为所需功能付费；加强价值沟通。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-004",
+      "segment_id": "seg-renewal-pricing",
+      "name": "竞品价格竞争力弱",
+      "summary": "客户指出其他供应商报价更低，产品缺乏价格竞争力。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB65",
+        "FB75"
+      ],
+      "secondary_themes": [
+        "市场竞争",
+        "定价策略"
+      ],
+      "possible_metrics": [
+        "市场份额",
+        "竞品价格对比"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "进行市场调研，调整定价策略以保持竞争力；强调独特价值和服务优势。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-005",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格透明度低与结构复杂",
+      "summary": "客户反馈费用结构复杂、隐藏费用多，价格透明度不足。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB68",
+        "FB73",
+        "FB76"
+      ],
+      "secondary_themes": [
+        "费用清晰度",
+        "沟通效率"
+      ],
+      "possible_metrics": [
+        "价格透明度评分",
+        "客户投诉率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "简化费用结构，提供清晰的价格明细；提前通知价格变动，增强透明度。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-006",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格灵活性与谈判限制",
+      "summary": "客户希望价格更灵活，谈判空间小，付款方式单一。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB22",
+        "FB67",
+        "FB70",
+        "FB74",
+        "FB78"
+      ],
+      "secondary_themes": [
+        "谈判能力",
+        "付款选项"
+      ],
+      "possible_metrics": [
+        "谈判成功率",
+        "付款方式多样性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "引入灵活的付款计划（如月付、按使用付费）；在续约时提供更多谈判选项和折扣。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-007",
+      "segment_id": "seg-renewal-pricing",
+      "name": "服务、支持与附加成本高",
+      "summary": "客户反馈现场支持、集成开发和解约罚金等附加成本过高。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB115",
+        "FB122",
+        "FB128",
+        "FB137"
+      ],
+      "secondary_themes": [
+        "服务定价",
+        "附加费用"
+      ],
+      "possible_metrics": [
+        "服务成本占比",
+        "客户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "评估并优化服务定价；提供捆绑优惠或降低集成费用；考虑灵活的解约政策。"
+    }
+  ]
+}

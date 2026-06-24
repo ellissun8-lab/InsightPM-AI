@@ -1,0 +1,102 @@
+{
+  "segment_id": "seg-ai-output-quality",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 21,
+    "cluster_count": 4,
+    "clustered_feedback_count": 21,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-003",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出内容质量低与格式问题",
+      "summary": "AI输出内容冗长、模板化、格式混乱或存在乱码，需要大量人工修正才能达到使用标准，降低用户效率。",
+      "feedback_count": 10,
+      "evidence_feedback_ids": [
+        "FB9",
+        "FB55",
+        "FB81",
+        "FB89",
+        "FB97",
+        "FB124",
+        "FB117",
+        "FB69",
+        "FB75",
+        "FB110"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户修正时间",
+        "输出可读性评分",
+        "格式错误率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化生成算法以产生更简洁、多样化的输出，添加自动格式清理和多语言处理功能，并支持用户自定义输出风格。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-002",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出质量不稳定与一致性差",
+      "summary": "AI输出质量波动大，同一提示词生成结果差异显著，缺乏一致性，增加用户后期审核和修正工作量。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB25",
+        "FB39",
+        "FB139",
+        "FB146",
+        "FB130"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "输出一致性指数",
+        "质量波动系数"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "实施输出标准化流程和一致性检查算法，引入缓存或模板功能以提高稳定性，并提供用户反馈循环以优化模型。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-001",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出事实性错误与数据不准确",
+      "summary": "AI输出存在事实性错误、数据计算错误或翻译错误，导致内容失实，严重影响可靠性和安全性。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB13",
+        "FB31",
+        "FB127"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "事实错误率",
+        "数据准确性评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "集成实时事实核查和数据验证机制，优化模型训练数据以减少错误，并在输出中添加来源引用和准确性提示。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-004",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出实用性不足与用户门槛高",
+      "summary": "AI输出方案脱离实际可行性，且对用户提示词能力要求高，影响输出质量的稳定性和易用性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB107",
+        "FB59"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "方案可行性评分",
+        "提示词复杂度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "增强模型对实际业务场景的理解，提供提示词优化建议和模板，并评估输出方案的资源需求以提升实用性。"
+    }
+  ]
+}

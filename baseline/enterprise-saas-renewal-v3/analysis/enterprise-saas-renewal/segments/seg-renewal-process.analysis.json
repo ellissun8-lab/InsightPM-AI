@@ -1,0 +1,96 @@
+{
+  "segment_id": "seg-renewal-process",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 20,
+    "cluster_count": 3,
+    "clustered_feedback_count": 20,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-process-cluster-002",
+      "segment_id": "seg-renewal-process",
+      "name": "合同条款不明确与自动续约问题",
+      "summary": "用户指出合同条款难以理解，自动续约条款缺乏透明度，导致意外扣款和SLA不明确，影响信任和体验。",
+      "feedback_count": 10,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB23",
+        "FB41",
+        "FB53",
+        "FB77",
+        "FB95",
+        "FB107",
+        "FB131",
+        "FB149",
+        "FB16"
+      ],
+      "secondary_themes": [
+        "条款可读性",
+        "自动续约透明度",
+        "SLA明确性"
+      ],
+      "possible_metrics": [
+        "条款理解度",
+        "自动续约关闭率",
+        "客户投诉率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "简化合同语言，明确自动续约条款和通知机制，提供SLA详细说明和提前通知，增加手动关闭选项的可见性。"
+    },
+    {
+      "cluster_id": "seg-renewal-process-cluster-001",
+      "segment_id": "seg-renewal-process",
+      "name": "续约流程复杂性与优化需求",
+      "summary": "用户反馈续约流程过于复杂，涉及多步骤、纸质文件和繁琐表单，希望简化并实现在线化以提升效率。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB32",
+        "FB59",
+        "FB70",
+        "FB86",
+        "FB113",
+        "FB124",
+        "FB140",
+        "FB46"
+      ],
+      "secondary_themes": [
+        "流程繁琐",
+        "数字化/无纸化",
+        "审批效率"
+      ],
+      "possible_metrics": [
+        "流程完成时间",
+        "用户满意度",
+        "自助服务率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "简化续约流程，减少表单字段和审批环节，提供在线自助服务以减少纸质文件和操作复杂度。"
+    },
+    {
+      "cluster_id": "seg-renewal-process-cluster-003",
+      "segment_id": "seg-renewal-process",
+      "name": "续约通知及时性",
+      "summary": "用户反馈续约通知太晚，可能导致错过续约或服务中断，影响客户连续性和满意度。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB100",
+        "FB105"
+      ],
+      "secondary_themes": [
+        "通知时效",
+        "客户提醒"
+      ],
+      "possible_metrics": [
+        "通知提前期",
+        "客户续约率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "提前发送续约通知，设置多次提醒机制（如邮件、短信），确保客户有足够时间处理续约事宜。"
+    }
+  ]
+}

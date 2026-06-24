@@ -1,0 +1,126 @@
+{
+  "segment_id": "seg-ecommerce-mobile",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 11,
+    "cluster_count": 5,
+    "clustered_feedback_count": 11,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-mobile-cluster-001",
+      "segment_id": "seg-ecommerce-mobile",
+      "name": "应用崩溃稳定性问题",
+      "summary": "应用在iOS和安卓平台上频繁发生闪退，严重影响用户连续操作和信任，是导致转化中断的核心稳定性问题。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB115",
+        "FB137",
+        "FB117"
+      ],
+      "secondary_themes": [
+        "iOS应用崩溃",
+        "移动端"
+      ],
+      "possible_metrics": [
+        "崩溃率(Crash Rate)",
+        "无崩溃会话率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "1. 引入并强化崩溃日志收集与分析工具（如Firebase Crashlytics），定位高频崩溃的堆栈和场景。 2. 在主要机型和系统版本上加强回归测试与稳定性测试，确保新版本发布前崩溃率达标。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-mobile-cluster-002",
+      "segment_id": "seg-ecommerce-mobile",
+      "name": "应用性能与资源占用问题",
+      "summary": "应用在安卓端出现卡顿，同时存在耗电过快的问题，影响操作流畅度和设备续航，降低用户满意度。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB48",
+        "FB126"
+      ],
+      "secondary_themes": [
+        "性能问题",
+        "移动端"
+      ],
+      "possible_metrics": [
+        "应用响应时间",
+        "CPU/内存使用率",
+        "耗电量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "1. 对应用进行性能剖析，定位卡顿和耗电的代码热点（如过度绘制、无效唤醒）。 2. 优化后台任务管理，减少不必要的网络请求和后台服务，遵循系统电源管理最佳实践。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-mobile-cluster-003",
+      "segment_id": "seg-ecommerce-mobile",
+      "name": "移动端UI适配与交互问题",
+      "summary": "移动端界面元素尺寸不合理导致误触，以及在横屏模式下布局错乱，破坏了操作的精确性和视觉体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB119",
+        "FB124"
+      ],
+      "secondary_themes": [
+        "移动端UI交互问题",
+        "移动端"
+      ],
+      "possible_metrics": [
+        "误触率",
+        "横屏布局异常报告率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "1. 根据平台设计规范（如iOS HIG, Material Design）审查并增大关键交互元素（特别是按钮）的可点击区域。 2. 全面测试并优化应用在横屏模式下的布局，确保核心功能可正常使用，或明确提示用户切换至竖屏。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-mobile-cluster-004",
+      "segment_id": "seg-ecommerce-mobile",
+      "name": "关键流程异常与基础功能缺失",
+      "summary": "用户在下单关键流程中遭遇页面异常跳转，且离线模式无法工作，导致核心交易路径中断和基础体验缺失。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB121"
+      ],
+      "secondary_themes": [
+        "页面跳转",
+        "移动端"
+      ],
+      "possible_metrics": [
+        "下单流程完成率",
+        "错误页面跳出率",
+        "离线功能可用性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "1. 立即排查并修复导致页面异常跳转的路由或网络请求逻辑错误，确保下单流程稳定。 2. 评估离线模式的功能范围，至少应确保基础商品浏览和购物车功能可用，并清晰告知用户网络状态和功能限制。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-mobile-cluster-005",
+      "segment_id": "seg-ecommerce-mobile",
+      "name": "通知与推送策略问题",
+      "summary": "安卓端通知无法正常显示，同时用户抱怨推送消息过于频繁，导致重要信息触达失效与用户骚扰并存。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB116",
+        "FB120"
+      ],
+      "secondary_themes": [
+        "安卓通知问题",
+        "推送骚扰"
+      ],
+      "possible_metrics": [
+        "通知送达率",
+        "通知点击率",
+        "推送退订率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "1. 针对安卓端，检查通知渠道配置、权限申请及厂商适配，确保基础送达能力。 2. 制定精细化的推送频率与内容策略，引入用户偏好设置，允许用户自主选择接收的推送类型和时间。"
+    }
+  ]
+}

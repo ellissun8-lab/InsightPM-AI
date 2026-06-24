@@ -1,0 +1,84 @@
+{
+  "segment_id": "seg-onboarding-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 11,
+    "cluster_count": 3,
+    "clustered_feedback_count": 11,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-001",
+      "segment_id": "seg-onboarding-performance",
+      "name": "初始页面加载性能瓶颈",
+      "summary": "用户反馈注册页面、产品整体和演示环境加载时间过长，导致用户体验下降和流失风险增加。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB25",
+        "FB90",
+        "FB118"
+      ],
+      "secondary_themes": [
+        "加载性能",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "用户流失率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "优化前端资源加载策略，实施图片懒加载、代码分割和CDN加速，重点减少注册页面和产品首页的加载时间至3秒以内。"
+    },
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-002",
+      "segment_id": "seg-onboarding-performance",
+      "name": "登录后会话加载与连接稳定性问题",
+      "summary": "登录后页面加载失败、频繁掉线和服务器错误，阻碍用户正常访问和使用产品。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB35",
+        "FB95",
+        "FB107",
+        "FB114"
+      ],
+      "secondary_themes": [
+        "登录性能",
+        "服务器稳定性"
+      ],
+      "possible_metrics": [
+        "登录成功率",
+        "会话持续时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "检查服务器负载和登录会话管理机制，修复502错误，优化个人资料页面的数据库查询和缓存策略。"
+    },
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-003",
+      "segment_id": "seg-onboarding-performance",
+      "name": "系统更新响应与数据同步问题",
+      "summary": "产品更新后出现卡顿、按钮功能失效和跨设备数据同步延迟，影响功能可靠性和用户工作效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB17",
+        "FB132",
+        "FB145"
+      ],
+      "secondary_themes": [
+        "系统更新",
+        "功能响应",
+        "数据同步"
+      ],
+      "possible_metrics": [
+        "操作响应时间",
+        "数据同步延迟"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "在更新发布前进行性能回归测试，修复按钮点击事件的bug，优化数据同步协议以减少跨设备延迟。"
+    }
+  ]
+}

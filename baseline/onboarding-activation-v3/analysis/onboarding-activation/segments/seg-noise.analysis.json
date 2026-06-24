@@ -1,0 +1,30 @@
+{
+  "segment_id": "seg-noise",
+  "segment_type": "noise",
+  "summary": {
+    "feedback_count": 4,
+    "cluster_count": 1,
+    "clustered_feedback_count": 4,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-noise-cluster-001",
+      "segment_id": "seg-noise",
+      "name": "无效/噪声反馈",
+      "summary": "噪声/无效反馈相关反馈",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB43",
+        "FB127",
+        "FB133"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "不进入核心问题排序。"
+    }
+  ]
+}

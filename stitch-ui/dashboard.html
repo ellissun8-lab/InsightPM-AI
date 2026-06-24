@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard - ProofLoop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#bdffdb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#006242",
+                        "surface-tint": "#0053db",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#dce2f7",
+                        "surface": "#f9f9ff",
+                        "on-surface-variant": "#434655",
+                        "inverse-on-surface": "#edf0ff",
+                        "on-primary-fixed": "#00174b",
+                        "on-secondary-container": "#fffbff",
+                        "tertiary-container": "#007d55",
+                        "surface-container": "#e9edff",
+                        "inverse-surface": "#293040",
+                        "surface-bright": "#f9f9ff",
+                        "outline": "#737686",
+                        "background": "#f9f9ff",
+                        "on-secondary-fixed": "#25005a",
+                        "inverse-primary": "#b4c5ff",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "secondary-container": "#8a4cfc",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-surface": "#141b2b",
+                        "on-background": "#141b2b",
+                        "surface-container-high": "#e1e8fd",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-primary": "#ffffff",
+                        "primary": "#004ac6",
+                        "outline-variant": "#c3c6d7",
+                        "surface-dim": "#d3daef",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dbe1ff",
+                        "secondary": "#712ae2",
+                        "on-primary-container": "#eeefff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-variant": "#dce2f7",
+                        "primary-container": "#2563eb",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f1f3ff",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#eaddff"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        lg: "24px",
+                        "sidebar-width": "260px",
+                        gutter: "24px",
+                        xs: "4px",
+                        "margin-mobile": "16px",
+                        base: "4px",
+                        xl: "32px",
+                        md: "16px",
+                        sm: "8px",
+                        "margin-desktop": "40px"
+                    },
+                    fontFamily: {
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.01em", fontWeight: "500" }],
+                        "label-sm": ["11px", { lineHeight: "14px", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "title-lg": ["20px", { lineHeight: "28px", fontWeight: "600" }]
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Subtle shadow for interactive elements */
+        .hover-lift {
+            transition: all 0.2s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.05), 0 1px 2px rgba(37, 99, 235, 0.05);
+        }
+        
+        /* Base card shadow */
+        .card-shadow {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen antialiased flex">
+<!-- SideNavBar -->
+<aside class="w-[260px] h-full fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-md overflow-y-auto z-50">
+<!-- Logo Area -->
+<div class="px-md mb-xl flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-primary-container flex items-center justify-center text-on-primary font-bold">PL</div>
+<div>
+<h1 class="text-title-lg font-title-lg font-bold text-primary">ProofLoop</h1>
+<p class="text-label-sm text-on-surface-variant">AI Feedback Analysis</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 px-sm space-y-1">
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-primary bg-primary-container/10 border-l-2 border-primary font-bold text-body-md font-body-md transition-transform duration-200 hover:scale-[0.99]" href="#">
+<span class="material-symbols-outlined filled">dashboard</span>
+<span>控制台</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors duration-200 text-body-md font-body-md" href="#">
+<span class="material-symbols-outlined">add_chart</span>
+<span>新建分析</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors duration-200 text-body-md font-body-md" href="#">
+<span class="material-symbols-outlined">history</span>
+<span>运行历史</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors duration-200 text-body-md font-body-md" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span>分析报告</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors duration-200 text-body-md font-body-md" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span>评估校验</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors duration-200 text-body-md font-body-md" href="#">
+<span class="material-symbols-outlined">storage</span>
+<span>训练数据</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors duration-200 text-body-md font-body-md mt-xl" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>系统设置</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="ml-[260px] flex-1 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="h-16 w-full bg-surface border-b border-outline-variant flex justify-between items-center px-lg sticky top-0 z-40">
+<!-- Search Bar Area (Left) -->
+<div class="flex-1 max-w-md">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-full text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Search analysis, runs, or reports..." type="text"/>
+</div>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-sm">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high/50 rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high/50 rounded-full transition-all">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="ml-2 w-8 h-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACw7n4MugTISyU-IpkES78ZF-uPoKff1mVbGavAnL5c8nxL4o3sIP9D_cMbR5taAmOFD3LuJkRtUii4mxLOFRZtqalJDMm_rZ-8HbuWuLYG9QzqoYXQQfz7pFk2h4KDDqYSeOc2ZoKs5Ui1ZEe3ELoWSV4XftHrSjoARNbSjdgWl1uojffAVps2Wnlk7iblmCRqoKmxLqUehwKAuuftI08ndrsUVFsY-46m_g7m5cKwi6C1Spt5NeCNQI3AI6kN2FXV1hEt0y-D1Jz"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 p-md md:p-lg lg:p-margin-desktop max-w-[1600px] mx-auto w-full space-y-xl">
+<!-- Page Header & Hero Panel -->
+<div class="bg-surface-container-lowest rounded-xl p-lg card-shadow border border-outline-variant flex flex-col md:flex-row justify-between items-start md:items-center gap-lg">
+<div class="max-w-2xl">
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-sm">把用户反馈变成可信产品洞察</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-md leading-relaxed">
+                        上传原始用户反馈，自动生成结构化产品分析报告，并通过 hard validation、语义评分和证据链追踪验证每一个结论。
+                    </p>
+<div class="flex flex-wrap gap-md">
+<button class="bg-primary-container text-on-primary px-6 py-2.5 rounded-lg text-body-md font-medium hover:bg-primary transition-colors flex items-center gap-2 hover-lift">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                            新建分析
+                        </button>
+<button class="bg-surface-container-lowest border border-outline-variant text-on-surface px-6 py-2.5 rounded-lg text-body-md font-medium hover:bg-surface-container-low transition-colors hover-lift">
+                            查看演示
+                        </button>
+</div>
+</div>
+<!-- Small illustrative graphic area (placeholder for visual balance) -->
+<div class="hidden lg:flex w-48 h-32 bg-surface-container rounded-lg border border-outline-variant items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/10 to-secondary-container/10"></div>
+<span class="material-symbols-outlined text-4xl text-primary/40">analytics</span>
+</div>
+</div>
+<!-- Status Strip (Metrics) -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-md">
+<!-- Metric 1 -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
+<div class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">已采纳数据集</div>
+<div class="text-headline-md font-headline-md text-on-surface">20</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
+<div class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">训练反馈量</div>
+<div class="text-headline-md font-headline-md text-on-surface">2,957</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
+<div class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Hard 校验</div>
+<div class="text-headline-md font-headline-md text-on-surface flex items-baseline gap-1">
+                        43<span class="text-body-md text-on-surface-variant">/43</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
+<div class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">语义评分</div>
+<div class="text-headline-md font-headline-md text-tertiary-container">97</div>
+</div>
+<!-- Metric 5 -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
+<div class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">证据断裂</div>
+<div class="text-headline-md font-headline-md text-tertiary-container">0</div>
+</div>
+<!-- Metric 6 -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
+<div class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">CI Smoke</div>
+<div class="mt-1 flex items-center">
+<span class="bg-tertiary-container/10 text-tertiary-container px-2 py-1 rounded text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                            PASS
+                        </span>
+</div>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left Card: Latest Analysis -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl border border-outline-variant card-shadow p-lg flex flex-col">
+<div class="flex justify-between items-center mb-md pb-md border-b border-outline-variant">
+<h3 class="text-title-lg font-title-lg text-on-surface">Latest Analysis</h3>
+<a class="text-primary text-body-md hover:underline flex items-center gap-1" href="#">
+                            View details <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-sm mb-lg">
+<span class="material-symbols-outlined text-outline">description</span>
+<span class="text-body-lg font-medium">mixed-feedback-realism-v1</span>
+<span class="bg-tertiary-container/10 text-tertiary-container px-2 py-0.5 rounded text-label-sm font-bold ml-2">通过</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-auto">
+<div class="bg-surface p-sm rounded border border-outline-variant/50">
+<div class="text-label-sm text-on-surface-variant mb-1">Hard Val</div>
+<div class="font-medium text-body-lg">100%</div>
+</div>
+<div class="bg-surface p-sm rounded border border-outline-variant/50">
+<div class="text-label-sm text-on-surface-variant mb-1">Semantic</div>
+<div class="font-medium text-body-lg text-tertiary-container">97</div>
+</div>
+<div class="bg-surface p-sm rounded border border-outline-variant/50">
+<div class="text-label-sm text-on-surface-variant mb-1">Evidence Broken</div>
+<div class="font-medium text-body-lg">0</div>
+</div>
+<div class="bg-surface p-sm rounded border border-outline-variant/50">
+<div class="text-label-sm text-on-surface-variant mb-1">Duration</div>
+<div class="font-medium text-body-lg">190s</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Card: Validation Quality -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant card-shadow p-lg">
+<h3 class="text-title-lg font-title-lg text-on-surface mb-md pb-md border-b border-outline-variant">Validation Checks</h3>
+<ul class="space-y-md">
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-tertiary-container bg-tertiary-container/10 rounded-full p-1 text-[20px]">check</span>
+<div>
+<div class="font-medium text-body-md text-on-surface">Hard Validation</div>
+<div class="text-label-md text-on-surface-variant mt-0.5">Exact match &amp; structural integrity verified.</div>
+</div>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-tertiary-container bg-tertiary-container/10 rounded-full p-1 text-[20px]">check</span>
+<div>
+<div class="font-medium text-body-md text-on-surface">Semantic Validation</div>
+<div class="text-label-md text-on-surface-variant mt-0.5">High semantic alignment with source data.</div>
+</div>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-tertiary-container bg-tertiary-container/10 rounded-full p-1 text-[20px]">check</span>
+<div>
+<div class="font-medium text-body-md text-on-surface">Consistency Guard</div>
+<div class="text-label-md text-on-surface-variant mt-0.5">No conflicting insights detected across segments.</div>
+</div>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-outline bg-surface-variant rounded-full p-1 text-[20px]">pending</span>
+<div>
+<div class="font-medium text-body-md text-on-surface">Regression Test</div>
+<div class="text-label-md text-on-surface-variant mt-0.5">Pending historical comparison run.</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- Middle Section: Processing Flow -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant card-shadow p-lg">
+<h3 class="text-title-lg font-title-lg text-on-surface mb-xl text-center">Processing Flow</h3>
+<div class="flex flex-col md:flex-row justify-between items-center gap-2 text-center relative max-w-5xl mx-auto">
+<!-- Connector Line for Desktop -->
+<div class="hidden md:block absolute top-6 left-10 right-10 h-0.5 bg-outline-variant/30 z-0"></div>
+<!-- Steps -->
+<div class="flex flex-col items-center gap-2 z-10 w-32">
+<div class="w-12 h-12 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">csv</span>
+</div>
+<span class="text-label-md font-medium">Raw CSV</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant md:hidden">arrow_downward</span>
+<div class="flex flex-col items-center gap-2 z-10 w-32">
+<div class="w-12 h-12 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">data_object</span>
+</div>
+<span class="text-label-md font-medium">Normalized JSON</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant md:hidden">arrow_downward</span>
+<div class="flex flex-col items-center gap-2 z-10 w-32">
+<div class="w-12 h-12 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">segment</span>
+</div>
+<span class="text-label-md font-medium">Segments</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant md:hidden">arrow_downward</span>
+<div class="flex flex-col items-center gap-2 z-10 w-32">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined">memory</span>
+</div>
+<span class="text-label-md font-bold text-primary">Analysis JSON</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant md:hidden">arrow_downward</span>
+<div class="flex flex-col items-center gap-2 z-10 w-32">
+<div class="w-12 h-12 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">markdown</span>
+</div>
+<span class="text-label-md font-medium">Markdown Report</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant md:hidden">arrow_downward</span>
+<div class="flex flex-col items-center gap-2 z-10 w-32">
+<div class="w-12 h-12 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">rule</span>
+</div>
+<span class="text-label-md font-medium">Validation</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant md:hidden">arrow_downward</span>
+<div class="flex flex-col items-center gap-2 z-10 w-32">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/20 border border-tertiary-container/30 flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined">database</span>
+</div>
+<span class="text-label-md font-medium text-tertiary-container">Accepted Dataset</span>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Recent Runs Table -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant card-shadow overflow-hidden">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface/50">
+<h3 class="text-title-lg font-title-lg text-on-surface">Recent Runs</h3>
+<button class="text-primary text-label-md font-medium hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="py-3 px-lg text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Case Name</th>
+<th class="py-3 px-md text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">场景</th>
+<th class="py-3 px-md text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider text-right">反馈数</th>
+<th class="py-3 px-md text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Hard</th>
+<th class="py-3 px-md text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Semantic</th>
+<th class="py-3 px-md text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">状态</th>
+<th class="py-3 px-lg text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider text-right">创建时间</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/50 text-body-md font-body-md">
+<tr class="hover:bg-surface transition-colors">
+<td class="py-3 px-lg font-medium text-on-surface">mixed-feedback-realism-v1</td>
+<td class="py-3 px-md text-on-surface-variant">mixed feedback</td>
+<td class="py-3 px-md text-right text-on-surface-variant">130</td>
+<td class="py-3 px-md text-right text-on-surface-variant">100</td>
+<td class="py-3 px-md text-right text-on-surface-variant">100</td>
+<td class="py-3 px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-label-sm font-medium bg-tertiary-container/10 text-tertiary-container">通过</span>
+</td>
+<td class="py-3 px-lg text-right text-on-surface-variant text-label-md">10 mins ago</td>
+</tr>
+<tr class="hover:bg-surface transition-colors">
+<td class="py-3 px-lg font-medium text-on-surface">enterprise-saas-renewal-v3</td>
+<td class="py-3 px-md text-on-surface-variant">enterprise SaaS renewal</td>
+<td class="py-3 px-md text-right text-on-surface-variant">150</td>
+<td class="py-3 px-md text-right text-on-surface-variant">100</td>
+<td class="py-3 px-md text-right text-on-surface-variant">96</td>
+<td class="py-3 px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-label-sm font-medium bg-tertiary-container/10 text-tertiary-container">通过</span>
+</td>
+<td class="py-3 px-lg text-right text-on-surface-variant text-label-md">2 hours ago</td>
+</tr>
+<tr class="hover:bg-surface transition-colors">
+<td class="py-3 px-lg font-medium text-on-surface">onboarding-activation-v1</td>
+<td class="py-3 px-md text-on-surface-variant">onboarding activation</td>
+<td class="py-3 px-md text-right text-on-surface-variant">150</td>
+<td class="py-3 px-md text-right text-on-surface-variant">95</td>
+<td class="py-3 px-md text-right text-on-surface-variant">98</td>
+<td class="py-3 px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-label-sm font-medium bg-tertiary-container/10 text-tertiary-container">通过</span>
+</td>
+<td class="py-3 px-lg text-right text-on-surface-variant text-label-md">Yesterday</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</div>
+</body></html>

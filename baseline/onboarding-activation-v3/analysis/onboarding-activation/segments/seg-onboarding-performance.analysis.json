@@ -1,0 +1,133 @@
+{
+  "segment_id": "seg-onboarding-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 15,
+    "cluster_count": 5,
+    "clustered_feedback_count": 15,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-001",
+      "segment_id": "seg-onboarding-performance",
+      "name": "页面加载缓慢与性能优化问题",
+      "summary": "登录页面、仪表盘等关键页面加载缓慢、卡顿或空白，移动端流量消耗大，影响用户首次使用体验。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB33",
+        "FB36",
+        "FB115",
+        "FB147",
+        "FB123"
+      ],
+      "secondary_themes": [
+        "页面加载",
+        "性能优化"
+      ],
+      "possible_metrics": [
+        "平均页面加载时间",
+        "加载失败率",
+        "移动端流量消耗"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化前端代码和资源加载，实施懒加载和代码分割；压缩图像和脚本文件；使用CDN分发静态资源；添加加载状态指示器；针对移动端优化数据请求以减少流量消耗。"
+    },
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-002",
+      "segment_id": "seg-onboarding-performance",
+      "name": "媒体资源加载失败",
+      "summary": "视频教程和图片资源无法正常加载，出现缓冲卡顿或显示为破损图标，阻碍用户学习和操作。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB75",
+        "FB120"
+      ],
+      "secondary_themes": [
+        "媒体加载",
+        "资源可用性"
+      ],
+      "possible_metrics": [
+        "媒体加载成功率",
+        "缓冲时间",
+        "资源错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "检查媒体资源CDN配置和服务器可用性；优化视频流传输协议（如使用HLS或DASH）；提供备选资源或降级方案；实现预加载和错误重试机制。"
+    },
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-003",
+      "segment_id": "seg-onboarding-performance",
+      "name": "网络请求延迟与稳定性问题",
+      "summary": "表单提交后网络异常、弱网环境下应用闪退或白屏、海外用户访问速度慢，导致功能不可用或体验差。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB116",
+        "FB122"
+      ],
+      "secondary_themes": [
+        "网络稳定性",
+        "地理延迟"
+      ],
+      "possible_metrics": [
+        "网络请求成功率",
+        "弱网崩溃率",
+        "海外平均响应时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "增强错误处理和用户反馈，如显示明确的网络错误提示；优化弱网环境下的应用逻辑，减少资源依赖；使用全球CDN和边缘计算改善海外访问速度；实现请求重试和离线缓存机制。"
+    },
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-004",
+      "segment_id": "seg-onboarding-performance",
+      "name": "用户操作反馈延迟与错误",
+      "summary": "点击菜单或按钮后无响应，用户重复操作导致错误页面跳转，缺乏即时反馈影响交互流畅性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB121",
+        "FB132"
+      ],
+      "secondary_themes": [
+        "操作反馈",
+        "错误处理"
+      ],
+      "possible_metrics": [
+        "操作响应时间",
+        "用户误操作率",
+        "UI反馈延迟"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "优化前端事件处理和异步操作，确保快速响应；添加加载指示器或禁用状态防止重复提交；改进错误页面设计，提供明确指导和恢复选项；进行用户测试以识别反馈延迟点。"
+    },
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-005",
+      "segment_id": "seg-onboarding-performance",
+      "name": "大数据处理性能瓶颈",
+      "summary": "文件上传失败、复杂查询页面长时间卡顿、大型数据导入缺乏进度反馈，导致功能中断和用户困惑。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB117",
+        "FB118",
+        "FB125"
+      ],
+      "secondary_themes": [
+        "文件处理",
+        "查询性能",
+        "用户引导"
+      ],
+      "possible_metrics": [
+        "文件上传成功率",
+        "查询平均执行时间",
+        "导入任务完成率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化后端处理逻辑，使用异步任务和队列系统处理大文件和查询；增加实时进度条和状态更新；提升服务器资源分配和负载均衡；实施客户端预验证和分片上传以减少失败。"
+    }
+  ]
+}

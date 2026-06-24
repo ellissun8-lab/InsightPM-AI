@@ -1,0 +1,142 @@
+{
+  "segment_id": "seg-ecommerce-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 22,
+    "cluster_count": 5,
+    "clustered_feedback_count": 22,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-001",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "核心页面加载缓慢",
+      "summary": "用户反馈多个核心页面（如首页、订单确认页、商品详情页）加载时间过长，包括白屏、响应延迟和更新后性能下降，导致体验下降和耐心丧失。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB46",
+        "FB50",
+        "FB51",
+        "FB56",
+        "FB59",
+        "FB79",
+        "FB118",
+        "FB145"
+      ],
+      "secondary_themes": [
+        "页面加载",
+        "性能问题",
+        "应用性能"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "首次内容绘制时间",
+        "交互延迟"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化页面加载性能：压缩图片和资源、启用懒加载、减少HTTP请求、使用CDN分发静态资源；针对缓存问题，优化缓存策略；对更新后变卡进行回归测试和性能分析，减少不必要的计算和渲染。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-003",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "网络不稳定和服务器错误",
+      "summary": "用户报告因网络问题（如低网速、WiFi慢）导致操作失败，以及频繁的服务器错误（如503、504），影响交易和浏览连续性。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB20",
+        "FB54",
+        "FB55",
+        "FB62"
+      ],
+      "secondary_themes": [
+        "网络连接",
+        "服务器性能",
+        "错误处理"
+      ],
+      "possible_metrics": [
+        "网络错误率",
+        "服务器响应时间",
+        "系统可用性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "实现更好的网络错误处理，如离线模式、自动重试和用户提示；监控服务器性能，增加负载均衡和容错机制；优化数据传输量，支持低网速环境下的简化加载。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-002",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "图片和视频资源加载失败",
+      "summary": "用户遇到图片和视频无法加载的问题，尤其在夜间模式下，影响内容展示和用户体验，导致信息缺失。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB47",
+        "FB57",
+        "FB58"
+      ],
+      "secondary_themes": [
+        "资源加载",
+        "兼容性问题"
+      ],
+      "possible_metrics": [
+        "资源加载成功率",
+        "加载时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "确保资源使用优化格式和大小，检查CDN配置；为夜间模式提供适配资源，如使用CSS媒体查询或切换图片源；实现加载失败时的重试机制或占位图，提升容错性。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-004",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "页面意外刷新和崩溃",
+      "summary": "页面在操作过程中意外刷新、闪退或交互无响应（如下拉刷新失败），导致数据丢失和操作中断，破坏用户流程。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB19",
+        "FB52",
+        "FB60"
+      ],
+      "secondary_themes": [
+        "页面稳定性",
+        "交互问题",
+        "崩溃"
+      ],
+      "possible_metrics": [
+        "崩溃率",
+        "页面刷新率",
+        "交互响应时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "检查并修复内存泄漏或JavaScript错误；优化页面生命周期管理，防止意外刷新；确保表单数据在提交前自动保存；加强测试覆盖各种交互场景，提升稳定性。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-005",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "加载动画过多和UI渲染问题",
+      "summary": "加载动画占用过多流量且进度条不准确，页面元素重叠影响可读性和加载，降低视觉体验和效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB53",
+        "FB61",
+        "FB63"
+      ],
+      "secondary_themes": [
+        "UI/UX",
+        "加载指示器",
+        "布局问题"
+      ],
+      "possible_metrics": [
+        "加载动画资源大小",
+        "UI渲染错误率",
+        "页面布局准确性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 45,
+      "recommendation": "减少不必要的加载动画，优化进度条算法以提高准确性；修复页面布局问题，使用响应式设计避免元素重叠；确保加载状态清晰且高效，减少对用户感知的干扰。"
+    }
+  ]
+}

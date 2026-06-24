@@ -1,0 +1,112 @@
+{
+  "segment_id": "seg-bi-renewal",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 12,
+    "cluster_count": 4,
+    "clustered_feedback_count": 12,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-bi-renewal",
+      "name": "系统性能瓶颈",
+      "summary": "用户反馈BI工具的加载速度和查询响应速度过慢，严重影响使用体验和效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB24",
+        "FB82"
+      ],
+      "secondary_themes": [
+        "系统性能与响应速度",
+        "数据查询性能"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "查询响应时间",
+        "用户满意度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 80,
+      "recommendation": "优化服务器架构和查询算法，引入缓存机制，定期监控性能指标以提升响应速度。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-bi-renewal",
+      "name": "数据质量与集成故障",
+      "summary": "用户遇到数据导出失败、数据不一致和数据源连接问题，导致数据可信度下降和使用障碍。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB17",
+        "FB30",
+        "FB54"
+      ],
+      "secondary_themes": [
+        "数据导出功能",
+        "数据准确性与可信度",
+        "数据源连接与集成"
+      ],
+      "possible_metrics": [
+        "数据导出成功率",
+        "数据准确性比率",
+        "数据源连接成功率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "修复数据导出功能的错误，增强数据计算逻辑的透明度，并扩展对私有数据库的连接支持。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-bi-renewal",
+      "name": "功能缺失与灵活性不足",
+      "summary": "用户指出报表功能基础、缺少自动化报告生成和灵活计算方式，希望增强功能以提升效率。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB48",
+        "FB99",
+        "FB110"
+      ],
+      "secondary_themes": [
+        "报表与数据分析能力",
+        "自动化报告生成",
+        "报表灵活性",
+        "自动化报表"
+      ],
+      "possible_metrics": [
+        "功能使用率",
+        "用户请求功能数量",
+        "自动化功能采纳率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "开发一键生成报告、自定义同比环比计算和定时发送邮箱功能，以满足用户自动化需求。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-bi-renewal",
+      "name": "UI/UX改进需求",
+      "summary": "用户反馈图表美观度不足、功能位置难找和移动端体验差，需要优化界面和可用性。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB66",
+        "FB74"
+      ],
+      "secondary_themes": [
+        "UI/图表可视化",
+        "功能可发现性",
+        "移动端可用性"
+      ],
+      "possible_metrics": [
+        "UI满意度评分",
+        "功能查找时间",
+        "移动端使用率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "提供图表自定义颜色选项，优化功能导航和提示，重设计移动端界面以提升易用性。"
+    }
+  ]
+}

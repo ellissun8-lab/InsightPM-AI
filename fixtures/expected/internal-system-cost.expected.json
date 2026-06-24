@@ -1,0 +1,36 @@
+{
+  "dataset": "internal-system-cost",
+  "project": {
+    "name": "内部 OA 系统",
+    "product_type": "B端 SaaS",
+    "business_goal": "降低成本",
+    "target_user": "全体员工和 HR",
+    "key_metric": "客服工单量"
+  },
+  "expected_top_themes": [
+    "流程审批繁琐",
+    "系统响应慢",
+    "功能分散难用"
+  ],
+  "allowed_metrics": [
+    "客服成本",
+    "管理员效率",
+    "工单量",
+    "员工满意度"
+  ],
+  "forbidden_metrics": [
+    "续费率",
+    "GMV",
+    "转化率",
+    "DAU",
+    "NPS"
+  ],
+  "minimum_requirements": {
+    "min_feedback_count": 100,
+    "min_cluster_count": 5,
+    "max_cluster_count": 12,
+    "min_evidence_per_cluster": 2,
+    "min_top_theme_recall": 0.6,
+    "max_hallucinated_metric_count": 0
+  }
+}

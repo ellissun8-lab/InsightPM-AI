@@ -1,0 +1,111 @@
+{
+  "segment_id": "seg-bi-renewal",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 15,
+    "cluster_count": 4,
+    "clustered_feedback_count": 15,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-bi-renewal",
+      "name": "价格与性价比问题",
+      "summary": "用户反馈续费价格过高，且认为产品性价比不高，导致续费意愿降低。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB71",
+        "FB80",
+        "FB88"
+      ],
+      "secondary_themes": [
+        "续费提醒体验"
+      ],
+      "possible_metrics": [
+        "续费率",
+        "客户生命周期价值",
+        "价格敏感度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "重新评估定价策略，提供分层定价或折扣方案；优化续费提醒频率和方式，减少用户反感。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-bi-renewal",
+      "name": "报表功能与性能问题",
+      "summary": "用户反馈报表功能薄弱、生成速度慢、加载慢，且定制化操作困难，影响使用体验。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB72",
+        "FB75",
+        "FB79",
+        "FB87"
+      ],
+      "secondary_themes": [
+        "报表定制化",
+        "报表加载性能"
+      ],
+      "possible_metrics": [
+        "报表生成时间",
+        "用户操作成功率",
+        "功能使用率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化报表引擎性能，提升生成和加载速度；增强报表定制化能力，提供拖拽式编辑和模板库。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-bi-renewal",
+      "name": "产品易用性与学习成本问题",
+      "summary": "用户认为BI工具学习成本高，数据可视化效果不佳，且功能被认为过时，导致满意度低。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB73",
+        "FB74",
+        "FB77",
+        "FB89"
+      ],
+      "secondary_themes": [
+        "数据可视化",
+        "功能现代性"
+      ],
+      "possible_metrics": [
+        "用户学习时长",
+        "满意度评分",
+        "功能采用率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "提供交互式教程和引导，降低学习门槛；更新可视化图表库，引入现代设计风格；定期发布功能更新以保持竞争力。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-bi-renewal",
+      "name": "数据质量与支持问题",
+      "summary": "用户反映数据导入存在问题、数据准确性存疑，且客户支持差、更新慢，影响信任度。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB76",
+        "FB78",
+        "FB82",
+        "FB84"
+      ],
+      "secondary_themes": [
+        "数据导入",
+        "软件更新",
+        "客户支持"
+      ],
+      "possible_metrics": [
+        "数据错误率",
+        "支持响应时间",
+        "更新频率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化数据导入流程，增加数据校验机制；建立数据质量监控体系；提升客户支持响应速度，并加快产品迭代节奏。"
+    }
+  ]
+}

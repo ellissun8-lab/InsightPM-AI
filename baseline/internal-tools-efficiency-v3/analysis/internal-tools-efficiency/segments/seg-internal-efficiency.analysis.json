@@ -1,0 +1,109 @@
+{
+  "segment_id": "seg-internal-efficiency",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 29,
+    "cluster_count": 4,
+    "clustered_feedback_count": 29,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-001",
+      "segment_id": "seg-internal-efficiency",
+      "name": "系统响应延迟和加载缓慢",
+      "summary": "用户频繁报告系统加载时间过长、响应速度慢，影响工作效率。",
+      "feedback_count": 15,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB2",
+        "FB3",
+        "FB4",
+        "FB6",
+        "FB7",
+        "FB9",
+        "FB11",
+        "FB12",
+        "FB17",
+        "FB21",
+        "FB22",
+        "FB15",
+        "FB20",
+        "FB131"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均加载时间",
+        "响应时间百分位"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化前端资源加载（如压缩图片、启用缓存），并监控服务器性能以减少数据库查询延迟。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-004",
+      "segment_id": "seg-internal-efficiency",
+      "name": "整体效率未达预期",
+      "summary": "团队反馈系统效率低下，工具未能有效提升工作效率，甚至有时降低效率。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB13",
+        "FB14",
+        "FB18",
+        "FB19",
+        "FB23",
+        "FB24"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "任务完成时间",
+        "用户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "开展用户访谈以识别具体痛点，迭代优化工具功能并针对常见工作流进行定制化改进。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-002",
+      "segment_id": "seg-internal-efficiency",
+      "name": "系统崩溃和超时错误",
+      "summary": "反馈中提到系统频繁崩溃、超时错误和高CPU使用率，导致工作流程中断。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB10",
+        "FB16",
+        "FB25"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "错误率",
+        "崩溃频率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "进行代码审查以修复内存泄漏，增加服务器资源监控并设置自动恢复机制。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-003",
+      "segment_id": "seg-internal-efficiency",
+      "name": "操作流程繁琐和配置复杂",
+      "summary": "用户指出操作步骤多、配置流程繁琐，增加了操作时间，降低效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB62",
+        "FB72",
+        "FB73"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "操作步骤数",
+        "配置时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "简化用户界面，减少非必要步骤，并提供一键式配置模板或自动化向导。"
+    }
+  ]
+}

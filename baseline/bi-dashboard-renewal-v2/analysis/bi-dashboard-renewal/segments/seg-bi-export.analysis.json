@@ -1,0 +1,145 @@
+{
+  "segment_id": "seg-bi-export",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 31,
+    "cluster_count": 6,
+    "clustered_feedback_count": 31,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-export-cluster-001",
+      "segment_id": "seg-bi-export",
+      "name": "PDF和PPT导出布局变形",
+      "summary": "导出PDF或PPT时，图表布局混乱、标签显示不全或页边距设置不当，影响报表美观度和可用性。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB20",
+        "FB92",
+        "FB137",
+        "FB54"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "导出成功率",
+        "用户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化导出布局引擎，确保图表自适应页面尺寸，支持标签完整显示和可调页边距；对于图片导出，改进字体渲染以解决中文乱码问题。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-002",
+      "segment_id": "seg-bi-export",
+      "name": "导出过程失败与错误代码不明",
+      "summary": "用户在导出Excel或CSV时遇到失败、乱码或权限错误，且错误信息不明确，导致问题无法自行解决。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB14",
+        "FB43",
+        "FB70",
+        "FB102"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "导出失败率",
+        "错误解决时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "改进错误处理机制，提供清晰的错误代码解释和自动修复选项；例如，对于乱码问题，默认使用UTF-8编码；对于权限错误，验证用户角色并给出具体提示。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-003",
+      "segment_id": "seg-bi-export",
+      "name": "导出数据完整性丢失",
+      "summary": "导出后报表缺少表头、筛选条件、超链接或样式信息，导致数据不完整或格式错误，影响后续使用。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB39",
+        "FB31",
+        "FB128",
+        "FB133",
+        "FB146"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "数据完整率",
+        "保真度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "增强导出模板，确保保留所有元数据，如筛选状态、表头、超链接和单元格样式；提供配置选项，允许用户在导出时选择保留这些元素。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-004",
+      "segment_id": "seg-bi-export",
+      "name": "批量导出与自动化功能缺失",
+      "summary": "用户需要批量导出多张报表、定时发送报表或自动化导出任务，但当前功能不支持，效率低下。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB35",
+        "FB74",
+        "FB141",
+        "FB123"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "批量导出使用率",
+        "自动化任务数"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "开发批量导出和定时发送功能，允许用户选择多个报表或仪表盘进行导出，并设置定期任务发送到邮箱；支持在导出Excel时自动按条件分Sheet页以提升效率。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-005",
+      "segment_id": "seg-bi-export",
+      "name": "高质量导出与格式自定义需求",
+      "summary": "用户对导出质量有高要求，需要高清、矢量格式、去水印等自定义选项，以满足专业展示和二次编辑需求。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB24",
+        "FB46",
+        "FB51",
+        "FB105",
+        "FB110"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "高清导出使用率",
+        "用户自定义满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "提供高清和矢量格式导出选项（如SVG或PDF矢量），并允许用户自定义导出设置，如分辨率、去除水印和动画支持，以提升报表美观度和可编辑性。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-006",
+      "segment_id": "seg-bi-export",
+      "name": "导出功能灵活性与自定义不足",
+      "summary": "用户在导出时缺乏灵活性，如无法合并数据、选择时间范围、压缩文件、自定义时间戳或选择性导出图表。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB28",
+        "FB58",
+        "FB62",
+        "FB79",
+        "FB88",
+        "FB96",
+        "FB119"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "功能定制使用率",
+        "导出效率提升"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "增加导出功能灵活性，支持数据合并导出、扩展时间范围选择、提供文件压缩选项、允许自定义时间戳格式，并支持选择性图表导出（如单个图表导出为图片序列）。"
+    }
+  ]
+}

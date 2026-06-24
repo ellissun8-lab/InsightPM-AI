@@ -1,0 +1,127 @@
+{
+  "segment_id": "seg-ecommerce-checkout",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 15,
+    "cluster_count": 5,
+    "clustered_feedback_count": 15,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-005",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "多种功能错误和计算不一致",
+      "summary": "涉及购物车删除失效、表单显示错误、配送选项故障、价格和邮费计算不一致等多种功能问题，影响下单准确性和可靠性。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB15",
+        "FB16",
+        "FB18",
+        "FB24",
+        "FB9"
+      ],
+      "secondary_themes": [
+        "功能稳定性",
+        "数据准确性"
+      ],
+      "possible_metrics": [
+        "功能错误发生率",
+        "计算准确性率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "全面测试并修复相关功能：确保购物车删除、表单显示正常；验证配送选项逻辑；实现实时价格同步和费用计算一致性，加强错误监控和日志记录。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-004",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "下单流程繁琐和异常",
+      "summary": "下单流程中存在不必要的信息填写步骤、登录状态检测异常和繁琐环节，建议简化以提升用户体验和转化率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB13",
+        "FB14"
+      ],
+      "secondary_themes": [
+        "流程优化",
+        "技术稳定性"
+      ],
+      "possible_metrics": [
+        "流程完成率",
+        "平均流程时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "简化信息填写步骤，减少非必填字段；修复登录状态检测逻辑，避免重复登录要求；引入进度指示器，帮助用户跟踪流程进度。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-001",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "下单按钮响应和可见性问题",
+      "summary": "用户反馈下单按钮点击无响应或视觉设计不突出，导致下单困难，影响核心转化路径。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB17"
+      ],
+      "secondary_themes": [
+        "用户界面",
+        "交互设计"
+      ],
+      "possible_metrics": [
+        "按钮点击成功率",
+        "用户点击延迟"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "优化下单按钮的响应速度，确保点击后立即提供视觉反馈；调整按钮大小、颜色对比度和位置，使其在页面中更突出，便于用户定位。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-002",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "地址保存和默认选择错误",
+      "summary": "地址管理功能存在缺陷，包括保存失败和默认地址选择错误，影响配送准确性和用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB12"
+      ],
+      "secondary_themes": [
+        "数据管理",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "地址保存成功率",
+        "默认地址选择准确性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "修复地址保存功能的技术问题，确保稳定运行；优化默认地址选择逻辑，基于用户历史使用频率或允许手动设置默认地址，减少错误。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-003",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "结算页面设计复杂和广告干扰",
+      "summary": "结算页面设计过于复杂且广告过多，增加用户认知负担，干扰核心操作，降低操作效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB21"
+      ],
+      "secondary_themes": [
+        "页面布局",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "页面停留时间",
+        "用户退出率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "简化结算页面布局，减少非核心广告展示，突出关键操作按钮和信息；进行A/B测试以优化设计，确保页面清晰易用。"
+    }
+  ]
+}

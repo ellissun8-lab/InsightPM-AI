@@ -1,0 +1,87 @@
+{
+  "segment_id": "seg-internal-training",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 12,
+    "cluster_count": 3,
+    "clustered_feedback_count": 12,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-training-cluster-001",
+      "segment_id": "seg-internal-training",
+      "name": "培训文档和材料质量不足",
+      "summary": "反馈指出培训文档未及时更新、材料类型单一、语言晦涩，导致学习效果差和困惑增加。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB21",
+        "FB124",
+        "FB128",
+        "FB142"
+      ],
+      "secondary_themes": [
+        "文档管理",
+        "用户理解度"
+      ],
+      "possible_metrics": [
+        "文档更新频率",
+        "材料多样性评分",
+        "用户反馈满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "建立定期文档审核流程，确保培训材料与系统界面同步；提供多样化材料如图文手册、快速参考卡和GIF动图；使用通俗语言重写晦涩内容，提升可读性。"
+    },
+    {
+      "cluster_id": "seg-internal-training-cluster-002",
+      "segment_id": "seg-internal-training",
+      "name": "培训方式缺乏实践和互动支持",
+      "summary": "反馈表明培训仅依赖视频，缺乏动手操作环境、新手引导和个性化辅导，影响学习效果和掌握度。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB56",
+        "FB104",
+        "FB116"
+      ],
+      "secondary_themes": [
+        "实践学习",
+        "用户支持"
+      ],
+      "possible_metrics": [
+        "测试环境使用率",
+        "新手引导完成率",
+        "辅导请求频率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "开发沙盒式测试环境供员工动手练习；设计分步骤的新手引导流程；设立定期一对一辅导或小组辅导环节，以提供个性化学习支持。"
+    },
+    {
+      "cluster_id": "seg-internal-training-cluster-003",
+      "segment_id": "seg-internal-training",
+      "name": "培训成本高和内容设计复杂",
+      "summary": "反馈反映培训内容过多、学习成本高、隐性成本未评估，以及系统更新后学习负担加重，导致培训效率低下。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB38",
+        "FB74",
+        "FB86",
+        "FB138"
+      ],
+      "secondary_themes": [
+        "成本评估",
+        "内容简化"
+      ],
+      "possible_metrics": [
+        "培训工时超出预期比例",
+        "学习成本指数",
+        "场景化学习参与度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "进行培训成本预评估，包括隐性工时；简化内容为模块化、场景化学习路径；在系统更新时发布图文并茂的What's New说明，降低重新学习成本。"
+    }
+  ]
+}

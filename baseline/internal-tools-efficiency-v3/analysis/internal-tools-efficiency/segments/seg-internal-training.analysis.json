@@ -1,0 +1,93 @@
+{
+  "segment_id": "seg-internal-training",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 18,
+    "cluster_count": 3,
+    "clustered_feedback_count": 18,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-training-cluster-001",
+      "segment_id": "seg-internal-training",
+      "name": "培训成本过高与负担",
+      "summary": "员工反馈培训成本高、费用贵、时间长，导致业务负担重，影响效率。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB64",
+        "FB102",
+        "FB107",
+        "FB108",
+        "FB109",
+        "FB112",
+        "FB113",
+        "FB114",
+        "FB142"
+      ],
+      "secondary_themes": [
+        "成本优化",
+        "时间效率"
+      ],
+      "possible_metrics": [
+        "培训费用",
+        "培训时间",
+        "成本效益比"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化培训流程，提供在线自助学习模块以减少培训时间；引入成本控制措施，如批量培训或简化内容，降低单次培训费用。"
+    },
+    {
+      "cluster_id": "seg-internal-training-cluster-002",
+      "segment_id": "seg-internal-training",
+      "name": "培训效果不佳",
+      "summary": "培训后员工仍无法熟练使用工具，错误率未降，培训内容不实用，导致效果有限。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB103",
+        "FB104",
+        "FB106",
+        "FB110",
+        "FB111"
+      ],
+      "secondary_themes": [
+        "学习成果",
+        "错误率"
+      ],
+      "possible_metrics": [
+        "培训后错误率",
+        "员工熟练度评分",
+        "培训满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "重新设计培训材料，增加实际案例和动手练习；建立培训后跟踪机制，收集反馈并定期更新内容，确保实用性。"
+    },
+    {
+      "cluster_id": "seg-internal-training-cluster-003",
+      "segment_id": "seg-internal-training",
+      "name": "培训资源与支持不足",
+      "summary": "培训资源不足、支持改进需求大，资源使用率低，导致培训难以满足需求。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB54",
+        "FB105",
+        "FB115",
+        "FB116"
+      ],
+      "secondary_themes": [
+        "资源可用性",
+        "支持系统"
+      ],
+      "possible_metrics": [
+        "资源访问率",
+        "支持响应时间",
+        "培训资源覆盖率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "扩充培训资源库，提供更多样化的学习材料（如视频、指南）；改进培训支持工具，集成即时帮助功能，并监控资源使用率以优化分配。"
+    }
+  ]
+}

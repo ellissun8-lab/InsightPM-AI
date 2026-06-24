@@ -1,0 +1,133 @@
+{
+  "segment_id": "seg-bi-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 33,
+    "cluster_count": 4,
+    "clustered_feedback_count": 33,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-performance-cluster-002",
+      "segment_id": "seg-bi-performance",
+      "name": "查询执行缓慢与超时",
+      "summary": "查询性能差导致仪表盘加载缓慢、查询频繁超时、数据延迟显示，直接影响分析工作流和用户体验。",
+      "feedback_count": 17,
+      "evidence_feedback_ids": [
+        "FB36",
+        "FB48",
+        "FB61",
+        "FB62",
+        "FB64",
+        "FB65",
+        "FB69",
+        "FB70",
+        "FB74",
+        "FB75",
+        "FB79",
+        "FB80",
+        "FB117",
+        "FB139",
+        "FB148",
+        "FB129",
+        "FB133"
+      ],
+      "secondary_themes": [
+        "数据延迟",
+        "仪表盘加载",
+        "续费影响"
+      ],
+      "possible_metrics": [
+        "查询响应时间",
+        "超时率",
+        "数据新鲜度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化查询引擎和缓存策略（如增加缓存预热和失效策略）；实施查询超时和自动重试机制；改进数据加载逻辑以支持实时更新。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-001",
+      "segment_id": "seg-bi-performance",
+      "name": "导出操作性能瓶颈",
+      "summary": "大数据集导出到CSV或生成报告时，系统卡死、速度缓慢或任务失败，严重影响用户工作效率。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB5",
+        "FB9",
+        "FB13",
+        "FB18",
+        "FB23",
+        "FB25"
+      ],
+      "secondary_themes": [
+        "系统崩溃",
+        "服务器负载",
+        "网络超时"
+      ],
+      "possible_metrics": [
+        "导出时间",
+        "任务成功率",
+        "服务器负载率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化导出流程，引入异步处理和分布式队列管理；增加服务器资源（如CPU、内存）以处理大数据集；监控网络连接并设置超时重试机制。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-004",
+      "segment_id": "seg-bi-performance",
+      "name": "查询优化与监控不足",
+      "summary": "查询优化器效率低、缓存失效、队列管理不当、日志不足，导致性能调试困难和优化瓶颈。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB68",
+        "FB72",
+        "FB73",
+        "FB78",
+        "FB143"
+      ],
+      "secondary_themes": [
+        "缓存策略",
+        "查询日志",
+        "性能监控"
+      ],
+      "possible_metrics": [
+        "查询优化效率",
+        "缓存命中率",
+        "日志完整性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "改进查询优化器算法以提高生成查询的效率；增强缓存管理和预热策略；完善查询日志记录和性能监控工具，便于问题排查和优化。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-003",
+      "segment_id": "seg-bi-performance",
+      "name": "高负载下系统不稳定",
+      "summary": "查询时CPU使用率飙升、并发查询导致系统卡死或崩溃，服务器响应慢，影响系统可靠性。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB63",
+        "FB67",
+        "FB76",
+        "FB118"
+      ],
+      "secondary_themes": [
+        "服务器负载",
+        "并发处理",
+        "资源管理"
+      ],
+      "possible_metrics": [
+        "CPU使用率",
+        "并发查询数",
+        "系统崩溃次数"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "实施资源监控和自动扩展机制（如基于负载的弹性伸缩）；优化并发查询调度算法，设置优先级队列；增加硬件资源或优化查询计划以减少资源占用。"
+    }
+  ]
+}

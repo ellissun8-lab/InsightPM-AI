@@ -1,0 +1,749 @@
+{
+  "project_id": "",
+  "analysis_run_id": "",
+  "summary": {
+    "total_feedback_count": 150,
+    "analyzed_feedback_count": 150,
+    "clustered_feedback_count": 150,
+    "unclustered_feedback_count": 0,
+    "unanalyzed_feedback_count": 0,
+    "segment_count": 9,
+    "business_segment_count": 7,
+    "noise_segment_count": 1,
+    "positive_segment_count": 1,
+    "cluster_count": 26,
+    "is_mixed_dataset": true
+  },
+  "segments": [
+    {
+      "segment_id": "seg-ecommerce-performance",
+      "name": "性能与加载问题",
+      "feedback_count": 29,
+      "business_goal": "提升页面加载速度",
+      "issue_cluster_ids": [
+        "seg-ecommerce-performance-cluster-002",
+        "seg-ecommerce-performance-cluster-001",
+        "seg-ecommerce-performance-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "下单流程问题",
+      "feedback_count": 20,
+      "business_goal": "提升下单成功率",
+      "issue_cluster_ids": [
+        "seg-ecommerce-checkout-cluster-001",
+        "seg-ecommerce-checkout-cluster-004",
+        "seg-ecommerce-checkout-cluster-002",
+        "seg-ecommerce-checkout-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "促销与优惠问题",
+      "feedback_count": 21,
+      "business_goal": "提升促销转化",
+      "issue_cluster_ids": [
+        "seg-ecommerce-promotion-cluster-002",
+        "seg-ecommerce-promotion-cluster-001",
+        "seg-ecommerce-promotion-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付失败问题",
+      "feedback_count": 23,
+      "business_goal": "降低支付失败率",
+      "issue_cluster_ids": [
+        "seg-ecommerce-payment-cluster-001",
+        "seg-ecommerce-payment-cluster-002",
+        "seg-ecommerce-payment-cluster-003",
+        "seg-ecommerce-payment-cluster-005",
+        "seg-ecommerce-payment-cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "推荐与搜索问题",
+      "feedback_count": 21,
+      "business_goal": "提升推荐准确性",
+      "issue_cluster_ids": [
+        "seg-ecommerce-recommendation-cluster-001",
+        "seg-ecommerce-recommendation-cluster-002",
+        "seg-ecommerce-recommendation-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-data",
+      "name": "数据打通问题",
+      "feedback_count": 18,
+      "business_goal": "提升数据一致性",
+      "issue_cluster_ids": [
+        "seg-ecommerce-data-cluster-001",
+        "seg-ecommerce-data-cluster-002",
+        "seg-ecommerce-data-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-mobile",
+      "name": "移动端体验问题",
+      "feedback_count": 11,
+      "business_goal": "提升移动端转化",
+      "issue_cluster_ids": [
+        "seg-ecommerce-mobile-cluster-003",
+        "seg-ecommerce-mobile-cluster-001",
+        "seg-ecommerce-mobile-cluster-002"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "name": "噪声/无效反馈",
+      "feedback_count": 2,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-noise-cluster-001"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "feedback_count": 5,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-positive-cluster-001"
+      ]
+    }
+  ],
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-002",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "多页面加载速度缓慢",
+      "summary": "商品详情页、首页、搜索结果等关键页面加载时间过长，图片加载失败或模糊，滚动卡顿，严重影响用户浏览和转化率。",
+      "feedback_count": 19,
+      "evidence_feedback_ids": [
+        "FB46",
+        "FB47",
+        "FB48",
+        "FB49",
+        "FB50",
+        "FB51",
+        "FB52",
+        "FB53",
+        "FB54",
+        "FB55",
+        "FB56",
+        "FB57",
+        "FB58",
+        "FB59",
+        "FB61",
+        "FB62",
+        "FB63",
+        "FB132",
+        "FB149"
+      ],
+      "secondary_themes": [
+        "性能"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "图片加载成功率",
+        "滚动性能评分"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "压缩和优化图片资源，实施懒加载和CDN加速，优化JavaScript和CSS捆绑以减少渲染阻塞，进行前端性能监控并设置加载时间阈值告警。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-001",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "结账流程加载缓慢与错误",
+      "summary": "用户在下单、确认订单等结账环节频繁遇到加载延迟、卡顿或服务器错误，导致购买流程中断和体验下降。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB2",
+        "FB8",
+        "FB9",
+        "FB14",
+        "FB19",
+        "FB25"
+      ],
+      "secondary_themes": [
+        "checkout_performance"
+      ],
+      "possible_metrics": [
+        "结账完成时间",
+        "订单提交成功率",
+        "用户流失率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化结账API响应时间，实施前端加载状态指示器和错误重试机制，减少结账页面的非必要资源加载，并监控服务器错误日志以快速定位问题。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-003",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "App和移动端性能卡顿",
+      "summary": "移动应用和移动端网页运行卡顿严重，加载速度明显慢于PC端，需要频繁重启才能恢复，影响移动端用户体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB60",
+        "FB124",
+        "FB125"
+      ],
+      "secondary_themes": [
+        "性能与加载"
+      ],
+      "possible_metrics": [
+        "App启动时间",
+        "移动端页面加载时间",
+        "内存使用率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "针对移动端进行专项性能优化，减少内存占用和CPU使用，优化网络请求和缓存策略，实现平滑滚动和快速渲染，并提供崩溃恢复机制。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-001",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "下单流程步骤过多且复杂",
+      "summary": "用户普遍反馈下单流程复杂、步骤多、耗时长，与竞品相比缺乏便捷性，导致用户挫败感和流失。",
+      "feedback_count": 11,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB6",
+        "FB11",
+        "FB12",
+        "FB16",
+        "FB17",
+        "FB18",
+        "FB24",
+        "FB129",
+        "FB138",
+        "FB145"
+      ],
+      "secondary_themes": [
+        "竞品对比"
+      ],
+      "possible_metrics": [
+        "下单完成率",
+        "平均下单时间",
+        "步骤数"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "简化下单流程，减少不必要的步骤，参考竞品设计一键下单或快速结算功能，并进行用户测试以优化流程。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-004",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "用户体验差导致高跳出率",
+      "summary": "下单页面跳出率高、用户体验糟糕，可能与界面设计有关，导致下单成功率下降和流失。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB5",
+        "FB10",
+        "FB22",
+        "FB23"
+      ],
+      "secondary_themes": [
+        "界面设计",
+        "用户流失"
+      ],
+      "possible_metrics": [
+        "页面跳出率",
+        "用户满意度评分",
+        "下单成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "进行用户体验审计，优化界面设计和交互流程，通过A/B测试减少跳出率，并收集用户反馈持续改进。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-002",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "关键操作按钮无响应",
+      "summary": "下单流程中的保存和下单按钮在点击后无反应，导致用户无法完成订单，严重影响转化率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB7",
+        "FB20"
+      ],
+      "secondary_themes": [
+        "UI交互"
+      ],
+      "possible_metrics": [
+        "按钮点击成功率",
+        "错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "立即排查按钮无响应的bug，确保前端事件正确触发和后端接口稳定，增加错误提示和重试机制。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-003",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "地址默认错误与页面信息混乱",
+      "summary": "收货地址经常默认错误需用户手动修改，结算页面信息展示混乱，影响用户体验和操作效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB15",
+        "FB21"
+      ],
+      "secondary_themes": [
+        "数据预填",
+        "页面布局"
+      ],
+      "possible_metrics": [
+        "地址修改率",
+        "页面停留时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化地址默认逻辑，基于用户历史或定位自动填充，并重新设计结算页面布局，使信息更清晰易读。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-002",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "促销活动信息不准确与误导",
+      "summary": "活动页面展示过期活动、内容不真实、折扣计算错误等，导致用户困惑和信任下降。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB84",
+        "FB86",
+        "FB87",
+        "FB88",
+        "FB89",
+        "FB95",
+        "FB98",
+        "FB133",
+        "FB147"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "活动信息准确率",
+        "用户信任度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "加强活动页面管理，及时下架过期活动并更新信息；确保促销信息真实透明，提供清晰的规则说明和折扣计算示例。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-001",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "优惠券应用与更新失败",
+      "summary": "用户反馈优惠券在使用时出现金额未更新、显示过期、无法使用等技术问题，以及流程不清晰导致核销率低。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB82",
+        "FB83",
+        "FB85",
+        "FB90",
+        "FB96"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "优惠券使用成功率",
+        "订单金额更新准确率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化优惠券系统技术稳定性，确保金额实时更新和状态同步；简化优惠券使用流程，提供明确的操作指引和状态提示。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-003",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "促销策略设计不佳影响转化",
+      "summary": "促销套路多、门槛高、页面跳出率高，且竞品促销更频繁，导致转化率未提升。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB91",
+        "FB92",
+        "FB93",
+        "FB94",
+        "FB97",
+        "FB99"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "促销转化率",
+        "页面跳出率",
+        "用户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化促销策略，减少复杂套路，设置合理的满减门槛；提升页面设计和内容质量，增加活动频率并借鉴竞品优势。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-001",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "通用支付失败与重试循环",
+      "summary": "用户频繁遇到支付失败，系统提示重试，但问题持续存在，导致挫败感。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB27",
+        "FB28",
+        "FB30",
+        "FB35",
+        "FB42",
+        "FB131",
+        "FB140"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "支付失败率",
+        "重试成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "分析支付接口的错误日志，识别常见失败原因（如超时、限流），并实施智能重试策略，例如指数退避，同时提供更清晰的错误消息。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-002",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付系统与移动端稳定性问题",
+      "summary": "支付过程中出现系统错误、网络问题或App崩溃，导致支付失败。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB29",
+        "FB32",
+        "FB39",
+        "FB121"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "系统可用性",
+        "崩溃率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "加强支付接口的监控和告警，设置自动故障转移；优化移动端App的支付模块，减少内存泄漏和崩溃；进行定期维护并提前通知用户。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-003",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付失败导致订单与资金不一致",
+      "summary": "支付失败后出现资金扣款但订单未生成，或订单取消、优惠券失效等问题。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB34",
+        "FB41",
+        "FB44",
+        "FB45"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "订单确认率",
+        "资金扣款失败率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "实现可靠的支付回调处理机制，确保订单状态与支付结果同步；为失败支付提供自动退款流程；优化优惠券的持久化，避免支付失败后丢失。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-005",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付体验差且落后于竞品",
+      "summary": "用户反映支付过程不流畅，竞品支付更稳定、支持更多方式，导致用户流失风险。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB31",
+        "FB36",
+        "FB37",
+        "FB43"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "支付流程转化率",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "进行竞品分析，benchmark支付流程；增加更多支付方式选项（如Apple Pay、支付宝等）；优化支付界面设计，减少步骤，提升用户体验。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-004",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "银行卡与第三方支付方式失败",
+      "summary": "用户在使用银行卡、微信支付等特定方式时遇到失败，提示银行拒绝或其他错误。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB33",
+        "FB38",
+        "FB40"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "各支付方式成功率",
+        "银行拒绝率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "与各支付提供商（银行、微信支付）紧密合作，分析失败交易的原因；调整风控规则以减少误拒；在支付页面提供更详细的错误指导和替代支付选项。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-001",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "推荐算法准确性不足",
+      "summary": "用户反馈推荐商品不相关、不符合个人喜好、存在重复推荐，导致点击率低和体验差。",
+      "feedback_count": 11,
+      "evidence_feedback_ids": [
+        "FB65",
+        "FB68",
+        "FB70",
+        "FB72",
+        "FB73",
+        "FB76",
+        "FB78",
+        "FB80",
+        "FB130",
+        "FB136",
+        "FB144"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "推荐点击率(CTR)",
+        "推荐转化率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化推荐算法，集成用户行为数据和机器学习模型，实施个性化推荐策略；通过A/B测试评估效果，并定期更新模型以减少重复推荐。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-002",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "搜索结果质量问题",
+      "summary": "搜索功能返回不相关结果、排序混乱、未能返回结果或过滤器失效，影响用户体验和搜索转化率。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB64",
+        "FB66",
+        "FB67",
+        "FB71",
+        "FB74",
+        "FB77",
+        "FB79"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "搜索转化率",
+        "搜索结果相关性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "改进搜索索引和排序算法，确保结果相关性；添加模糊匹配和容错功能；修复过滤器bug；分析搜索日志以识别并满足未覆盖的用户需求。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-003",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "算法竞争力与竞品差距",
+      "summary": "用户指出竞品的推荐和搜索功能更智能、更精准，如支持模糊匹配，我方产品在功能上相对落后。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB69",
+        "FB75",
+        "FB81"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户满意度",
+        "功能对比评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "分析竞品推荐和搜索功能，优先实现模糊匹配等关键特性；增强算法智能性，通过用户反馈和测试提升精准度。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-001",
+      "segment_id": "seg-ecommerce-data",
+      "name": "多端数据同步延迟与状态更新滞后",
+      "summary": "用户反馈在不同设备（如App、网页版）或不同环节（如订单、物流）间的数据同步存在显著延迟，导致信息无法实时查看，影响体验和决策。",
+      "feedback_count": 11,
+      "evidence_feedback_ids": [
+        "FB100",
+        "FB101",
+        "FB102",
+        "FB105",
+        "FB108",
+        "FB110",
+        "FB111",
+        "FB113",
+        "FB135",
+        "FB142",
+        "FB148"
+      ],
+      "secondary_themes": [
+        "数据同步时效性",
+        "竞品对比"
+      ],
+      "possible_metrics": [
+        "跨端数据同步延迟率",
+        "订单/物流状态更新延迟时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "1. 优化核心数据（订单、地址、物流）的同步机制，缩短同步间隔或采用事件驱动、实时推送技术。\n2. 针对订单、物流等关键状态变更，向用户同步设备发送更新通知。\n3. 优先修复地址同步失败（如FB113）等阻断性同步问题。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-002",
+      "segment_id": "seg-ecommerce-data",
+      "name": "跨端数据展示不一致",
+      "summary": "用户在不同客户端（App、网站）上查看同一信息（如订单记录、优惠券、账户信息）时发现内容不一致，损害信任感并增加客服咨询量。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB103",
+        "FB104",
+        "FB107",
+        "FB112"
+      ],
+      "secondary_themes": [
+        "数据一致性",
+        "客服工单"
+      ],
+      "possible_metrics": [
+        "跨端信息展示一致性错误率",
+        "因数据不一致导致的客服工单量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "1. 建立统一的数据源和同步逻辑，确保优惠券、账户信息等在所有端的展示均从同一权威数据源读取。\n2. 增加数据一致性校验逻辑，在同步后或展示前进行抽样对比。\n3. 为客服提供快速排查数据不一致问题的内部工具。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-003",
+      "segment_id": "seg-ecommerce-data",
+      "name": "订单与账户数据丢失或错误",
+      "summary": "用户遭遇历史订单数据丢失、订单状态显示错误等数据准确性及完整性问题，直接导致无法查询历史记录或产生错误判断（如误以为未支付）。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB106",
+        "FB109",
+        "FB114"
+      ],
+      "secondary_themes": [
+        "数据完整性",
+        "数据准确性"
+      ],
+      "possible_metrics": [
+        "历史订单数据丢失率",
+        "订单状态显示错误率",
+        "数据同步错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "1. 立即排查并修复导致历史订单数据丢失的技术缺陷，确保数据归档和查询功能可靠。\n2. 严格审查订单状态同步的准确性，修正如“已发货显示未支付”（FB114）等逻辑错误。\n3. 建立数据同步错误监控和报警机制，降低错误率（如FB109）。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-mobile-cluster-003",
+      "segment_id": "seg-ecommerce-mobile",
+      "name": "移动端用户体验与转化效率低下",
+      "summary": "反馈显示移动端整体难用、转化率低于PC端，且竞品在体验和功能上更优，表明用户体验和功能完整性是关键短板。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB118",
+        "FB119",
+        "FB120",
+        "FB126",
+        "FB134",
+        "FB150"
+      ],
+      "secondary_themes": [
+        "移动端转化",
+        "竞品分析"
+      ],
+      "possible_metrics": [
+        "移动端转化率",
+        "用户满意度",
+        "功能覆盖率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "进行移动端用户旅程地图分析，简化结账流程以提升转化，优先开发竞品已有的核心功能，并通过用户访谈和热图工具持续优化体验。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-mobile-cluster-001",
+      "segment_id": "seg-ecommerce-mobile",
+      "name": "移动端技术性能缺陷",
+      "summary": "用户反馈在iPhone上商品图片显示异常、滚动卡顿、App闪退和触摸响应不灵，严重影响基本使用体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB115",
+        "FB116",
+        "FB117"
+      ],
+      "secondary_themes": [
+        "移动端性能",
+        "移动端稳定性"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "崩溃率",
+        "触摸响应时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "针对iOS设备优化图片压缩和懒加载机制以减少卡顿，实施崩溃监控和快速修复流程，改进触摸事件处理代码以提高响应灵敏度。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-mobile-cluster-002",
+      "segment_id": "seg-ecommerce-mobile",
+      "name": "移动端UI/UX设计问题",
+      "summary": "用户指出移动端字体过小影响可读性，以及页面适配不当导致按钮重叠，降低界面可用性和操作效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB122",
+        "FB123"
+      ],
+      "secondary_themes": [
+        "移动端字体",
+        "移动端布局"
+      ],
+      "possible_metrics": [
+        "可读性评分",
+        "UI错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "采用响应式设计原则，调整字体大小至不低于16px，使用CSS媒体查询确保按钮和元素在不同屏幕尺寸下自适应布局，并通过A/B测试验证用户体验提升。"
+    },
+    {
+      "cluster_id": "seg-noise-cluster-001",
+      "segment_id": "seg-noise",
+      "name": "无效/噪声反馈",
+      "summary": "噪声/无效反馈相关反馈",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB127",
+        "FB128"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "不进入核心问题排序。"
+    },
+    {
+      "cluster_id": "seg-positive-cluster-001",
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "summary": "正向反馈汇总相关反馈",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB137",
+        "FB139",
+        "FB141",
+        "FB143",
+        "FB146"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "保留为产品亮点参考。"
+    }
+  ],
+  "report_path": ""
+}

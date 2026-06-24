@@ -1,0 +1,88 @@
+{
+  "segment_id": "seg-b2b-renewal",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 27,
+    "cluster_count": 2,
+    "clustered_feedback_count": 27,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-b2b-renewal-cluster-001",
+      "segment_id": "seg-b2b-renewal",
+      "name": "续费价格过高与性价比感知低",
+      "summary": "用户集中反馈续费价格过高，与竞品对比后性价比感知低，导致续费犹豫、寻求优惠或考虑更换供应商，存在可能增加流失风险，需要结合续费率、客户分层和使用频次进一步验证。",
+      "feedback_count": 21,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB8",
+        "FB12",
+        "FB14",
+        "FB19",
+        "FB24",
+        "FB34",
+        "FB42",
+        "FB59",
+        "FB75",
+        "FB78",
+        "FB81",
+        "FB84",
+        "FB102",
+        "FB106",
+        "FB110",
+        "FB122",
+        "FB124",
+        "FB49",
+        "FB54",
+        "FB111"
+      ],
+      "secondary_themes": [
+        "价格敏感",
+        "竞品对比",
+        "寻求折扣",
+        "促销活动需求",
+        "灵活计费"
+      ],
+      "possible_metrics": [
+        "续费率",
+        "客户流失率",
+        "价格满意度",
+        "优惠券使用率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "调整定价策略，推出阶梯定价或按用量计费选项；增加老客户优惠和促销活动；优化性价比宣传，通过案例展示价值；监控竞品价格动态。"
+    },
+    {
+      "cluster_id": "seg-b2b-renewal-cluster-002",
+      "segment_id": "seg-b2b-renewal",
+      "name": "续费流程繁琐与用户体验不佳",
+      "summary": "用户在续费过程中遇到入口隐蔽、合同流程复杂、信息不透明、条款不清晰、数据安全需求未满足和提醒过于频繁等问题，影响续费体验和意愿。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB20",
+        "FB45",
+        "FB55",
+        "FB67",
+        "FB68",
+        "FB118"
+      ],
+      "secondary_themes": [
+        "入口可用性",
+        "合同流程优化",
+        "信息透明度",
+        "定制化需求",
+        "提醒策略"
+      ],
+      "possible_metrics": [
+        "续费流程完成时间",
+        "用户支持请求量",
+        "续费转化率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化续费入口在产品内的可见性；简化合同流程，提供清晰指引；确保定价页面信息透明，无隐藏费用；评估提供私有化部署选项；调整续费提醒频率和方式，避免打扰用户。"
+    }
+  ]
+}

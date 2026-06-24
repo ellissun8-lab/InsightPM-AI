@@ -1,0 +1,83 @@
+{
+  "segment_id": "seg-ai-customer-service",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 17,
+    "cluster_count": 3,
+    "clustered_feedback_count": 17,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-customer-service-cluster-001",
+      "segment_id": "seg-ai-customer-service",
+      "name": "AI客服自然语言理解能力不足",
+      "summary": "用户反馈AI客服无法理解复杂问题、答非所问，且缺乏个性化上下文理解，导致交互无效。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB43",
+        "FB56",
+        "FB73",
+        "FB90",
+        "FB96",
+        "FB138"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "自然语言理解准确率",
+        "复杂问题解决率",
+        "上下文保持率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化AI自然语言处理模型，增加针对复杂场景和用户操作历史的训练数据，实现上下文跟踪和个性化回答。"
+    },
+    {
+      "cluster_id": "seg-ai-customer-service-cluster-002",
+      "segment_id": "seg-ai-customer-service",
+      "name": "AI客服回答无效或不实用",
+      "summary": "AI客服经常提供重复、模糊或无关的回答，缺乏同理心和后续跟进，导致用户无法解决问题。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB18",
+        "FB32",
+        "FB109",
+        "FB118",
+        "FB125",
+        "FB132",
+        "FB145"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户满意度评分",
+        "回答相关性评分",
+        "问题首次解决率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "重新设计回答策略，确保提供具体、可操作的信息，增加同理心表达，并建立问题跟进机制以提升回答的实用性和灵活性。"
+    },
+    {
+      "cluster_id": "seg-ai-customer-service-cluster-003",
+      "segment_id": "seg-ai-customer-service",
+      "name": "转人工客服体验不佳",
+      "summary": "转人工过程中存在排队时间长、上下文丢失和入口难找的问题，影响用户连贯体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB14",
+        "FB65",
+        "FB102"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均转人工等待时间",
+        "上下文传递成功率",
+        "转接入口点击率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化转人工队列管理以减少等待时间，实现AI与人工客服之间的上下文自动传递，并改进界面设计使转接入口更直观易找。"
+    }
+  ]
+}

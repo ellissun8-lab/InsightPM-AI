@@ -1,0 +1,131 @@
+{
+  "segment_id": "seg-internal-cost",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 17,
+    "cluster_count": 5,
+    "clustered_feedback_count": 17,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-cost-cluster-001",
+      "segment_id": "seg-internal-cost",
+      "name": "成本效益未达预期，降本效果有限",
+      "summary": "用户反馈使用系统未显著降低运营成本，核心功能利用率低，导致总体成本节约未达预期。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB48",
+        "FB85",
+        "FB87",
+        "FB92",
+        "FB109"
+      ],
+      "secondary_themes": [
+        "降本效果",
+        "功能利用率"
+      ],
+      "possible_metrics": [
+        "运营成本节约率",
+        "核心功能月活跃使用率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "深入分析功能使用率数据，优化低频但关键的功能设计，提升其易用性和价值感知。为管理层提供可视化ROI报告。"
+    },
+    {
+      "cluster_id": "seg-internal-cost-cluster-002",
+      "segment_id": "seg-internal-cost",
+      "name": "系统性能与速度问题影响工作效率",
+      "summary": "系统反应慢、页面加载速度低，导致用户体验差，反复操作和等待直接降低了工作效率。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB76",
+        "FB83",
+        "FB86",
+        "FB100"
+      ],
+      "secondary_themes": [
+        "系统可用性",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "页面平均加载时间",
+        "关键操作响应延迟（P95）"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "对高频访问页面和核心接口进行性能剖析与优化，引入缓存机制，建立性能监控与预警体系。"
+    },
+    {
+      "cluster_id": "seg-internal-cost-cluster-003",
+      "segment_id": "seg-internal-cost",
+      "name": "系统稳定性不足引发运营风险",
+      "summary": "系统存在频繁崩溃或不可用的情况，可能影响业务连续性，需结合日志、工单或业务数据验证，并引发用户对数据安全和迁移的担忧。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB66",
+        "FB93",
+        "FB104"
+      ],
+      "secondary_themes": [
+        "系统可用性",
+        "数据安全"
+      ],
+      "possible_metrics": [
+        "系统月度正常运行时间",
+        "平均故障恢复时间（MTTR）"
+      ],
+      "priority": "P1",
+      "opportunity_score": 90,
+      "recommendation": "实施全面的应用性能监控和日志监控，增加服务冗余，完善数据库备份与恢复演练流程。建议先确认崩溃频率和影响用户数。",
+      "needs_validation": true,
+      "confidence_note": "3 条反馈，需验证系统稳定性的实际影响"
+    },
+    {
+      "cluster_id": "seg-internal-cost-cluster-004",
+      "segment_id": "seg-internal-cost",
+      "name": "系统功能与配置不完善",
+      "summary": "系统缺乏灵活的流程自定义能力、必要的数据汇总分析功能，且通知管理粗糙，影响使用效率和体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB38",
+        "FB64",
+        "FB74"
+      ],
+      "secondary_themes": [
+        "流程定制",
+        "数据分析"
+      ],
+      "possible_metrics": [
+        "已支持自定义的流程数量",
+        "通知消息的有效阅读率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "开发低代码/配置化的流程引擎，支持用户自定义审批路径，优化通知策略。"
+    },
+    {
+      "cluster_id": "seg-internal-cost-cluster-005",
+      "segment_id": "seg-internal-cost",
+      "name": "系统易用性不足导致培训成本高",
+      "summary": "用户反馈系统界面复杂、逻辑不直观，导致新人上手困难，培训周期长，间接增加了人力成本。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB25",
+        "FB63"
+      ],
+      "secondary_themes": [
+        "用户学习曲线",
+        "通知管理"
+      ],
+      "possible_metrics": [
+        "新员工独立操作系统所需培训时长",
+        "用户满意度调查中易用性评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "对核心任务流进行可用性测试，简化操作步骤和界面布局，制作交互式引导教程。"
+    }
+  ]
+}

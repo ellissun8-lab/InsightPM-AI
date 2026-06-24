@@ -1,0 +1,104 @@
+{
+  "segment_id": "seg-renewal-training",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 13,
+    "cluster_count": 4,
+    "clustered_feedback_count": 13,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-training-cluster-001",
+      "segment_id": "seg-renewal-training",
+      "name": "培训资源与内容不足",
+      "summary": "用户反映培训材料、在线资源和高级培训内容缺乏，影响学习效果和效率。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB144",
+        "FB148",
+        "FB94"
+      ],
+      "secondary_themes": [
+        "training-resources",
+        "training-content"
+      ],
+      "possible_metrics": [
+        "培训资源覆盖率",
+        "用户培训完成率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "增加培训材料种类和数量，提供丰富的在线资源，包括高级课程和实用教程。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-002",
+      "segment_id": "seg-renewal-training",
+      "name": "培训质量与效果不佳",
+      "summary": "培训课程不实用、培训师水平低、界面设计不直观导致培训效果差，用户学习困难。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB28",
+        "FB143",
+        "FB149",
+        "FB146"
+      ],
+      "secondary_themes": [
+        "training-efficacy",
+        "training-quality"
+      ],
+      "possible_metrics": [
+        "培训满意度",
+        "用户学习效率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "优化培训课程内容以提高实用性，提升培训师专业水平，改进界面设计以增强直观性和易用性。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-003",
+      "segment_id": "seg-renewal-training",
+      "name": "培训支持与安排不足",
+      "summary": "培训后续支持缺乏、时间安排不合理，导致用户无法持续学习和有效应用知识。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB52",
+        "FB145",
+        "FB147"
+      ],
+      "secondary_themes": [
+        "training-support",
+        "training-scheduling"
+      ],
+      "possible_metrics": [
+        "培训支持响应时间",
+        "培训参与率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "提供持续的培训支持服务，如在线帮助和社区支持，优化培训时间安排以适应用户需求。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-004",
+      "segment_id": "seg-renewal-training",
+      "name": "上手难度高与引导不足",
+      "summary": "新用户上手困难，引导流程差，需要长时间学习，影响产品采纳和使用。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB16",
+        "FB44"
+      ],
+      "secondary_themes": [
+        "onboarding"
+      ],
+      "possible_metrics": [
+        "新用户上手时间",
+        "用户流失率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 90,
+      "recommendation": "改进新用户引导流程，提供交互式教程和快速入门指南，减少学习曲线并提升用户体验。"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "segment_id": "seg-onboarding-first-use",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 13,
+    "cluster_count": 4,
+    "clustered_feedback_count": 13,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-first-use-cluster-001",
+      "segment_id": "seg-onboarding-first-use",
+      "name": "首次使用入门引导不足",
+      "summary": "新用户在首次使用时面临引导缺失、界面复杂、功能可发现性差等问题，导致不知从何开始，影响入门体验和满意度。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB68",
+        "FB86",
+        "FB87",
+        "FB88",
+        "FB145"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "首次使用完成率",
+        "用户引导点击率",
+        "界面易用性评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化新用户引导流程：提供可跳过的步骤式引导教程；简化界面布局，减少初始信息过载；突出显示核心功能按钮（如新建项目）；添加上下文提示或示例，帮助用户快速上手。"
+    },
+    {
+      "cluster_id": "seg-onboarding-first-use-cluster-002",
+      "segment_id": "seg-onboarding-first-use",
+      "name": "操作反馈与错误处理缺失",
+      "summary": "用户在操作过程中遇到错误提示不清晰、反馈缺失或数据丢失，导致困惑、挫败感和信任度下降。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB89",
+        "FB93",
+        "FB98",
+        "FB124"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "操作成功率",
+        "错误提示清晰度评分",
+        "用户反馈解决时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "改进错误处理机制：为所有操作错误提供具体原因和解决步骤；确保文件上传等操作有明确成功/失败反馈（如进度条和完成提示）；实现自动保存功能，防止页面刷新时数据丢失；优化数据导入的错误提示，使用用户友好的语言。"
+    },
+    {
+      "cluster_id": "seg-onboarding-first-use-cluster-003",
+      "segment_id": "seg-onboarding-first-use",
+      "name": "学习曲线陡峭",
+      "summary": "产品功能强大但学习门槛高，用户需要较长时间或额外培训才能上手，影响首次使用体验和长期采用。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB95",
+        "FB99"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户培训需求率",
+        "功能使用深度",
+        "学习时间指标"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "降低学习门槛：提供交互式新手教程、视频指南或知识库；简化核心功能的初始使用流程，逐步引入高级功能；添加工具提示和帮助文档，支持用户自助学习。"
+    },
+    {
+      "cluster_id": "seg-onboarding-first-use-cluster-004",
+      "segment_id": "seg-onboarding-first-use",
+      "name": "首次使用设置与试用期问题",
+      "summary": "试用期长度不足和示例项目设置不当，影响用户对产品的熟悉、评估和满意度。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB90",
+        "FB96"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "试用期转化率",
+        "示例项目自定义率",
+        "用户留存率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "调整试用期设置：评估并延长试用期长度，或提供灵活的扩展选项；优化首次使用示例项目，允许用户删除、编辑或自定义，以更好地匹配个人需求；在试用期内提供引导支持，帮助用户充分利用功能。"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "segment_id": "seg-internal-adoption",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 35,
+    "cluster_count": 5,
+    "clustered_feedback_count": 35,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-adoption-cluster-001",
+      "segment_id": "seg-internal-adoption",
+      "name": "信息架构复杂与导航效率低下",
+      "summary": "核心导航不直观，菜单层级深，常用功能难找，新用户引导不足。",
+      "feedback_count": 22,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB23",
+        "FB52",
+        "FB145",
+        "FB19",
+        "FB29",
+        "FB32",
+        "FB41",
+        "FB44",
+        "FB50",
+        "FB51",
+        "FB54",
+        "FB57",
+        "FB62",
+        "FB65",
+        "FB73",
+        "FB88",
+        "FB106",
+        "FB107",
+        "FB122",
+        "FB131",
+        "FB134"
+      ],
+      "secondary_themes": [
+        "用户界面与学习成本",
+        "信息架构与导航设计",
+        "界面效率/自定义",
+        "界面交互"
+      ],
+      "possible_metrics": [
+        "新员工上手时间",
+        "菜单点击深度",
+        "功能发现率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "进行信息架构梳理和卡片分类测试，基于用户任务流重构主导航和菜单结构，将高频功能提升至一级入口，并为新用户提供交互式引导。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-004",
+      "segment_id": "seg-internal-adoption",
+      "name": "工具复杂度高与学习曲线陡峭",
+      "summary": "系统功能强大但操作复杂，对基层员工不友好，导致学习成本高、效率低下，违背“降本增效”目标。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB25",
+        "FB77",
+        "FB98",
+        "FB101"
+      ],
+      "secondary_themes": [
+        "工具复杂度与业务目标背离",
+        "采用度",
+        "员工使用"
+      ],
+      "possible_metrics": [
+        "平均任务完成时间",
+        "用户培训时长"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "根据角色和任务频率提供可切换的简化视图或“专家模式”，优化核心任务流程，减少冗余步骤，加强新手引导和上下文帮助。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-005",
+      "segment_id": "seg-internal-adoption",
+      "name": "个性化与自定义功能不足",
+      "summary": "系统缺乏个性化配置，界面和流程固化，无法适应不同岗位和习惯，导致用户偏好使用外部工具（如Excel）。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB78",
+        "FB92",
+        "FB100",
+        "FB126"
+      ],
+      "secondary_themes": [
+        "员工使用",
+        "采用度"
+      ],
+      "possible_metrics": [
+        "个性化设置使用率",
+        "与外部工具的数据交换频率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "开发自定义仪表板或首页功能，允许用户配置常用模块和快捷入口，增加图表样式、主题（包括深色模式）等视觉定制选项。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-003",
+      "segment_id": "seg-internal-adoption",
+      "name": "错误提示不明确与用户引导缺失",
+      "summary": "系统错误和限制提示晦涩难懂或不明显，导致用户困惑、操作失败，挫伤使用积极性。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB24",
+        "FB47",
+        "FB113"
+      ],
+      "secondary_themes": [
+        "错误提示与用户引导",
+        "错误处理/用户提示",
+        "采用度"
+      ],
+      "possible_metrics": [
+        "用户提交失败率",
+        "关于错误提示的反馈数量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "重新设计错误提示系统，将技术性错误转化为用户可理解的描述和明确的解决步骤，对系统限制（如附件大小）进行前置、醒目的提示。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-002",
+      "segment_id": "seg-internal-adoption",
+      "name": "移动端功能缺失与体验不佳",
+      "summary": "移动端功能覆盖严重不足，体验与电脑端脱节，影响外出办公效率和整体采用。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB46",
+        "FB150"
+      ],
+      "secondary_themes": [
+        "移动端支持"
+      ],
+      "possible_metrics": [
+        "移动端功能覆盖率",
+        "移动端用户活跃度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "评估并优先实现核心工作流（如审批、查看报表、基础录入）的移动端适配，确保体验流畅一致，推出专用移动App或优化PWA。"
+    }
+  ]
+}

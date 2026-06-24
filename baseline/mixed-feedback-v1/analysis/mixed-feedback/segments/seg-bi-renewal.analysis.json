@@ -1,0 +1,147 @@
+{
+  "segment_id": "seg-bi-renewal",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 23,
+    "cluster_count": 5,
+    "clustered_feedback_count": 23,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-renewal-cluster-001",
+      "segment_id": "seg-bi-renewal",
+      "name": "报表导出功能可靠性不足",
+      "summary": "用户反馈报表导出功能频繁出现数据错误和格式混乱问题，导致数据不可用，影响决策准确性和工作效率。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB9",
+        "FB27",
+        "FB53",
+        "FB70",
+        "FB88",
+        "FB98",
+        "FB123",
+        "FB113",
+        "FB52"
+      ],
+      "secondary_themes": [
+        "数据准确性",
+        "导出可靠性",
+        "用户体验下降"
+      ],
+      "possible_metrics": [
+        "导出错误率",
+        "格式一致性得分",
+        "用户投诉率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "立即修复导出数据错误，标准化输出格式，并增加导出前预览和验证功能，以提升数据可靠性和用户信任。"
+    },
+    {
+      "cluster_id": "seg-bi-renewal-cluster-002",
+      "segment_id": "seg-bi-renewal",
+      "name": "系统性能与可用性问题",
+      "summary": "用户遇到系统加载缓慢、数据同步延迟和数据看板无法打开的问题，可能影响实时数据访问和用户体验，需结合日志、工单或业务数据验证。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB15",
+        "FB47",
+        "FB117"
+      ],
+      "secondary_themes": [
+        "实时性",
+        "系统稳定性",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "平均加载时间",
+        "数据同步延迟",
+        "看板可用性百分比"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "优化后端架构和缓存机制，监控并提升系统性能，确保数据同步的实时性和看板的稳定加载。建议先确认性能问题的影响用户比例。",
+      "needs_validation": true,
+      "confidence_note": "3 条反馈，需验证业务影响范围"
+    },
+    {
+      "cluster_id": "seg-bi-renewal-cluster-003",
+      "segment_id": "seg-bi-renewal",
+      "name": "界面设计复杂与操作流程不直观",
+      "summary": "用户反馈界面设计复杂、操作流程别扭，版本更新后功能入口难以找到，导致学习成本高和体验下降。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB18",
+        "FB73",
+        "FB79"
+      ],
+      "secondary_themes": [
+        "易用性",
+        "界面设计",
+        "用户培训需求"
+      ],
+      "possible_metrics": [
+        "任务完成时间",
+        "用户满意度评分",
+        "操作错误率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "简化界面布局，优化导航和交互流程，通过用户测试和反馈迭代改进，并提供清晰的使用指南。"
+    },
+    {
+      "cluster_id": "seg-bi-renewal-cluster-004",
+      "segment_id": "seg-bi-renewal",
+      "name": "功能深度与灵活性不足",
+      "summary": "用户需求包括自定义仪表盘、更多可视化图表、数据源集成和高级BI模型，现有功能无法满足业务深度分析。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB17",
+        "FB33",
+        "FB36",
+        "FB62",
+        "FB94"
+      ],
+      "secondary_themes": [
+        "定制化能力",
+        "产品竞争力",
+        "功能丰富度"
+      ],
+      "possible_metrics": [
+        "功能采用率",
+        "定制化需求满足率",
+        "竞品对比得分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优先开发高需求功能如自定义仪表盘和数据源集成，并扩展可视化和分析模型库，以增强产品价值。"
+    },
+    {
+      "cluster_id": "seg-bi-renewal-cluster-005",
+      "segment_id": "seg-bi-renewal",
+      "name": "价值感知与价格不匹配",
+      "summary": "用户质疑产品价格与处理能力的平衡，报告使用后成本未降反升，影响续费意愿和ROI评估。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB50",
+        "FB105"
+      ],
+      "secondary_themes": [
+        "定价策略",
+        "投资回报率",
+        "客户价值"
+      ],
+      "possible_metrics": [
+        "客户满意度指数",
+        "续费率",
+        "价格敏感度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化产品价值主张，提供清晰的ROI分析和案例展示，考虑灵活定价或增值服务以提升客户感知价值。"
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "segment_id": "seg-b2b-activation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 24,
+    "cluster_count": 7,
+    "clustered_feedback_count": 24,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-b2b-activation",
+      "name": "激活流程复杂且不直观",
+      "summary": "用户普遍反映产品激活流程步骤过多、设计复杂、不直观，导致激活时间长、用户困惑，影响激活成功率。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB33",
+        "FB40",
+        "FB50",
+        "FB32"
+      ],
+      "secondary_themes": [
+        "初始设置繁琐",
+        "步骤设计复杂"
+      ],
+      "possible_metrics": [
+        "激活完成率",
+        "平均激活时长",
+        "激活步骤放弃率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "简化激活流程，减少不必要的步骤，提供清晰的进度指引和分步引导，优化初始配置的自动化程度，降低用户操作门槛。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-b2b-activation",
+      "name": "注册与验证环节问题频发",
+      "summary": "用户在注册和账户验证过程中遇到失败、卡顿、信息填写过多、验证邮件无法收到等问题，阻碍了激活的顺利进行。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB31",
+        "FB35",
+        "FB39",
+        "FB43",
+        "FB48"
+      ],
+      "secondary_themes": [
+        "注册失败",
+        "验证邮件问题",
+        "注册表单繁琐"
+      ],
+      "possible_metrics": [
+        "注册成功率",
+        "验证邮件送达率",
+        "注册表单完成率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 88,
+      "recommendation": "优化注册表单设计，减少必填字段；排查并修复注册过程中的技术故障；确保验证邮件及时发送并提高送达率，增加备用验证方式。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-b2b-activation",
+      "name": "激活后缺乏有效引导，用户困惑",
+      "summary": "用户在完成激活后不清楚如何使用核心功能，缺乏必要的引导和帮助，导致使用困难、活跃度低。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB34",
+        "FB38",
+        "FB41",
+        "FB42",
+        "FB44"
+      ],
+      "secondary_themes": [
+        "新手引导不足",
+        "界面不友好",
+        "功能入口难找"
+      ],
+      "possible_metrics": [
+        "激活后次日留存率",
+        "核心功能使用率",
+        "用户引导完成率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 82,
+      "recommendation": "设计交互式新手引导，在激活后立即展示核心功能入口和使用路径；优化界面布局，提升易用性；提供情境化的帮助提示。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-b2b-activation",
+      "name": "培训与材料不足以支持用户上手",
+      "summary": "用户反馈培训不充分、培训视频不清晰、新手指南无实际帮助，导致产品使用困难，影响激活后的转化。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB23",
+        "FB37",
+        "FB41"
+      ],
+      "secondary_themes": [
+        "培训视频质量差",
+        "新手指南无效"
+      ],
+      "possible_metrics": [
+        "培训完成率",
+        "用户满意度评分",
+        "首次使用成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "重新制作高质量、分步骤的培训视频，增加实操演示；更新新手指南，使其更贴近用户实际场景；提供在线客服或社区支持作为补充。"
+    },
+    {
+      "cluster_id": "cluster-005",
+      "segment_id": "seg-b2b-activation",
+      "name": "功能缺失或激活后部分功能锁定",
+      "summary": "用户反映产品功能不足，无法满足需求，或激活后部分功能被锁定且原因不明，影响使用体验和激活价值。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB20",
+        "FB36"
+      ],
+      "secondary_themes": [
+        "功能不完善",
+        "功能锁定问题"
+      ],
+      "possible_metrics": [
+        "功能使用率",
+        "功能解锁率",
+        "用户需求满足度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "评估并优先开发用户高频需求的功能；明确激活后功能锁定的规则，并在激活过程中向用户清晰说明，避免困惑。"
+    },
+    {
+      "cluster_id": "cluster-006",
+      "segment_id": "seg-b2b-activation",
+      "name": "激活后用户活跃度低，转化不足",
+      "summary": "用户激活后使用不活跃，未产生有效转化，导致营销资源浪费，影响业务目标。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB45",
+        "FB49",
+        "FB102"
+      ],
+      "secondary_themes": [
+        "用户流失",
+        "转化率低"
+      ],
+      "possible_metrics": [
+        "激活后7日活跃率",
+        "付费转化率",
+        "用户生命周期价值"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "建立激活后的用户触达机制，如邮件、推送提醒；提供个性化推荐和激励措施，引导用户完成关键行为；分析流失节点并针对性优化。"
+    },
+    {
+      "cluster_id": "cluster-007",
+      "segment_id": "seg-b2b-activation",
+      "name": "激活邮件与初始设置技术问题",
+      "summary": "激活邮件延迟发送、初始设置出错率高，影响用户激活体验和效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB46",
+        "FB47",
+        "FB39"
+      ],
+      "secondary_themes": [
+        "邮件延迟",
+        "设置出错"
+      ],
+      "possible_metrics": [
+        "邮件发送成功率",
+        "初始设置错误率",
+        "激活完成时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 72,
+      "recommendation": "优化邮件发送系统，确保实时触发；加强初始设置的自动化校验和错误提示，降低出错率；提供一键重置或帮助文档。"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "segment_id": "seg-renewal-migration",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 6,
+    "cluster_count": 3,
+    "clustered_feedback_count": 6,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-migration-cluster-001",
+      "segment_id": "seg-renewal-migration",
+      "name": "数据迁移错误和数据丢失",
+      "summary": "用户报告数据迁移过程中出现错误和数据丢失，影响业务连续性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB93",
+        "FB98"
+      ],
+      "secondary_themes": [
+        "data-integrity",
+        "system-reliability"
+      ],
+      "possible_metrics": [
+        "错误发生率",
+        "数据丢失率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 90,
+      "recommendation": "加强迁移过程的错误处理和数据验证机制，确保数据完整性。"
+    },
+    {
+      "cluster_id": "seg-renewal-migration-cluster-002",
+      "segment_id": "seg-renewal-migration",
+      "name": "迁移过程复杂性与支持不足",
+      "summary": "用户反映从旧系统迁移数据很麻烦，且迁移支持不足。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB96",
+        "FB100"
+      ],
+      "secondary_themes": [
+        "user-experience",
+        "support-quality"
+      ],
+      "possible_metrics": [
+        "迁移时间",
+        "支持响应时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "简化迁移流程，提供更详细的文档和实时支持。"
+    },
+    {
+      "cluster_id": "seg-renewal-migration-cluster-003",
+      "segment_id": "seg-renewal-migration",
+      "name": "迁移问题普遍性与关键性",
+      "summary": "反馈指出迁移问题普遍，且数据迁移是续约前的关键步骤。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB95",
+        "FB103"
+      ],
+      "secondary_themes": [
+        "process-criticality",
+        "customer-retention"
+      ],
+      "possible_metrics": [
+        "迁移成功率",
+        "续约影响"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "将数据迁移作为关键流程管理，确保高效可靠以支持续约。"
+    }
+  ]
+}

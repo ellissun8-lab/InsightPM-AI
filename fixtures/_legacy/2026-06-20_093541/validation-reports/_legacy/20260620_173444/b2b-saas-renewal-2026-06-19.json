@@ -1,0 +1,37 @@
+{
+  "dataset": "b2b-saas-renewal",
+  "status": "pass",
+  "score": 98,
+  "model_roles": {
+    "generator": "mimo",
+    "validator": "deepseek-v4-pro"
+  },
+  "summary": {
+    "feedback_count": 120,
+    "cluster_count": 3,
+    "invalid_evidence_count": 0,
+    "forbidden_metric_count": 0,
+    "hallucination_count": 0,
+    "over_inference_count": 0
+  },
+  "warning_types": [],
+  "score_breakdown": {
+    "data_realism": 15,
+    "theme_coverage": 14,
+    "cluster_accuracy": 15,
+    "evidence_accuracy": 15,
+    "metric_fit": 10,
+    "format_compliance": 9,
+    "conclusion_credibility": 10,
+    "no_hallucination": 10
+  },
+  "training_decision": {
+    "usable_for_training": true,
+    "usable_for_testing": true,
+    "usable_for_regression": true,
+    "requires_human_review": false
+  },
+  "failed_checks": [],
+  "warnings": [],
+  "recommendations": []
+}

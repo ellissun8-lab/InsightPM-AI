@@ -1,0 +1,62 @@
+{
+  "dataset": "b2b-saas-activation",
+  "status": "warning",
+  "score": 85,
+  "model_roles": {
+    "generator": "mimo",
+    "validator": "deepseek-v4-pro"
+  },
+  "summary": {
+    "feedback_count": 120,
+    "cluster_count": 3,
+    "invalid_evidence_count": 0,
+    "forbidden_metric_count": 0,
+    "hallucination_count": 1,
+    "over_inference_count": 0
+  },
+  "warning_types": [
+    "count_mismatch",
+    "markdown_json_mixed",
+    "partial_sample_overclaim"
+  ],
+  "score_breakdown": {
+    "data_realism": 10,
+    "theme_coverage": 14,
+    "cluster_accuracy": 14,
+    "evidence_accuracy": 14,
+    "metric_fit": 10,
+    "format_compliance": 7,
+    "conclusion_credibility": 8,
+    "no_hallucination": 8
+  },
+  "training_decision": {
+    "usable_for_training": false,
+    "usable_for_testing": false,
+    "usable_for_regression": false,
+    "requires_human_review": true
+  },
+  "failed_checks": [
+    {
+      "type": "count_mismatch",
+      "detail": "summary.clustered_feedback_count is 120, but the issue clusters contain only 50 evidence feedback IDs (total 50). The report also states clustering is based on the first 50 samples, creating a contradiction with the claimed 120 clustered feedbacks."
+    },
+    {
+      "type": "markdown_json_mixed",
+      "detail": "The report is delivered as a Markdown narrative followed by a raw JSON block. For automated consumption, only structured JSON is expected; mixing reduces parsability."
+    },
+    {
+      "type": "partial_sample_overclaim",
+      "detail": "The executive summary presents findings (e.g., 'key reasons ... severely limiting 7-day activation rate') as if they represent the full 120 feedbacks, while the analysis is explicitly based on only the first 50 samples. The summary lacks clear qualification of the sample scope."
+    }
+  ],
+  "warnings": [
+    "Structure of the report does not separate the analysis JSON from the descriptive text; future submissions should be pure JSON.",
+    "The clustered feedback count is inconsistent with the underlying evidence; ensure summary counts match the actual scope of analysis."
+  ],
+  "recommendations": [
+    "Correct summary.clustered_feedback_count to 50 (or explicitly mark that only 50 were clustered in this iteration).",
+    "Deliver the validated analysis in a single JSON object without surrounding prose.",
+    "In all conclusions intended for executive audiences, clearly qualify that the findings are based on the first 50 of 120 feedbacks and are preliminary.",
+    "Consider re-running clustering on the full 120-feedback dataset to eliminate the sample-vs-population discrepancy."
+  ]
+}

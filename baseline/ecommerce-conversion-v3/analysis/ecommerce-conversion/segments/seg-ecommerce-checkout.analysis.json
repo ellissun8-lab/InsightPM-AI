@@ -1,0 +1,152 @@
+{
+  "segment_id": "seg-ecommerce-checkout",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 16,
+    "cluster_count": 6,
+    "clustered_feedback_count": 16,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-001",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "下单流程繁琐",
+      "summary": "用户反馈下单步骤过多、信息要求冗余，希望简化流程以提升效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB12",
+        "FB16"
+      ],
+      "secondary_themes": [
+        "Checkout Step Simplification",
+        "Excessive Information Requirement",
+        "Checkout Flow Optimization"
+      ],
+      "possible_metrics": [
+        "Checkout Completion Rate",
+        "Average Step Count"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "合并或减少下单步骤，提供表单预填充和默认选项，减少必填字段，以简化流程。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-002",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "订单确认反馈不明确",
+      "summary": "用户提交订单后缺乏即时反馈，且确认通知缺失，导致对订单状态不确定。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB20",
+        "FB21"
+      ],
+      "secondary_themes": [
+        "Order Submission Feedback Lack",
+        "Inconsistent Order Outcome",
+        "Order Confirmation Notification Missing"
+      ],
+      "possible_metrics": [
+        "Order Confirmation Visibility",
+        "Notification Delivery Rate"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "在订单提交后立即显示成功/失败提示，确保邮件或短信确认及时发送，并提供订单状态跟踪页面。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-003",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "订单后修改困难",
+      "summary": "用户在下单后无法修改商品数量或收货信息，且修改入口不明显。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB7",
+        "FB10",
+        "FB25"
+      ],
+      "secondary_themes": [
+        "Post-Order Modification Issue",
+        "Recipient Information Correction",
+        "Post-Order Modification Access Issue"
+      ],
+      "possible_metrics": [
+        "Post-Order Modification Rate",
+        "Customer Support Contact Rate"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "在订单确认前允许修改，或设置订单修改窗口，并在订单详情页明确显示修改选项，支持自助修改。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-004",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "技术故障导致流程中断",
+      "summary": "用户在下单过程中遇到网络中断或页面意外跳转，导致订单丢失或流程中断。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB9",
+        "FB14"
+      ],
+      "secondary_themes": [
+        "Checkout Flow Interruption",
+        "Network Interruption Leading to Order Loss"
+      ],
+      "possible_metrics": [
+        "Error Rate",
+        "Flow Completion Rate"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "增强网络稳定性，添加本地草稿保存和自动重试机制，优化页面加载性能以减少中断。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-005",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "认证与验证问题",
+      "summary": "用户遇到手机号验证失败或老用户需重复登录，影响下单效率和体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB17"
+      ],
+      "secondary_themes": [
+        "Phone Verification Failure",
+        "Login State Persistence Issue"
+      ],
+      "possible_metrics": [
+        "Verification Success Rate",
+        "Login Frequency"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "优化验证流程，提供备用验证方式（如邮箱验证），并实现登录状态持久化以减少重复登录步骤。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-006",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "可访问性与导航问题",
+      "summary": "用户反馈页面元素如字体太小、按钮位置不便、地址管理不完善，影响可读性和易用性。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB139",
+        "FB140",
+        "FB148"
+      ],
+      "secondary_themes": [
+        "accessibility",
+        "navigation",
+        "address_management"
+      ],
+      "possible_metrics": [
+        "Usability Score",
+        "Accessibility Compliance Rate"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "改进UI设计，确保字体大小可调、按钮位置直观，并优化地址簿的显示、搜索和缓存功能。"
+    }
+  ]
+}

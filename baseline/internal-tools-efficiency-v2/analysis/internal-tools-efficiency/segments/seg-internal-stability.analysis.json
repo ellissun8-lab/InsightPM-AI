@@ -1,0 +1,228 @@
+{
+  "segment_id": "seg-internal-stability",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 38,
+    "cluster_count": 9,
+    "clustered_feedback_count": 38,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-stability-cluster-001",
+      "segment_id": "seg-internal-stability",
+      "name": "系统响应缓慢与中断",
+      "summary": "用户在业务高峰期或特定操作下遇到系统卡顿、响应超时甚至完全无法访问，严重影响工作效率和系统可用性。",
+      "feedback_count": 13,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB14",
+        "FB25",
+        "FB65",
+        "FB78",
+        "FB83",
+        "FB66",
+        "FB86",
+        "FB102",
+        "FB9",
+        "FB24",
+        "FB60",
+        "FB114"
+      ],
+      "secondary_themes": [
+        "系统承载能力",
+        "登录会话"
+      ],
+      "possible_metrics": [
+        "平均响应时间",
+        "P99延迟",
+        "系统可用性百分比"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "1. 进行全链路性能分析和压力测试，定位响应瓶颈（如数据库、服务间调用）。2. 优化代码和查询，引入缓存、异步处理、负载均衡提升系统承载能力。3. 修复登录会话管理逻辑，确保‘记住我’功能可靠。4. 制定针对高峰期的应急预案和容量扩容计划。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-002",
+      "segment_id": "seg-internal-stability",
+      "name": "移动端应用稳定性与体验问题",
+      "summary": "移动端APP崩溃率上升、操作闪退、在后台切换或弱网环境下丢失数据，用户体验差，尤其影响特定机型用户。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB80",
+        "FB84",
+        "FB141",
+        "FB125",
+        "FB121"
+      ],
+      "secondary_themes": [
+        "应用崩溃",
+        "数据持久化",
+        "弱网优化"
+      ],
+      "possible_metrics": [
+        "APP崩溃率",
+        "表单数据恢复成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "1. 分析崩溃堆栈，重点修复与低端安卓机型的兼容性问题。2. 优化应用本地数据缓存策略，确保表单在切换后台或进程异常时能自动保存和恢复。3. 增强数据提交的容错机制，在弱网或中断时支持本地暂存和重试。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-003",
+      "segment_id": "seg-internal-stability",
+      "name": "数据库性能与后台任务可靠性问题",
+      "summary": "数据库出现慢查询、主从同步延迟，以及定时任务因服务器负载高而执行失败，影响数据时效性和后台业务自动化。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB30",
+        "FB94",
+        "FB149",
+        "FB18",
+        "FB104"
+      ],
+      "secondary_themes": [
+        "数据库优化",
+        "任务调度",
+        "备份可靠性"
+      ],
+      "possible_metrics": [
+        "慢查询数量",
+        "主从同步延迟时间",
+        "备份任务成功率与数据校验通过率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "1. 使用数据库监控工具识别并优化慢查询，增加必要索引。2. 评估并优化主从同步配置，考虑引入半同步复制。3. 将资源密集型定时任务（如备份、周报生成）调度到业务低峰期，并为其分配专用资源。4. 增加数据备份后的完整性校验步骤。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-005",
+      "segment_id": "seg-internal-stability",
+      "name": "大文件上传处理异常",
+      "summary": "上传大文件（如超过1GB）或在业务高峰时段上传时，接口响应超时甚至导致服务器进程挂起。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB92",
+        "FB147"
+      ],
+      "secondary_themes": [
+        "文件处理"
+      ],
+      "possible_metrics": [
+        "文件上传成功率",
+        "上传平均耗时"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "1. 重构文件上传模块，支持分块上传、断点续传。2. 为上传服务设置独立的进程和资源限制，防止单个大文件任务耗尽系统资源。3. 设置合理的超时时间并增加上传进度反馈。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-006",
+      "segment_id": "seg-internal-stability",
+      "name": "业务单号生成重复",
+      "summary": "系统生成的唯一业务单号出现重复，导致下游流程跟踪、关联和统计出现混乱，存在数据一致性风险。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB88",
+        "FB119",
+        "FB143"
+      ],
+      "secondary_themes": [
+        "数据唯一性"
+      ],
+      "possible_metrics": [
+        "单号重复率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "1. 立即审查单号生成算法，引入分布式ID生成方案（如雪花算法）确保全局唯一性。2. 在数据库的单号字段上增加唯一约束作为最终保障。3. 对历史数据中的重复单号进行排查和修复。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-007",
+      "segment_id": "seg-internal-stability",
+      "name": "服务器资源使用率高与性能风险",
+      "summary": "业务高峰期内存使用率持续处于高位，存在内存泄漏风险；同时，定时备份导致的磁盘I/O激增影响同时段操作。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB33",
+        "FB54"
+      ],
+      "secondary_themes": [
+        "内存泄漏",
+        "磁盘性能"
+      ],
+      "possible_metrics": [
+        "内存使用率峰值",
+        "磁盘I/O等待时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "1. 使用内存分析工具排查并修复内存泄漏问题。2. 评估应用资源需求，进行垂直扩容或优化代码内存使用。3. 将数据备份任务调度至深夜等非业务时段，或优化备份策略以减少I/O峰值。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-004",
+      "segment_id": "seg-internal-stability",
+      "name": "审批流程最终步骤失败",
+      "summary": "审批流程在最后提交步骤报错，导致用户已输入的所有数据丢失，严重影响业务流程和用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB29",
+        "FB120"
+      ],
+      "secondary_themes": [
+        "数据丢失",
+        "错误处理"
+      ],
+      "possible_metrics": [
+        "审批提交成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "1. 定位并修复导致最后一步报错的代码缺陷。2. 在提交流程中实现前端或临时后端数据暂存功能，即使后端报错，用户刷新页面后也能恢复填写内容。3. 优化错误提示，提供清晰的错误原因和重试指引。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-008",
+      "segment_id": "seg-internal-stability",
+      "name": "数据导出格式错乱",
+      "summary": "将系统数据（如预算、报表）导出为Excel时出现格式混乱，导致用户无法直接使用，引发多次工单。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB128",
+        "FB133"
+      ],
+      "secondary_themes": [
+        "数据导出"
+      ],
+      "possible_metrics": [
+        "因格式问题导致的工单数量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 40,
+      "recommendation": "1. 检查并修复导出功能的模板定义，确保单元格格式、合并等设置正确。2. 增加在不同版本Office软件（如WPS）下的兼容性测试。3. 提供导出格式选项（如CSV）作为备选方案。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-009",
+      "segment_id": "seg-internal-stability",
+      "name": "缓存策略与浏览器兼容性问题",
+      "summary": "部署新缓存策略后导致部分用户页面样式错乱；在IE11等旧浏览器下存在JavaScript错误，影响功能使用。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB76",
+        "FB48"
+      ],
+      "secondary_themes": [
+        "缓存策略",
+        "前端兼容性"
+      ],
+      "possible_metrics": [
+        "前端报错率",
+        "缓存相关用户咨询量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "1. 优化静态资源版本控制和缓存策略，确保用户能及时加载到最新资源。2. 建立前端构建的兼容性目标，在CI/CD流程中加入旧浏览器测试。3. 提供明确的缓存清理引导，帮助遇到问题的用户快速解决。"
+    }
+  ]
+}

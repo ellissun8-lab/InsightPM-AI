@@ -1,0 +1,166 @@
+{
+  "segment_id": "seg-b2b-activation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 24,
+    "cluster_count": 6,
+    "clustered_feedback_count": 24,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-b2b-activation-cluster-001",
+      "segment_id": "seg-b2b-activation",
+      "name": "系统性能低下",
+      "summary": "用户反馈系统响应缓慢、页面加载时间长，影响激活流程和日常使用效率。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB7",
+        "FB13",
+        "FB16",
+        "FB28",
+        "FB35",
+        "FB58",
+        "FB80",
+        "FB121"
+      ],
+      "secondary_themes": [
+        "后台响应速度",
+        "页面加载时间",
+        "系统闪退",
+        "更新后卡顿"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "系统响应时间",
+        "用户满意度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "优化服务器性能，实施缓存策略，减少页面加载时间，并监控性能指标。"
+    },
+    {
+      "cluster_id": "seg-b2b-activation-cluster-002",
+      "segment_id": "seg-b2b-activation",
+      "name": "激活流程复杂与失败",
+      "summary": "用户报告激活流程繁琐、步骤多、路径长，导致激活耗时过长或中途放弃，阻碍产品快速使用。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB23",
+        "FB32",
+        "FB46",
+        "FB96"
+      ],
+      "secondary_themes": [
+        "流程繁琐",
+        "步骤过多",
+        "路径不清",
+        "中途失败"
+      ],
+      "possible_metrics": [
+        "激活完成率",
+        "激活时间",
+        "支持工单量"
+      ],
+      "priority": "P0",
+      "opportunity_score": 95,
+      "recommendation": "简化激活流程，减少必填字段和步骤数，优化流程路径，提供进度指示和断点续传。"
+    },
+    {
+      "cluster_id": "seg-b2b-activation-cluster-003",
+      "segment_id": "seg-b2b-activation",
+      "name": "激活码与邮件验证问题",
+      "summary": "用户遇到激活码过期、无效、验证邮件无法接收等问题，导致激活失败。",
+      "feedback_count": 1,
+      "evidence_feedback_ids": [
+        "FB115"
+      ],
+      "secondary_themes": [
+        "激活码管理",
+        "邮件系统"
+      ],
+      "possible_metrics": [
+        "激活失败率",
+        "支持工单数量"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "确保激活码有效性和及时更新，检查邮件发送系统可靠性，提供备用验证方式。建议先收集更多证据再决定优先级。",
+      "low_confidence": true,
+      "confidence_note": "仅 1 条反馈，置信度有限，需补充数据验证"
+    },
+    {
+      "cluster_id": "seg-b2b-activation-cluster-004",
+      "segment_id": "seg-b2b-activation",
+      "name": "登录验证码与浏览器兼容问题",
+      "summary": "用户反馈登录时验证码错误、无法登录或收不到验证码，阻碍激活和系统访问。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB37",
+        "FB40",
+        "FB61"
+      ],
+      "secondary_themes": [
+        "登录失败",
+        "验证码发送",
+        "浏览器兼容性"
+      ],
+      "possible_metrics": [
+        "登录成功率",
+        "验证码错误率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化验证码算法和发送机制，提供多种验证方式，确保跨浏览器兼容性。"
+    },
+    {
+      "cluster_id": "seg-b2b-activation-cluster-005",
+      "segment_id": "seg-b2b-activation",
+      "name": "用户引导与文档问题",
+      "summary": "用户激活后难以找到新功能或上手困难，说明文档不清晰和引导不足。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB91",
+        "FB112",
+        "FB57"
+      ],
+      "secondary_themes": [
+        "新功能入口",
+        "用户教程",
+        "文档质量"
+      ],
+      "possible_metrics": [
+        "功能发现率",
+        "用户上手时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "改进产品引导，增加新功能提示和交互式教程，优化帮助文档的清晰度和可访问性。"
+    },
+    {
+      "cluster_id": "seg-b2b-activation-cluster-006",
+      "segment_id": "seg-b2b-activation",
+      "name": "账户设置和邀请问题",
+      "summary": "用户遇到团队邀请功能故障和管理员权限设置复杂，影响团队激活和管理效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB31",
+        "FB82"
+      ],
+      "secondary_themes": [
+        "团队管理",
+        "权限配置"
+      ],
+      "possible_metrics": [
+        "邀请成功率",
+        "设置错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "修复团队邀请功能，简化权限设置界面，提供预设角色模板和向导式设置。"
+    }
+  ]
+}

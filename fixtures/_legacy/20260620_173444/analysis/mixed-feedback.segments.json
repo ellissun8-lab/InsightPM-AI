@@ -1,0 +1,264 @@
+{
+  "dataset": "mixed-feedback",
+  "is_mixed_dataset": true,
+  "segment_count": 8,
+  "business_segment_count": 6,
+  "noise_segment_count": 1,
+  "segments": [
+    {
+      "segment_id": "seg-unknown",
+      "segment_type": "unknown",
+      "name": "未分类反馈",
+      "product_type": "unknown",
+      "business_goal": "unknown",
+      "feedback_count": 24,
+      "feedback_ids": [
+        "FB1",
+        "FB3",
+        "FB5",
+        "FB7",
+        "FB10",
+        "FB18",
+        "FB19",
+        "FB21",
+        "FB22",
+        "FB24",
+        "FB27",
+        "FB28",
+        "FB29",
+        "FB81",
+        "FB83",
+        "FB86",
+        "FB90",
+        "FB101",
+        "FB108",
+        "FB109",
+        "FB110",
+        "FB116",
+        "FB117",
+        "FB119"
+      ],
+      "main_themes": [
+        "产品满意度",
+        "产品好评",
+        "期望改进",
+        "易用性",
+        "功能评价"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "segment_type": "noise",
+      "name": "噪声/无效反馈",
+      "product_type": "unknown",
+      "business_goal": "unknown",
+      "feedback_count": 5,
+      "feedback_ids": [
+        "FB2",
+        "FB4",
+        "FB6",
+        "FB8",
+        "FB9"
+      ],
+      "main_themes": [
+        "随机反馈",
+        "无实质反馈",
+        "无效输入",
+        "随意浏览"
+      ]
+    },
+    {
+      "segment_id": "seg-b2b-renewal",
+      "segment_type": "business",
+      "name": "B端 SaaS 续费风险",
+      "product_type": "B端 SaaS",
+      "business_goal": "提升续费 / 降低流失",
+      "feedback_count": 11,
+      "feedback_ids": [
+        "FB11",
+        "FB13",
+        "FB14",
+        "FB15",
+        "FB17",
+        "FB25",
+        "FB26",
+        "FB30",
+        "FB107",
+        "FB112",
+        "FB115"
+      ],
+      "main_themes": [
+        "续费价格",
+        "客服质量影响续费",
+        "功能更新和续费意愿",
+        "合同问题",
+        "续费流程优化"
+      ]
+    },
+    {
+      "segment_id": "seg-b2b-activation",
+      "segment_type": "business",
+      "name": "B端 SaaS 激活问题",
+      "product_type": "B端 SaaS",
+      "business_goal": "提升激活",
+      "feedback_count": 24,
+      "feedback_ids": [
+        "FB12",
+        "FB20",
+        "FB23",
+        "FB31",
+        "FB32",
+        "FB33",
+        "FB34",
+        "FB35",
+        "FB36",
+        "FB37",
+        "FB38",
+        "FB39",
+        "FB40",
+        "FB41",
+        "FB42",
+        "FB43",
+        "FB44",
+        "FB45",
+        "FB46",
+        "FB47",
+        "FB48",
+        "FB49",
+        "FB50",
+        "FB102"
+      ],
+      "main_themes": [
+        "功能缺失",
+        "功能完善",
+        "用户培训",
+        "用户注册",
+        "初始设置"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-conversion",
+      "segment_type": "business",
+      "name": "电商转化问题",
+      "product_type": "电商平台",
+      "business_goal": "提升下单转化率",
+      "feedback_count": 12,
+      "feedback_ids": [
+        "FB16",
+        "FB91",
+        "FB92",
+        "FB94",
+        "FB95",
+        "FB96",
+        "FB97",
+        "FB98",
+        "FB99",
+        "FB100",
+        "FB104",
+        "FB105"
+      ],
+      "main_themes": [
+        "价格比较",
+        "购物车功能",
+        "支付可靠性",
+        "结账流程",
+        "页面性能"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-experience",
+      "segment_type": "business",
+      "name": "AI 产品体验问题",
+      "product_type": "AI 产品",
+      "business_goal": "改善体验 / 提升留存",
+      "feedback_count": 22,
+      "feedback_ids": [
+        "FB51",
+        "FB52",
+        "FB53",
+        "FB54",
+        "FB55",
+        "FB56",
+        "FB57",
+        "FB58",
+        "FB59",
+        "FB60",
+        "FB61",
+        "FB62",
+        "FB63",
+        "FB64",
+        "FB65",
+        "FB66",
+        "FB67",
+        "FB68",
+        "FB69",
+        "FB70",
+        "FB93",
+        "FB103"
+      ],
+      "main_themes": [
+        "AI功能体验",
+        "AI学习曲线",
+        "AI自动化程度",
+        "AI响应准确性",
+        "AI功能实用性"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-renewal",
+      "segment_type": "business",
+      "name": "BI 工具续费问题",
+      "product_type": "数据/BI 工具",
+      "business_goal": "提升续费",
+      "feedback_count": 15,
+      "feedback_ids": [
+        "FB71",
+        "FB72",
+        "FB73",
+        "FB74",
+        "FB75",
+        "FB76",
+        "FB77",
+        "FB78",
+        "FB79",
+        "FB80",
+        "FB82",
+        "FB84",
+        "FB87",
+        "FB88",
+        "FB89"
+      ],
+      "main_themes": [
+        "BI工具续费价格",
+        "报表功能强度",
+        "BI工具学习成本",
+        "数据可视化",
+        "报表生成速度"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-cost",
+      "segment_type": "business",
+      "name": "内部系统降本问题",
+      "product_type": "内部系统",
+      "business_goal": "降低运营成本",
+      "feedback_count": 7,
+      "feedback_ids": [
+        "FB85",
+        "FB106",
+        "FB111",
+        "FB113",
+        "FB114",
+        "FB118",
+        "FB120"
+      ],
+      "main_themes": [
+        "成本",
+        "系统性能与效率",
+        "软件质量与稳定性",
+        "系统响应速度",
+        "系统更新管理"
+      ]
+    }
+  ]
+}

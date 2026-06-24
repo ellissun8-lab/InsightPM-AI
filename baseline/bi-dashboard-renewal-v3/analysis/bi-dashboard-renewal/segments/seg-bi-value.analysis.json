@@ -1,0 +1,98 @@
+{
+  "segment_id": "seg-bi-value",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 24,
+    "cluster_count": 3,
+    "clustered_feedback_count": 24,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-value-cluster-001",
+      "segment_id": "seg-bi-value",
+      "name": "价格与功能价值不匹配",
+      "summary": "用户普遍反馈续费定价过高，功能与需求不匹配，导致价值感低和性价比差。",
+      "feedback_count": 14,
+      "evidence_feedback_ids": [
+        "FB81",
+        "FB82",
+        "FB84",
+        "FB86",
+        "FB87",
+        "FB91",
+        "FB94",
+        "FB99",
+        "FB92",
+        "FB97",
+        "FB130",
+        "FB135",
+        "FB140",
+        "FB145"
+      ],
+      "secondary_themes": [
+        "定价策略",
+        "功能利用率"
+      ],
+      "possible_metrics": [
+        "续费率",
+        "价格敏感度",
+        "功能使用率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "重新评估定价结构，引入基于价值的收费模式（如按功能模块）；提供个性化功能匹配分析和ROI展示工具，以增强用户价值感知。"
+    },
+    {
+      "cluster_id": "seg-bi-value-cluster-003",
+      "segment_id": "seg-bi-value",
+      "name": "功能更新滞后与决策信息不足",
+      "summary": "用户期望更频繁的功能更新、透明的产品路线图以及基于ROI的决策支持信息，以支撑续费决策。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB85",
+        "FB88",
+        "FB89",
+        "FB90",
+        "FB95",
+        "FB96",
+        "FB100",
+        "FB150"
+      ],
+      "secondary_themes": [
+        "产品开发",
+        "客户沟通"
+      ],
+      "possible_metrics": [
+        "功能更新频率",
+        "路线图透明度",
+        "续费决策周期"
+      ],
+      "priority": "P0",
+      "opportunity_score": 80,
+      "recommendation": "发布并定期更新公开的产品路线图，确保功能迭代符合用户需求；提供ROI计算模板和行业案例研究，帮助用户量化价值。"
+    },
+    {
+      "cluster_id": "seg-bi-value-cluster-002",
+      "segment_id": "seg-bi-value",
+      "name": "技术支持响应效率低",
+      "summary": "用户反映续费后技术支持响应缓慢，服务体验差，影响价值感知。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB83",
+        "FB98"
+      ],
+      "secondary_themes": [
+        "客户服务",
+        "响应时间"
+      ],
+      "possible_metrics": [
+        "支持响应时间",
+        "客户满意度得分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "优化技术支持流程，设定明确的服务水平协议（SLA）并监控执行；增加自助支持资源（如知识库、视频教程）以减少依赖。"
+    }
+  ]
+}

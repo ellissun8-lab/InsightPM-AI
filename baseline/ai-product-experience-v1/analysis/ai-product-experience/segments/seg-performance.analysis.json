@@ -1,0 +1,33 @@
+{
+  "segment_id": "seg-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 4,
+    "cluster_count": 1,
+    "clustered_feedback_count": 4,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-performance-cluster-001",
+      "segment_id": "seg-performance",
+      "name": "响应速度延迟和卡顿问题",
+      "summary": "用户反馈响应速度存在延迟、慢和卡顿现象，尤其在高峰时段，导致用户体验下降和投诉，需优化性能。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB121",
+        "FB129",
+        "FB139",
+        "FB147"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均响应时间",
+        "高峰期延迟率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化后端服务器性能，实施负载均衡和自动扩展机制以应对高峰流量，同时引入缓存策略减少延迟，并监控关键指标如响应时间和系统负载。"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "segment_id": "seg-ai-data-security",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 23,
+    "cluster_count": 5,
+    "clustered_feedback_count": 23,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-data-security-cluster-001",
+      "segment_id": "seg-ai-data-security",
+      "name": "数据用途与模型训练的担忧",
+      "summary": "用户强烈关注其输入的数据（特别是敏感内容）是否会被用于训练AI模型，或是否会导致隐私内容被其他用户获取，对数据处理的最终目的和透明度存在疑虑。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB24",
+        "FB48",
+        "FB60",
+        "FB72",
+        "FB90"
+      ],
+      "secondary_themes": [
+        "数据处理透明度",
+        "企业数据风险"
+      ],
+      "possible_metrics": [
+        "用户对数据用途的明确知晓率",
+        "数据处理政策页面访问率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "在产品界面、帮助中心及隐私政策中，用清晰、易懂的语言明确说明用户数据的用途，特别是与模型训练的关系。可设置独立的“数据用途说明”页面，并通过弹窗或提示框在用户首次上传敏感数据时进行告知，彻底消除用户的核心疑虑。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-002",
+      "segment_id": "seg-ai-data-security",
+      "name": "技术安全防护与加密措施的疑虑",
+      "summary": "用户关注产品在技术层面如何保障数据安全，包括是否有加密措施（如端到端加密）、如何防御外部攻击（如黑客）导致的数据泄露。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB66",
+        "FB78",
+        "FB120"
+      ],
+      "secondary_themes": [
+        "加密需求",
+        "安全防护"
+      ],
+      "possible_metrics": [
+        "安全功能使用率",
+        "安全相关问题的客服咨询量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "发布“安全技术白皮书”，详细介绍从传输到存储的全链路加密方案（如TLS、AES-256）和防御攻击的安全架构。在产品中为用户提供可选的“安全增强模式”（如端到端加密），并清晰展示安全认证标志（如SOC2, ISO27001）以建立技术信任。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-003",
+      "segment_id": "seg-ai-data-security",
+      "name": "用户数据控制与隐私管理能力不足",
+      "summary": "用户希望拥有对自身数据的完全控制权，包括对聊天记录、上传文档的查看、删除、自动清除以及访问权限管理等功能，当前功能无法满足其隐私管理需求。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB18",
+        "FB30",
+        "FB36",
+        "FB42",
+        "FB102",
+        "FB114"
+      ],
+      "secondary_themes": [
+        "数据生命周期",
+        "访问控制"
+      ],
+      "possible_metrics": [
+        "数据删除功能使用率",
+        "隐私模式开启率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "开发并上线全面的数据生命周期管理功能。具体包括：1. 提供“会话过期”和“一键清除所有历史记录”的功能。2. 上线“隐私对话”模式，该模式下的对话不被记录或存储。3. 在账户设置中提供清晰的界面，供用户随时查看和管理其所有存储的数据，并支持永久删除。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-004",
+      "segment_id": "seg-ai-data-security",
+      "name": "合规认证与安全透明度诉求",
+      "summary": "用户（尤其是企业用户）要求产品展示其通过第三方安全认证（如ISO27001、SOC2）、符合法规（如GDPR）并提供相关合规文档，以满足审计和信任建立的需求。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB54",
+        "FB96",
+        "FB108",
+        "FB132",
+        "FB138"
+      ],
+      "secondary_themes": [
+        "第三方审计",
+        "合规文档"
+      ],
+      "possible_metrics": [
+        "合规文档下载量",
+        "企业客户转化率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "将获取相关国际安全认证（ISO27001、SOC2）作为优先级任务。在认证完成后，于官网显要位置展示认证标志，并设立专门的“信任中心”页面，集中提供合规白皮书、安全事件响应计划、数据处理协议（DPA）等文档，方便潜在客户和现有用户查阅。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-005",
+      "segment_id": "seg-ai-data-security",
+      "name": "数据存储位置与跨境传输关切",
+      "summary": "用户关注数据的物理存储位置以及是否发生跨境传输，这涉及数据主权、本地法律合规以及对数据管辖权的控制感。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB84",
+        "FB144"
+      ],
+      "secondary_themes": [
+        "数据主权",
+        "合规性"
+      ],
+      "possible_metrics": [
+        "区域化服务请求次数"
+      ],
+      "priority": "P2",
+      "opportunity_score": 45,
+      "recommendation": "在隐私政策或数据中心页面明确说明数据存储的主要地理位置。针对有严格数据驻留要求的区域（如欧盟、中国），可考虑推出区域化部署方案或明确承诺数据不会流出该地区，并提供相关法律依据说明，以满足不同地区用户的合规性需求。"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "segment_id": "seg-internal-adoption",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 18,
+    "cluster_count": 2,
+    "clustered_feedback_count": 18,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-adoption-cluster-001",
+      "segment_id": "seg-internal-adoption",
+      "name": "用户界面复杂性和易用性差",
+      "summary": "员工普遍反馈工具界面不友好、操作复杂，导致学习曲线陡峭、频繁出错和低使用率，影响整体采纳。",
+      "feedback_count": 16,
+      "evidence_feedback_ids": [
+        "FB46",
+        "FB47",
+        "FB48",
+        "FB49",
+        "FB50",
+        "FB52",
+        "FB53",
+        "FB55",
+        "FB56",
+        "FB58",
+        "FB59",
+        "FB61",
+        "FB63",
+        "FB65",
+        "FB81",
+        "FB83"
+      ],
+      "secondary_themes": [
+        "usability",
+        "simplicity"
+      ],
+      "possible_metrics": [
+        "user_adoption_rate",
+        "error_rate",
+        "learning_time"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "进行用户界面重设计以提高直观性，简化导航和操作步骤；实施用户测试和交互式培训计划，降低学习曲线并减少出错。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-002",
+      "segment_id": "seg-internal-adoption",
+      "name": "功能不足和手动处理需求",
+      "summary": "工具功能缺失，无法满足员工需求，导致经常需要手动处理，浪费时间并降低效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB51",
+        "FB57"
+      ],
+      "secondary_themes": [
+        "functionality"
+      ],
+      "possible_metrics": [
+        "manual_work_hours",
+        "feature_satisfaction"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "收集并分析用户需求，优先开发关键缺失功能；集成自动化工具或流程，减少手动干预，提升工作效率和用户满意度。"
+    }
+  ]
+}

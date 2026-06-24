@@ -1,0 +1,35 @@
+{
+  "dataset": "ai-product-experience",
+  "project": {
+    "name": "AI 写作助手",
+    "product_type": "C端产品",
+    "business_goal": "提升留存",
+    "target_user": "内容创作者和营销人员",
+    "key_metric": "7 日留存率"
+  },
+  "expected_top_themes": [
+    "生成质量不稳定",
+    "使用限制太多",
+    "响应速度慢"
+  ],
+  "allowed_metrics": [
+    "留存率",
+    "用户满意度",
+    "NPS",
+    "功能使用率"
+  ],
+  "forbidden_metrics": [
+    "续费率",
+    "GMV",
+    "转化率",
+    "客单价"
+  ],
+  "minimum_requirements": {
+    "min_feedback_count": 100,
+    "min_cluster_count": 5,
+    "max_cluster_count": 12,
+    "min_evidence_per_cluster": 2,
+    "min_top_theme_recall": 0.6,
+    "max_hallucinated_metric_count": 0
+  }
+}

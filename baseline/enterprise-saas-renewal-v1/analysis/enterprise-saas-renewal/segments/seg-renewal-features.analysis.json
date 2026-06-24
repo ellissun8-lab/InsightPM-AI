@@ -1,0 +1,212 @@
+{
+  "segment_id": "seg-renewal-features",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 26,
+    "cluster_count": 8,
+    "clustered_feedback_count": 26,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-features-cluster-001",
+      "segment_id": "seg-renewal-features",
+      "name": "功能缺失与不足",
+      "summary": "用户反馈多个核心功能缺失或不足，如报表、移动端、数据分析、自动化、协作和安全功能，导致产品无法满足基本业务需求。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB48",
+        "FB80",
+        "FB82",
+        "FB85",
+        "FB89",
+        "FB90",
+        "FB91",
+        "FB92"
+      ],
+      "secondary_themes": [
+        "报表功能",
+        "移动端功能",
+        "数据分析",
+        "自动化",
+        "协作功能"
+      ],
+      "possible_metrics": [
+        "功能满意度评分",
+        "用户流失率",
+        "功能使用率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "优先开发缺失的核心功能，如报表和移动端支持，并加强数据分析与自动化能力，通过用户调研确认优先级。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-002",
+      "segment_id": "seg-renewal-features",
+      "name": "集成与API挑战",
+      "summary": "集成其他系统困难，API缺失或文档质量差，影响产品的互联互通和扩展性，导致用户无法高效整合工作流。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB15",
+        "FB83",
+        "FB86"
+      ],
+      "secondary_themes": [
+        "系统集成",
+        "API接口",
+        "文档支持"
+      ],
+      "possible_metrics": [
+        "集成成功率",
+        "API调用错误率",
+        "集成相关工单量"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "改善API文档和示例，提供预构建集成模板，并加强技术支持以降低集成门槛。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-003",
+      "segment_id": "seg-renewal-features",
+      "name": "用户体验与易用性问题",
+      "summary": "界面不友好、操作复杂，功能复杂度高，导致用户学习曲线陡峭和使用效率低下，影响整体满意度。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB81",
+        "FB97",
+        "FB130"
+      ],
+      "secondary_themes": [
+        "界面设计",
+        "操作流程",
+        "合同管理"
+      ],
+      "possible_metrics": [
+        "用户满意度调查得分",
+        "任务完成时间",
+        "支持请求量"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "进行用户体验优化，简化界面布局和操作流程，提供用户引导和培训资源。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-004",
+      "segment_id": "seg-renewal-features",
+      "name": "文档质量问题",
+      "summary": "文档过时或不清晰，特别是集成API文档，影响用户理解和正确使用产品功能，导致集成和使用障碍。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB134",
+        "FB142"
+      ],
+      "secondary_themes": [
+        "API文档",
+        "知识库"
+      ],
+      "possible_metrics": [
+        "文档访问频率",
+        "文档相关支持请求",
+        "用户反馈评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "定期更新和审查文档，确保准确性和时效性，并提供交互式文档或示例代码。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-005",
+      "segment_id": "seg-renewal-features",
+      "name": "定制化需求不足",
+      "summary": "定制化选项少，无法满足特定行业或客户的个性化需求，限制了产品的适用范围和竞争力。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB23",
+        "FB87"
+      ],
+      "secondary_themes": [
+        "客户定制",
+        "行业特定功能"
+      ],
+      "possible_metrics": [
+        "定制功能采纳率",
+        "客户流失原因分析",
+        "需求匹配度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "评估并引入更多可配置选项或模块化设计，支持轻度定制以提升产品灵活性。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-006",
+      "segment_id": "seg-renewal-features",
+      "name": "功能更新延迟",
+      "summary": "新功能开发慢，更新不及时，无法跟上市场变化和用户需求，导致产品逐渐落后于竞争对手。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB39",
+        "FB84"
+      ],
+      "secondary_themes": [
+        "开发速度",
+        "版本发布"
+      ],
+      "possible_metrics": [
+        "功能发布时间表",
+        "用户对更新的满意度",
+        "市场响应时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化开发流程，采用敏捷方法，并增加用户反馈循环以加速关键功能的交付。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-007",
+      "segment_id": "seg-renewal-features",
+      "name": "功能与需求不匹配",
+      "summary": "功能与用户实际需求或宣传内容不符，导致用户期望落差和不满，影响产品信任度。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB88"
+      ],
+      "secondary_themes": [
+        "需求契合度",
+        "宣传一致性"
+      ],
+      "possible_metrics": [
+        "需求匹配指数",
+        "用户投诉率",
+        "净推荐值"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "加强市场调研和用户测试，确保功能设计与真实需求对齐，并调整宣传材料以反映实际能力。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-008",
+      "segment_id": "seg-renewal-features",
+      "name": "合规与安全问题",
+      "summary": "合规要求变化不满足，安全漏洞多，影响产品的可信度和合法性，可能导致客户流失和风险。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB18",
+        "FB30",
+        "FB93"
+      ],
+      "secondary_themes": [
+        "合规性",
+        "安全漏洞",
+        "风险管理"
+      ],
+      "possible_metrics": [
+        "安全事件数量",
+        "合规审计通过率",
+        "客户信任度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 90,
+      "recommendation": "立即进行安全漏洞修复和合规性评估，建立定期更新机制以应对法规变化。"
+    }
+  ]
+}

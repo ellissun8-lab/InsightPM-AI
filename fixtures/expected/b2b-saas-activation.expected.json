@@ -1,0 +1,34 @@
+{
+  "dataset": "b2b-saas-activation",
+  "project": {
+    "name": "项目管理工具 Pro",
+    "product_type": "B端 SaaS",
+    "business_goal": "提升激活",
+    "target_user": "项目经理和团队成员",
+    "key_metric": "新用户 7 日激活率"
+  },
+  "expected_top_themes": [
+    "新用户引导不足",
+    "团队协作困难",
+    "价格不透明"
+  ],
+  "allowed_metrics": [
+    "试用转化率",
+    "新用户激活率",
+    "功能采纳率",
+    "用户满意度"
+  ],
+  "forbidden_metrics": [
+    "续费率",
+    "GMV",
+    "客单价"
+  ],
+  "minimum_requirements": {
+    "min_feedback_count": 100,
+    "min_cluster_count": 5,
+    "max_cluster_count": 12,
+    "min_evidence_per_cluster": 2,
+    "min_top_theme_recall": 0.6,
+    "max_hallucinated_metric_count": 0
+  }
+}

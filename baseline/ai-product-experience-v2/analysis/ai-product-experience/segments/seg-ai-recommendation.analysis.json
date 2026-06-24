@@ -1,0 +1,93 @@
+{
+  "segment_id": "seg-ai-recommendation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 18,
+    "cluster_count": 3,
+    "clustered_feedback_count": 18,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-001",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐算法准确性不足",
+      "summary": "用户反馈推荐内容不相关、未结合个人偏好、价值低或价格非最优，导致推荐准确性差，影响用户体验和信任。",
+      "feedback_count": 12,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB15",
+        "FB33",
+        "FB45",
+        "FB75",
+        "FB129",
+        "FB147",
+        "FB93",
+        "FB99",
+        "FB105",
+        "FB111",
+        "FB117"
+      ],
+      "secondary_themes": [
+        "算法优化",
+        "个性化推荐"
+      ],
+      "possible_metrics": [
+        "推荐点击率",
+        "用户满意度评分",
+        "转化率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "优化推荐算法，集成用户历史行为、实时偏好和上下文数据，进行A/B测试以提升准确性；同时监控价格竞争力，确保推荐商品价格最优。"
+    },
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-002",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐内容新鲜度与多样性问题",
+      "summary": "推荐内容重复、更新缓慢或风格单一，导致用户审美疲劳和体验下降，缺乏新意。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB27",
+        "FB39",
+        "FB69"
+      ],
+      "secondary_themes": [
+        "内容多样性",
+        "更新频率"
+      ],
+      "possible_metrics": [
+        "内容重复率",
+        "用户浏览时长",
+        "跳出率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "增强推荐内容多样性策略，引入随机性和探索性推荐；提高内容库更新频率，避免重复推荐已浏览内容，并定期分析用户行为以调整推荐风格。"
+    },
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-003",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐数据实时性差",
+      "summary": "推荐信息过时，如包含已下架商品或失效服务，导致推荐内容不可靠，损害用户信任。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB21",
+        "FB62"
+      ],
+      "secondary_themes": [
+        "数据更新",
+        "信息准确性"
+      ],
+      "possible_metrics": [
+        "数据新鲜度",
+        "推荐错误率",
+        "用户投诉率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "建立实时数据监控和更新机制，与供应商或数据源同步，确保推荐内容基于最新状态；实施自动化检查以过滤过时信息，并设置用户反馈渠道快速修正。"
+    }
+  ]
+}

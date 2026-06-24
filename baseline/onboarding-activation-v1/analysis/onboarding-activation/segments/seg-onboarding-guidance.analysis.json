@@ -1,0 +1,145 @@
+{
+  "segment_id": "seg-onboarding-guidance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 31,
+    "cluster_count": 6,
+    "clustered_feedback_count": 31,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-002",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "文档可读性与可访问性差",
+      "summary": "文档格式不友好、分类混乱或语言问题，影响用户查找和理解。",
+      "feedback_count": 12,
+      "evidence_feedback_ids": [
+        "FB41",
+        "FB56",
+        "FB65",
+        "FB92",
+        "FB97",
+        "FB120",
+        "FB130",
+        "FB6",
+        "FB62",
+        "FB136",
+        "FB144",
+        "FB149"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "文档可访问性评分",
+        "用户查找时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "提供响应式网页版文档，改进文档分类结构，使用业务用户友好的语言，确保帮助按钮显眼。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-006",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "文档内容缺失与指导不足",
+      "summary": "文档缺少关键信息或详细说明，无法有效指导用户完成任务。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB52",
+        "FB82",
+        "FB115",
+        "FB121",
+        "FB148"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "文档完整性评分",
+        "任务完成率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "补充缺失文档内容，如数据迁移、功能清单、配置步骤；提供详细步骤指南和示例。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-001",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "文档内容过时与不一致",
+      "summary": "文档描述与产品实际界面或功能不符，导致用户操作错误或困惑。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB16",
+        "FB24",
+        "FB77",
+        "FB137",
+        "FB142"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "文档准确率",
+        "用户错误率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "建立文档审核流程，确保每次产品更新后同步更新文档；对于关键功能，提供实时对比图示。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-004",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "功能入口难以发现",
+      "summary": "用户难以找到管理员功能或重新访问新手引导入口。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB30",
+        "FB43",
+        "FB100"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "功能发现率",
+        "用户帮助请求次数"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "在界面中突出显示帮助按钮和功能入口；提供引导重访选项。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-005",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "术语混淆与概念解释不足",
+      "summary": "产品术语不一致或关键概念解释缺失，导致用户理解困难。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB69",
+        "FB108",
+        "FB125"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "术语理解准确率",
+        "用户困惑率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "统一产品术语，在文档中添加术语表；对复杂概念如权限、角色提供详细图解说明。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-003",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "引导视频体验不佳",
+      "summary": "视频教程时长过长或缺乏，用户希望更多视频内容或播放控制。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB73"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "视频观看完成率",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "为视频添加进度条和快进功能；制作更多短视频教程覆盖关键功能。"
+    }
+  ]
+}

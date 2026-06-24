@@ -1,0 +1,35 @@
+{
+  "dataset": "bi-tool-renewal",
+  "project": {
+    "name": "数据洞察 BI 平台",
+    "product_type": "B端 SaaS",
+    "business_goal": "提升续费",
+    "target_user": "数据分析师和业务决策者",
+    "key_metric": "续费率"
+  },
+  "expected_top_themes": [
+    "数据口径不一致",
+    "报表性能差",
+    "权限管理复杂"
+  ],
+  "allowed_metrics": [
+    "续费率",
+    "数据准确性",
+    "客户满意度",
+    "管理员效率"
+  ],
+  "forbidden_metrics": [
+    "GMV",
+    "转化率",
+    "客单价",
+    "DAU"
+  ],
+  "minimum_requirements": {
+    "min_feedback_count": 100,
+    "min_cluster_count": 5,
+    "max_cluster_count": 12,
+    "min_evidence_per_cluster": 2,
+    "min_top_theme_recall": 0.6,
+    "max_hallucinated_metric_count": 0
+  }
+}

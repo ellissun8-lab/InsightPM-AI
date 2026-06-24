@@ -1,0 +1,83 @@
+{
+  "segment_id": "seg-renewal-migration",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 8,
+    "cluster_count": 3,
+    "clustered_feedback_count": 8,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-migration-cluster-001",
+      "segment_id": "seg-renewal-migration",
+      "name": "数据迁移格式兼容性问题",
+      "summary": "用户在迁移旧数据时频繁遇到格式不兼容问题，导致迁移过程耗时、困难，影响迁移效率和数据集成满意度。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB25",
+        "FB79",
+        "FB133",
+        "FB7"
+      ],
+      "secondary_themes": [
+        "迁移",
+        "数据兼容性"
+      ],
+      "possible_metrics": [
+        "迁移成功率",
+        "用户迁移时间",
+        "兼容性支持率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "增强数据格式转换功能，支持更广泛的数据源格式，提供自动化格式检测和转换工具，减少用户手动处理时间。"
+    },
+    {
+      "cluster_id": "seg-renewal-migration-cluster-002",
+      "segment_id": "seg-renewal-migration",
+      "name": "迁移服务费用过高问题",
+      "summary": "用户反馈数据迁移服务收费不合理、费用过高，增加了迁移门槛，可能影响企业采用迁移服务。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB33",
+        "FB141"
+      ],
+      "secondary_themes": [
+        "迁移价格",
+        "迁移费用"
+      ],
+      "possible_metrics": [
+        "迁移服务定价",
+        "用户成本满意度",
+        "迁移服务使用率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化迁移服务定价模型，提供透明、灵活的费用套餐或免费基础迁移选项，以降低用户迁移成本。"
+    },
+    {
+      "cluster_id": "seg-renewal-migration-cluster-003",
+      "segment_id": "seg-renewal-migration",
+      "name": "迁移过程复杂且支持响应慢问题",
+      "summary": "数据迁移过程复杂，需要专业支持，但技术支持响应速度慢，导致用户体验下降和迁移效率低下。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB48",
+        "FB102"
+      ],
+      "secondary_themes": [
+        "数据迁移支持",
+        "数据迁移"
+      ],
+      "possible_metrics": [
+        "支持响应时间",
+        "迁移过程易用性",
+        "用户支持满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "简化迁移流程，增加向导式操作和自动化功能，同时扩大技术支持团队规模或优化响应机制，提升支持效率。"
+    }
+  ]
+}

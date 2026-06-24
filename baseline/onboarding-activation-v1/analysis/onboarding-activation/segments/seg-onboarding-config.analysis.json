@@ -1,0 +1,72 @@
+{
+  "segment_id": "seg-onboarding-config",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 9,
+    "cluster_count": 3,
+    "clustered_feedback_count": 9,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-config-cluster-001",
+      "segment_id": "seg-onboarding-config",
+      "name": "初始配置复杂性与高认知负担",
+      "summary": "用户反馈初始配置选项过多、流程繁琐、页面说明冗长，对非技术用户不友好，导致认知负担重。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB7",
+        "FB23",
+        "FB119",
+        "FB99"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置完成率",
+        "用户支持请求率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "引入快速开始模式，默认只显示必要配置项；简化页面布局，使用分步向导减少认知负荷；为复杂选项提供简明的帮助提示。"
+    },
+    {
+      "cluster_id": "seg-onboarding-config-cluster-002",
+      "segment_id": "seg-onboarding-config",
+      "name": "初始配置技术错误与文档支持不足",
+      "summary": "用户在初始配置过程中遇到技术错误如上传头像失败、API密钥权限错误，并反馈文档位置不明确或指引有误。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB51",
+        "FB54",
+        "FB146"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置错误率",
+        "文档访问率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "优化文件上传验证，提供清晰的格式和错误提示；确保API文档准确，并在配置界面直接链接到相关文档；提供配置前检查清单和实时支持。"
+    },
+    {
+      "cluster_id": "seg-onboarding-config-cluster-003",
+      "segment_id": "seg-onboarding-config",
+      "name": "初始配置后修改灵活性限制",
+      "summary": "用户反馈初始配置后无法修改某些设置如时区或模板，只能通过删除项目重建，缺乏灵活性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB104",
+        "FB140"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户配置满意度",
+        "项目重建率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "允许用户后续修改初始配置选项，如时区和模板选择；提供配置迁移或重置功能，避免项目重建；增加配置变更确认和撤销选项。"
+    }
+  ]
+}

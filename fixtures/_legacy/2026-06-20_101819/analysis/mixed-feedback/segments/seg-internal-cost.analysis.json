@@ -1,0 +1,70 @@
+{
+  "segment_id": "seg-internal-cost",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 11,
+    "cluster_count": 2,
+    "clustered_feedback_count": 11,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-internal-cost",
+      "name": "成本节约与效率提升成效",
+      "summary": "多个部门反馈系统在降低运营成本、提升业务效率方面取得显著成效，包括电费节约、流程优化、人力节省等。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB26",
+        "FB37",
+        "FB61",
+        "FB84",
+        "FB103"
+      ],
+      "secondary_themes": [
+        "电费成本降低",
+        "报销流程简化",
+        "运维人力节省",
+        "盘点误差减少",
+        "采购周期缩短",
+        "故障预防"
+      ],
+      "possible_metrics": [
+        "成本降低百分比",
+        "效率提升比例",
+        "错误率下降值"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "量化并宣传各部门的降本成效，推广系统最佳实践，扩大应用范围以最大化成本节约。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-internal-cost",
+      "name": "系统易用性与界面问题",
+      "summary": "用户反馈系统存在功能引导缺失、学习成本高、界面设计不佳和稳定性问题，影响使用体验和效率。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB23",
+        "FB43",
+        "FB51",
+        "FB101"
+      ],
+      "secondary_themes": [
+        "后台管理功能缺失",
+        "培训成本高",
+        "视觉设计不满意",
+        "系统闪退"
+      ],
+      "possible_metrics": [
+        "用户培训时长",
+        "界面满意度评分",
+        "系统崩溃频率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化后台管理界面，提供明确引导和文档；简化系统设计，降低学习曲线；加强测试和监控，提升系统稳定性。"
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "segment_id": "seg-internal-adoption",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 30,
+    "cluster_count": 7,
+    "clustered_feedback_count": 30,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-adoption-cluster-001",
+      "segment_id": "seg-internal-adoption",
+      "name": "UI 设计过时及操作不直观",
+      "summary": "用户反馈系统界面风格过时，操作流程不符合现代直觉，导致使用体验不佳。",
+      "feedback_count": 10,
+      "evidence_feedback_ids": [
+        "FB23",
+        "FB68",
+        "FB96",
+        "FB110",
+        "FB129",
+        "FB7",
+        "FB26",
+        "FB99",
+        "FB109",
+        "FB112"
+      ],
+      "secondary_themes": [
+        "信息架构",
+        "可用性"
+      ],
+      "possible_metrics": [
+        "用户界面满意度",
+        "任务完成时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "进行用户界面现代化 redesign，参考主流产品设计规范，优化布局和交互流程，并进行可用性测试以确保直觉操作。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-002",
+      "segment_id": "seg-internal-adoption",
+      "name": "移动端体验缺陷",
+      "summary": "移动端应用存在字体过小、闪退和功能缺失等问题，影响员工在移动场景下的使用效率。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB27",
+        "FB72",
+        "FB97"
+      ],
+      "secondary_themes": [
+        "响应式设计",
+        "稳定性"
+      ],
+      "possible_metrics": [
+        "移动端使用率",
+        "移动端任务成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "优化移动端字体大小和触控区域，修复闪退问题，并确保移动端功能（如历史版本查看）与桌面端保持一致。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-003",
+      "segment_id": "seg-internal-adoption",
+      "name": "通知过多及非工作时间打扰",
+      "summary": "系统发送大量无关通知，且在非工作时间发送非紧急通知，打扰员工休息并降低工作效率。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB38",
+        "FB75",
+        "FB116",
+        "FB136"
+      ],
+      "secondary_themes": [
+        "通知策略",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "通知忽略率",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "实现通知优先级筛选功能，允许用户自定义通知类型，并设置非工作时间通知静默或延迟发送规则。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-006",
+      "segment_id": "seg-internal-adoption",
+      "name": "数据看板图表类型不足及导出格式问题",
+      "summary": "数据看板的图表类型无法满足定制化分析需求，且导出到Excel后格式混乱，影响数据二次加工。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB95",
+        "FB122",
+        "FB150",
+        "FB67"
+      ],
+      "secondary_themes": [
+        "数据分析",
+        "报告生成"
+      ],
+      "possible_metrics": [
+        "数据看板使用频率",
+        "导出成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "增加更多图表类型以支持定制化分析，并优化导出格式确保与常用软件兼容，减少格式错乱问题。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-004",
+      "segment_id": "seg-internal-adoption",
+      "name": "文档与更新沟通不清晰",
+      "summary": "系统更新公告和技术文档语言晦涩，操作手册过时，导致用户无法理解更新内容和正确使用系统。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB61",
+        "FB62",
+        "FB85"
+      ],
+      "secondary_themes": [
+        "培训",
+        "文档管理"
+      ],
+      "possible_metrics": [
+        "文档查阅率",
+        "培训完成率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "使用通俗语言撰写更新日志，定期更新操作手册以匹配当前功能，并提供视频教程或图文指南辅助学习。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-005",
+      "segment_id": "seg-internal-adoption",
+      "name": "表单输入体验不佳",
+      "summary": "长文本输入缺乏字数统计和提示，且缺少草稿保存功能，导致数据输入错误和效率低下。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB64",
+        "FB115",
+        "FB118"
+      ],
+      "secondary_themes": [
+        "表单设计",
+        "数据完整性"
+      ],
+      "possible_metrics": [
+        "表单提交错误率",
+        "输入效率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "为长文本输入框添加字数统计和实时提示，并实现草稿自动保存功能，以防止数据丢失。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-007",
+      "segment_id": "seg-internal-adoption",
+      "name": "新用户导航困难及学习曲线陡峭",
+      "summary": "新员工上手系统慢，功能入口层级深，不易发现和使用关键功能，导致初期采用率低。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB51"
+      ],
+      "secondary_themes": [
+        "用户引导",
+        "信息架构"
+      ],
+      "possible_metrics": [
+        "新用户激活率",
+        "功能发现率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "优化菜单结构，减少层级深度，并提供新手引导教程或交互式帮助，以加速新用户上手过程。"
+    }
+  ]
+}

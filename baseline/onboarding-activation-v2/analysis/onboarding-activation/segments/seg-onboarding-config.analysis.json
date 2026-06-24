@@ -1,0 +1,96 @@
+{
+  "segment_id": "seg-onboarding-config",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 14,
+    "cluster_count": 4,
+    "clustered_feedback_count": 14,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-config-cluster-001",
+      "segment_id": "seg-onboarding-config",
+      "name": "初始配置步骤过多和选项复杂",
+      "summary": "用户反映初始配置步骤繁多，选项复杂，导致劝退或困惑，尤其是新手用户，如个人用户被强制填写公司信息、通知设置选项过多、高级选项缺乏默认值。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB100",
+        "FB109",
+        "FB111"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置完成率",
+        "用户流失率",
+        "支持请求量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "简化初始配置流程，减少必填项，提供‘快速开始’模式让用户先试用核心功能；为高级选项设置智能默认值；优化通知设置为分步引导，避免信息过载。"
+    },
+    {
+      "cluster_id": "seg-onboarding-config-cluster-002",
+      "segment_id": "seg-onboarding-config",
+      "name": "配置更改受限和灵活性不足",
+      "summary": "用户在初始配置后无法轻松更改选择，如套餐版本更改需联系客服、主题颜色无法修改，导致不满和操作不便。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB23",
+        "FB103"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置更改成功率",
+        "客服支持请求量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "允许用户在配置后自助更改关键设置，如套餐版本调整可在账户设置中自助操作；主题颜色提供修改选项；在配置过程中增加预览和确认步骤以减少错误。"
+    },
+    {
+      "cluster_id": "seg-onboarding-config-cluster-003",
+      "segment_id": "seg-onboarding-config",
+      "name": "数据导入模板严格和缺乏模板选项",
+      "summary": "数据导入时模板格式要求严格，导致导入失败；初始工作区空，缺乏预置模板；用户希望一键导入旧数据，而非手动转换。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB93",
+        "FB99",
+        "FB107"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "数据导入成功率",
+        "模板使用率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "提供更灵活的数据导入工具，支持智能格式识别和错误提示；增加热门模板库供用户选择，如项目管理、内容规划；开发一键导入功能，支持常见旧平台数据格式自动转换。"
+    },
+    {
+      "cluster_id": "seg-onboarding-config-cluster-004",
+      "segment_id": "seg-onboarding-config",
+      "name": "技术设置错误和集成复杂性",
+      "summary": "初始配置中技术设置存在问题，如时区识别错误、外部服务授权复杂、通知权限无效、数据存储地域选项不明确，以及工作日设置麻烦。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB95",
+        "FB105",
+        "FB110",
+        "FB106",
+        "FB108"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "设置错误率",
+        "集成成功率",
+        "合规符合度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "改进时区自动检测算法，基于用户位置智能设置；简化外部服务授权流程，提供引导式授权；确保通知权限配置后立即生效并测试；明确数据存储地域选项，添加合规说明；集成日历API，自动同步团队工作日和节假日。"
+    }
+  ]
+}

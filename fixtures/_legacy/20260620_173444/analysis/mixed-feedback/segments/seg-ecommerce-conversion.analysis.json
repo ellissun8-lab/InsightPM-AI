@@ -1,0 +1,109 @@
+{
+  "segment_id": "seg-ecommerce-conversion",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 12,
+    "cluster_count": 4,
+    "clustered_feedback_count": 12,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "结账与支付流程问题",
+      "summary": "用户在结账和支付环节遇到多种问题，包括流程复杂、支付失败、支付方式少以及错误提示，导致转化率下降。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB92",
+        "FB94",
+        "FB99",
+        "FB104"
+      ],
+      "secondary_themes": [
+        "支付可靠性",
+        "支付选项",
+        "结账流程"
+      ],
+      "possible_metrics": [
+        "结账转化率",
+        "支付成功率",
+        "支付方式覆盖率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "简化结账流程，减少步骤；增加主流支付方式（如支付宝、微信、信用卡）；优化支付错误提示并提升支付系统稳定性。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "页面性能与数据准确性",
+      "summary": "页面加载慢导致高弃单率，库存显示不准和物流信息更新慢影响用户购买决策。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB95",
+        "FB97",
+        "FB100"
+      ],
+      "secondary_themes": [
+        "页面性能",
+        "库存数据",
+        "物流信息"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "库存准确率",
+        "物流信息更新时效"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化前端性能，压缩资源并启用CDN；实时同步库存数据；对接物流API以提升物流信息更新频率。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "购物车与优惠券功能问题",
+      "summary": "购物车功能异常（自动清空）和优惠券无法使用，直接影响用户下单意愿和转化率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB91",
+        "FB96"
+      ],
+      "secondary_themes": [
+        "购物车功能",
+        "优惠券功能"
+      ],
+      "possible_metrics": [
+        "购物车留存率",
+        "优惠券使用率",
+        "购物车弃单率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "修复购物车数据持久化问题，确保用户登录后购物车不丢失；排查优惠券系统，确保优惠券可正常领取和使用。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "价格与客服问题",
+      "summary": "价格高于竞争对手导致用户流失，客服响应慢影响购买决策。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB16",
+        "FB98"
+      ],
+      "secondary_themes": [
+        "价格比较",
+        "客服响应"
+      ],
+      "possible_metrics": [
+        "价格竞争力指数",
+        "客服平均响应时间",
+        "客服满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "进行竞品价格分析并调整定价策略；增加客服人员或引入AI客服，缩短响应时间。"
+    }
+  ]
+}

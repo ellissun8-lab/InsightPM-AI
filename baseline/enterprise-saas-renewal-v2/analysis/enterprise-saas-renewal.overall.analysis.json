@@ -1,0 +1,934 @@
+{
+  "project_id": "",
+  "analysis_run_id": "",
+  "summary": {
+    "total_feedback_count": 150,
+    "analyzed_feedback_count": 150,
+    "clustered_feedback_count": 150,
+    "unclustered_feedback_count": 0,
+    "unanalyzed_feedback_count": 0,
+    "segment_count": 11,
+    "business_segment_count": 8,
+    "noise_segment_count": 1,
+    "positive_segment_count": 1,
+    "cluster_count": 33,
+    "is_mixed_dataset": true
+  },
+  "segments": [
+    {
+      "segment_id": "seg-renewal-pricing",
+      "name": "续约价格与性价比",
+      "feedback_count": 24,
+      "business_goal": "提升续约率 / 降低价格敏感度",
+      "issue_cluster_ids": [
+        "seg-renewal-pricing-cluster-001",
+        "seg-renewal-pricing-cluster-002",
+        "seg-renewal-pricing-cluster-003",
+        "seg-renewal-pricing-cluster-005",
+        "seg-renewal-pricing-cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-features",
+      "name": "产品功能与需求匹配",
+      "feedback_count": 32,
+      "business_goal": "提升功能满意度 / 降低流失",
+      "issue_cluster_ids": [
+        "seg-renewal-features-cluster-002",
+        "seg-renewal-features-cluster-003",
+        "seg-renewal-features-cluster-001",
+        "seg-renewal-features-cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-performance",
+      "name": "系统性能与稳定性",
+      "feedback_count": 17,
+      "business_goal": "提升系统满意度 / 降低性能投诉",
+      "issue_cluster_ids": [
+        "seg-renewal-performance-cluster-001",
+        "seg-renewal-performance-cluster-002",
+        "seg-renewal-performance-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-service",
+      "name": "技术支持与服务质量",
+      "feedback_count": 24,
+      "business_goal": "提升服务满意度 / 降低支持投诉",
+      "issue_cluster_ids": [
+        "seg-renewal-service-cluster-001",
+        "seg-renewal-service-cluster-002",
+        "seg-renewal-service-cluster-003",
+        "seg-renewal-service-cluster-004",
+        "seg-renewal-service-cluster-005"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-process",
+      "name": "续约流程与合同",
+      "feedback_count": 16,
+      "business_goal": "简化续约流程 / 提升续约效率",
+      "issue_cluster_ids": [
+        "seg-renewal-process-cluster-001",
+        "seg-renewal-process-cluster-002",
+        "seg-renewal-process-cluster-004",
+        "seg-renewal-process-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-migration",
+      "name": "数据迁移与集成",
+      "feedback_count": 6,
+      "business_goal": "降低迁移门槛 / 提升数据集成满意度",
+      "issue_cluster_ids": [
+        "seg-renewal-migration-cluster-001",
+        "seg-renewal-migration-cluster-002",
+        "seg-renewal-migration-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-training",
+      "name": "用户培训与上手",
+      "feedback_count": 11,
+      "business_goal": "降低上手难度 / 提升培训效率",
+      "issue_cluster_ids": [
+        "seg-renewal-training-cluster-001",
+        "seg-renewal-training-cluster-002",
+        "seg-renewal-training-cluster-003",
+        "seg-renewal-training-cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-renewal-competition",
+      "name": "竞品对比",
+      "feedback_count": 8,
+      "business_goal": "提升竞争力 / 降低竞品流失",
+      "issue_cluster_ids": [
+        "seg-renewal-competition-cluster-001",
+        "seg-renewal-competition-cluster-002"
+      ]
+    },
+    {
+      "segment_id": "seg-unknown",
+      "name": "未分类反馈",
+      "feedback_count": 3,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-unknown-cluster-001"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "name": "噪声/无效反馈",
+      "feedback_count": 4,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-noise-cluster-001"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "feedback_count": 5,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-positive-cluster-001"
+      ]
+    }
+  ],
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-001",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格过高与折扣请求",
+      "summary": "客户普遍认为续约价格过高，直接表达不满并寻求折扣或降价。",
+      "feedback_count": 11,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB3",
+        "FB6",
+        "FB7",
+        "FB9",
+        "FB11",
+        "FB13",
+        "FB16",
+        "FB21",
+        "FB22",
+        "FB2"
+      ],
+      "secondary_themes": [
+        "折扣请求",
+        "价格异议"
+      ],
+      "possible_metrics": [
+        "价格敏感度",
+        "折扣接受率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "提供灵活的定价方案，如阶梯折扣或忠诚度折扣，以降低价格敏感度。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-002",
+      "segment_id": "seg-renewal-pricing",
+      "name": "性价比不匹配",
+      "summary": "客户认为产品价格与提供的价值不匹配，性价比低，可能考虑竞品。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB15",
+        "FB19",
+        "FB4"
+      ],
+      "secondary_themes": [
+        "价值评估",
+        "功能评价一般"
+      ],
+      "possible_metrics": [
+        "客户感知价值",
+        "功能满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "增强产品价值沟通，突出独特功能和ROI，或调整定价以反映价值。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-003",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格决定续约决策",
+      "summary": "价格是客户续约与否的主要决定因素，直接影响决策过程。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB8",
+        "FB17",
+        "FB20"
+      ],
+      "secondary_themes": [
+        "决策障碍",
+        "价格敏感"
+      ],
+      "possible_metrics": [
+        "价格对续约率的影响",
+        "客户流失风险"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "实施价格保护或提供灵活付款选项，以减少价格对续约的负面影响。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-005",
+      "segment_id": "seg-renewal-pricing",
+      "name": "竞品驱动的价格敏感性",
+      "summary": "客户因竞品报价更具吸引力而考虑转向其他方案，价格是主要考量因素。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB14",
+        "FB122",
+        "FB124"
+      ],
+      "secondary_themes": [
+        "竞争压力",
+        "替代方案考虑"
+      ],
+      "possible_metrics": [
+        "竞品价格对标",
+        "客户保留率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "进行竞品价格分析，提供有竞争力的报价或捆绑服务以增强价值主张。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-004",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格上涨不可接受",
+      "summary": "客户对续约价格相比去年上涨表示强烈不满，可能超出预算。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB18"
+      ],
+      "secondary_themes": [
+        "预算超支",
+        "价格异议"
+      ],
+      "possible_metrics": [
+        "价格变化接受度",
+        "续约率变化"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "提供价格调整透明度，或为受影响客户提供补偿性折扣以缓和不满。"
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-002",
+      "segment_id": "seg-renewal-features",
+      "name": "Feature Enhancement and Customization Demands",
+      "summary": "Users seek enhancements like mobile support, custom workflows, improved data analytics, and better report export options to better adapt to their business processes.",
+      "feedback_count": 14,
+      "evidence_feedback_ids": [
+        "FB24",
+        "FB28",
+        "FB30",
+        "FB31",
+        "FB33",
+        "FB35",
+        "FB38",
+        "FB39",
+        "FB40",
+        "FB41",
+        "FB42",
+        "FB44",
+        "FB23",
+        "FB25"
+      ],
+      "secondary_themes": [
+        "功能增强需求",
+        "功能定制需求",
+        "功能改进需求"
+      ],
+      "possible_metrics": [
+        "新功能采用率",
+        "用户定制满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "Gather detailed enhancement requests, prioritize high-impact features based on user feedback, and introduce customization options to increase flexibility and satisfaction."
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-003",
+      "segment_id": "seg-renewal-features",
+      "name": "Integration and API Challenges",
+      "summary": "Users face difficulties integrating third-party tools, lack of API interfaces, and unclear documentation, hindering system extensibility and workflow efficiency.",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB27",
+        "FB29",
+        "FB37",
+        "FB94",
+        "FB97",
+        "FB99",
+        "FB101",
+        "FB102",
+        "FB104"
+      ],
+      "secondary_themes": [
+        "集成功能缺失",
+        "扩展性需求",
+        "documentation"
+      ],
+      "possible_metrics": [
+        "集成成功率",
+        "API使用率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 82,
+      "recommendation": "Enhance integration capabilities by expanding API offerings, improving documentation clarity, and providing dedicated support to facilitate seamless tool connections."
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-001",
+      "segment_id": "seg-renewal-features",
+      "name": "Core Feature Gaps and Mismatches",
+      "summary": "Users report missing critical features such as reporting, multilingual support, and basic functionalities, leading to unmet business needs and potential churn.",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB32",
+        "FB34",
+        "FB36",
+        "FB43",
+        "FB109",
+        "FB131"
+      ],
+      "secondary_themes": [
+        "功能缺失",
+        "需求不匹配",
+        "功能不足"
+      ],
+      "possible_metrics": [
+        "功能覆盖率",
+        "需求匹配度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "Prioritize development of missing core features, conduct thorough needs analysis to ensure alignment with user requirements, and communicate roadmaps to address gaps."
+    },
+    {
+      "cluster_id": "seg-renewal-features-cluster-004",
+      "segment_id": "seg-renewal-features",
+      "name": "User Interface Complexity",
+      "summary": "Users find the interface complex and difficult to navigate, with concerns about aesthetic elements like icons, impacting overall user experience and adoption.",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB147",
+        "FB133"
+      ],
+      "secondary_themes": [
+        "user-interface",
+        "界面图标美观度"
+      ],
+      "possible_metrics": [
+        "用户界面满意度",
+        "学习曲线时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "Simplify the user interface through usability testing, redesign icons for better aesthetics, and provide guided onboarding to reduce complexity and improve engagement."
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-001",
+      "segment_id": "seg-renewal-performance",
+      "name": "系统崩溃与故障",
+      "summary": "用户频繁报告系统崩溃、闪退和故障，严重影响正常使用和业务连续性。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB45",
+        "FB48",
+        "FB53",
+        "FB55",
+        "FB149"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "崩溃率",
+        "故障恢复时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "深入分析崩溃日志，修复根本原因，实施监控和警报系统以快速响应故障。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-002",
+      "segment_id": "seg-renewal-performance",
+      "name": "系统响应速度慢",
+      "summary": "系统卡顿、加载时间长，响应速度下降，导致用户效率降低和潜在成本增加。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB47",
+        "FB49",
+        "FB54",
+        "FB56",
+        "FB57",
+        "FB58"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均响应时间",
+        "页面加载时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化前端和后端性能，使用缓存机制，定期进行性能测试和优化。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-003",
+      "segment_id": "seg-renewal-performance",
+      "name": "系统稳定性问题",
+      "summary": "系统在高并发时出错，uptime不达标，稳定性差导致数据丢失风险，影响客户续约意愿。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB46",
+        "FB50",
+        "FB51",
+        "FB52",
+        "FB59",
+        "FB60"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "系统可用性",
+        "错误率",
+        "uptime百分比"
+      ],
+      "priority": "P0",
+      "opportunity_score": 88,
+      "recommendation": "加强系统监控，提升架构弹性，进行压力测试，确保高可用性和数据安全。"
+    },
+    {
+      "cluster_id": "seg-renewal-service-cluster-001",
+      "segment_id": "seg-renewal-service",
+      "name": "技术支持响应延迟",
+      "summary": "用户多次反馈技术支持响应时间过长，工单处理拖延，导致问题无法及时解决，影响业务运营。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB63",
+        "FB66",
+        "FB67",
+        "FB68",
+        "FB71"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均响应时间",
+        "工单解决时间",
+        "首次响应时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 80,
+      "recommendation": "优化支持流程，增加人力资源，实施自动回复和优先级处理机制，以缩短响应时间。"
+    },
+    {
+      "cluster_id": "seg-renewal-service-cluster-002",
+      "segment_id": "seg-renewal-service",
+      "name": "问题解决不彻底或不专业",
+      "summary": "反馈指出技术支持解决方案不彻底、人员不专业或推卸责任，导致技术问题持续存在，客户满意度下降。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB61",
+        "FB62",
+        "FB72",
+        "FB76"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "问题解决率",
+        "客户满意度评分",
+        "重复问题发生率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "加强技术支持团队培训，建立问题跟踪和升级机制，确保问题彻底解决。"
+    },
+    {
+      "cluster_id": "seg-renewal-service-cluster-003",
+      "segment_id": "seg-renewal-service",
+      "name": "技术支持满意度低",
+      "summary": "用户对技术支持整体不满意，体验不佳影响客户忠诚度和续约意愿，包括响应慢、解决差、渠道少等问题。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB64",
+        "FB65",
+        "FB69",
+        "FB70",
+        "FB73",
+        "FB74",
+        "FB75",
+        "FB77"
+      ],
+      "secondary_themes": [
+        "客户续约影响",
+        "内部批评"
+      ],
+      "possible_metrics": [
+        "支持满意度分数",
+        "NPS",
+        "续约率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "全面改进支持服务，包括响应时间、解决质量和渠道多样性，定期收集反馈并优化。"
+    },
+    {
+      "cluster_id": "seg-renewal-service-cluster-004",
+      "segment_id": "seg-renewal-service",
+      "name": "客户服务态度与沟通问题",
+      "summary": "用户反馈客服服务态度差、沟通方式有意见，并希望改善整体客户服务体验，包括专属客户经理需求。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB127",
+        "FB128",
+        "FB129",
+        "FB132",
+        "FB136"
+      ],
+      "secondary_themes": [
+        "账户管理便捷性",
+        "个性化服务需求"
+      ],
+      "possible_metrics": [
+        "客户服务满意度",
+        "沟通满意度",
+        "客户保留率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "提升客服培训，优化沟通渠道，考虑提供专属客户经理服务以增强客户关系。"
+    },
+    {
+      "cluster_id": "seg-renewal-service-cluster-005",
+      "segment_id": "seg-renewal-service",
+      "name": "邮件通知管理问题",
+      "summary": "用户抱怨邮件通知过多，希望减少或退订相关邮件，影响用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB135",
+        "FB148"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "邮件打开率",
+        "退订率",
+        "用户反馈率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "优化邮件发送频率和内容，提供个性化订阅选项，尊重用户偏好。"
+    },
+    {
+      "cluster_id": "seg-renewal-process-cluster-001",
+      "segment_id": "seg-renewal-process",
+      "name": "续约流程复杂繁琐",
+      "summary": "客户反馈续约流程复杂、麻烦、需要太多审批，导致使用困难。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB78",
+        "FB80",
+        "FB81",
+        "FB85",
+        "FB89",
+        "FB79",
+        "FB82"
+      ],
+      "secondary_themes": [
+        "审批流程",
+        "简化需求"
+      ],
+      "possible_metrics": [
+        "流程步骤数",
+        "平均处理时间",
+        "用户满意度评分"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "简化续约流程，减少不必要的审批步骤，提供清晰的操作指南和自助服务选项。"
+    },
+    {
+      "cluster_id": "seg-renewal-process-cluster-002",
+      "segment_id": "seg-renewal-process",
+      "name": "合同条款不清晰和不透明",
+      "summary": "客户反映合同条款难以理解、不透明，可能需要重新协商，影响续约决策。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB83",
+        "FB90",
+        "FB84",
+        "FB86"
+      ],
+      "secondary_themes": [
+        "合同语言",
+        "条款透明度"
+      ],
+      "possible_metrics": [
+        "合同理解度调查",
+        "条款协商请求率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "优化合同语言，使其更易懂；增加条款解释和透明度；提供协商选项。"
+    },
+    {
+      "cluster_id": "seg-renewal-process-cluster-004",
+      "segment_id": "seg-renewal-process",
+      "name": "客户体验和通知问题",
+      "summary": "续约流程被客户视为痛点，通知不及时，整体影响客户体验和满意度。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB87",
+        "FB88",
+        "FB92"
+      ],
+      "secondary_themes": [
+        "客户满意度",
+        "通知机制"
+      ],
+      "possible_metrics": [
+        "客户净推荐值(NPS)",
+        "续约成功率",
+        "通知及时率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "改进续约通知机制，确保及时提醒；监控客户反馈，持续优化体验。"
+    },
+    {
+      "cluster_id": "seg-renewal-process-cluster-003",
+      "segment_id": "seg-renewal-process",
+      "name": "流程自动化和效率提升需求",
+      "summary": "用户希望续约流程更自动化，减少手动操作，以提升效率和用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB91",
+        "FB130"
+      ],
+      "secondary_themes": [
+        "自动化",
+        "效率优化"
+      ],
+      "possible_metrics": [
+        "自动化率",
+        "手动操作步骤数"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "引入自动化工具，如自动续约链接、减少手动输入，优化流程设计。"
+    },
+    {
+      "cluster_id": "seg-renewal-migration-cluster-001",
+      "segment_id": "seg-renewal-migration",
+      "name": "数据迁移错误和数据丢失",
+      "summary": "用户报告数据迁移过程中出现错误和数据丢失，影响业务连续性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB93",
+        "FB98"
+      ],
+      "secondary_themes": [
+        "data-integrity",
+        "system-reliability"
+      ],
+      "possible_metrics": [
+        "错误发生率",
+        "数据丢失率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 90,
+      "recommendation": "加强迁移过程的错误处理和数据验证机制，确保数据完整性。"
+    },
+    {
+      "cluster_id": "seg-renewal-migration-cluster-002",
+      "segment_id": "seg-renewal-migration",
+      "name": "迁移过程复杂性与支持不足",
+      "summary": "用户反映从旧系统迁移数据很麻烦，且迁移支持不足。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB96",
+        "FB100"
+      ],
+      "secondary_themes": [
+        "user-experience",
+        "support-quality"
+      ],
+      "possible_metrics": [
+        "迁移时间",
+        "支持响应时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "简化迁移流程，提供更详细的文档和实时支持。"
+    },
+    {
+      "cluster_id": "seg-renewal-migration-cluster-003",
+      "segment_id": "seg-renewal-migration",
+      "name": "迁移问题普遍性与关键性",
+      "summary": "反馈指出迁移问题普遍，且数据迁移是续约前的关键步骤。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB95",
+        "FB103"
+      ],
+      "secondary_themes": [
+        "process-criticality",
+        "customer-retention"
+      ],
+      "possible_metrics": [
+        "迁移成功率",
+        "续约影响"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "将数据迁移作为关键流程管理，确保高效可靠以支持续约。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-001",
+      "segment_id": "seg-renewal-training",
+      "name": "培训材料过时或不足",
+      "summary": "用户反馈培训资料老旧、不全面或缺乏如视频教程等资源，需要更新和更丰富的培训材料以降低学习曲线。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB105",
+        "FB110",
+        "FB113"
+      ],
+      "secondary_themes": [
+        "training-materials"
+      ],
+      "possible_metrics": [
+        "培训材料更新频率",
+        "用户对培训材料的满意度评分",
+        "在线课程使用率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "定期审查和更新培训材料，引入视频教程和互动式在线课程，确保内容与产品最新版本同步。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-002",
+      "segment_id": "seg-renewal-training",
+      "name": "产品上手难度高",
+      "summary": "反馈显示用户或客户觉得产品上手困难，影响新用户快速采纳和使用。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB106",
+        "FB112"
+      ],
+      "secondary_themes": [
+        "onboarding"
+      ],
+      "possible_metrics": [
+        "新用户上手时间",
+        "首次使用成功率",
+        "用户流失率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "简化产品用户界面和流程，提供步骤式引导和快速入门指南，优化新用户 onboarding 体验。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-003",
+      "segment_id": "seg-renewal-training",
+      "name": "培训支持和资源不足",
+      "summary": "客户要求改善培训支持，反馈培训资源不够全面，需要更多帮助渠道。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB111",
+        "FB114"
+      ],
+      "secondary_themes": [
+        "training-support",
+        "training-resources"
+      ],
+      "possible_metrics": [
+        "培训支持请求量",
+        "资源可用性评分",
+        "支持响应时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "扩展培训支持渠道，如增加在线帮助中心、FAQ 和实时聊天支持，并提供更多样化的培训资源。"
+    },
+    {
+      "cluster_id": "seg-renewal-training-cluster-004",
+      "segment_id": "seg-renewal-training",
+      "name": "培训效率低和整体改进需求",
+      "summary": "反馈指出培训不足、时间长、需改进，显示培训效率低，用户培训是关注焦点。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB107",
+        "FB108",
+        "FB115",
+        "FB116"
+      ],
+      "secondary_themes": [
+        "training-gap",
+        "training-efficiency",
+        "training-focus",
+        "training-improvement"
+      ],
+      "possible_metrics": [
+        "培训完成时间",
+        "培训效果评估分数",
+        "新员工培训效率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化培训流程，缩短培训时间，定期评估培训效果，并基于反馈持续改进培训计划。"
+    },
+    {
+      "cluster_id": "seg-renewal-competition-cluster-001",
+      "segment_id": "seg-renewal-competition",
+      "name": "产品功能与定价落后于竞品",
+      "summary": "客户反馈在功能全面性、具体功能点、定价以及服务支持方面，存在落后于主要竞品的明确感知。这构成了客户考虑流失和评估替代方案的核心原因。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB117",
+        "FB121",
+        "FB125",
+        "FB126"
+      ],
+      "secondary_themes": [
+        "pricing",
+        "service support"
+      ],
+      "possible_metrics": [
+        "竞品功能覆盖率",
+        "价格竞争力指数",
+        "客户服务满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "立即启动竞品功能与定价的专项分析，识别关键差距；优先优化产品路线图以补齐核心功能短板；评估现有定价模型，并考虑针对高流失风险客群提供价值捆绑或忠诚度方案。"
+    },
+    {
+      "cluster_id": "seg-renewal-competition-cluster-002",
+      "segment_id": "seg-renewal-competition",
+      "name": "客户竞品评估与流失风险",
+      "summary": "客户在沟通中表现出对竞品的主动评估、比较行为，或已存在明确的换系统意图。这些是直接的流失风险信号，表明客户正处于决策周期的关键阶段。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB118",
+        "FB119",
+        "FB120",
+        "FB123"
+      ],
+      "secondary_themes": [
+        "competitive-evaluation",
+        "churn-risk"
+      ],
+      "possible_metrics": [
+        "竞品评估活动频率",
+        "客户流失预警率",
+        "竞品提及率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 90,
+      "recommendation": "建立针对处于评估期客户的主动干预机制；销售与客户成功团队需联动，基于收集到的竞品优势信息进行针对性价值重申；考虑提供迁移支持或试点项目以降低客户转换决策门槛。"
+    },
+    {
+      "cluster_id": "seg-unknown-cluster-001",
+      "segment_id": "seg-unknown",
+      "name": "未分类反馈",
+      "summary": "无法明确归类的反馈，需要人工复核",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB134",
+        "FB137",
+        "FB150"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "需要人工复核，尝试重新归类到具体业务分组。"
+    },
+    {
+      "cluster_id": "seg-noise-cluster-001",
+      "segment_id": "seg-noise",
+      "name": "无效/噪声反馈",
+      "summary": "包含无效内容、情绪表达、无法归因的反馈",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB138",
+        "FB144",
+        "FB145",
+        "FB146"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "不进入核心问题排序，保留为低置信度样本。"
+    },
+    {
+      "cluster_id": "seg-positive-cluster-001",
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "summary": "用户对产品功能、体验等方面的正面评价",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB139",
+        "FB140",
+        "FB141",
+        "FB142",
+        "FB143"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "保留正向反馈作为产品亮点参考，可纳入产品宣传材料。"
+    }
+  ],
+  "report_path": ""
+}

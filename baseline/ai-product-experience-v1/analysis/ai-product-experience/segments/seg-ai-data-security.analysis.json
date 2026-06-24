@@ -1,0 +1,84 @@
+{
+  "segment_id": "seg-ai-data-security",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 14,
+    "cluster_count": 3,
+    "clustered_feedback_count": 14,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-data-security-cluster-002",
+      "segment_id": "seg-ai-data-security",
+      "name": "AI学习用户数据存在滥用或泄露风险",
+      "summary": "用户担忧AI系统在学习用户数据时可能被滥用或导致数据泄露，影响信任度。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB56",
+        "FB74",
+        "FB92",
+        "FB110",
+        "FB128",
+        "FB146",
+        "FB120"
+      ],
+      "secondary_themes": [
+        "AI伦理",
+        "数据滥用"
+      ],
+      "possible_metrics": [
+        "AI数据使用透明度",
+        "用户数据控制设置使用率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "采用差分隐私或匿名化技术处理用户数据，提供明确的数据使用授权选项，并定期发布AI数据使用报告。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-003",
+      "segment_id": "seg-ai-data-security",
+      "name": "数据泄露事件和第三方获取导致信任危机",
+      "summary": "用户提到过去的数据泄露事件或担心数据被第三方非法获取，显著降低对产品的信任。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB9",
+        "FB19",
+        "FB29",
+        "FB39"
+      ],
+      "secondary_themes": [
+        "第三方数据共享"
+      ],
+      "possible_metrics": [
+        "用户信任度评分",
+        "第三方数据共享合规率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "建立严格的数据共享审计制度，公开隐私政策细节，并设置用户数据可移植性功能以增强控制感。"
+    },
+    {
+      "cluster_id": "seg-ai-data-security-cluster-001",
+      "segment_id": "seg-ai-data-security",
+      "name": "数据安全措施不足导致隐私泄露风险",
+      "summary": "用户反馈指出数据安全措施不足，导致用户隐私容易泄露或被侵犯，需要加强防护。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB66",
+        "FB102",
+        "FB138"
+      ],
+      "secondary_themes": [
+        "隐私保护"
+      ],
+      "possible_metrics": [
+        "数据泄露事件数",
+        "安全漏洞修复时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "实施多层次数据加密和访问控制机制，定期进行安全渗透测试，并建立用户隐私保护自查流程。"
+    }
+  ]
+}

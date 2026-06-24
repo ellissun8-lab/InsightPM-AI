@@ -1,0 +1,973 @@
+{
+  "project_id": "",
+  "analysis_run_id": "",
+  "summary": {
+    "total_feedback_count": 150,
+    "analyzed_feedback_count": 150,
+    "clustered_feedback_count": 150,
+    "unclustered_feedback_count": 0,
+    "unanalyzed_feedback_count": 0,
+    "segment_count": 9,
+    "business_segment_count": 7,
+    "noise_segment_count": 0,
+    "positive_segment_count": 1,
+    "cluster_count": 35,
+    "is_mixed_dataset": true
+  },
+  "segments": [
+    {
+      "segment_id": "seg-internal-efficiency",
+      "name": "系统效率问题",
+      "feedback_count": 29,
+      "business_goal": "提升工作效率",
+      "issue_cluster_ids": [
+        "seg-internal-efficiency-cluster-001",
+        "seg-internal-efficiency-cluster-002",
+        "seg-internal-efficiency-cluster-003",
+        "seg-internal-efficiency-cluster-005",
+        "seg-internal-efficiency-cluster-006",
+        "seg-internal-efficiency-cluster-004",
+        "seg-internal-efficiency-cluster-007"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-config",
+      "name": "流程配置问题",
+      "feedback_count": 12,
+      "business_goal": "简化配置管理",
+      "issue_cluster_ids": [
+        "seg-internal-config-cluster-001",
+        "seg-internal-config-cluster-002",
+        "seg-internal-config-cluster-003",
+        "seg-internal-config-cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "feedback_count": 22,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-positive-cluster-001"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-stability",
+      "name": "系统稳定性问题",
+      "feedback_count": 38,
+      "business_goal": "提升系统可用性",
+      "issue_cluster_ids": [
+        "seg-internal-stability-cluster-001",
+        "seg-internal-stability-cluster-002",
+        "seg-internal-stability-cluster-003",
+        "seg-internal-stability-cluster-005",
+        "seg-internal-stability-cluster-006",
+        "seg-internal-stability-cluster-007",
+        "seg-internal-stability-cluster-004",
+        "seg-internal-stability-cluster-008",
+        "seg-internal-stability-cluster-009"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-adoption",
+      "name": "员工使用与采纳",
+      "feedback_count": 30,
+      "business_goal": "提升系统使用率",
+      "issue_cluster_ids": [
+        "seg-internal-adoption-cluster-001",
+        "seg-internal-adoption-cluster-002",
+        "seg-internal-adoption-cluster-003",
+        "seg-internal-adoption-cluster-006",
+        "seg-internal-adoption-cluster-004",
+        "seg-internal-adoption-cluster-005",
+        "seg-internal-adoption-cluster-007"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-training",
+      "name": "培训成本问题",
+      "feedback_count": 7,
+      "business_goal": "降低培训成本",
+      "issue_cluster_ids": [
+        "seg-internal-training-cluster-001",
+        "seg-internal-training-cluster-002"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-integration",
+      "name": "集成与打通问题",
+      "feedback_count": 8,
+      "business_goal": "提升系统集成度",
+      "issue_cluster_ids": [
+        "seg-internal-integration-cluster-001",
+        "seg-internal-integration-cluster-002",
+        "seg-internal-integration-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-unknown",
+      "name": "未分类反馈",
+      "feedback_count": 2,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-unknown-cluster-001"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-cost",
+      "name": "成本与降本问题",
+      "feedback_count": 2,
+      "business_goal": "降低运营成本",
+      "issue_cluster_ids": [
+        "seg-internal-cost-cluster-001"
+      ]
+    }
+  ],
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-001",
+      "segment_id": "seg-internal-efficiency",
+      "name": "系统性能与加载速度缓慢",
+      "summary": "用户反馈系统响应慢、页面加载时间长，包括仪表盘、报表和整体系统，严重影响工作效率起始状态。",
+      "feedback_count": 10,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB35",
+        "FB41",
+        "FB53",
+        "FB70",
+        "FB107",
+        "FB126",
+        "FB139",
+        "FB40",
+        "FB135"
+      ],
+      "secondary_themes": [
+        "数据库查询优化",
+        "前端资源压缩",
+        "缓存策略"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "系统响应时间",
+        "报表生成速度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "优化数据库查询，为常用报表和仪表盘添加索引；压缩前端CSS、JS等资源以减少页面加载体积；实施缓存机制改善数据加载速度。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-002",
+      "segment_id": "seg-internal-efficiency",
+      "name": "搜索功能效率与准确性不足",
+      "summary": "搜索功能无法有效找到相关文档，结果排序不合理，导致信息检索效率低下，影响知识获取。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB16",
+        "FB28",
+        "FB91",
+        "FB123",
+        "FB146"
+      ],
+      "secondary_themes": [
+        "知识库结构优化",
+        "排序算法改进"
+      ],
+      "possible_metrics": [
+        "搜索准确率",
+        "用户搜索满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "改进搜索算法，支持按相关性、时间等多维度排序；优化知识库文章分类和标签系统，提升搜索结果的精准度。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-003",
+      "segment_id": "seg-internal-efficiency",
+      "name": "数据导出格式与质量问题",
+      "summary": "导出Excel或图表时格式混乱、公式错位或分辨率低，导致手动调整和使用不便，浪费工作时间。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB15",
+        "FB42",
+        "FB55"
+      ],
+      "secondary_themes": [
+        "导出模板标准化",
+        "筛选功能完善"
+      ],
+      "possible_metrics": [
+        "导出错误率",
+        "用户手动调整时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "修复导出模板，确保公式和格式正确；增加自定义时间筛选选项以满足灵活需求；提高图表导出分辨率，支持高清输出。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-005",
+      "segment_id": "seg-internal-efficiency",
+      "name": "数据校验与识别准确性低",
+      "summary": "包括税号校验错误、OCR识别不准确和历史数据查询困难，增加人工复核和搜索成本，影响数据可靠性。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB32",
+        "FB90",
+        "FB131"
+      ],
+      "secondary_themes": [
+        "校验规则优化",
+        "数据迁移策略"
+      ],
+      "possible_metrics": [
+        "校验错误率",
+        "OCR识别准确率",
+        "数据查询成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "升级OCR算法或集成第三方服务提高识别精度；完善税号校验规则并定期审核；优化历史数据查询接口和迁移工具。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-006",
+      "segment_id": "seg-internal-efficiency",
+      "name": "导航复杂与移动端兼容性差",
+      "summary": "页面层级过深增加操作步骤，移动端附件无法打开，草稿保存功能缺失导致数据丢失风险。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB45",
+        "FB50",
+        "FB57"
+      ],
+      "secondary_themes": [
+        "界面简化",
+        "移动端优化"
+      ],
+      "possible_metrics": [
+        "平均操作点击数",
+        "移动端功能可用性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "简化页面导航结构，减少层级嵌套；增加草稿自动保存功能以防数据丢失；优化移动端文件兼容性，支持常见附件格式。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-004",
+      "segment_id": "seg-internal-efficiency",
+      "name": "内部沟通消息推送延迟",
+      "summary": "系统聊天工具消息推送不及时，导致错过重要提醒如@通知，影响团队协作效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB37",
+        "FB106"
+      ],
+      "secondary_themes": [
+        "实时通知机制",
+        "推送可靠性"
+      ],
+      "possible_metrics": [
+        "消息送达延迟时间",
+        "用户通知缺失率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "优化消息推送服务，采用实时推送技术如WebSocket；添加推送状态确认功能，确保消息及时送达。"
+    },
+    {
+      "cluster_id": "seg-internal-efficiency-cluster-007",
+      "segment_id": "seg-internal-efficiency",
+      "name": "系统扩展性限制与资源管理",
+      "summary": "API速率限制过保守、文件存储服务器周期性高负载，影响批量数据同步和系统稳定性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB58",
+        "FB100"
+      ],
+      "secondary_themes": [
+        "API设计优化",
+        "存储架构调整"
+      ],
+      "possible_metrics": [
+        "API请求成功率",
+        "服务器负载峰值"
+      ],
+      "priority": "P2",
+      "opportunity_score": 45,
+      "recommendation": "调整API速率限制，提高阈值以适应批量同步需求；优化文件存储架构，采用分布式或负载均衡平滑周期性高负载。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-001",
+      "segment_id": "seg-internal-config",
+      "name": "业务自助配置能力不足，高度依赖IT支持",
+      "summary": "用户普遍反映流程配置（如条件分支、字段定义）过于复杂，缺乏直观、易用的配置工具，导致简单的业务需求（如自定义字段、权限配置）也必须依赖IT人员编写脚本或进行复杂操作，业务部门无法自主、快速地完成配置，严重影响了敏捷性和工作效率。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB19",
+        "FB56",
+        "FB82",
+        "FB89",
+        "FB137",
+        "FB144"
+      ],
+      "secondary_themes": [
+        "流程配置复杂",
+        "权限管理颗粒度",
+        "业务自主能力"
+      ],
+      "possible_metrics": [
+        "业务自助配置率",
+        "IT支持工单中配置类占比",
+        "平均配置任务完成时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "1. **引入低代码/无代码配置界面**：设计可视化、表单化的流程与规则配置器，将脚本编写转化为勾选、拖拽等操作。2. **预置业务模板与组件库**：为常见场景（如请假附加字段、部门数据权限）提供开箱即用的配置模板。3. **建立“配置沙箱”与引导式文档**：提供安全的测试环境和清晰的步骤指引，赋能业务用户进行配置尝试。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-002",
+      "segment_id": "seg-internal-config",
+      "name": "配置变更生效慢与环境不一致",
+      "summary": "配置管理存在效率和质量风险。流程或配置的修改需要较长时间（如次日）才能生效，影响测试和迭代效率。同时，测试环境与生产环境的配置存在不一致，导致经过验证的功能在上线后出现问题，增加了运维和回滚的风险。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB34",
+        "FB46"
+      ],
+      "secondary_themes": [
+        "流程生效延迟",
+        "环境一致性"
+      ],
+      "possible_metrics": [
+        "配置变更平均生效时间",
+        "环境配置差异告警次数",
+        "因环境问题导致的线上缺陷数"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "1. **实现配置热部署与版本管理**：支持配置即时生效或在可控时间窗口内生效，并记录版本历史，便于回溯和回滚。2. **强化环境配置同步机制**：开发或引入配置中心，确保测试、预发、生产环境的核心配置（如流程定义、权限规则）可一键同步或严格校验差异。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-003",
+      "segment_id": "seg-internal-config",
+      "name": "流程状态与进度对用户不透明",
+      "summary": "流程执行（如审批）过程中，系统仅提供模糊的“处理中”状态，缺乏关键的进度信息（如预计完成时间、当前环节停留时长、处理人），导致发起人无法预估时间，产生焦虑，也影响了跨部门协作的效率和对流程的信任度。",
+      "feedback_count": 1,
+      "evidence_feedback_ids": [
+        "FB2"
+      ],
+      "secondary_themes": [
+        "审批进度可视性",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "用户因进度问题产生的查询工单数",
+        "平均流程完成时间",
+        "用户对流程效率的满意度评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "1. **增加流程进度条与关键节点提示**：在流程详情页可视化展示流程图、当前节点及历史审批记录。2. **提供预估时间与SLA提醒**：基于历史数据或配置的SLA，展示预计处理时间，并在超时前向处理人及发起人发送提醒。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-004",
+      "segment_id": "seg-internal-config",
+      "name": "其他配置与模板功能限制",
+      "summary": "系统在催办机制、特定模块（日报）的模板灵活性、以及相关业务模块（如文件版本管理）的配置能力上存在不足，导致功能效用打折扣或无法满足个性化管理需求。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB74",
+        "FB111",
+        "FB117"
+      ],
+      "secondary_themes": [
+        "催办机制",
+        "模板自定义",
+        "文件版本管理"
+      ],
+      "possible_metrics": [
+        "催办后流程实际加速比例",
+        "模板自定义使用率",
+        "因文件版本问题导致的错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 45,
+      "recommendation": "1. **优化催办功能**：增强催办的可见性和强制性，如通过消息强提醒、短信通知，或允许发起人设置升级规则。2. **增强模板可配置性**：允许管理员对日报等模块的字段、布局进行自定义配置。3. **完善文件版本控制**：为关联文档引入清晰的版本号、修订历史和状态标签功能。"
+    },
+    {
+      "cluster_id": "seg-positive-cluster-001",
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "summary": "正向反馈汇总相关反馈",
+      "feedback_count": 22,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB13",
+        "FB22",
+        "FB31",
+        "FB44",
+        "FB47",
+        "FB59",
+        "FB63",
+        "FB69",
+        "FB71",
+        "FB77",
+        "FB81",
+        "FB87",
+        "FB93",
+        "FB103",
+        "FB105",
+        "FB124",
+        "FB130",
+        "FB132",
+        "FB138",
+        "FB142",
+        "FB148"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "保留为产品亮点参考。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-001",
+      "segment_id": "seg-internal-stability",
+      "name": "系统响应缓慢与中断",
+      "summary": "用户在业务高峰期或特定操作下遇到系统卡顿、响应超时甚至完全无法访问，严重影响工作效率和系统可用性。",
+      "feedback_count": 13,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB14",
+        "FB25",
+        "FB65",
+        "FB78",
+        "FB83",
+        "FB66",
+        "FB86",
+        "FB102",
+        "FB9",
+        "FB24",
+        "FB60",
+        "FB114"
+      ],
+      "secondary_themes": [
+        "系统承载能力",
+        "登录会话"
+      ],
+      "possible_metrics": [
+        "平均响应时间",
+        "P99延迟",
+        "系统可用性百分比"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "1. 进行全链路性能分析和压力测试，定位响应瓶颈（如数据库、服务间调用）。2. 优化代码和查询，引入缓存、异步处理、负载均衡提升系统承载能力。3. 修复登录会话管理逻辑，确保‘记住我’功能可靠。4. 制定针对高峰期的应急预案和容量扩容计划。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-002",
+      "segment_id": "seg-internal-stability",
+      "name": "移动端应用稳定性与体验问题",
+      "summary": "移动端APP崩溃率上升、操作闪退、在后台切换或弱网环境下丢失数据，用户体验差，尤其影响特定机型用户。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB80",
+        "FB84",
+        "FB141",
+        "FB125",
+        "FB121"
+      ],
+      "secondary_themes": [
+        "应用崩溃",
+        "数据持久化",
+        "弱网优化"
+      ],
+      "possible_metrics": [
+        "APP崩溃率",
+        "表单数据恢复成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "1. 分析崩溃堆栈，重点修复与低端安卓机型的兼容性问题。2. 优化应用本地数据缓存策略，确保表单在切换后台或进程异常时能自动保存和恢复。3. 增强数据提交的容错机制，在弱网或中断时支持本地暂存和重试。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-003",
+      "segment_id": "seg-internal-stability",
+      "name": "数据库性能与后台任务可靠性问题",
+      "summary": "数据库出现慢查询、主从同步延迟，以及定时任务因服务器负载高而执行失败，影响数据时效性和后台业务自动化。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB30",
+        "FB94",
+        "FB149",
+        "FB18",
+        "FB104"
+      ],
+      "secondary_themes": [
+        "数据库优化",
+        "任务调度",
+        "备份可靠性"
+      ],
+      "possible_metrics": [
+        "慢查询数量",
+        "主从同步延迟时间",
+        "备份任务成功率与数据校验通过率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "1. 使用数据库监控工具识别并优化慢查询，增加必要索引。2. 评估并优化主从同步配置，考虑引入半同步复制。3. 将资源密集型定时任务（如备份、周报生成）调度到业务低峰期，并为其分配专用资源。4. 增加数据备份后的完整性校验步骤。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-005",
+      "segment_id": "seg-internal-stability",
+      "name": "大文件上传处理异常",
+      "summary": "上传大文件（如超过1GB）或在业务高峰时段上传时，接口响应超时甚至导致服务器进程挂起。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB92",
+        "FB147"
+      ],
+      "secondary_themes": [
+        "文件处理"
+      ],
+      "possible_metrics": [
+        "文件上传成功率",
+        "上传平均耗时"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "1. 重构文件上传模块，支持分块上传、断点续传。2. 为上传服务设置独立的进程和资源限制，防止单个大文件任务耗尽系统资源。3. 设置合理的超时时间并增加上传进度反馈。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-006",
+      "segment_id": "seg-internal-stability",
+      "name": "业务单号生成重复",
+      "summary": "系统生成的唯一业务单号出现重复，导致下游流程跟踪、关联和统计出现混乱，存在数据一致性风险。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB88",
+        "FB119",
+        "FB143"
+      ],
+      "secondary_themes": [
+        "数据唯一性"
+      ],
+      "possible_metrics": [
+        "单号重复率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "1. 立即审查单号生成算法，引入分布式ID生成方案（如雪花算法）确保全局唯一性。2. 在数据库的单号字段上增加唯一约束作为最终保障。3. 对历史数据中的重复单号进行排查和修复。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-007",
+      "segment_id": "seg-internal-stability",
+      "name": "服务器资源使用率高与性能风险",
+      "summary": "业务高峰期内存使用率持续处于高位，存在内存泄漏风险；同时，定时备份导致的磁盘I/O激增影响同时段操作。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB33",
+        "FB54"
+      ],
+      "secondary_themes": [
+        "内存泄漏",
+        "磁盘性能"
+      ],
+      "possible_metrics": [
+        "内存使用率峰值",
+        "磁盘I/O等待时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "1. 使用内存分析工具排查并修复内存泄漏问题。2. 评估应用资源需求，进行垂直扩容或优化代码内存使用。3. 将数据备份任务调度至深夜等非业务时段，或优化备份策略以减少I/O峰值。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-004",
+      "segment_id": "seg-internal-stability",
+      "name": "审批流程最终步骤失败",
+      "summary": "审批流程在最后提交步骤报错，导致用户已输入的所有数据丢失，严重影响业务流程和用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB29",
+        "FB120"
+      ],
+      "secondary_themes": [
+        "数据丢失",
+        "错误处理"
+      ],
+      "possible_metrics": [
+        "审批提交成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "1. 定位并修复导致最后一步报错的代码缺陷。2. 在提交流程中实现前端或临时后端数据暂存功能，即使后端报错，用户刷新页面后也能恢复填写内容。3. 优化错误提示，提供清晰的错误原因和重试指引。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-008",
+      "segment_id": "seg-internal-stability",
+      "name": "数据导出格式错乱",
+      "summary": "将系统数据（如预算、报表）导出为Excel时出现格式混乱，导致用户无法直接使用，引发多次工单。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB128",
+        "FB133"
+      ],
+      "secondary_themes": [
+        "数据导出"
+      ],
+      "possible_metrics": [
+        "因格式问题导致的工单数量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 40,
+      "recommendation": "1. 检查并修复导出功能的模板定义，确保单元格格式、合并等设置正确。2. 增加在不同版本Office软件（如WPS）下的兼容性测试。3. 提供导出格式选项（如CSV）作为备选方案。"
+    },
+    {
+      "cluster_id": "seg-internal-stability-cluster-009",
+      "segment_id": "seg-internal-stability",
+      "name": "缓存策略与浏览器兼容性问题",
+      "summary": "部署新缓存策略后导致部分用户页面样式错乱；在IE11等旧浏览器下存在JavaScript错误，影响功能使用。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB76",
+        "FB48"
+      ],
+      "secondary_themes": [
+        "缓存策略",
+        "前端兼容性"
+      ],
+      "possible_metrics": [
+        "前端报错率",
+        "缓存相关用户咨询量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "1. 优化静态资源版本控制和缓存策略，确保用户能及时加载到最新资源。2. 建立前端构建的兼容性目标，在CI/CD流程中加入旧浏览器测试。3. 提供明确的缓存清理引导，帮助遇到问题的用户快速解决。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-001",
+      "segment_id": "seg-internal-adoption",
+      "name": "UI 设计过时及操作不直观",
+      "summary": "用户反馈系统界面风格过时，操作流程不符合现代直觉，导致使用体验不佳。",
+      "feedback_count": 10,
+      "evidence_feedback_ids": [
+        "FB23",
+        "FB68",
+        "FB96",
+        "FB110",
+        "FB129",
+        "FB7",
+        "FB26",
+        "FB99",
+        "FB109",
+        "FB112"
+      ],
+      "secondary_themes": [
+        "信息架构",
+        "可用性"
+      ],
+      "possible_metrics": [
+        "用户界面满意度",
+        "任务完成时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "进行用户界面现代化 redesign，参考主流产品设计规范，优化布局和交互流程，并进行可用性测试以确保直觉操作。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-002",
+      "segment_id": "seg-internal-adoption",
+      "name": "移动端体验缺陷",
+      "summary": "移动端应用存在字体过小、闪退和功能缺失等问题，影响员工在移动场景下的使用效率。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB27",
+        "FB72",
+        "FB97"
+      ],
+      "secondary_themes": [
+        "响应式设计",
+        "稳定性"
+      ],
+      "possible_metrics": [
+        "移动端使用率",
+        "移动端任务成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "优化移动端字体大小和触控区域，修复闪退问题，并确保移动端功能（如历史版本查看）与桌面端保持一致。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-003",
+      "segment_id": "seg-internal-adoption",
+      "name": "通知过多及非工作时间打扰",
+      "summary": "系统发送大量无关通知，且在非工作时间发送非紧急通知，打扰员工休息并降低工作效率。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB38",
+        "FB75",
+        "FB116",
+        "FB136"
+      ],
+      "secondary_themes": [
+        "通知策略",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "通知忽略率",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "实现通知优先级筛选功能，允许用户自定义通知类型，并设置非工作时间通知静默或延迟发送规则。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-006",
+      "segment_id": "seg-internal-adoption",
+      "name": "数据看板图表类型不足及导出格式问题",
+      "summary": "数据看板的图表类型无法满足定制化分析需求，且导出到Excel后格式混乱，影响数据二次加工。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB95",
+        "FB122",
+        "FB150",
+        "FB67"
+      ],
+      "secondary_themes": [
+        "数据分析",
+        "报告生成"
+      ],
+      "possible_metrics": [
+        "数据看板使用频率",
+        "导出成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "增加更多图表类型以支持定制化分析，并优化导出格式确保与常用软件兼容，减少格式错乱问题。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-004",
+      "segment_id": "seg-internal-adoption",
+      "name": "文档与更新沟通不清晰",
+      "summary": "系统更新公告和技术文档语言晦涩，操作手册过时，导致用户无法理解更新内容和正确使用系统。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB61",
+        "FB62",
+        "FB85"
+      ],
+      "secondary_themes": [
+        "培训",
+        "文档管理"
+      ],
+      "possible_metrics": [
+        "文档查阅率",
+        "培训完成率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "使用通俗语言撰写更新日志，定期更新操作手册以匹配当前功能，并提供视频教程或图文指南辅助学习。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-005",
+      "segment_id": "seg-internal-adoption",
+      "name": "表单输入体验不佳",
+      "summary": "长文本输入缺乏字数统计和提示，且缺少草稿保存功能，导致数据输入错误和效率低下。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB64",
+        "FB115",
+        "FB118"
+      ],
+      "secondary_themes": [
+        "表单设计",
+        "数据完整性"
+      ],
+      "possible_metrics": [
+        "表单提交错误率",
+        "输入效率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "为长文本输入框添加字数统计和实时提示，并实现草稿自动保存功能，以防止数据丢失。"
+    },
+    {
+      "cluster_id": "seg-internal-adoption-cluster-007",
+      "segment_id": "seg-internal-adoption",
+      "name": "新用户导航困难及学习曲线陡峭",
+      "summary": "新员工上手系统慢，功能入口层级深，不易发现和使用关键功能，导致初期采用率低。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB51"
+      ],
+      "secondary_themes": [
+        "用户引导",
+        "信息架构"
+      ],
+      "possible_metrics": [
+        "新用户激活率",
+        "功能发现率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "优化菜单结构，减少层级深度，并提供新手引导教程或交互式帮助，以加速新用户上手过程。"
+    },
+    {
+      "cluster_id": "seg-internal-training-cluster-001",
+      "segment_id": "seg-internal-training",
+      "name": "培训内容与材料实用性不足",
+      "summary": "员工反馈培训内容过于理论化、材料案例陈旧，导致学习效果不佳，倾向于自行摸索而非培训。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB21",
+        "FB43",
+        "FB101",
+        "FB113"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "培训满意度评分",
+        "培训后独立操作率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "立即更新培训材料，使用真实业务场景案例；减少理论讲解，增加实操模拟环节；建立定期反馈机制以持续优化培训内容。"
+    },
+    {
+      "cluster_id": "seg-internal-training-cluster-002",
+      "segment_id": "seg-internal-training",
+      "name": "系统易用性与更新导致学习成本增加",
+      "summary": "系统更新后界面变化和易用性问题突出，新员工培训后仍需大量实操辅导，增加了学习时间和成本。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB73",
+        "FB134"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均学习曲线时间",
+        "辅导支持时长"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "在系统更新前发布变更说明和过渡培训；优化界面设计以提升易用性；为新员工提供分阶段的实操辅导计划和资源包。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-001",
+      "segment_id": "seg-internal-integration",
+      "name": "外部服务集成性能瓶颈",
+      "summary": "外部供应商协作门户文件传输速度慢、电子签章服务调用不稳定以及天气API接口失败率高，导致业务流程效率降低和用户不满。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB17",
+        "FB49",
+        "FB127"
+      ],
+      "secondary_themes": [
+        "集成打通",
+        "电子签章集成稳定性"
+      ],
+      "possible_metrics": [
+        "文件传输时间",
+        "API调用失败率",
+        "服务响应时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化文件传输协议，如采用分块传输或压缩；为电子签章服务增加重试和降级机制；监控外部API健康状态，设置故障转移和告警。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-002",
+      "segment_id": "seg-internal-integration",
+      "name": "跨系统数据同步与质量缺陷",
+      "summary": "HR系统数据同步延迟、CRM集成数据重复以及历史数据缺失，导致数据不一致和查询困难，影响数据准确性和业务决策。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB36",
+        "FB52",
+        "FB145"
+      ],
+      "secondary_themes": [
+        "跨系统数据同步延迟",
+        "跨系统数据一致性",
+        "数据管理"
+      ],
+      "possible_metrics": [
+        "数据同步延迟时间",
+        "数据重复率",
+        "数据查询成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "实施近实时数据同步机制，使用消息队列确保数据一致性；在数据集成层增加去重逻辑；完善数据迁移脚本并验证历史数据完整性。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-003",
+      "segment_id": "seg-internal-integration",
+      "name": "集成接口文档与认证问题",
+      "summary": "API接口文档参数说明模糊，增加开发对接难度；SSO单点登录偶尔失效，导致用户重新登录，影响集成开发效率和用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB20",
+        "FB98"
+      ],
+      "secondary_themes": [
+        "集成打通",
+        "单点登录"
+      ],
+      "possible_metrics": [
+        "API对接时间",
+        "SSO登录失败率",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "标准化API文档，提供详细参数说明、示例代码和错误码；加强SSO会话管理，增加监控和自动重连机制；定期审查集成接口质量。"
+    },
+    {
+      "cluster_id": "seg-unknown-cluster-001",
+      "segment_id": "seg-unknown",
+      "name": "未分类反馈",
+      "summary": "未分类反馈相关反馈",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB39",
+        "FB108"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "需要人工复核。"
+    },
+    {
+      "cluster_id": "seg-internal-cost-cluster-001",
+      "segment_id": "seg-internal-cost",
+      "name": "工具投资回报率低，效率提升不明显",
+      "summary": "用户反馈工具成本高昂，但日常工作效率提升未达预期，导致对投资回报产生质疑。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB79",
+        "FB140"
+      ],
+      "secondary_themes": [
+        "成本效益",
+        "投资回报"
+      ],
+      "possible_metrics": [
+        "用户效率提升评分",
+        "工具使用频率",
+        "投资回报率（ROI）"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "进行用户访谈和工具使用数据分析，识别效率瓶颈；优化工具功能以提升易用性，并提供针对性培训，以增强用户对效率提升的感知。"
+    }
+  ],
+  "report_path": ""
+}

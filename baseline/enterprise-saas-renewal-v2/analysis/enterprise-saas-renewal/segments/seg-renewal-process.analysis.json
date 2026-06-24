@@ -1,0 +1,110 @@
+{
+  "segment_id": "seg-renewal-process",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 16,
+    "cluster_count": 4,
+    "clustered_feedback_count": 16,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-process-cluster-001",
+      "segment_id": "seg-renewal-process",
+      "name": "续约流程复杂繁琐",
+      "summary": "客户反馈续约流程复杂、麻烦、需要太多审批，导致使用困难。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB78",
+        "FB80",
+        "FB81",
+        "FB85",
+        "FB89",
+        "FB79",
+        "FB82"
+      ],
+      "secondary_themes": [
+        "审批流程",
+        "简化需求"
+      ],
+      "possible_metrics": [
+        "流程步骤数",
+        "平均处理时间",
+        "用户满意度评分"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "简化续约流程，减少不必要的审批步骤，提供清晰的操作指南和自助服务选项。"
+    },
+    {
+      "cluster_id": "seg-renewal-process-cluster-002",
+      "segment_id": "seg-renewal-process",
+      "name": "合同条款不清晰和不透明",
+      "summary": "客户反映合同条款难以理解、不透明，可能需要重新协商，影响续约决策。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB83",
+        "FB90",
+        "FB84",
+        "FB86"
+      ],
+      "secondary_themes": [
+        "合同语言",
+        "条款透明度"
+      ],
+      "possible_metrics": [
+        "合同理解度调查",
+        "条款协商请求率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "优化合同语言，使其更易懂；增加条款解释和透明度；提供协商选项。"
+    },
+    {
+      "cluster_id": "seg-renewal-process-cluster-004",
+      "segment_id": "seg-renewal-process",
+      "name": "客户体验和通知问题",
+      "summary": "续约流程被客户视为痛点，通知不及时，整体影响客户体验和满意度。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB87",
+        "FB88",
+        "FB92"
+      ],
+      "secondary_themes": [
+        "客户满意度",
+        "通知机制"
+      ],
+      "possible_metrics": [
+        "客户净推荐值(NPS)",
+        "续约成功率",
+        "通知及时率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "改进续约通知机制，确保及时提醒；监控客户反馈，持续优化体验。"
+    },
+    {
+      "cluster_id": "seg-renewal-process-cluster-003",
+      "segment_id": "seg-renewal-process",
+      "name": "流程自动化和效率提升需求",
+      "summary": "用户希望续约流程更自动化，减少手动操作，以提升效率和用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB91",
+        "FB130"
+      ],
+      "secondary_themes": [
+        "自动化",
+        "效率优化"
+      ],
+      "possible_metrics": [
+        "自动化率",
+        "手动操作步骤数"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "引入自动化工具，如自动续约链接、减少手动输入，优化流程设计。"
+    }
+  ]
+}

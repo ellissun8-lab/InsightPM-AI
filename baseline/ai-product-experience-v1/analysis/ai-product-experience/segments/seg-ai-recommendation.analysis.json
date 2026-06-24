@@ -1,0 +1,87 @@
+{
+  "segment_id": "seg-ai-recommendation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 14,
+    "cluster_count": 3,
+    "clustered_feedback_count": 14,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-001",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐内容相关性低",
+      "summary": "用户频繁反馈推荐的商品或内容与个人兴趣不匹配，导致使用体验差和时间浪费。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB26",
+        "FB45",
+        "FB81",
+        "FB117",
+        "FB125"
+      ],
+      "secondary_themes": [
+        "相关性",
+        "用户满意度"
+      ],
+      "possible_metrics": [
+        "推荐点击率",
+        "用户停留时间",
+        "相关性评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化推荐算法，增加用户兴趣匹配度；引入用户反馈循环，定期校准推荐相关性，并通过A/B测试验证改进效果。"
+    },
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-002",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐内容时效性差",
+      "summary": "推荐系统提供过时商品或内容，降低用户体验和满意度。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB36",
+        "FB71",
+        "FB107",
+        "FB143"
+      ],
+      "secondary_themes": [
+        "时效性",
+        "内容新鲜度"
+      ],
+      "possible_metrics": [
+        "内容更新频率",
+        "推荐时效性分数"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "集成实时数据源，确保推荐内容及时更新；设置过期阈值，自动过滤过时内容，并监控更新频率指标。"
+    },
+    {
+      "cluster_id": "seg-ai-recommendation-cluster-003",
+      "segment_id": "seg-ai-recommendation",
+      "name": "推荐准确性不稳定",
+      "summary": "推荐准确性时好时坏，用户反馈混合，影响系统信任度。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB63",
+        "FB99",
+        "FB135",
+        "FB16"
+      ],
+      "secondary_themes": [
+        "一致性",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "推荐准确性方差",
+        "用户满意度标准差"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "实施监控和警报系统，跟踪推荐性能波动；定期重新训练模型，确保一致性，并分析不稳定性根因进行针对性优化。"
+    }
+  ]
+}

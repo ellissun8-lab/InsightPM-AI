@@ -1,0 +1,64 @@
+{
+  "segment_id": "seg-renewal-competition",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 6,
+    "cluster_count": 2,
+    "clustered_feedback_count": 6,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-competition-cluster-001",
+      "segment_id": "seg-renewal-competition",
+      "name": "竞品功能与集成能力优势",
+      "summary": "用户反馈显示竞品在功能完整性、集成能力及整体产品方面优于我们，导致流失风险。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB9",
+        "FB150",
+        "FB53"
+      ],
+      "secondary_themes": [
+        "competitor",
+        "features",
+        "integration",
+        "竞品比较"
+      ],
+      "possible_metrics": [
+        "功能覆盖率",
+        "集成兼容性",
+        "产品优势评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "加强产品功能研发，特别是集成能力的提升，并分析竞品X的优势以制定针对性改进计划。"
+    },
+    {
+      "cluster_id": "seg-renewal-competition-cluster-002",
+      "segment_id": "seg-renewal-competition",
+      "name": "竞品价格、服务与市场趋势优势",
+      "summary": "用户指出竞品在价格、服务质量和市场采用趋势方面具有优势，影响竞争力。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB17",
+        "FB29",
+        "FB45"
+      ],
+      "secondary_themes": [
+        "competitor",
+        "price",
+        "service",
+        "market trends"
+      ],
+      "possible_metrics": [
+        "价格竞争力",
+        "客户满意度",
+        "市场趋势适应度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化定价策略以提升价格竞争力，增强服务质量，并跟踪市场趋势如Z系统的采用情况以调整产品方向。"
+    }
+  ]
+}

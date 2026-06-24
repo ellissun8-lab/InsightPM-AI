@@ -1,0 +1,37 @@
+{
+  "dataset": "b2b-saas-renewal",
+  "project": {
+    "name": "CloudCRM 企业版",
+    "product_type": "B端 SaaS",
+    "business_goal": "提升续费",
+    "target_user": "企业销售管理者",
+    "key_metric": "续费率"
+  },
+  "expected_top_themes": [
+    "权限配置复杂",
+    "续费流程繁琐",
+    "报表导出问题",
+    "登录认证问题"
+  ],
+  "allowed_metrics": [
+    "续费率",
+    "管理员效率",
+    "客服成本",
+    "客户满意度",
+    "功能采纳率"
+  ],
+  "forbidden_metrics": [
+    "DAU",
+    "GMV",
+    "转化率",
+    "客单价"
+  ],
+  "minimum_requirements": {
+    "min_feedback_count": 100,
+    "min_cluster_count": 5,
+    "max_cluster_count": 12,
+    "min_evidence_per_cluster": 2,
+    "min_top_theme_recall": 0.6,
+    "max_hallucinated_metric_count": 0
+  }
+}

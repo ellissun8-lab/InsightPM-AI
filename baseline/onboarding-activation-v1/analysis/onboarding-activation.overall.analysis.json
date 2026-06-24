@@ -1,0 +1,809 @@
+{
+  "project_id": "",
+  "analysis_run_id": "",
+  "summary": {
+    "total_feedback_count": 150,
+    "analyzed_feedback_count": 150,
+    "clustered_feedback_count": 150,
+    "unclustered_feedback_count": 0,
+    "unanalyzed_feedback_count": 0,
+    "segment_count": 9,
+    "business_segment_count": 7,
+    "noise_segment_count": 1,
+    "positive_segment_count": 1,
+    "cluster_count": 28,
+    "is_mixed_dataset": true
+  },
+  "segments": [
+    {
+      "segment_id": "seg-onboarding-performance",
+      "name": "性能与加载问题",
+      "feedback_count": 11,
+      "business_goal": "提升系统响应速度",
+      "issue_cluster_ids": [
+        "seg-onboarding-performance-cluster-001",
+        "seg-onboarding-performance-cluster-002",
+        "seg-onboarding-performance-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-onboarding-registration",
+      "name": "注册与登录问题",
+      "feedback_count": 33,
+      "business_goal": "降低注册流失",
+      "issue_cluster_ids": [
+        "seg-onboarding-registration-cluster-002",
+        "seg-onboarding-registration-cluster-003",
+        "seg-onboarding-registration-cluster-001",
+        "seg-onboarding-registration-cluster-005",
+        "seg-onboarding-registration-cluster-004",
+        "seg-onboarding-registration-cluster-006"
+      ]
+    },
+    {
+      "segment_id": "seg-onboarding-invitation",
+      "name": "邀请与权限问题",
+      "feedback_count": 21,
+      "business_goal": "提升团队协作效率",
+      "issue_cluster_ids": [
+        "seg-onboarding-invitation-cluster-001",
+        "seg-onboarding-invitation-cluster-002",
+        "seg-onboarding-invitation-cluster-003",
+        "seg-onboarding-invitation-cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-onboarding-guidance",
+      "name": "引导与文档问题",
+      "feedback_count": 31,
+      "business_goal": "降低上手难度",
+      "issue_cluster_ids": [
+        "seg-onboarding-guidance-cluster-002",
+        "seg-onboarding-guidance-cluster-006",
+        "seg-onboarding-guidance-cluster-001",
+        "seg-onboarding-guidance-cluster-004",
+        "seg-onboarding-guidance-cluster-005",
+        "seg-onboarding-guidance-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-onboarding-config",
+      "name": "初始配置问题",
+      "feedback_count": 9,
+      "business_goal": "简化配置流程",
+      "issue_cluster_ids": [
+        "seg-onboarding-config-cluster-001",
+        "seg-onboarding-config-cluster-002",
+        "seg-onboarding-config-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "feedback_count": 24,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-positive-cluster-001"
+      ]
+    },
+    {
+      "segment_id": "seg-onboarding-first-use",
+      "name": "首次使用体验",
+      "feedback_count": 13,
+      "business_goal": "提升首次使用满意度",
+      "issue_cluster_ids": [
+        "seg-onboarding-first-use-cluster-001",
+        "seg-onboarding-first-use-cluster-002",
+        "seg-onboarding-first-use-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "name": "噪声/无效反馈",
+      "feedback_count": 6,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-noise-cluster-001"
+      ]
+    },
+    {
+      "segment_id": "seg-onboarding-activation",
+      "name": "激活流程问题",
+      "feedback_count": 2,
+      "business_goal": "提升激活成功率",
+      "issue_cluster_ids": [
+        "seg-onboarding-activation-cluster-001"
+      ]
+    }
+  ],
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-001",
+      "segment_id": "seg-onboarding-performance",
+      "name": "初始页面加载性能瓶颈",
+      "summary": "用户反馈注册页面、产品整体和演示环境加载时间过长，导致用户体验下降和流失风险增加。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB25",
+        "FB90",
+        "FB118"
+      ],
+      "secondary_themes": [
+        "加载性能",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "用户流失率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "优化前端资源加载策略，实施图片懒加载、代码分割和CDN加速，重点减少注册页面和产品首页的加载时间至3秒以内。"
+    },
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-002",
+      "segment_id": "seg-onboarding-performance",
+      "name": "登录后会话加载与连接稳定性问题",
+      "summary": "登录后页面加载失败、频繁掉线和服务器错误，阻碍用户正常访问和使用产品。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB35",
+        "FB95",
+        "FB107",
+        "FB114"
+      ],
+      "secondary_themes": [
+        "登录性能",
+        "服务器稳定性"
+      ],
+      "possible_metrics": [
+        "登录成功率",
+        "会话持续时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "检查服务器负载和登录会话管理机制，修复502错误，优化个人资料页面的数据库查询和缓存策略。"
+    },
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-003",
+      "segment_id": "seg-onboarding-performance",
+      "name": "系统更新响应与数据同步问题",
+      "summary": "产品更新后出现卡顿、按钮功能失效和跨设备数据同步延迟，影响功能可靠性和用户工作效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB17",
+        "FB132",
+        "FB145"
+      ],
+      "secondary_themes": [
+        "系统更新",
+        "功能响应",
+        "数据同步"
+      ],
+      "possible_metrics": [
+        "操作响应时间",
+        "数据同步延迟"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "在更新发布前进行性能回归测试，修复按钮点击事件的bug，优化数据同步协议以减少跨设备延迟。"
+    },
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-002",
+      "segment_id": "seg-onboarding-registration",
+      "name": "注册流程繁琐和强制填写问题",
+      "summary": "用户反馈注册流程步骤过多、页面过多，强制要求填写公司信息、手机号等字段，导致注册阻塞和体验下降。",
+      "feedback_count": 15,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB5",
+        "FB45",
+        "FB55",
+        "FB93",
+        "FB117",
+        "FB131",
+        "FB135",
+        "FB143",
+        "FB19",
+        "FB27",
+        "FB32",
+        "FB75",
+        "FB110",
+        "FB134"
+      ],
+      "secondary_themes": [
+        "表单设计",
+        "用户异议"
+      ],
+      "possible_metrics": [
+        "注册步骤数量",
+        "字段必填率",
+        "注册流失率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "简化注册流程，减少必填字段并设置为可选（如公司信息、手机号），提供先体验个人功能再补填信息的选项；优化表单布局减少页面切换；默认取消非必要勾选项（如新闻订阅）。"
+    },
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-003",
+      "segment_id": "seg-onboarding-registration",
+      "name": "安全验证和密码管理流程问题",
+      "summary": "用户遇到密码重置流程失效、登录二次验证繁琐、异常登录检测误报等问题，影响账户安全性和使用便捷性。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB28",
+        "FB47",
+        "FB71",
+        "FB127"
+      ],
+      "secondary_themes": [
+        "账户安全",
+        "验证频率"
+      ],
+      "possible_metrics": [
+        "密码重置成功率",
+        "登录验证时间",
+        "安全事件误报率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "修复密码重置链接确保点击有效；更新密码后立即失效旧密码；优化二次验证（2FA）流程，提供‘信任设备’选项减少频率；改进异常登录检测算法，减少误报并简化验证步骤。"
+    },
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-001",
+      "segment_id": "seg-onboarding-registration",
+      "name": "短信验证码接收问题",
+      "summary": "用户无法接收短信验证码，多次尝试失败，导致注册流程阻塞，尤其影响安卓手机用户。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB15",
+        "FB53",
+        "FB85"
+      ],
+      "secondary_themes": [
+        "验证码延迟",
+        "通道故障"
+      ],
+      "possible_metrics": [
+        "短信验证码发送成功率",
+        "注册流程完成率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "与短信服务商合作优化通道稳定性，增加备用验证方式（如邮件验证码或语音验证码），并在验证码发送失败时提供明确错误提示和重试机制。"
+    },
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-005",
+      "segment_id": "seg-onboarding-registration",
+      "name": "用户理解和系统提示问题",
+      "summary": "用户对产品概念（如工作区、项目）理解不清，注册后缺乏明确提示，更新后密码重置无解释，邮箱修改困难。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB37",
+        "FB88",
+        "FB63",
+        "FB66"
+      ],
+      "secondary_themes": [
+        "用户引导",
+        "系统反馈"
+      ],
+      "possible_metrics": [
+        "用户理解度",
+        "提示明确性评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "在注册流程中添加概念解释和引导提示（如工具提示或帮助文档）；注册成功后提供明确欢迎信息和下一步指引；更新时解释密码重置原因；优化个人资料设置，允许邮箱修改功能。"
+    },
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-004",
+      "segment_id": "seg-onboarding-registration",
+      "name": "第三方登录和SSO集成问题",
+      "summary": "用户希望支持微信扫码和社交账号快速登录，同时SSO单点登录与产品内部独立密码要求冲突，造成不便。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB105",
+        "FB124",
+        "FB113"
+      ],
+      "secondary_themes": [
+        "登录方式",
+        "集成兼容性"
+      ],
+      "possible_metrics": [
+        "第三方登录使用率",
+        "SSO登录成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "增加微信扫码和社交账号（如GitHub）登录选项，简化注册流程；整合SSO与产品内部认证，避免要求用户设置独立密码，统一使用SSO进行权限管理。"
+    },
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-006",
+      "segment_id": "seg-onboarding-registration",
+      "name": "浏览器和设备兼容性问题",
+      "summary": "产品在不同浏览器（如Chrome与Safari）上登录行为不一致，手机浏览器注册时输入框自动放大，影响用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB39",
+        "FB123"
+      ],
+      "secondary_themes": [
+        "跨平台兼容性",
+        "移动体验"
+      ],
+      "possible_metrics": [
+        "浏览器兼容性错误率",
+        "移动端注册完成率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "进行全面的跨浏览器和设备测试，修复登录行为不一致问题；优化移动端表单设计，通过CSS或JavaScript控制输入框缩放，确保在手机浏览器上输入体验流畅。"
+    },
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-001",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "邀请链接和邮件发送失败",
+      "summary": "用户在邀请过程中遇到链接失效、邮件被误判为垃圾邮件、邮件显示乱码或无法接收、浏览器不兼容或过期时间不可设置等问题，导致邀请流程中断。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB33",
+        "FB60",
+        "FB89",
+        "FB102",
+        "FB109",
+        "FB138"
+      ],
+      "secondary_themes": [
+        "邮件送达",
+        "链接兼容性",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "邀请链接点击率",
+        "邮件送达率",
+        "邀请流程完成时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "优化邮件发送基础设施，使用专业邮件服务提升送达率并避免垃圾邮件过滤；确保邀请链接兼容主流浏览器并提供备用方案；允许用户自定义链接过期时间；添加邮件发送状态追踪和自动重发机制。"
+    },
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-002",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "邀请流程界面不清晰和状态显示问题",
+      "summary": "用户在邀请成员时找不到邀请码输入或批量导入入口，邀请后状态显示卡住或成员列表不显示，造成操作困惑和效率低下。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB64",
+        "FB72",
+        "FB116"
+      ],
+      "secondary_themes": [
+        "用户界面设计",
+        "状态同步"
+      ],
+      "possible_metrics": [
+        "邀请流程完成率",
+        "用户支持请求量",
+        "界面导航错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "重新设计邀请界面，将邀请码输入和批量导入功能置于明显位置；优化邀请状态同步机制，提供实时进度指示和解决卡住问题的自助工具（如重试按钮）；简化成员列表显示逻辑。"
+    },
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-003",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "权限配置和访问控制缺陷",
+      "summary": "权限设置复杂、默认过于严格或存在逻辑错误，导致文件共享失效、误删数据或移除成员后仍能访问，影响团队协作效率和数据安全。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB21",
+        "FB49",
+        "FB94",
+        "FB96"
+      ],
+      "secondary_themes": [
+        "权限管理",
+        "安全审计",
+        "协作效率"
+      ],
+      "possible_metrics": [
+        "权限配置错误率",
+        "数据泄露事件数",
+        "协作满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "简化权限配置流程，提供预设模板和清晰说明以降低复杂度；调整默认权限设置，平衡安全与协作效率（如为小团队提供宽松选项）；确保成员移除后立即撤销所有访问权限；添加权限变更审计日志和即时通知。"
+    },
+    {
+      "cluster_id": "seg-onboarding-invitation-cluster-004",
+      "segment_id": "seg-onboarding-invitation",
+      "name": "邀请限制和系统配置错误",
+      "summary": "系统错误提示账号上限、域名限制处理不佳、工作区设置冲突或邮箱冲突，导致邀请失败、配置困难或误判，阻碍团队扩展和协作。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB40",
+        "FB46",
+        "FB81",
+        "FB129",
+        "FB133"
+      ],
+      "secondary_themes": [
+        "配额管理",
+        "域名处理",
+        "外部协作"
+      ],
+      "possible_metrics": [
+        "邀请失败率",
+        "配置支持请求量",
+        "外部用户加入成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "修正配额检查逻辑，与用户购买信息实时同步并提供清晰错误解释；优化域名限制处理，提供自动化验证和解决方案（如白名单设置）；改进工作区设置，避免冲突并增加提示；简化外部用户邀请流程，支持项目级别访问而不暴露整个工作区。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-002",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "文档可读性与可访问性差",
+      "summary": "文档格式不友好、分类混乱或语言问题，影响用户查找和理解。",
+      "feedback_count": 12,
+      "evidence_feedback_ids": [
+        "FB41",
+        "FB56",
+        "FB65",
+        "FB92",
+        "FB97",
+        "FB120",
+        "FB130",
+        "FB6",
+        "FB62",
+        "FB136",
+        "FB144",
+        "FB149"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "文档可访问性评分",
+        "用户查找时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "提供响应式网页版文档，改进文档分类结构，使用业务用户友好的语言，确保帮助按钮显眼。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-006",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "文档内容缺失与指导不足",
+      "summary": "文档缺少关键信息或详细说明，无法有效指导用户完成任务。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB52",
+        "FB82",
+        "FB115",
+        "FB121",
+        "FB148"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "文档完整性评分",
+        "任务完成率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "补充缺失文档内容，如数据迁移、功能清单、配置步骤；提供详细步骤指南和示例。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-001",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "文档内容过时与不一致",
+      "summary": "文档描述与产品实际界面或功能不符，导致用户操作错误或困惑。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB16",
+        "FB24",
+        "FB77",
+        "FB137",
+        "FB142"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "文档准确率",
+        "用户错误率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "建立文档审核流程，确保每次产品更新后同步更新文档；对于关键功能，提供实时对比图示。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-004",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "功能入口难以发现",
+      "summary": "用户难以找到管理员功能或重新访问新手引导入口。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB30",
+        "FB43",
+        "FB100"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "功能发现率",
+        "用户帮助请求次数"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "在界面中突出显示帮助按钮和功能入口；提供引导重访选项。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-005",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "术语混淆与概念解释不足",
+      "summary": "产品术语不一致或关键概念解释缺失，导致用户理解困难。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB69",
+        "FB108",
+        "FB125"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "术语理解准确率",
+        "用户困惑率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "统一产品术语，在文档中添加术语表；对复杂概念如权限、角色提供详细图解说明。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-003",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "引导视频体验不佳",
+      "summary": "视频教程时长过长或缺乏，用户希望更多视频内容或播放控制。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB10",
+        "FB73"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "视频观看完成率",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "为视频添加进度条和快进功能；制作更多短视频教程覆盖关键功能。"
+    },
+    {
+      "cluster_id": "seg-onboarding-config-cluster-001",
+      "segment_id": "seg-onboarding-config",
+      "name": "初始配置复杂性与高认知负担",
+      "summary": "用户反馈初始配置选项过多、流程繁琐、页面说明冗长，对非技术用户不友好，导致认知负担重。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB7",
+        "FB23",
+        "FB119",
+        "FB99"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置完成率",
+        "用户支持请求率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "引入快速开始模式，默认只显示必要配置项；简化页面布局，使用分步向导减少认知负荷；为复杂选项提供简明的帮助提示。"
+    },
+    {
+      "cluster_id": "seg-onboarding-config-cluster-002",
+      "segment_id": "seg-onboarding-config",
+      "name": "初始配置技术错误与文档支持不足",
+      "summary": "用户在初始配置过程中遇到技术错误如上传头像失败、API密钥权限错误，并反馈文档位置不明确或指引有误。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB51",
+        "FB54",
+        "FB146"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置错误率",
+        "文档访问率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "优化文件上传验证，提供清晰的格式和错误提示；确保API文档准确，并在配置界面直接链接到相关文档；提供配置前检查清单和实时支持。"
+    },
+    {
+      "cluster_id": "seg-onboarding-config-cluster-003",
+      "segment_id": "seg-onboarding-config",
+      "name": "初始配置后修改灵活性限制",
+      "summary": "用户反馈初始配置后无法修改某些设置如时区或模板，只能通过删除项目重建，缺乏灵活性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB104",
+        "FB140"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户配置满意度",
+        "项目重建率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "允许用户后续修改初始配置选项，如时区和模板选择；提供配置迁移或重置功能，避免项目重建；增加配置变更确认和撤销选项。"
+    },
+    {
+      "cluster_id": "seg-positive-cluster-001",
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "summary": "正向反馈汇总相关反馈",
+      "feedback_count": 24,
+      "evidence_feedback_ids": [
+        "FB9",
+        "FB20",
+        "FB22",
+        "FB29",
+        "FB34",
+        "FB42",
+        "FB48",
+        "FB50",
+        "FB57",
+        "FB61",
+        "FB68",
+        "FB70",
+        "FB74",
+        "FB80",
+        "FB84",
+        "FB86",
+        "FB87",
+        "FB98",
+        "FB103",
+        "FB106",
+        "FB112",
+        "FB126",
+        "FB139",
+        "FB141"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "保留为产品亮点参考。"
+    },
+    {
+      "cluster_id": "seg-onboarding-first-use-cluster-001",
+      "segment_id": "seg-onboarding-first-use",
+      "name": "核心功能引导缺失与初期设置体验不佳",
+      "summary": "用户在首次使用过程中面临核心功能引导不足、设置流程复杂、第三方服务绑定困惑、导航不便以及客服响应慢等问题，导致上手时间延长和挫败感，可能引发放弃。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB31",
+        "FB36",
+        "FB44",
+        "FB59",
+        "FB67"
+      ],
+      "secondary_themes": [
+        "首次使用引导",
+        "设置流程",
+        "客服支持"
+      ],
+      "possible_metrics": [
+        "首次任务完成时间",
+        "设置放弃率",
+        "用户支持请求量"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化首次使用引导，为创建报表等核心功能添加交互式教程；简化设置步骤，将非必要第三方服务绑定改为可选；改进导航结构，减少功能入口层级；提升客服响应速度，或在设置阶段提供实时帮助选项。"
+    },
+    {
+      "cluster_id": "seg-onboarding-first-use-cluster-002",
+      "segment_id": "seg-onboarding-first-use",
+      "name": "技术错误与用户界面不一致问题",
+      "summary": "用户在首次使用时遇到页面卡死、数据导入失败错误信息模糊、以及登录后意外跳转到旧版界面等问题，严重影响操作流畅性和产品信任度。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB38",
+        "FB79",
+        "FB91"
+      ],
+      "secondary_themes": [
+        "技术稳定性",
+        "错误处理",
+        "界面一致性"
+      ],
+      "possible_metrics": [
+        "错误发生率",
+        "用户中断率",
+        "界面切换投诉量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "修复页面卡死bug，确保用户数据自动保存；改进错误提示信息，提供具体失败原因和解决步骤；加强界面版本控制，避免意外跳转，并为用户提供清晰的界面切换指南。"
+    },
+    {
+      "cluster_id": "seg-onboarding-first-use-cluster-003",
+      "segment_id": "seg-onboarding-first-use",
+      "name": "正面体验与竞争对手差距改进机会",
+      "summary": "用户赞赏产品的简洁设计、数据导入向导和案例模板等优点，但指出竞争对手上手体验更优，需在保持优势的同时针对性改进整体首次使用流程。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB122",
+        "FB128",
+        "FB147",
+        "FB150"
+      ],
+      "secondary_themes": [
+        "用户体验满意度",
+        "竞争分析"
+      ],
+      "possible_metrics": [
+        "用户满意度评分",
+        "净推荐值（NPS）",
+        "功能使用深度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "继续优化数据导入向导和案例模板，作为差异化卖点；深入分析竞争对手的上手体验优势，识别自身短板，如简化注册到核心功能的流程，或增强个性化引导，以提升整体满意度。"
+    },
+    {
+      "cluster_id": "seg-noise-cluster-001",
+      "segment_id": "seg-noise",
+      "name": "无效/噪声反馈",
+      "summary": "噪声/无效反馈相关反馈",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB14",
+        "FB18",
+        "FB76",
+        "FB83",
+        "FB101",
+        "FB111"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "不进入核心问题排序。"
+    },
+    {
+      "cluster_id": "seg-onboarding-activation-cluster-001",
+      "segment_id": "seg-onboarding-activation",
+      "name": "激活邮件内容不一致与不当付费引导",
+      "summary": "用户在激活流程中遇到激活邮件标题与正文内容不一致（标题为激活，正文为欢迎注册），导致困惑和激活障碍；同时，免费版注册用户被过度引导购买付费功能，引起不满，影响激活成功率和用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB58",
+        "FB78"
+      ],
+      "secondary_themes": [
+        "用户体验",
+        "转化优化"
+      ],
+      "possible_metrics": [
+        "激活邮件打开率",
+        "激活完成率",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "1. 立即审核并统一激活邮件的标题和正文内容，确保一致性并提供清晰、明确的激活链接和指引，以减少用户困惑。2. 优化onboarding流程，针对免费版用户，在注册后提供基于免费功能的个性化引导，避免强制或过度推销付费功能，可考虑通过价值展示而非干扰方式促进自然升级。"
+    }
+  ],
+  "report_path": ""
+}

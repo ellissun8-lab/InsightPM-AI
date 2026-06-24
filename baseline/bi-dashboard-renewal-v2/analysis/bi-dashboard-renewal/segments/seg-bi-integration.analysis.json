@@ -1,0 +1,115 @@
+{
+  "segment_id": "seg-bi-integration",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 21,
+    "cluster_count": 4,
+    "clustered_feedback_count": 21,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-integration-cluster-001",
+      "segment_id": "seg-bi-integration",
+      "name": "配置、文档与部署的复杂性阻碍了快速集成",
+      "summary": "用户在配置连接、理解文档和部署产品时遇到显著困难，包括数据库连接池设置复杂、API文档不完整、功能入口隐蔽、部署文档缺失以及对简化连接器设置和自动化部署的诉求。",
+      "feedback_count": 11,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB25",
+        "FB72",
+        "FB80",
+        "FB104",
+        "FB129",
+        "FB145",
+        "FB18",
+        "FB41",
+        "FB61",
+        "FB117"
+      ],
+      "secondary_themes": [
+        "用户引导",
+        "文档质量",
+        "部署体验"
+      ],
+      "possible_metrics": [
+        "首次集成成功时间",
+        "部署文档满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "1. 推出分步配置向导，预置常见数据库连接池的最佳实践模板。2. 成立文档改进小组，按数据源类型和使用场景重构API文档，增加交互式示例。3. 发布基于Docker/Kubernetes的一键部署脚本和详细指南，并评估提供开机自启服务的可能性。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-003",
+      "segment_id": "seg-bi-integration",
+      "name": "数据源连接器覆盖不足与功能扩展需求",
+      "summary": "用户强烈希望支持更多数据源（如Snowflake、达梦数据库、国产化环境）和扩展功能（如与CRM系统打通、集成ETL能力），以提升产品的适用性和业务价值。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB27",
+        "FB29",
+        "FB69",
+        "FB108",
+        "FB148"
+      ],
+      "secondary_themes": [
+        "生态集成",
+        "功能完整性",
+        "国产化支持"
+      ],
+      "possible_metrics": [
+        "支持的数据源类型数",
+        "用户请求的功能采纳率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "1. 建立公开的连接器开发路线图和投票机制，优先支持市场需求高、技术可行的数据源（如Snowflake）和平台（如麒麟OS）。2. 开放连接器开发SDK或框架，鼓励社区和合作伙伴开发定制连接器。3. 评估内置轻量级ETL模块或与主流ETL工具提供深度集成方案的可行性，作为高阶付费功能。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-002",
+      "segment_id": "seg-bi-integration",
+      "name": "单点登录（SSO）集成与稳定性问题",
+      "summary": "用户反馈单点登录（SSO）功能与内部系统集成困难、技术响应慢，且在使用中存在功能不稳定（需重新登录）和角色映射错误导致权限不对等的问题。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB86",
+        "FB106"
+      ],
+      "secondary_themes": [
+        "认证可靠性",
+        "权限同步"
+      ],
+      "possible_metrics": [
+        "SSO登录成功率",
+        "角色映射准确率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "1. 提供覆盖主流SSO协议（如SAML, OAuth2.0）的详细集成指南和调试工具，并建立SSO集成的专门支持通道以提升响应速度。2. 对SSO功能进行压力测试和稳定性优化，增加会话保持和错误恢复机制。3. 设计并提供清晰的用户-角色映射配置界面和验证工具。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-004",
+      "segment_id": "seg-bi-integration",
+      "name": "身份访问管理与数据安全功能待完善",
+      "summary": "用户对数据安全合规和高效权限管理有明确需求，具体包括必须提供数据脱敏功能以处理敏感数据，以及希望将权限模型从ACL升级为更易管理的RBAC。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB99",
+        "FB142"
+      ],
+      "secondary_themes": [
+        "数据安全",
+        "权限模型"
+      ],
+      "possible_metrics": [
+        "安全功能启用率",
+        "权限配置复杂度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "1. 将数据脱敏功能（如动态脱敏）的开发提升至高优先级，这是进入金融、政务等行业的必要条件。2. 立项评估权限系统从ACL向RBAC模型迁移的技术方案和路线图，为管理员提供更直观、可扩展的权限管理界面。"
+    }
+  ]
+}

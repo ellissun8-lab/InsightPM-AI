@@ -1,0 +1,46 @@
+{
+  "dataset": "ai-product-experience",
+  "status": "warning",
+  "score": 84,
+  "model_roles": {
+    "generator": "mimo",
+    "validator": "deepseek-v4-pro"
+  },
+  "summary": {
+    "feedback_count": 114,
+    "cluster_count": 6,
+    "invalid_evidence_count": 0,
+    "forbidden_metric_count": 0,
+    "hallucination_count": 0,
+    "over_inference_count": 0
+  },
+  "warning_types": [
+    "count_mismatch"
+  ],
+  "score_breakdown": {
+    "data_realism": 5,
+    "theme_coverage": 14,
+    "cluster_accuracy": 14,
+    "evidence_accuracy": 15,
+    "metric_fit": 10,
+    "format_compliance": 10,
+    "conclusion_credibility": 7,
+    "no_hallucination": 9
+  },
+  "training_decision": {
+    "usable_for_training": false,
+    "usable_for_testing": false,
+    "usable_for_regression": false,
+    "requires_human_review": true
+  },
+  "failed_checks": [
+    "汇总中已归类反馈数量为114，但6个聚类的反馈数量总和为99，存在15条反馈未被有效分类，与“未归类反馈数量：0”矛盾，数据一致性失败。"
+  ],
+  "warnings": [
+    "count_mismatch：反馈总量与各聚类反馈数之和不符，未归类数量应为15而非0。"
+  ],
+  "recommendations": [
+    "修正聚类反馈计数，确保总和等于已分析总数，或正确标注未归类反馈数量。",
+    "重新审查各聚类证据ID是否完整覆盖对应反馈，避免因计数错误导致结论偏差。"
+  ]
+}

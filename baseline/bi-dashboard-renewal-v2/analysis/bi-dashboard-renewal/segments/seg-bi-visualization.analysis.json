@@ -1,0 +1,72 @@
+{
+  "segment_id": "seg-bi-visualization",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 9,
+    "cluster_count": 3,
+    "clustered_feedback_count": 9,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-visualization-cluster-001",
+      "segment_id": "seg-bi-visualization",
+      "name": "图表美观与品牌适配不足",
+      "summary": "用户反馈图表样式单一、颜色搭配不专业，与品牌调性不符，影响演示效果。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB60",
+        "FB101"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户满意度",
+        "品牌一致性评分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "引入更多美观的图表模板和专业的颜色主题库，支持用户自定义品牌颜色方案，并定期更新设计资源以提升视觉效果。"
+    },
+    {
+      "cluster_id": "seg-bi-visualization-cluster-002",
+      "segment_id": "seg-bi-visualization",
+      "name": "图表功能限制与准确性",
+      "summary": "地图可视化功能简单，散点图标签重叠，智能推荐图表类型不准确，限制数据分析能力。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB23",
+        "FB76",
+        "FB125"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "数据分析效率",
+        "图表错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "增强地图可视化功能，支持热力图和区域填充；优化散点图标签自动避让算法以避免重叠；基于用户使用历史和数据特征改进智能推荐算法。"
+    },
+    {
+      "cluster_id": "seg-bi-visualization-cluster-003",
+      "segment_id": "seg-bi-visualization",
+      "name": "交互体验与操作效率",
+      "summary": "移动端适配差无法操作，图表复制功能缺失，交互动画效果不足，影响使用便捷性。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB37",
+        "FB100",
+        "FB118"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "移动端使用率",
+        "操作完成时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化移动端响应式设计，确保核心图表功能可用；添加图表复制和粘贴功能以减少重复配置；提供可配置的交互动画选项，增强用户体验。"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "segment_id": "seg-onboarding-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 14,
+    "cluster_count": 4,
+    "clustered_feedback_count": 14,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-001",
+      "segment_id": "seg-onboarding-performance",
+      "name": "前端加载与响应延迟问题",
+      "summary": "用户反馈页面加载缓慢、动画卡顿、搜索延迟等前端性能问题，影响用户体验和系统响应速度。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB37",
+        "FB46",
+        "FB113",
+        "FB118",
+        "FB122",
+        "FB123"
+      ],
+      "secondary_themes": [
+        "seg-onboarding-performance",
+        "性能与加载"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "交互响应时间",
+        "搜索延迟时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化前端资源加载，压缩图片和CSS/JS文件，实现懒加载和代码分割，改善动画性能（如使用CSS硬件加速），并优化搜索算法以减少查询延迟。"
+    },
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-002",
+      "segment_id": "seg-onboarding-performance",
+      "name": "应用稳定性与操作超时问题",
+      "summary": "用户遭遇应用闪退、保存失败、上传卡住等稳定性问题，导致操作中断、数据丢失和用户体验下降。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB25",
+        "FB115",
+        "FB117"
+      ],
+      "secondary_themes": [
+        "性能或稳定性问题"
+      ],
+      "possible_metrics": [
+        "崩溃率",
+        "操作成功率",
+        "上传完成率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "加强应用错误处理和崩溃监控，实现自动保存功能以防数据丢失，优化文件上传和保存流程以增加进度条实时更新和重试机制。"
+    },
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-003",
+      "segment_id": "seg-onboarding-performance",
+      "name": "特定功能性能瓶颈问题",
+      "summary": "团队成员管理、文件列表查看、报表导出等特定功能在数据量大时出现卡顿、超时或失败，影响业务效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB58",
+        "FB114",
+        "FB120"
+      ],
+      "secondary_themes": [
+        "性能与加载",
+        "seg-onboarding-performance"
+      ],
+      "possible_metrics": [
+        "功能响应时间",
+        "大数据处理时间",
+        "列表渲染速度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "优化数据库查询和索引，为列表和表格实现分页加载或虚拟滚动，对于大数据操作如导出采用异步处理并在完成后通知用户下载。"
+    },
+    {
+      "cluster_id": "seg-onboarding-performance-cluster-004",
+      "segment_id": "seg-onboarding-performance",
+      "name": "网络与服务器延迟问题",
+      "summary": "高峰期性能波动和海外访问速度慢，表明服务器负载过高或网络路由不佳，影响全球用户访问体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB116",
+        "FB121"
+      ],
+      "secondary_themes": [
+        "网络访问与部署",
+        "性能与加载"
+      ],
+      "possible_metrics": [
+        "服务器响应时间",
+        "国际访问延迟",
+        "高峰时段可用性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "监控和优化服务器负载，考虑实施负载均衡和CDN加速，计划部署海外节点或优化国际网络路由以减少延迟。"
+    }
+  ]
+}

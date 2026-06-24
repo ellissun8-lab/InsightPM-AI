@@ -1,0 +1,324 @@
+{
+  "dataset": "ai-product-experience",
+  "is_mixed_dataset": true,
+  "segment_count": 10,
+  "business_segment_count": 8,
+  "noise_segment_count": 1,
+  "positive_segment_count": 1,
+  "segments": [
+    {
+      "segment_id": "seg-ai-output-quality",
+      "segment_type": "business",
+      "name": "AI 输出质量问题",
+      "product_type": "AI-product",
+      "business_goal": "提升输出准确性",
+      "feedback_count": 35,
+      "feedback_ids": [
+        "FB1",
+        "FB2",
+        "FB4",
+        "FB13",
+        "FB14",
+        "FB21",
+        "FB22",
+        "FB24",
+        "FB33",
+        "FB34",
+        "FB42",
+        "FB43",
+        "FB50",
+        "FB51",
+        "FB60",
+        "FB61",
+        "FB68",
+        "FB69",
+        "FB78",
+        "FB79",
+        "FB86",
+        "FB87",
+        "FB96",
+        "FB97",
+        "FB104",
+        "FB105",
+        "FB114",
+        "FB115",
+        "FB122",
+        "FB123",
+        "FB132",
+        "FB133",
+        "FB140",
+        "FB141",
+        "FB150"
+      ],
+      "main_themes": [
+        "AI输出质量",
+        "AI Output Quality",
+        "准确性",
+        "可读性",
+        "可靠性"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "segment_type": "positive",
+      "name": "正向反馈汇总",
+      "product_type": "AI-product",
+      "business_goal": "unknown",
+      "feedback_count": 20,
+      "feedback_ids": [
+        "FB3",
+        "FB12",
+        "FB17",
+        "FB23",
+        "FB32",
+        "FB46",
+        "FB47",
+        "FB48",
+        "FB53",
+        "FB59",
+        "FB64",
+        "FB65",
+        "FB77",
+        "FB83",
+        "FB84",
+        "FB89",
+        "FB95",
+        "FB113",
+        "FB131",
+        "FB149"
+      ],
+      "main_themes": [
+        "正向反馈",
+        "正向",
+        "AI Customer Service",
+        "Usage Quota",
+        "Overall Satisfaction"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-hallucination",
+      "segment_type": "business",
+      "name": "AI 幻觉与错误",
+      "product_type": "AI-product",
+      "business_goal": "降低幻觉率",
+      "feedback_count": 16,
+      "feedback_ids": [
+        "FB5",
+        "FB15",
+        "FB25",
+        "FB35",
+        "FB44",
+        "FB52",
+        "FB62",
+        "FB70",
+        "FB80",
+        "FB88",
+        "FB98",
+        "FB106",
+        "FB116",
+        "FB124",
+        "FB134",
+        "FB142"
+      ],
+      "main_themes": [
+        "幻觉错误",
+        "Hallucination",
+        "真实性",
+        "产品推荐真实性",
+        "信息真实性"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-recommendation",
+      "segment_type": "business",
+      "name": "推荐准确性问题",
+      "product_type": "AI-product",
+      "business_goal": "提升推荐相关性",
+      "feedback_count": 14,
+      "feedback_ids": [
+        "FB6",
+        "FB16",
+        "FB26",
+        "FB36",
+        "FB45",
+        "FB63",
+        "FB71",
+        "FB81",
+        "FB99",
+        "FB107",
+        "FB117",
+        "FB125",
+        "FB135",
+        "FB143"
+      ],
+      "main_themes": [
+        "推荐准确性",
+        "Recommendation Accuracy",
+        "相关性",
+        "内容时效性"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-customer-service",
+      "segment_type": "business",
+      "name": "AI 客服体验",
+      "product_type": "AI-product",
+      "business_goal": "提升客服满意度",
+      "feedback_count": 13,
+      "feedback_ids": [
+        "FB7",
+        "FB27",
+        "FB37",
+        "FB54",
+        "FB72",
+        "FB82",
+        "FB90",
+        "FB100",
+        "FB108",
+        "FB118",
+        "FB126",
+        "FB136",
+        "FB144"
+      ],
+      "main_themes": [
+        "AI客服",
+        "AI Customer Service",
+        "服务效果",
+        "算法升级",
+        "自然语言处理"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-usage",
+      "segment_type": "business",
+      "name": "使用量与配额",
+      "product_type": "AI-product",
+      "business_goal": "优化使用量管理",
+      "feedback_count": 13,
+      "feedback_ids": [
+        "FB8",
+        "FB18",
+        "FB28",
+        "FB38",
+        "FB55",
+        "FB73",
+        "FB91",
+        "FB101",
+        "FB109",
+        "FB119",
+        "FB127",
+        "FB137",
+        "FB145"
+      ],
+      "main_themes": [
+        "使用量配额",
+        "Usage Quota",
+        "资源管理",
+        "用户体验",
+        "资源限制"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-data-security",
+      "segment_type": "business",
+      "name": "数据安全与隐私",
+      "product_type": "AI-product",
+      "business_goal": "提升数据安全信任",
+      "feedback_count": 14,
+      "feedback_ids": [
+        "FB9",
+        "FB19",
+        "FB29",
+        "FB39",
+        "FB56",
+        "FB66",
+        "FB74",
+        "FB92",
+        "FB102",
+        "FB110",
+        "FB120",
+        "FB128",
+        "FB138",
+        "FB146"
+      ],
+      "main_themes": [
+        "数据安全",
+        "Data Security",
+        "信任与隐私",
+        "隐私保护",
+        "学习数据安全"
+      ]
+    },
+    {
+      "segment_id": "seg-ai-performance",
+      "segment_type": "business",
+      "name": "AI 响应速度",
+      "product_type": "AI-product",
+      "business_goal": "提升响应效率",
+      "feedback_count": 12,
+      "feedback_ids": [
+        "FB10",
+        "FB20",
+        "FB30",
+        "FB40",
+        "FB49",
+        "FB57",
+        "FB67",
+        "FB75",
+        "FB85",
+        "FB93",
+        "FB103",
+        "FB111"
+      ],
+      "main_themes": [
+        "响应速度",
+        "Response Speed",
+        "系统性能",
+        "稳定性",
+        "用户体验"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "segment_type": "noise",
+      "name": "噪声/无效反馈",
+      "product_type": "AI-product",
+      "business_goal": "unknown",
+      "feedback_count": 9,
+      "feedback_ids": [
+        "FB11",
+        "FB31",
+        "FB41",
+        "FB58",
+        "FB76",
+        "FB94",
+        "FB112",
+        "FB130",
+        "FB148"
+      ],
+      "main_themes": [
+        "噪声",
+        "Noise",
+        "无关",
+        "其他"
+      ]
+    },
+    {
+      "segment_id": "seg-performance",
+      "segment_type": "business",
+      "name": "seg-performance",
+      "product_type": "AI-product",
+      "business_goal": "unknown",
+      "feedback_count": 4,
+      "feedback_ids": [
+        "FB121",
+        "FB129",
+        "FB139",
+        "FB147"
+      ],
+      "main_themes": [
+        "响应速度"
+      ]
+    }
+  ]
+}

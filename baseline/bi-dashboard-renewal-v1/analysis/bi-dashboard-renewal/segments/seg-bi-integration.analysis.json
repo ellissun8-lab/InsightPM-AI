@@ -1,0 +1,102 @@
+{
+  "segment_id": "seg-bi-integration",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 18,
+    "cluster_count": 4,
+    "clustered_feedback_count": 18,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-integration-cluster-001",
+      "segment_id": "seg-bi-integration",
+      "name": "数据源连接与配置兼容性问题",
+      "summary": "用户在使用数据源时遇到连接配置困难、驱动错误、连接池耗尽和版本不兼容问题，导致数据集成效率低下。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB38",
+        "FB59",
+        "FB72",
+        "FB101",
+        "FB133"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "数据源连接成功率",
+        "配置向导完成率",
+        "版本兼容性测试覆盖率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "改进数据源配置向导，提供详细的驱动安装指南和错误排查文档；优化连接池管理机制，自动释放空闲连接；加强与主流数据库版本（如Oracle 12c、PostgreSQL 15、Hive）的兼容性测试，并发布兼容性补丁。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-002",
+      "segment_id": "seg-bi-integration",
+      "name": "外部系统API集成与文档缺失问题",
+      "summary": "集成外部系统如SSO和CMDB时，API文档不完整、接口不稳定、频率限制严格，阻碍开发进度。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB14",
+        "FB33",
+        "FB80",
+        "FB102",
+        "FB142"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "API文档完整性评分",
+        "API集成开发周期",
+        "API调用成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "完善API文档，确保与接口一致性，提供详细的参数说明和集成示例；优化API返回数据格式稳定性，避免字段名变化；评估并调整API调用频率限制，支持自动化报表推送场景。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-003",
+      "segment_id": "seg-bi-integration",
+      "name": "数据同步任务不稳定与监控不足",
+      "summary": "数据同步任务频繁失败，日志信息晦涩难懂，监控功能薄弱，增加运维负担。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB20",
+        "FB88",
+        "FB136"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "任务失败率",
+        "日志清晰度评分",
+        "监控覆盖度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "改进数据同步任务的错误处理和日志输出，提供更易理解的日志信息和故障排查指南；增强系统监控和告警功能，支持集中日志收集和分析，减少用户自行编写脚本的需求。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-004",
+      "segment_id": "seg-bi-integration",
+      "name": "部署运维文档不清晰与版本升级问题",
+      "summary": "集群部署和运维文档描述不清，版本升级后出现兼容性问题，导致部署和维护工作受阻。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB53",
+        "FB64",
+        "FB111",
+        "FB118"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "文档完整性评分",
+        "升级成功率",
+        "部署时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "编写详细的集群部署、高可用方案和运维手册，确保步骤清晰；在版本升级前提供兼容性测试报告和升级指南；建立快速响应机制，及时发布升级补丁和问题解决方案。"
+    }
+  ]
+}

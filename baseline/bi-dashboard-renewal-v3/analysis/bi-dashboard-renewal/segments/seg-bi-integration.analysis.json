@@ -1,0 +1,112 @@
+{
+  "segment_id": "seg-bi-integration",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 15,
+    "cluster_count": 5,
+    "clustered_feedback_count": 15,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-integration-cluster-001",
+      "segment_id": "seg-bi-integration",
+      "name": "连接和认证失败",
+      "summary": "用户报告数据源连接超时或认证错误，导致集成失败和数据访问中断。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB33",
+        "FB101",
+        "FB42",
+        "FB105",
+        "FB109",
+        "FB131"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "连接成功率",
+        "认证错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "优化网络连接超时配置，实现重试机制；改进认证流程，提供详细的错误代码和解决方案文档。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-002",
+      "segment_id": "seg-bi-integration",
+      "name": "数据同步中断和维护频繁",
+      "summary": "数据同步过程中经常中断，集成脚本错误多，导致需要手动重启和高频维护。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB102",
+        "FB108",
+        "FB107"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "同步中断频率",
+        "平均修复时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "增强同步任务的稳定性监控，实现自动恢复和日志分析；优化集成脚本，减少错误并提供维护指南。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-003",
+      "segment_id": "seg-bi-integration",
+      "name": "API文档不清晰和过时",
+      "summary": "用户反映API集成文档内容不清晰或信息过时，导致开发困难和效率低下。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB106",
+        "FB141"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "文档满意度评分",
+        "开发者反馈时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "全面审查并更新API文档，添加示例代码和常见问题解答；建立用户反馈渠道，定期迭代文档内容。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-004",
+      "segment_id": "seg-bi-integration",
+      "name": "集成过程复杂和成本高",
+      "summary": "数据源集成过程复杂，需要额外资源投入，导致续费成本增加和用户满意度下降。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB104",
+        "FB93"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "集成步骤数",
+        "用户集成成本"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "简化集成流程，提供向导式工具或预配置模板；评估成本结构，推出性价比更高的集成方案。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-005",
+      "segment_id": "seg-bi-integration",
+      "name": "兼容性差和数据源支持不足",
+      "summary": "产品不支持旧数据库系统，且缺乏更多数据源集成，限制了用户覆盖和产品价值。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB103",
+        "FB110"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "支持数据库类型数",
+        "数据源扩展请求量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "优先支持主流旧数据库系统，开发适配器或兼容层；调研用户需求，计划集成更多数据源以提升产品竞争力。"
+    }
+  ]
+}

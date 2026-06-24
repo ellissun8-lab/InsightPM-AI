@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ProofLoop - 创建你的 AI 产品分析工作区</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#eeefff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "tertiary": "#006242",
+                        "surface-variant": "#dce2f7",
+                        "secondary-container": "#8a4cfc",
+                        "inverse-surface": "#293040",
+                        "secondary-fixed": "#eaddff",
+                        "surface-bright": "#f9f9ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "primary": "#004ac6",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#dce2f7",
+                        "primary-fixed": "#dbe1ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-container-low": "#f1f3ff",
+                        "surface-container": "#e9edff",
+                        "on-secondary-fixed": "#25005a",
+                        "inverse-primary": "#b4c5ff",
+                        "on-tertiary-container": "#bdffdb",
+                        "tertiary-container": "#007d55",
+                        "surface-tint": "#0053db",
+                        "on-secondary-container": "#fffbff",
+                        "secondary": "#712ae2",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-fixed": "#00174b",
+                        "surface-container-high": "#e1e8fd",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "outline": "#737686",
+                        "on-tertiary-fixed": "#002113",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#2563eb",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "background": "#f9f9ff",
+                        "on-background": "#141b2b",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c3c6d7",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "inverse-on-surface": "#edf0ff",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "surface-dim": "#d3daef",
+                        "surface": "#f9f9ff",
+                        "on-surface-variant": "#434655",
+                        "on-surface": "#141b2b",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "sidebar-width": "260px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter", "sans-serif"],
+                        "title-lg": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #F7F8FB;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #E5E7EB;
+        }
+        .soft-shadow {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02), 0 12px 24px rgba(37, 99, 235, 0.04);
+        }
+    </style>
+</head>
+<body class="text-on-background">
+<main class="min-h-screen flex flex-col md:flex-row">
+<!-- Left Section: Brand & Hero -->
+<section class="relative w-full md:w-5/12 lg:w-4/12 bg-surface-container-low p-margin-mobile md:p-margin-desktop flex flex-col justify-between overflow-hidden border-r border-outline-variant">
+<!-- Background Decoration -->
+<div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary rounded-full blur-[100px]"></div>
+<div class="absolute top-1/2 -right-24 w-64 h-64 bg-secondary rounded-full blur-[80px]"></div>
+</div>
+<!-- Brand Header -->
+<div class="relative z-10">
+<div class="flex items-center gap-sm mb-xs">
+<span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 1;">dataset_linked</span>
+<h1 class="font-title-lg text-title-lg font-extrabold tracking-tight text-primary">ProofLoop</h1>
+</div>
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-widest">AI Feedback Analysis</p>
+</div>
+<!-- Hero Content -->
+<div class="relative z-10 mt-xl md:mt-0">
+<h2 class="font-headline-lg text-[32px] md:text-[40px] leading-tight font-extrabold text-on-surface mb-md">
+                    创建你的 AI <br/>产品分析工作区
+                </h2>
+<p class="font-body-md text-body-lg text-on-surface-variant max-w-md leading-relaxed">
+                    管理反馈数据、分析报告、验证结果和训练数据集，让产品决策有证据可追踪。
+                </p>
+<!-- Trust Points -->
+<div class="mt-xl space-y-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">shield_lock</span>
+</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">本地 Demo 模式支持</p>
+<p class="text-xs text-outline">数据完全可控，隐私优先</p>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">track_changes</span>
+</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">验证结果可追踪</p>
+<p class="text-xs text-outline">每一次 AI 推理均有据可依</p>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">file_export</span>
+</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">支持 Markdown / JSON 导出</p>
+<p class="text-xs text-outline">无缝对接现有产品管理流程</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Branding -->
+<div class="relative z-10 mt-xl md:mt-0 hidden md:block">
+<p class="text-xs text-outline-variant font-medium">© 2024 ProofLoop Systems. All rights reserved.</p>
+</div>
+</section>
+<!-- Right Section: Sign Up Form -->
+<section class="w-full md:w-7/12 lg:w-8/12 flex items-center justify-center p-md md:p-xl bg-background relative">
+<div class="w-full max-w-[480px] z-10">
+<div class="bg-white rounded-xl p-lg md:p-xl border border-outline-variant soft-shadow">
+<div class="mb-xl text-center md:text-left">
+<h3 class="font-headline-md text-on-surface mb-xs">创建账号</h3>
+<p class="font-body-md text-on-surface-variant">开始使用 ProofLoop Workspace</p>
+</div>
+<form class="space-y-md" onsubmit="return false;">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="text-xs font-bold text-on-surface-variant ml-xs">姓名</label>
+<input class="w-full px-md py-sm bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-body-md" placeholder="您的称呼" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-xs font-bold text-on-surface-variant ml-xs">工作邮箱</label>
+<input class="w-full px-md py-sm bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-body-md" placeholder="name@company.com" type="email"/>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-xs font-bold text-on-surface-variant ml-xs">工作区名称</label>
+<input class="w-full px-md py-sm bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-body-md" placeholder="例如：产品研究实验室" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="text-xs font-bold text-on-surface-variant ml-xs">密码</label>
+<input class="w-full px-md py-sm bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-body-md" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-xs font-bold text-on-surface-variant ml-xs">确认密码</label>
+<input class="w-full px-md py-sm bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-body-md" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="flex items-start gap-sm py-xs">
+<input class="mt-1 rounded border-outline-variant text-primary focus:ring-primary" id="terms" type="checkbox"/>
+<label class="text-xs text-on-surface-variant leading-relaxed" for="terms">
+                                我同意 <a class="text-primary font-medium hover:underline" href="#">服务条款</a> 和 <a class="text-primary font-medium hover:underline" href="#">隐私政策</a>
+</label>
+</div>
+<div class="pt-md space-y-md">
+<button class="w-full py-md bg-[#2563EB] hover:bg-primary-container text-white font-bold rounded-lg transition-all active:scale-[0.98] shadow-lg shadow-primary/20 flex items-center justify-center gap-sm" type="submit">
+                                创建账号
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<div class="relative flex items-center py-xs">
+<div class="flex-grow border-t border-outline-variant"></div>
+<span class="flex-shrink mx-md text-xs text-outline-variant font-medium">或者</span>
+<div class="flex-grow border-t border-outline-variant"></div>
+</div>
+<button class="w-full py-md bg-white border border-outline-variant hover:bg-surface-container text-on-surface font-bold rounded-lg transition-all active:scale-[0.98] flex items-center justify-center gap-sm" type="button">
+<span class="material-symbols-outlined text-primary">key</span>
+                                使用 Demo Access Code
+                            </button>
+</div>
+</form>
+<div class="mt-xl pt-lg border-t border-outline-variant text-center">
+<p class="text-body-md text-on-surface-variant">
+                            已有账号？ <a class="text-primary font-bold hover:underline" href="#">登录</a>
+</p>
+<p class="mt-md text-[11px] text-outline italic">
+                            * 正式账号系统将在 SaaS 版本启用。
+                        </p>
+</div>
+</div>
+<!-- Extra Mobile Info -->
+<div class="mt-lg text-center md:hidden">
+<p class="text-xs text-outline-variant">© 2024 ProofLoop Systems</p>
+</div>
+</div>
+<!-- Background Elements -->
+<div class="absolute inset-0 z-0 opacity-40 overflow-hidden pointer-events-none">
+<div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-surface-container-high to-transparent"></div>
+<!-- Micro-Interactions Dot Grid -->
+<div class="absolute inset-0" style="background-image: radial-gradient(#c3c6d7 1px, transparent 1px); background-size: 32px 32px;"></div>
+</div>
+</section>
+</main>
+<script>
+        // Micro-interaction for input focus effects
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('scale-[1.01]');
+                input.parentElement.style.transition = 'transform 0.2s ease-out';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+
+        // Simple button click ripple effect or feedback
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                let x = e.clientX - e.target.offsetLeft;
+                let y = e.clientY - e.target.offsetTop;
+                // Interaction logic could be expanded here
+            });
+        });
+    </script>
+</body></html>

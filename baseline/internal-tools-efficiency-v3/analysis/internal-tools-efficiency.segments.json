@@ -1,0 +1,296 @@
+{
+  "dataset": "internal-tools-efficiency",
+  "is_mixed_dataset": true,
+  "segment_count": 9,
+  "business_segment_count": 7,
+  "noise_segment_count": 1,
+  "positive_segment_count": 1,
+  "segments": [
+    {
+      "segment_id": "seg-internal-efficiency",
+      "segment_type": "business",
+      "name": "系统效率问题",
+      "product_type": "internal-tools",
+      "business_goal": "提升工作效率",
+      "feedback_count": 29,
+      "feedback_ids": [
+        "FB1",
+        "FB2",
+        "FB3",
+        "FB4",
+        "FB5",
+        "FB6",
+        "FB7",
+        "FB8",
+        "FB9",
+        "FB10",
+        "FB11",
+        "FB12",
+        "FB13",
+        "FB14",
+        "FB15",
+        "FB16",
+        "FB17",
+        "FB18",
+        "FB19",
+        "FB20",
+        "FB21",
+        "FB22",
+        "FB23",
+        "FB24",
+        "FB25",
+        "FB62",
+        "FB72",
+        "FB73",
+        "FB131"
+      ],
+      "main_themes": [
+        "系统效率",
+        "efficiency",
+        "系统效率: seg-internal-efficiency"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-cost",
+      "segment_type": "business",
+      "name": "成本与降本问题",
+      "product_type": "internal-tools",
+      "business_goal": "降低运营成本",
+      "feedback_count": 22,
+      "feedback_ids": [
+        "FB26",
+        "FB27",
+        "FB28",
+        "FB29",
+        "FB30",
+        "FB31",
+        "FB32",
+        "FB33",
+        "FB34",
+        "FB35",
+        "FB36",
+        "FB37",
+        "FB38",
+        "FB39",
+        "FB40",
+        "FB41",
+        "FB42",
+        "FB43",
+        "FB44",
+        "FB45",
+        "FB71",
+        "FB141"
+      ],
+      "main_themes": [
+        "成本控制",
+        "seg-internal-cost",
+        "dependency",
+        "成本降本: seg-internal-cost"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-adoption",
+      "segment_type": "business",
+      "name": "员工使用与采纳",
+      "product_type": "internal-tools",
+      "business_goal": "提升系统使用率",
+      "feedback_count": 18,
+      "feedback_ids": [
+        "FB46",
+        "FB47",
+        "FB48",
+        "FB49",
+        "FB50",
+        "FB51",
+        "FB52",
+        "FB53",
+        "FB55",
+        "FB56",
+        "FB57",
+        "FB58",
+        "FB59",
+        "FB61",
+        "FB63",
+        "FB65",
+        "FB81",
+        "FB83"
+      ],
+      "main_themes": [
+        "seg-internal-adoption",
+        "usability",
+        "simplicity"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-training",
+      "segment_type": "business",
+      "name": "培训成本问题",
+      "product_type": "internal-tools",
+      "business_goal": "降低培训成本",
+      "feedback_count": 18,
+      "feedback_ids": [
+        "FB54",
+        "FB64",
+        "FB102",
+        "FB103",
+        "FB104",
+        "FB105",
+        "FB106",
+        "FB107",
+        "FB108",
+        "FB109",
+        "FB110",
+        "FB111",
+        "FB112",
+        "FB113",
+        "FB114",
+        "FB115",
+        "FB116",
+        "FB142"
+      ],
+      "main_themes": [
+        "seg-internal-training",
+        "usability",
+        "培训成本",
+        "培训成本: seg-internal-training"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-stability",
+      "segment_type": "business",
+      "name": "系统稳定性问题",
+      "product_type": "internal-tools",
+      "business_goal": "提升系统可用性",
+      "feedback_count": 24,
+      "feedback_ids": [
+        "FB60",
+        "FB75",
+        "FB84",
+        "FB85",
+        "FB86",
+        "FB87",
+        "FB88",
+        "FB89",
+        "FB90",
+        "FB91",
+        "FB92",
+        "FB93",
+        "FB94",
+        "FB95",
+        "FB96",
+        "FB97",
+        "FB98",
+        "FB99",
+        "FB100",
+        "FB101",
+        "FB133",
+        "FB138",
+        "FB147",
+        "FB148"
+      ],
+      "main_themes": [
+        "seg-internal-stability",
+        "stability",
+        "reliability",
+        "connectivity",
+        "系统稳定性"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-config",
+      "segment_type": "business",
+      "name": "流程配置问题",
+      "product_type": "internal-tools",
+      "business_goal": "简化配置管理",
+      "feedback_count": 13,
+      "feedback_ids": [
+        "FB66",
+        "FB67",
+        "FB68",
+        "FB69",
+        "FB70",
+        "FB74",
+        "FB76",
+        "FB77",
+        "FB78",
+        "FB79",
+        "FB80",
+        "FB82",
+        "FB146"
+      ],
+      "main_themes": [
+        "complexity",
+        "flexibility",
+        "reliability",
+        "customization",
+        "simplicity"
+      ]
+    },
+    {
+      "segment_id": "seg-internal-integration",
+      "segment_type": "business",
+      "name": "集成与打通问题",
+      "product_type": "internal-tools",
+      "business_goal": "提升系统集成度",
+      "feedback_count": 13,
+      "feedback_ids": [
+        "FB117",
+        "FB118",
+        "FB119",
+        "FB120",
+        "FB121",
+        "FB122",
+        "FB123",
+        "FB124",
+        "FB125",
+        "FB126",
+        "FB127",
+        "FB128",
+        "FB145"
+      ],
+      "main_themes": [
+        "系统集成",
+        "集成打通: seg-internal-integration"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "segment_type": "noise",
+      "name": "噪声/无效反馈",
+      "product_type": "internal-tools",
+      "business_goal": "unknown",
+      "feedback_count": 5,
+      "feedback_ids": [
+        "FB129",
+        "FB134",
+        "FB139",
+        "FB144",
+        "FB149"
+      ],
+      "main_themes": [
+        "噪声: seg-noise"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "segment_type": "positive",
+      "name": "正向反馈汇总",
+      "product_type": "internal-tools",
+      "business_goal": "unknown",
+      "feedback_count": 8,
+      "feedback_ids": [
+        "FB130",
+        "FB132",
+        "FB135",
+        "FB136",
+        "FB137",
+        "FB140",
+        "FB143",
+        "FB150"
+      ],
+      "main_themes": [
+        "正向: seg-positive"
+      ]
+    }
+  ]
+}

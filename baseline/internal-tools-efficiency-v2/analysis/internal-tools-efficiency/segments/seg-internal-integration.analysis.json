@@ -1,0 +1,84 @@
+{
+  "segment_id": "seg-internal-integration",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 8,
+    "cluster_count": 3,
+    "clustered_feedback_count": 8,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-integration-cluster-001",
+      "segment_id": "seg-internal-integration",
+      "name": "外部服务集成性能瓶颈",
+      "summary": "外部供应商协作门户文件传输速度慢、电子签章服务调用不稳定以及天气API接口失败率高，导致业务流程效率降低和用户不满。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB17",
+        "FB49",
+        "FB127"
+      ],
+      "secondary_themes": [
+        "集成打通",
+        "电子签章集成稳定性"
+      ],
+      "possible_metrics": [
+        "文件传输时间",
+        "API调用失败率",
+        "服务响应时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化文件传输协议，如采用分块传输或压缩；为电子签章服务增加重试和降级机制；监控外部API健康状态，设置故障转移和告警。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-002",
+      "segment_id": "seg-internal-integration",
+      "name": "跨系统数据同步与质量缺陷",
+      "summary": "HR系统数据同步延迟、CRM集成数据重复以及历史数据缺失，导致数据不一致和查询困难，影响数据准确性和业务决策。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB36",
+        "FB52",
+        "FB145"
+      ],
+      "secondary_themes": [
+        "跨系统数据同步延迟",
+        "跨系统数据一致性",
+        "数据管理"
+      ],
+      "possible_metrics": [
+        "数据同步延迟时间",
+        "数据重复率",
+        "数据查询成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "实施近实时数据同步机制，使用消息队列确保数据一致性；在数据集成层增加去重逻辑；完善数据迁移脚本并验证历史数据完整性。"
+    },
+    {
+      "cluster_id": "seg-internal-integration-cluster-003",
+      "segment_id": "seg-internal-integration",
+      "name": "集成接口文档与认证问题",
+      "summary": "API接口文档参数说明模糊，增加开发对接难度；SSO单点登录偶尔失效，导致用户重新登录，影响集成开发效率和用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB20",
+        "FB98"
+      ],
+      "secondary_themes": [
+        "集成打通",
+        "单点登录"
+      ],
+      "possible_metrics": [
+        "API对接时间",
+        "SSO登录失败率",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "标准化API文档，提供详细参数说明、示例代码和错误码；加强SSO会话管理，增加监控和自动重连机制；定期审查集成接口质量。"
+    }
+  ]
+}

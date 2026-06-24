@@ -1,0 +1,160 @@
+{
+  "segment_id": "seg-renewal-pricing",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 22,
+    "cluster_count": 7,
+    "clustered_feedback_count": 22,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-001",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格过高与预算不符",
+      "summary": "客户反馈产品价格过高，超出预算范围，导致续约困难或不考虑续约。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB19",
+        "FB73",
+        "FB127",
+        "FB87",
+        "FB1"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "价格敏感度",
+        "预算符合率",
+        "流失风险"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "进行客户预算调研，提供分层定价或灵活支付方案，以降低价格门槛。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-002",
+      "segment_id": "seg-renewal-pricing",
+      "name": "性价比低",
+      "summary": "客户认为产品价格与提供的功能或价值不匹配，感知性价比不高。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB9",
+        "FB37",
+        "FB91",
+        "FB145"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "性价比评分",
+        "价值感知指数",
+        "客户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "增强产品核心功能或捆绑增值服务，向客户清晰传达价值提升。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-003",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格上涨与价值脱节",
+      "summary": "客户指出价格涨幅但功能未改进，感觉定价不合理或缺乏透明度。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB64",
+        "FB118",
+        "FB8"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "价格调整接受度",
+        "功能更新满意度",
+        "透明度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "确保价格调整与产品迭代同步，并通过沟通解释价值变化以提升接受度。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-005",
+      "segment_id": "seg-renewal-pricing",
+      "name": "折扣与优惠不足",
+      "summary": "客户在续约谈判中感到折扣力度不足或优惠方案不具吸引力，影响续约决策。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB28",
+        "FB82",
+        "FB136"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "折扣接受度",
+        "谈判成功率",
+        "优惠满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 78,
+      "recommendation": "设计更有吸引力的续约折扣或忠诚度计划，以激励客户长期签约。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-006",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格作为主要流失因素",
+      "summary": "价格是客户考虑不续约或流失的主要障碍，显示高价格敏感性。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB35",
+        "FB89",
+        "FB143"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "流失风险指数",
+        "价格因素权重",
+        "客户保留率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 82,
+      "recommendation": "针对价格敏感客户群体，提供个性化定价或捆绑服务以降低流失风险。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-004",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格竞争力不足",
+      "summary": "客户认为产品价格高于市场平均水平或竞争对手，缺乏竞争力。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB52",
+        "FB106"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "市场比价指数",
+        "竞争力评分",
+        "价格合理性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "开展竞品分析，调整定价策略或提供差异化功能以增强竞争力。"
+    },
+    {
+      "cluster_id": "seg-renewal-pricing-cluster-007",
+      "segment_id": "seg-renewal-pricing",
+      "name": "价格谈判与客户意愿",
+      "summary": "客户表示在价格下调的条件下愿意续约，表明存在谈判空间和客户保留机会。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB44",
+        "FB98"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "谈判灵活性",
+        "客户保留意愿",
+        "价格弹性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 68,
+      "recommendation": "在续约谈判中灵活运用价格调整，结合长期合同优惠以提升续约率。"
+    }
+  ]
+}

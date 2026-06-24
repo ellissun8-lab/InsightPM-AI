@@ -1,0 +1,147 @@
+{
+  "segment_id": "seg-renewal-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 20,
+    "cluster_count": 5,
+    "clustered_feedback_count": 20,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-performance-cluster-001",
+      "segment_id": "seg-renewal-performance",
+      "name": "系统崩溃与稳定性问题",
+      "summary": "用户反馈系统频繁崩溃、卡死和不稳定，导致工作中断和体验下降。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB47",
+        "FB61",
+        "FB99",
+        "FB101",
+        "FB111"
+      ],
+      "secondary_themes": [
+        "performance",
+        "stability",
+        "reliability",
+        "product-stability"
+      ],
+      "possible_metrics": [
+        "崩溃率",
+        "系统可用性",
+        "错误率",
+        "平均无故障时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "优先加强系统稳定性测试，优化错误处理和崩溃恢复机制，实施实时监控以快速响应问题。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-002",
+      "segment_id": "seg-renewal-performance",
+      "name": "性能慢与延迟问题",
+      "summary": "用户抱怨加载速度慢、卡顿、延迟高，尤其在高峰期影响效率。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB40",
+        "FB54",
+        "FB102",
+        "FB105",
+        "FB107",
+        "FB108",
+        "FB110"
+      ],
+      "secondary_themes": [
+        "speed",
+        "latency",
+        "optimization",
+        "performance-optimization"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "响应时间",
+        "资源使用率",
+        "并发用户数"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "优化数据库和查询性能，增加缓存策略，提升服务器资源分配，进行负载测试和性能调优。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-003",
+      "segment_id": "seg-renewal-performance",
+      "name": "升级与功能迭代问题",
+      "summary": "系统升级后引入新问题，功能迭代对现有使用造成负面影响。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB24",
+        "FB96"
+      ],
+      "secondary_themes": [
+        "upgrade",
+        "feature-iteration",
+        "功能迭代"
+      ],
+      "possible_metrics": [
+        "升级后错误率",
+        "用户满意度变化",
+        "功能采用率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "加强升级前测试，提供回滚选项，建立用户反馈循环以优化功能发布流程。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-004",
+      "segment_id": "seg-renewal-performance",
+      "name": "数据安全与备份问题",
+      "summary": "用户经历数据丢失和备份恢复困难，威胁数据安全和业务连续性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB98",
+        "FB106"
+      ],
+      "secondary_themes": [
+        "data-security",
+        "backup",
+        "data-reliability"
+      ],
+      "possible_metrics": [
+        "数据丢失事件数",
+        "备份恢复成功率",
+        "数据完整性检查频率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "实施定期备份验证和测试，提供简易数据恢复工具，增强数据加密和访问控制。"
+    },
+    {
+      "cluster_id": "seg-renewal-performance-cluster-005",
+      "segment_id": "seg-renewal-performance",
+      "name": "系统集成与数据同步问题",
+      "summary": "系统兼容性问题多，数据同步经常出错，影响系统集成和数据一致性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB104",
+        "FB135"
+      ],
+      "secondary_themes": [
+        "system-integration",
+        "compatibility",
+        "data-sync",
+        "performance-reliability"
+      ],
+      "possible_metrics": [
+        "集成错误率",
+        "数据同步成功率",
+        "API兼容性测试覆盖率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "改进API设计和兼容性，增加数据同步的错误处理和重试机制，提供集成文档和开发者支持。"
+    }
+  ]
+}

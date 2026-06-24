@@ -1,0 +1,83 @@
+{
+  "segment_id": "seg-bi-visualization",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 11,
+    "cluster_count": 3,
+    "clustered_feedback_count": 11,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-visualization-cluster-001",
+      "segment_id": "seg-bi-visualization",
+      "name": "图表类型与多样性不足",
+      "summary": "用户反馈可视化图表类型太少，无法满足多样化需求，建议增加更多图表类型和模板以提升报表美观度和续费吸引力。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB111",
+        "FB120",
+        "FB142",
+        "FB114",
+        "FB115",
+        "FB119",
+        "FB132"
+      ],
+      "secondary_themes": [
+        "用户满意度",
+        "续费率"
+      ],
+      "possible_metrics": [
+        "图表类型数量",
+        "用户反馈率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "扩展图表库，增加至少10种新图表类型（如桑基图、热力图等），并提供更多预设模板，允许用户快速应用和自定义。"
+    },
+    {
+      "cluster_id": "seg-bi-visualization-cluster-002",
+      "segment_id": "seg-bi-visualization",
+      "name": "自定义选项与品牌匹配限制",
+      "summary": "用户指出主题颜色选项有限，无法匹配公司品牌，且图表自定义调整困难，影响品牌一致性和视觉吸引力。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB52",
+        "FB112"
+      ],
+      "secondary_themes": [
+        "品牌一致性",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "自定义选项数量",
+        "品牌匹配率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "增强主题自定义功能，提供更多颜色选项（如Pantone色支持）、字体和样式调整工具，并集成品牌指南导入功能，允许用户上传公司品牌配置文件。"
+    },
+    {
+      "cluster_id": "seg-bi-visualization-cluster-003",
+      "segment_id": "seg-bi-visualization",
+      "name": "图表性能与质量问题",
+      "summary": "用户报告图表交互性差，点击无响应，以及PDF导出后图表模糊不清，影响数据探索和报告分享效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB113"
+      ],
+      "secondary_themes": [
+        "性能优化",
+        "导出质量"
+      ],
+      "possible_metrics": [
+        "交互响应时间",
+        "导出分辨率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化图表交互性能，确保点击事件在200ms内响应；改进PDF导出算法，采用高分辨率渲染（至少300 DPI），并支持矢量格式导出以保持清晰度。"
+    }
+  ]
+}

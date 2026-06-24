@@ -1,0 +1,104 @@
+{
+  "segment_id": "seg-ecommerce-recommendation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 20,
+    "cluster_count": 4,
+    "clustered_feedback_count": 20,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-001",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "推荐算法个性化与准确性不足",
+      "summary": "用户反馈推荐商品不符合个人偏好、重复推荐、价格不合理、数据不更新或显示无库存商品，影响转化和体验。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB65",
+        "FB69",
+        "FB76",
+        "FB78",
+        "FB81",
+        "FB111"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "推荐点击率",
+        "推荐转化率",
+        "用户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化推荐算法以纳入个人偏好、避免重复推荐和价格匹配；实现实时数据更新和库存检查机制。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-002",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "搜索功能缺陷与体验问题",
+      "summary": "搜索功能存在多种问题，包括历史缺失、排序不合理、建议失效、广告过多、筛选不足、热门词不匹配、偏好不保存、纠错不准确、品牌搜索不准确。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB66",
+        "FB67",
+        "FB68",
+        "FB70",
+        "FB72",
+        "FB73",
+        "FB75",
+        "FB77",
+        "FB80"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "搜索成功率",
+        "搜索完成时间",
+        "用户满意度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "增强搜索排序算法、添加搜索历史功能、优化自动建议和纠错、减少广告干扰、扩展筛选条件、保存用户偏好设置。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-003",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "搜索结果质量与相关性低",
+      "summary": "搜索和推荐结果不相关，导航或筛选功能不足，商品信息与实物不符，导致用户信任度下降。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB64",
+        "FB71",
+        "FB74"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "搜索结果点击率",
+        "商品信息准确率",
+        "用户信任度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "改进搜索结果相关性算法、优化分类导航和筛选功能、加强商品信息审核以确保图片与实物一致。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-recommendation-cluster-004",
+      "segment_id": "seg-ecommerce-recommendation",
+      "name": "移动端搜索性能与功能弱",
+      "summary": "移动端搜索页面卡顿，功能较弱，影响用户体验和转化。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB49",
+        "FB125"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "页面加载时间",
+        "移动端用户留存率",
+        "移动端转化率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "优化移动端页面性能以减少卡顿、增强移动端搜索功能如响应式设计和快速加载。"
+    }
+  ]
+}

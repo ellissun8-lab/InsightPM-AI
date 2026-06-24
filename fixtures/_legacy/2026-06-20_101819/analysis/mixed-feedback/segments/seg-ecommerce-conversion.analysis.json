@@ -1,0 +1,126 @@
+{
+  "segment_id": "seg-ecommerce-conversion",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 15,
+    "cluster_count": 5,
+    "clustered_feedback_count": 15,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "支付流程障碍",
+      "summary": "用户在支付过程中遇到失败、状态未更新或页面跳转问题，导致交易中断。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB25",
+        "FB28",
+        "FB58",
+        "FB97"
+      ],
+      "secondary_themes": [
+        "购物车稳定性",
+        "订单状态同步"
+      ],
+      "possible_metrics": [
+        "支付成功率",
+        "订单完成率",
+        "用户投诉率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "优化支付接口稳定性，确保支付状态实时同步，并修复页面跳转逻辑以防止重复支付。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "购物车与界面可用性问题",
+      "summary": "购物车中商品自行消失或移动端加入购物车按钮过小，影响用户操作效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB62",
+        "FB13"
+      ],
+      "secondary_themes": [
+        "移动端UI设计",
+        "数据持久化"
+      ],
+      "possible_metrics": [
+        "加入购物车转化率",
+        "购物车 abandonment rate"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "确保购物车数据持久化以避免商品消失，并优化移动端按钮尺寸和交互反馈以提升易用性。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "搜索与商品导航效率低下",
+      "summary": "搜索结果排序异常或商品分类逻辑混乱，导致用户查找商品困难，影响转化。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB35",
+        "FB88"
+      ],
+      "secondary_themes": [
+        "搜索算法",
+        "信息架构"
+      ],
+      "possible_metrics": [
+        "搜索成功率",
+        "商品页浏览转化率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "改进搜索算法的相关性排序，并优化商品分类逻辑以提升用户查找效率和满意度。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "促销活动与规则不透明",
+      "summary": "促销价格显示异常或优惠券规则不清晰，影响活动效果和用户信任。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB42",
+        "FB69"
+      ],
+      "secondary_themes": [
+        "价格显示",
+        "规则沟通"
+      ],
+      "possible_metrics": [
+        "促销活动转化率",
+        "优惠券使用率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "确保促销信息准确显示，并提供清晰易懂的优惠券使用规则以减少订单纠纷。"
+    },
+    {
+      "cluster_id": "cluster-005",
+      "segment_id": "seg-ecommerce-conversion",
+      "name": "物流信息与地址保存问题",
+      "summary": "物流信息更新延迟或地址保存失败，影响用户体验和后续操作流程。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB52",
+        "FB80"
+      ],
+      "secondary_themes": [
+        "物流跟踪",
+        "表单交互"
+      ],
+      "possible_metrics": [
+        "物流信息准确率",
+        "地址保存成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化物流信息同步机制以提供实时跟踪，并改进地址保存功能以减少用户重复输入的麻烦。"
+    }
+  ]
+}

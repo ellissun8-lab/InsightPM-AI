@@ -1,0 +1,35 @@
+{
+  "segment_id": "seg-ai-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 3,
+    "cluster_count": 1,
+    "clustered_feedback_count": 3,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-performance-cluster-001",
+      "segment_id": "seg-ai-performance",
+      "name": "AI响应速度不稳定",
+      "summary": "用户反馈AI响应速度波动大，时快时慢或卡顿，导致用户体验不一致。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB9",
+        "FB16",
+        "FB46"
+      ],
+      "secondary_themes": [
+        "客户服务响应延迟"
+      ],
+      "possible_metrics": [
+        "响应时间标准差",
+        "平均响应时间",
+        "超时率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "优化AI模型推理效率和服务器资源分配，实施动态负载均衡和缓存策略，以减少响应时间波动。"
+    }
+  ]
+}

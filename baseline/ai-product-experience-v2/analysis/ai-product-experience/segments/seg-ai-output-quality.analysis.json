@@ -1,0 +1,107 @@
+{
+  "segment_id": "seg-ai-output-quality",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 25,
+    "cluster_count": 4,
+    "clustered_feedback_count": 25,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-001",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出风格与格式不一致",
+      "summary": "用户反馈AI输出在风格、格式和语言上不一致，如混合Markdown和纯文本、风格不稳定、术语过多或中英文混杂，影响使用体验。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB7",
+        "FB19",
+        "FB73",
+        "FB97"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "输出一致性分数",
+        "格式标准化率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "统一输出格式标准，避免Markdown和纯文本混合；优化风格一致性模型，减少语言风格切换；提供术语解释或简化选项。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-002",
+      "segment_id": "seg-ai-output-quality",
+      "name": "AI输出质量不稳定",
+      "summary": "用户报告AI输出质量波动大，有时好有时差，缺乏可靠性，影响信任度。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB37",
+        "FB49",
+        "FB67",
+        "FB91",
+        "FB127"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "输出质量方差",
+        "一致性指标"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "加强模型训练和测试，提高输出一致性；引入质量评估机制，自动检测和修正不稳定输出；提供用户反馈循环，持续优化。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-003",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出内容准确性低",
+      "summary": "AI输出常出现语法错误、答非所问、逻辑矛盾或遗漏关键信息，导致内容不准确。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB25",
+        "FB31",
+        "FB55",
+        "FB79",
+        "FB85",
+        "FB115",
+        "FB133",
+        "FB145"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "错误率",
+        "准确性分数",
+        "校对需求率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "增强事实核查和逻辑推理能力；实施后处理校对步骤，减少语法和逻辑错误；优化信息提取，确保关键数据不遗漏。"
+    },
+    {
+      "cluster_id": "seg-ai-output-quality-cluster-004",
+      "segment_id": "seg-ai-output-quality",
+      "name": "输出内容可操作性差且深度不足",
+      "summary": "AI输出常冗长、缺乏深度，或建议复杂难执行，导致实用性低。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB38",
+        "FB43",
+        "FB61",
+        "FB103",
+        "FB109",
+        "FB121"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "简洁度分数",
+        "可执行性评分",
+        "深度指数"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "优化内容生成算法，提供简洁结论和深入分析；确保建议步骤完整且易于执行；平衡详细程度与用户需求。"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "segment_id": "seg-internal-cost",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 22,
+    "cluster_count": 3,
+    "clustered_feedback_count": 22,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-cost-cluster-001",
+      "segment_id": "seg-internal-cost",
+      "name": "工具成本过高与预算不符",
+      "summary": "用户反馈工具成本过高，经常超出预算，性价比低，导致财务压力。",
+      "feedback_count": 11,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB28",
+        "FB29",
+        "FB31",
+        "FB33",
+        "FB34",
+        "FB36",
+        "FB41",
+        "FB44",
+        "FB38",
+        "FB141"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "总拥有成本(TCO)",
+        "预算偏差率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "重新评估工具定价策略，与供应商谈判降低许可费用，并探索开源或更经济的替代方案。"
+    },
+    {
+      "cluster_id": "seg-internal-cost-cluster-002",
+      "segment_id": "seg-internal-cost",
+      "name": "降本效果未达预期",
+      "summary": "反馈表明工具在降低运营成本方面效果有限，未能实现预期的成本节省。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB27",
+        "FB32",
+        "FB37",
+        "FB39",
+        "FB42",
+        "FB43"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "成本节省率",
+        "投资回报率(ROI)"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化工具使用流程，提供用户培训以提高效率，并调整功能以更好地支持成本节约目标。"
+    },
+    {
+      "cluster_id": "seg-internal-cost-cluster-003",
+      "segment_id": "seg-internal-cost",
+      "name": "资源、维护及流程配置成本高企",
+      "summary": "问题涉及资源使用率高、服务器成本上升、维护成本高以及流程配置需要专业IT支持，导致整体运营成本增加。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB30",
+        "FB35",
+        "FB40",
+        "FB45",
+        "FB71"
+      ],
+      "secondary_themes": [
+        "dependency"
+      ],
+      "possible_metrics": [
+        "服务器利用率",
+        "维护成本占比",
+        "配置成本"
+      ],
+      "priority": "P1",
+      "opportunity_score": 60,
+      "recommendation": "实施资源监控和优化策略（如自动缩放、缓存），简化流程配置以减少IT依赖，并定期审查维护合同以降低成本。"
+    }
+  ]
+}

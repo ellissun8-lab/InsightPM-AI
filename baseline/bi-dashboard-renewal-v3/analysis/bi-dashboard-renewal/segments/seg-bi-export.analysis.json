@@ -1,0 +1,63 @@
+{
+  "segment_id": "seg-bi-export",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 11,
+    "cluster_count": 2,
+    "clustered_feedback_count": 11,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-export-cluster-002",
+      "segment_id": "seg-bi-export",
+      "name": "导出失败与性能问题",
+      "summary": "用户报告导出功能不稳定，经常出现报错、API调用失败、偶尔失败或导出速度慢等问题，影响可靠性。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB8",
+        "FB19",
+        "FB136",
+        "FB144",
+        "FB126",
+        "FB134"
+      ],
+      "secondary_themes": [
+        "API权限",
+        "性能优化"
+      ],
+      "possible_metrics": [
+        "导出成功率",
+        "导出平均时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "改进错误处理机制，确保API权限正确配置；优化导出性能，添加重试逻辑和进度反馈；监控导出失败率并及时修复。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-001",
+      "segment_id": "seg-bi-export",
+      "name": "导出格式错乱问题",
+      "summary": "用户反馈导出PDF或Excel时格式错乱、表格不对齐、标签重叠等问题，导致需要手动调整，浪费时间。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB15",
+        "FB116",
+        "FB146"
+      ],
+      "secondary_themes": [
+        "格式一致性",
+        "用户调整负担"
+      ],
+      "possible_metrics": [
+        "导出格式正确率",
+        "用户手动调整时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化PDF和Excel导出引擎，确保表格对齐和标签清晰；添加导出格式预览功能，减少用户手动调整需求。"
+    }
+  ]
+}

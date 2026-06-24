@@ -1,0 +1,812 @@
+{
+  "project_id": "",
+  "analysis_run_id": "",
+  "summary": {
+    "total_feedback_count": 150,
+    "analyzed_feedback_count": 150,
+    "clustered_feedback_count": 150,
+    "unclustered_feedback_count": 0,
+    "unanalyzed_feedback_count": 0,
+    "segment_count": 10,
+    "business_segment_count": 7,
+    "noise_segment_count": 1,
+    "positive_segment_count": 1,
+    "cluster_count": 28,
+    "is_mixed_dataset": true
+  },
+  "segments": [
+    {
+      "segment_id": "seg-bi-export",
+      "name": "报表导出问题",
+      "feedback_count": 11,
+      "business_goal": "提升导出可靠性",
+      "issue_cluster_ids": [
+        "seg-bi-export-cluster-002",
+        "seg-bi-export-cluster-001"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-accuracy",
+      "name": "数据准确性问题",
+      "feedback_count": 27,
+      "business_goal": "提升数据可信度",
+      "issue_cluster_ids": [
+        "seg-bi-accuracy-cluster-002",
+        "seg-bi-accuracy-cluster-001",
+        "seg-bi-accuracy-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-performance",
+      "name": "查询性能问题",
+      "feedback_count": 33,
+      "business_goal": "提升查询速度",
+      "issue_cluster_ids": [
+        "seg-bi-performance-cluster-002",
+        "seg-bi-performance-cluster-001",
+        "seg-bi-performance-cluster-004",
+        "seg-bi-performance-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "feedback_count": 9,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-positive-cluster-001"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-visualization",
+      "name": "可视化与图表问题",
+      "feedback_count": 11,
+      "business_goal": "提升可视化能力",
+      "issue_cluster_ids": [
+        "seg-bi-visualization-cluster-001",
+        "seg-bi-visualization-cluster-002",
+        "seg-bi-visualization-cluster-003"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-integration",
+      "name": "数据源集成问题",
+      "feedback_count": 15,
+      "business_goal": "提升数据集成度",
+      "issue_cluster_ids": [
+        "seg-bi-integration-cluster-001",
+        "seg-bi-integration-cluster-002",
+        "seg-bi-integration-cluster-003",
+        "seg-bi-integration-cluster-004",
+        "seg-bi-integration-cluster-005"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-dashboard",
+      "name": "仪表盘配置问题",
+      "feedback_count": 17,
+      "business_goal": "简化配置流程",
+      "issue_cluster_ids": [
+        "seg-bi-dashboard-cluster-001",
+        "seg-bi-dashboard-cluster-002",
+        "seg-bi-dashboard-cluster-005",
+        "seg-bi-dashboard-cluster-003",
+        "seg-bi-dashboard-cluster-004"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-value",
+      "name": "续费价值感知",
+      "feedback_count": 24,
+      "business_goal": "提升价值感知",
+      "issue_cluster_ids": [
+        "seg-bi-value-cluster-001",
+        "seg-bi-value-cluster-003",
+        "seg-bi-value-cluster-002"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "name": "噪声/无效反馈",
+      "feedback_count": 2,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-noise-cluster-001"
+      ]
+    },
+    {
+      "segment_id": "seg-unknown",
+      "name": "未分类反馈",
+      "feedback_count": 1,
+      "business_goal": "unknown",
+      "issue_cluster_ids": [
+        "seg-unknown-cluster-001"
+      ]
+    }
+  ],
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-export-cluster-002",
+      "segment_id": "seg-bi-export",
+      "name": "导出失败与性能问题",
+      "summary": "用户报告导出功能不稳定，经常出现报错、API调用失败、偶尔失败或导出速度慢等问题，影响可靠性。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB6",
+        "FB8",
+        "FB19",
+        "FB136",
+        "FB144",
+        "FB126",
+        "FB134"
+      ],
+      "secondary_themes": [
+        "API权限",
+        "性能优化"
+      ],
+      "possible_metrics": [
+        "导出成功率",
+        "导出平均时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "改进错误处理机制，确保API权限正确配置；优化导出性能，添加重试逻辑和进度反馈；监控导出失败率并及时修复。"
+    },
+    {
+      "cluster_id": "seg-bi-export-cluster-001",
+      "segment_id": "seg-bi-export",
+      "name": "导出格式错乱问题",
+      "summary": "用户反馈导出PDF或Excel时格式错乱、表格不对齐、标签重叠等问题，导致需要手动调整，浪费时间。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB15",
+        "FB116",
+        "FB146"
+      ],
+      "secondary_themes": [
+        "格式一致性",
+        "用户调整负担"
+      ],
+      "possible_metrics": [
+        "导出格式正确率",
+        "用户手动调整时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化PDF和Excel导出引擎，确保表格对齐和标签清晰；添加导出格式预览功能，减少用户手动调整需求。"
+    },
+    {
+      "cluster_id": "seg-bi-accuracy-cluster-002",
+      "segment_id": "seg-bi-accuracy",
+      "name": "数据计算与一致性缺陷",
+      "summary": "数据在计算、聚合、缓存和定义方面存在准确性问题，导致报表不一致、决策受影响，甚至审计和续费风险。",
+      "feedback_count": 17,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB31",
+        "FB32",
+        "FB34",
+        "FB35",
+        "FB37",
+        "FB38",
+        "FB39",
+        "FB40",
+        "FB41",
+        "FB43",
+        "FB45",
+        "FB71",
+        "FB147",
+        "FB29",
+        "FB30",
+        "FB127"
+      ],
+      "secondary_themes": [
+        "数据不一致",
+        "公式错误",
+        "聚合错误",
+        "缓存问题",
+        "数据校验",
+        "指标定义"
+      ],
+      "possible_metrics": [
+        "数据准确性率",
+        "报表一致性分数",
+        "计算错误率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "增强数据准确性：1. 实施数据校验规则，支持自定义校验以确保数据质量。2. 统一指标定义，提供清晰文档避免混淆。3. 修复聚合计算逻辑，确保总数与明细一致。4. 优化缓存机制，确保数据刷新后显示最新。5. 定期审计数据准确性，建立反馈闭环改进。"
+    },
+    {
+      "cluster_id": "seg-bi-accuracy-cluster-001",
+      "segment_id": "seg-bi-accuracy",
+      "name": "数据导出格式与过滤错误",
+      "summary": "导出功能存在多个问题，包括日期格式错误、数字精度丢失、过滤条件失效、公式错误和字符乱码，影响数据导出质量。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB7",
+        "FB12",
+        "FB16",
+        "FB17",
+        "FB21",
+        "FB22"
+      ],
+      "secondary_themes": [
+        "数据格式",
+        "精度丢失",
+        "数据过滤",
+        "公式错误",
+        "字符编码"
+      ],
+      "possible_metrics": [
+        "导出成功率",
+        "数据格式正确率",
+        "过滤条件应用率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "改进导出模块：1. 修复日期格式映射，确保Excel导出时日期列正确显示。2. 在CSV导出中保留数字精度，避免截断。3. 验证并修复筛选条件在导出时的逻辑，确保只导出过滤后数据。4. 检查Excel公式生成逻辑，防止引用错误。5. 使用UTF-8编码处理特殊字符，避免乱码。"
+    },
+    {
+      "cluster_id": "seg-bi-accuracy-cluster-003",
+      "segment_id": "seg-bi-accuracy",
+      "name": "数据刷新与同步延迟",
+      "summary": "数据刷新和同步存在延迟，导致仪表盘显示旧数据，影响实时性和准确性。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB27",
+        "FB28",
+        "FB137"
+      ],
+      "secondary_themes": [
+        "数据刷新",
+        "同步延迟"
+      ],
+      "possible_metrics": [
+        "数据新鲜度",
+        "同步延迟时间",
+        "刷新频率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "优化数据同步：1. 减少数据源同步延迟，确保实时数据及时更新。2. 改进缓存刷新策略，避免显示过时数据。3. 提供数据更新状态指示，让用户知晓数据新鲜度。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-002",
+      "segment_id": "seg-bi-performance",
+      "name": "查询执行缓慢与超时",
+      "summary": "查询性能差导致仪表盘加载缓慢、查询频繁超时、数据延迟显示，直接影响分析工作流和用户体验。",
+      "feedback_count": 17,
+      "evidence_feedback_ids": [
+        "FB36",
+        "FB48",
+        "FB61",
+        "FB62",
+        "FB64",
+        "FB65",
+        "FB69",
+        "FB70",
+        "FB74",
+        "FB75",
+        "FB79",
+        "FB80",
+        "FB117",
+        "FB139",
+        "FB148",
+        "FB129",
+        "FB133"
+      ],
+      "secondary_themes": [
+        "数据延迟",
+        "仪表盘加载",
+        "续费影响"
+      ],
+      "possible_metrics": [
+        "查询响应时间",
+        "超时率",
+        "数据新鲜度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化查询引擎和缓存策略（如增加缓存预热和失效策略）；实施查询超时和自动重试机制；改进数据加载逻辑以支持实时更新。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-001",
+      "segment_id": "seg-bi-performance",
+      "name": "导出操作性能瓶颈",
+      "summary": "大数据集导出到CSV或生成报告时，系统卡死、速度缓慢或任务失败，严重影响用户工作效率。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB5",
+        "FB9",
+        "FB13",
+        "FB18",
+        "FB23",
+        "FB25"
+      ],
+      "secondary_themes": [
+        "系统崩溃",
+        "服务器负载",
+        "网络超时"
+      ],
+      "possible_metrics": [
+        "导出时间",
+        "任务成功率",
+        "服务器负载率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化导出流程，引入异步处理和分布式队列管理；增加服务器资源（如CPU、内存）以处理大数据集；监控网络连接并设置超时重试机制。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-004",
+      "segment_id": "seg-bi-performance",
+      "name": "查询优化与监控不足",
+      "summary": "查询优化器效率低、缓存失效、队列管理不当、日志不足，导致性能调试困难和优化瓶颈。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB68",
+        "FB72",
+        "FB73",
+        "FB78",
+        "FB143"
+      ],
+      "secondary_themes": [
+        "缓存策略",
+        "查询日志",
+        "性能监控"
+      ],
+      "possible_metrics": [
+        "查询优化效率",
+        "缓存命中率",
+        "日志完整性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "改进查询优化器算法以提高生成查询的效率；增强缓存管理和预热策略；完善查询日志记录和性能监控工具，便于问题排查和优化。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-003",
+      "segment_id": "seg-bi-performance",
+      "name": "高负载下系统不稳定",
+      "summary": "查询时CPU使用率飙升、并发查询导致系统卡死或崩溃，服务器响应慢，影响系统可靠性。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB63",
+        "FB67",
+        "FB76",
+        "FB118"
+      ],
+      "secondary_themes": [
+        "服务器负载",
+        "并发处理",
+        "资源管理"
+      ],
+      "possible_metrics": [
+        "CPU使用率",
+        "并发查询数",
+        "系统崩溃次数"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "实施资源监控和自动扩展机制（如基于负载的弹性伸缩）；优化并发查询调度算法，设置优先级队列；增加硬件资源或优化查询计划以减少资源占用。"
+    },
+    {
+      "cluster_id": "seg-positive-cluster-001",
+      "segment_id": "seg-positive",
+      "name": "正向反馈汇总",
+      "summary": "正向反馈汇总相关反馈",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB10",
+        "FB14",
+        "FB20",
+        "FB24",
+        "FB44",
+        "FB49",
+        "FB124",
+        "FB125"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "保留为产品亮点参考。"
+    },
+    {
+      "cluster_id": "seg-bi-visualization-cluster-001",
+      "segment_id": "seg-bi-visualization",
+      "name": "图表类型与多样性不足",
+      "summary": "用户反馈可视化图表类型太少，无法满足多样化需求，建议增加更多图表类型和模板以提升报表美观度和续费吸引力。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB111",
+        "FB120",
+        "FB142",
+        "FB114",
+        "FB115",
+        "FB119",
+        "FB132"
+      ],
+      "secondary_themes": [
+        "用户满意度",
+        "续费率"
+      ],
+      "possible_metrics": [
+        "图表类型数量",
+        "用户反馈率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "扩展图表库，增加至少10种新图表类型（如桑基图、热力图等），并提供更多预设模板，允许用户快速应用和自定义。"
+    },
+    {
+      "cluster_id": "seg-bi-visualization-cluster-002",
+      "segment_id": "seg-bi-visualization",
+      "name": "自定义选项与品牌匹配限制",
+      "summary": "用户指出主题颜色选项有限，无法匹配公司品牌，且图表自定义调整困难，影响品牌一致性和视觉吸引力。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB52",
+        "FB112"
+      ],
+      "secondary_themes": [
+        "品牌一致性",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "自定义选项数量",
+        "品牌匹配率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "增强主题自定义功能，提供更多颜色选项（如Pantone色支持）、字体和样式调整工具，并集成品牌指南导入功能，允许用户上传公司品牌配置文件。"
+    },
+    {
+      "cluster_id": "seg-bi-visualization-cluster-003",
+      "segment_id": "seg-bi-visualization",
+      "name": "图表性能与质量问题",
+      "summary": "用户报告图表交互性差，点击无响应，以及PDF导出后图表模糊不清，影响数据探索和报告分享效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB113"
+      ],
+      "secondary_themes": [
+        "性能优化",
+        "导出质量"
+      ],
+      "possible_metrics": [
+        "交互响应时间",
+        "导出分辨率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化图表交互性能，确保点击事件在200ms内响应；改进PDF导出算法，采用高分辨率渲染（至少300 DPI），并支持矢量格式导出以保持清晰度。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-001",
+      "segment_id": "seg-bi-integration",
+      "name": "连接和认证失败",
+      "summary": "用户报告数据源连接超时或认证错误，导致集成失败和数据访问中断。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB33",
+        "FB101",
+        "FB42",
+        "FB105",
+        "FB109",
+        "FB131"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "连接成功率",
+        "认证错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "优化网络连接超时配置，实现重试机制；改进认证流程，提供详细的错误代码和解决方案文档。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-002",
+      "segment_id": "seg-bi-integration",
+      "name": "数据同步中断和维护频繁",
+      "summary": "数据同步过程中经常中断，集成脚本错误多，导致需要手动重启和高频维护。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB102",
+        "FB108",
+        "FB107"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "同步中断频率",
+        "平均修复时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "增强同步任务的稳定性监控，实现自动恢复和日志分析；优化集成脚本，减少错误并提供维护指南。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-003",
+      "segment_id": "seg-bi-integration",
+      "name": "API文档不清晰和过时",
+      "summary": "用户反映API集成文档内容不清晰或信息过时，导致开发困难和效率低下。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB106",
+        "FB141"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "文档满意度评分",
+        "开发者反馈时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "全面审查并更新API文档，添加示例代码和常见问题解答；建立用户反馈渠道，定期迭代文档内容。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-004",
+      "segment_id": "seg-bi-integration",
+      "name": "集成过程复杂和成本高",
+      "summary": "数据源集成过程复杂，需要额外资源投入，导致续费成本增加和用户满意度下降。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB104",
+        "FB93"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "集成步骤数",
+        "用户集成成本"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "简化集成流程，提供向导式工具或预配置模板；评估成本结构，推出性价比更高的集成方案。"
+    },
+    {
+      "cluster_id": "seg-bi-integration-cluster-005",
+      "segment_id": "seg-bi-integration",
+      "name": "兼容性差和数据源支持不足",
+      "summary": "产品不支持旧数据库系统，且缺乏更多数据源集成，限制了用户覆盖和产品价值。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB103",
+        "FB110"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "支持数据库类型数",
+        "数据源扩展请求量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "优先支持主流旧数据库系统，开发适配器或兼容层；调研用户需求，计划集成更多数据源以提升产品竞争力。"
+    },
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-001",
+      "segment_id": "seg-bi-dashboard",
+      "name": "仪表盘配置复杂性与高学习曲线",
+      "summary": "用户反馈配置过程过于复杂，需要技术知识，小部件设置困难，导致学习曲线陡峭，成为续费阻碍。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB46",
+        "FB54",
+        "FB55",
+        "FB60",
+        "FB149",
+        "FB128"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置完成率",
+        "用户支持请求量"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "简化配置界面，引入步骤式向导和预设模板，降低技术门槛；提供交互式教程和上下文帮助，减少用户学习成本。"
+    },
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-002",
+      "segment_id": "seg-bi-dashboard",
+      "name": "性能与响应延迟问题",
+      "summary": "操作如小部件拖放、仪表盘加载和查询响应缓慢，导致用户体验卡顿和交互延迟。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB51",
+        "FB66",
+        "FB77",
+        "FB138"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均加载时间",
+        "操作响应时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "优化前端和后端代码，减少资源加载时间；实施懒加载和缓存策略，改善拖放响应；添加性能监控工具以识别瓶颈。"
+    },
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-005",
+      "segment_id": "seg-bi-dashboard",
+      "name": "权限与设置管理问题",
+      "summary": "共享设置与权限管理存在问题，过滤器设置不直观，性能监控配置不足。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB53",
+        "FB57",
+        "FB58"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "权限配置错误率",
+        "过滤器使用效率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "简化共享和权限管理界面，使用更直观的标签和选项；改进过滤器设计，提供可视化条件构建器；集成性能监控仪表板，便于配置优化。"
+    },
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-003",
+      "segment_id": "seg-bi-dashboard",
+      "name": "布局保存与显示问题",
+      "summary": "布局保存后再次打开时显示混乱，且响应式设计不佳导致移动端显示不清晰。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB47",
+        "FB56"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "布局保存成功率",
+        "移动端满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "修复布局保存逻辑，确保数据持久化正确；增强响应式设计框架，优化移动端自适应显示，进行跨设备测试。"
+    },
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-004",
+      "segment_id": "seg-bi-dashboard",
+      "name": "用户引导与功能发现不足",
+      "summary": "缺乏足够的配置模板和向导，高级功能入口隐藏较深，导致新用户上手困难。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB50",
+        "FB59"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "新用户激活率",
+        "功能使用率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "增加更多仪表盘配置模板和交互式向导；重新设计UI，使高级功能更易访问，提供引导式提示和搜索功能。"
+    },
+    {
+      "cluster_id": "seg-bi-value-cluster-001",
+      "segment_id": "seg-bi-value",
+      "name": "价格与功能价值不匹配",
+      "summary": "用户普遍反馈续费定价过高，功能与需求不匹配，导致价值感低和性价比差。",
+      "feedback_count": 14,
+      "evidence_feedback_ids": [
+        "FB81",
+        "FB82",
+        "FB84",
+        "FB86",
+        "FB87",
+        "FB91",
+        "FB94",
+        "FB99",
+        "FB92",
+        "FB97",
+        "FB130",
+        "FB135",
+        "FB140",
+        "FB145"
+      ],
+      "secondary_themes": [
+        "定价策略",
+        "功能利用率"
+      ],
+      "possible_metrics": [
+        "续费率",
+        "价格敏感度",
+        "功能使用率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "重新评估定价结构，引入基于价值的收费模式（如按功能模块）；提供个性化功能匹配分析和ROI展示工具，以增强用户价值感知。"
+    },
+    {
+      "cluster_id": "seg-bi-value-cluster-003",
+      "segment_id": "seg-bi-value",
+      "name": "功能更新滞后与决策信息不足",
+      "summary": "用户期望更频繁的功能更新、透明的产品路线图以及基于ROI的决策支持信息，以支撑续费决策。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB85",
+        "FB88",
+        "FB89",
+        "FB90",
+        "FB95",
+        "FB96",
+        "FB100",
+        "FB150"
+      ],
+      "secondary_themes": [
+        "产品开发",
+        "客户沟通"
+      ],
+      "possible_metrics": [
+        "功能更新频率",
+        "路线图透明度",
+        "续费决策周期"
+      ],
+      "priority": "P0",
+      "opportunity_score": 80,
+      "recommendation": "发布并定期更新公开的产品路线图，确保功能迭代符合用户需求；提供ROI计算模板和行业案例研究，帮助用户量化价值。"
+    },
+    {
+      "cluster_id": "seg-bi-value-cluster-002",
+      "segment_id": "seg-bi-value",
+      "name": "技术支持响应效率低",
+      "summary": "用户反映续费后技术支持响应缓慢，服务体验差，影响价值感知。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB83",
+        "FB98"
+      ],
+      "secondary_themes": [
+        "客户服务",
+        "响应时间"
+      ],
+      "possible_metrics": [
+        "支持响应时间",
+        "客户满意度得分"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "优化技术支持流程，设定明确的服务水平协议（SLA）并监控执行；增加自助支持资源（如知识库、视频教程）以减少依赖。"
+    },
+    {
+      "cluster_id": "seg-noise-cluster-001",
+      "segment_id": "seg-noise",
+      "name": "无效/噪声反馈",
+      "summary": "噪声/无效反馈相关反馈",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB121",
+        "FB123"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "不进入核心问题排序。"
+    },
+    {
+      "cluster_id": "seg-unknown-cluster-001",
+      "segment_id": "seg-unknown",
+      "name": "未分类反馈",
+      "summary": "未分类反馈相关反馈",
+      "feedback_count": 1,
+      "evidence_feedback_ids": [
+        "FB122"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "需要人工复核。"
+    }
+  ],
+  "report_path": ""
+}

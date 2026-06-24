@@ -1,0 +1,120 @@
+{
+  "segment_id": "seg-ecommerce-payment",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 23,
+    "cluster_count": 5,
+    "clustered_feedback_count": 23,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-001",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "通用支付失败与重试循环",
+      "summary": "用户频繁遇到支付失败，系统提示重试，但问题持续存在，导致挫败感。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB27",
+        "FB28",
+        "FB30",
+        "FB35",
+        "FB42",
+        "FB131",
+        "FB140"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "支付失败率",
+        "重试成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "分析支付接口的错误日志，识别常见失败原因（如超时、限流），并实施智能重试策略，例如指数退避，同时提供更清晰的错误消息。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-002",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付系统与移动端稳定性问题",
+      "summary": "支付过程中出现系统错误、网络问题或App崩溃，导致支付失败。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB29",
+        "FB32",
+        "FB39",
+        "FB121"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "系统可用性",
+        "崩溃率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "加强支付接口的监控和告警，设置自动故障转移；优化移动端App的支付模块，减少内存泄漏和崩溃；进行定期维护并提前通知用户。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-003",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付失败导致订单与资金不一致",
+      "summary": "支付失败后出现资金扣款但订单未生成，或订单取消、优惠券失效等问题。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB34",
+        "FB41",
+        "FB44",
+        "FB45"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "订单确认率",
+        "资金扣款失败率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 85,
+      "recommendation": "实现可靠的支付回调处理机制，确保订单状态与支付结果同步；为失败支付提供自动退款流程；优化优惠券的持久化，避免支付失败后丢失。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-005",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "支付体验差且落后于竞品",
+      "summary": "用户反映支付过程不流畅，竞品支付更稳定、支持更多方式，导致用户流失风险。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB31",
+        "FB36",
+        "FB37",
+        "FB43"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "支付流程转化率",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "进行竞品分析，benchmark支付流程；增加更多支付方式选项（如Apple Pay、支付宝等）；优化支付界面设计，减少步骤，提升用户体验。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-payment-cluster-004",
+      "segment_id": "seg-ecommerce-payment",
+      "name": "银行卡与第三方支付方式失败",
+      "summary": "用户在使用银行卡、微信支付等特定方式时遇到失败，提示银行拒绝或其他错误。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB33",
+        "FB38",
+        "FB40"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "各支付方式成功率",
+        "银行拒绝率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "与各支付提供商（银行、微信支付）紧密合作，分析失败交易的原因；调整风控规则以减少误拒；在支付页面提供更详细的错误指导和替代支付选项。"
+    }
+  ]
+}

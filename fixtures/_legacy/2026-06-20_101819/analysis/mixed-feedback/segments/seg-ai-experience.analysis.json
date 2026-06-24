@@ -1,0 +1,107 @@
+{
+  "segment_id": "seg-ai-experience",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 11,
+    "cluster_count": 4,
+    "clustered_feedback_count": 11,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-ai-experience",
+      "name": "AI输出准确性不足",
+      "summary": "用户反馈AI在回答专业问题、图片识别和商品推荐方面准确性不高，输出错误或不相关结果，影响信任和使用效果。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB32",
+        "FB64",
+        "FB90"
+      ],
+      "secondary_themes": [
+        "回答准确性",
+        "识别准确性",
+        "推荐准确性"
+      ],
+      "possible_metrics": [
+        "准确率",
+        "错误率",
+        "用户满意度得分"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "加强AI模型的训练数据质量和多样性，针对特定领域进行微调，实施持续监控和用户反馈机制以迭代提升准确性。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-ai-experience",
+      "name": "AI生成内容质量低",
+      "summary": "AI生成的报告和文案质量低于预期，需要大量人工修改才能使用，降低了工作效率和AI的实用价值。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB22",
+        "FB47"
+      ],
+      "secondary_themes": [
+        "报告生成",
+        "文案生成"
+      ],
+      "possible_metrics": [
+        "生成内容质量评分",
+        "人工修改率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化生成算法和模型，引入多轮迭代和人工反馈循环，建立质量评估标准以提高输出内容的直接可用性。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-ai-experience",
+      "name": "AI交互体验不佳",
+      "summary": "AI交互方式机械且上下文管理不佳，导致对话不自然、回答不连贯，影响用户体验和满意度。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB14",
+        "FB79"
+      ],
+      "secondary_themes": [
+        "交互自然度",
+        "上下文保持"
+      ],
+      "possible_metrics": [
+        "对话流畅度",
+        "上下文一致性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "改进自然语言处理模型，增强上下文跟踪和记忆能力，设计更人性化的交互流程以提升对话连贯性。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-ai-experience",
+      "name": "AI产品基础性能问题",
+      "summary": "用户反映系统响应速度慢、数据安全性担忧以及功能不实用，这些基础问题影响产品整体信任、体验和留存。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB73",
+        "FB98",
+        "FB116"
+      ],
+      "secondary_themes": [
+        "系统性能",
+        "数据安全",
+        "功能实用性"
+      ],
+      "possible_metrics": [
+        "响应时间",
+        "安全事件率",
+        "功能使用率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化系统架构以提升响应速度，加强数据加密和隐私保护措施，并重新评估功能设计以匹配用户实际需求和管理期望。"
+    }
+  ]
+}

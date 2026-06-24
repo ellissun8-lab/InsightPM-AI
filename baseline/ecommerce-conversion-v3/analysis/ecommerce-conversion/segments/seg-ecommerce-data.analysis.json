@@ -1,0 +1,153 @@
+{
+  "segment_id": "seg-ecommerce-data",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 21,
+    "cluster_count": 6,
+    "clustered_feedback_count": 21,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-001",
+      "segment_id": "seg-ecommerce-data",
+      "name": "跨平台数据同步延迟与不一致",
+      "summary": "用户在不同设备或平台间遇到数据同步延迟或不一致的问题，包括订单状态、搜索记录、支付设置、通知设置和多设备数据冲突。",
+      "feedback_count": 10,
+      "evidence_feedback_ids": [
+        "FB67",
+        "FB79",
+        "FB100",
+        "FB102",
+        "FB103",
+        "FB108",
+        "FB109",
+        "FB111",
+        "FB114",
+        "FB150"
+      ],
+      "secondary_themes": [
+        "数据一致性",
+        "用户体验"
+      ],
+      "possible_metrics": [
+        "同步成功率",
+        "数据更新延迟时间"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化数据同步架构，采用实时或准实时同步技术，减少延迟，并实施数据一致性检查机制以确保跨平台数据同步。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-002",
+      "segment_id": "seg-ecommerce-data",
+      "name": "数据准确性与可访问性问题",
+      "summary": "数据准确性问题，包括客服无法访问完整订单历史、用户画像数据不准确和隐私设置跨平台不生效。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB106",
+        "FB113",
+        "FB115"
+      ],
+      "secondary_themes": [
+        "数据质量",
+        "隐私管理"
+      ],
+      "possible_metrics": [
+        "数据准确率",
+        "客服查询效率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "加强数据质量监控和校验，优化隐私设置的同步机制，并确保客服系统能实时访问完整订单历史数据。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-003",
+      "segment_id": "seg-ecommerce-data",
+      "name": "地址保存与显示问题",
+      "summary": "用户在使用地址功能时遇到保存失败或地址簿显示不全的问题，导致重复填写和查找困难。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB18"
+      ],
+      "secondary_themes": [
+        "用户体验",
+        "数据持久化"
+      ],
+      "possible_metrics": [
+        "地址保存成功率",
+        "地址簿加载时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "优化地址保存逻辑，确保数据持久化到服务器，并改进地址簿的缓存和加载机制以提升显示完整性。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-004",
+      "segment_id": "seg-ecommerce-data",
+      "name": "库存与优惠信息显示不一致",
+      "summary": "库存显示和优惠信息在网站和App之间不一致，导致用户困惑和潜在购买决策问题。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB99"
+      ],
+      "secondary_themes": [
+        "信息一致性",
+        "营销效果"
+      ],
+      "possible_metrics": [
+        "信息一致率",
+        "用户投诉率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "统一库存和优惠信息的数据源，实现实时更新和跨平台一致性校验，并提供明确的信息差异提示。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-005",
+      "segment_id": "seg-ecommerce-data",
+      "name": "账户数据不一致与登录问题",
+      "summary": "账户余额在不同平台不一致，以及第三方登录信息未打通，影响用户体验和账户管理。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB101",
+        "FB105"
+      ],
+      "secondary_themes": [
+        "账户管理",
+        "登录体验"
+      ],
+      "possible_metrics": [
+        "账户数据同步率",
+        "登录成功率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "改进账户数据同步机制，确保余额信息实时一致，并集成第三方登录服务以支持无缝登录体验。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-data-cluster-006",
+      "segment_id": "seg-ecommerce-data",
+      "name": "数据迁移与管理功能缺失",
+      "summary": "数据迁移过程中历史订单丢失，以及数据导入导出功能缺失，影响数据安全和用户控制。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB104",
+        "FB110"
+      ],
+      "secondary_themes": [
+        "数据安全",
+        "用户控制"
+      ],
+      "possible_metrics": [
+        "数据迁移成功率",
+        "功能完整性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "提供可靠的数据迁移工具和备份恢复功能，并开发数据导入导出接口以增强用户数据管理和控制能力。"
+    }
+  ]
+}

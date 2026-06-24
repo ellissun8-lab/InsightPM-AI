@@ -1,0 +1,35 @@
+{
+  "segment_id": "seg-onboarding-activation",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 2,
+    "cluster_count": 1,
+    "clustered_feedback_count": 2,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-activation-cluster-001",
+      "segment_id": "seg-onboarding-activation",
+      "name": "激活邮件内容不一致与不当付费引导",
+      "summary": "用户在激活流程中遇到激活邮件标题与正文内容不一致（标题为激活，正文为欢迎注册），导致困惑和激活障碍；同时，免费版注册用户被过度引导购买付费功能，引起不满，影响激活成功率和用户体验。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB58",
+        "FB78"
+      ],
+      "secondary_themes": [
+        "用户体验",
+        "转化优化"
+      ],
+      "possible_metrics": [
+        "激活邮件打开率",
+        "激活完成率",
+        "用户满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "1. 立即审核并统一激活邮件的标题和正文内容，确保一致性并提供清晰、明确的激活链接和指引，以减少用户困惑。2. 优化onboarding流程，针对免费版用户，在注册后提供基于免费功能的个性化引导，避免强制或过度推销付费功能，可考虑通过价值展示而非干扰方式促进自然升级。"
+    }
+  ]
+}

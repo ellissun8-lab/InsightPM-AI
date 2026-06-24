@@ -1,0 +1,109 @@
+{
+  "segment_id": "seg-bi-accuracy",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 27,
+    "cluster_count": 3,
+    "clustered_feedback_count": 27,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-accuracy-cluster-002",
+      "segment_id": "seg-bi-accuracy",
+      "name": "数据计算与一致性缺陷",
+      "summary": "数据在计算、聚合、缓存和定义方面存在准确性问题，导致报表不一致、决策受影响，甚至审计和续费风险。",
+      "feedback_count": 17,
+      "evidence_feedback_ids": [
+        "FB26",
+        "FB31",
+        "FB32",
+        "FB34",
+        "FB35",
+        "FB37",
+        "FB38",
+        "FB39",
+        "FB40",
+        "FB41",
+        "FB43",
+        "FB45",
+        "FB71",
+        "FB147",
+        "FB29",
+        "FB30",
+        "FB127"
+      ],
+      "secondary_themes": [
+        "数据不一致",
+        "公式错误",
+        "聚合错误",
+        "缓存问题",
+        "数据校验",
+        "指标定义"
+      ],
+      "possible_metrics": [
+        "数据准确性率",
+        "报表一致性分数",
+        "计算错误率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 90,
+      "recommendation": "增强数据准确性：1. 实施数据校验规则，支持自定义校验以确保数据质量。2. 统一指标定义，提供清晰文档避免混淆。3. 修复聚合计算逻辑，确保总数与明细一致。4. 优化缓存机制，确保数据刷新后显示最新。5. 定期审计数据准确性，建立反馈闭环改进。"
+    },
+    {
+      "cluster_id": "seg-bi-accuracy-cluster-001",
+      "segment_id": "seg-bi-accuracy",
+      "name": "数据导出格式与过滤错误",
+      "summary": "导出功能存在多个问题，包括日期格式错误、数字精度丢失、过滤条件失效、公式错误和字符乱码，影响数据导出质量。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB7",
+        "FB12",
+        "FB16",
+        "FB17",
+        "FB21",
+        "FB22"
+      ],
+      "secondary_themes": [
+        "数据格式",
+        "精度丢失",
+        "数据过滤",
+        "公式错误",
+        "字符编码"
+      ],
+      "possible_metrics": [
+        "导出成功率",
+        "数据格式正确率",
+        "过滤条件应用率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "改进导出模块：1. 修复日期格式映射，确保Excel导出时日期列正确显示。2. 在CSV导出中保留数字精度，避免截断。3. 验证并修复筛选条件在导出时的逻辑，确保只导出过滤后数据。4. 检查Excel公式生成逻辑，防止引用错误。5. 使用UTF-8编码处理特殊字符，避免乱码。"
+    },
+    {
+      "cluster_id": "seg-bi-accuracy-cluster-003",
+      "segment_id": "seg-bi-accuracy",
+      "name": "数据刷新与同步延迟",
+      "summary": "数据刷新和同步存在延迟，导致仪表盘显示旧数据，影响实时性和准确性。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB27",
+        "FB28",
+        "FB137"
+      ],
+      "secondary_themes": [
+        "数据刷新",
+        "同步延迟"
+      ],
+      "possible_metrics": [
+        "数据新鲜度",
+        "同步延迟时间",
+        "刷新频率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "优化数据同步：1. 减少数据源同步延迟，确保实时数据及时更新。2. 改进缓存刷新策略，避免显示过时数据。3. 提供数据更新状态指示，让用户知晓数据新鲜度。"
+    }
+  ]
+}

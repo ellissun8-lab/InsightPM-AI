@@ -1,0 +1,112 @@
+{
+  "segment_id": "seg-ecommerce-checkout",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 20,
+    "cluster_count": 4,
+    "clustered_feedback_count": 20,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-001",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "下单流程步骤过多且复杂",
+      "summary": "用户普遍反馈下单流程复杂、步骤多、耗时长，与竞品相比缺乏便捷性，导致用户挫败感和流失。",
+      "feedback_count": 11,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB6",
+        "FB11",
+        "FB12",
+        "FB16",
+        "FB17",
+        "FB18",
+        "FB24",
+        "FB129",
+        "FB138",
+        "FB145"
+      ],
+      "secondary_themes": [
+        "竞品对比"
+      ],
+      "possible_metrics": [
+        "下单完成率",
+        "平均下单时间",
+        "步骤数"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "简化下单流程，减少不必要的步骤，参考竞品设计一键下单或快速结算功能，并进行用户测试以优化流程。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-004",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "用户体验差导致高跳出率",
+      "summary": "下单页面跳出率高、用户体验糟糕，可能与界面设计有关，导致下单成功率下降和流失。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB5",
+        "FB10",
+        "FB22",
+        "FB23"
+      ],
+      "secondary_themes": [
+        "界面设计",
+        "用户流失"
+      ],
+      "possible_metrics": [
+        "页面跳出率",
+        "用户满意度评分",
+        "下单成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "进行用户体验审计，优化界面设计和交互流程，通过A/B测试减少跳出率，并收集用户反馈持续改进。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-002",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "关键操作按钮无响应",
+      "summary": "下单流程中的保存和下单按钮在点击后无反应，导致用户无法完成订单，严重影响转化率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB7",
+        "FB20"
+      ],
+      "secondary_themes": [
+        "UI交互"
+      ],
+      "possible_metrics": [
+        "按钮点击成功率",
+        "错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "立即排查按钮无响应的bug，确保前端事件正确触发和后端接口稳定，增加错误提示和重试机制。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-checkout-cluster-003",
+      "segment_id": "seg-ecommerce-checkout",
+      "name": "地址默认错误与页面信息混乱",
+      "summary": "收货地址经常默认错误需用户手动修改，结算页面信息展示混乱，影响用户体验和操作效率。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB15",
+        "FB21"
+      ],
+      "secondary_themes": [
+        "数据预填",
+        "页面布局"
+      ],
+      "possible_metrics": [
+        "地址修改率",
+        "页面停留时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化地址默认逻辑，基于用户历史或定位自动填充，并重新设计结算页面布局，使信息更清晰易读。"
+    }
+  ]
+}

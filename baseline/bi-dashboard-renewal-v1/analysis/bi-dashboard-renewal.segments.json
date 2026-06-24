@@ -1,0 +1,325 @@
+{
+  "dataset": "bi-dashboard-renewal",
+  "is_mixed_dataset": true,
+  "segment_count": 10,
+  "business_segment_count": 7,
+  "noise_segment_count": 1,
+  "positive_segment_count": 1,
+  "segments": [
+    {
+      "segment_id": "seg-bi-export",
+      "segment_type": "business",
+      "name": "报表导出问题",
+      "product_type": "BI-dashboard",
+      "business_goal": "提升导出可靠性",
+      "feedback_count": 29,
+      "feedback_ids": [
+        "FB1",
+        "FB6",
+        "FB9",
+        "FB12",
+        "FB18",
+        "FB21",
+        "FB25",
+        "FB28",
+        "FB31",
+        "FB34",
+        "FB40",
+        "FB47",
+        "FB52",
+        "FB56",
+        "FB65",
+        "FB71",
+        "FB76",
+        "FB77",
+        "FB81",
+        "FB87",
+        "FB95",
+        "FB112",
+        "FB117",
+        "FB123",
+        "FB129",
+        "FB131",
+        "FB137",
+        "FB139",
+        "FB143"
+      ],
+      "main_themes": [
+        "导出格式错乱",
+        "导出功能无响应/失败",
+        "导出文件字符编码错误",
+        "导出数据格式转换错误",
+        "导出操作效率不足"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-accuracy",
+      "segment_type": "business",
+      "name": "数据准确性问题",
+      "product_type": "BI-dashboard",
+      "business_goal": "提升数据可信度",
+      "feedback_count": 19,
+      "feedback_ids": [
+        "FB2",
+        "FB13",
+        "FB26",
+        "FB32",
+        "FB46",
+        "FB50",
+        "FB54",
+        "FB60",
+        "FB75",
+        "FB89",
+        "FB96",
+        "FB106",
+        "FB108",
+        "FB114",
+        "FB119",
+        "FB127",
+        "FB135",
+        "FB141",
+        "FB148"
+      ],
+      "main_themes": [
+        "数据不一致/计算错误",
+        "计算逻辑错误，修复引发新问题",
+        "维度数据映射更新延迟/失效",
+        "数据准确性",
+        "计算逻辑"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-integration",
+      "segment_type": "business",
+      "name": "数据源集成问题",
+      "product_type": "BI-dashboard",
+      "business_goal": "提升数据集成度",
+      "feedback_count": 18,
+      "feedback_ids": [
+        "FB3",
+        "FB14",
+        "FB20",
+        "FB33",
+        "FB38",
+        "FB53",
+        "FB59",
+        "FB64",
+        "FB72",
+        "FB80",
+        "FB88",
+        "FB101",
+        "FB102",
+        "FB111",
+        "FB118",
+        "FB133",
+        "FB136",
+        "FB142"
+      ],
+      "main_themes": [
+        "数据源集成配置困难",
+        "外部系统集成困难",
+        "数据集成任务不稳定，日志不清晰",
+        "API集成",
+        "连接管理"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-value",
+      "segment_type": "business",
+      "name": "续费价值感知",
+      "product_type": "BI-dashboard",
+      "business_goal": "提升价值感知",
+      "feedback_count": 14,
+      "feedback_ids": [
+        "FB4",
+        "FB10",
+        "FB23",
+        "FB44",
+        "FB57",
+        "FB74",
+        "FB84",
+        "FB98",
+        "FB115",
+        "FB128",
+        "FB134",
+        "FB140",
+        "FB145",
+        "FB150"
+      ],
+      "main_themes": [
+        "功能效果不达预期，影响续费",
+        "核心缺陷影响续费决策",
+        "产品易用性差影响组织采纳与续费",
+        "产品价值",
+        "续费价值"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "segment_type": "positive",
+      "name": "正向反馈汇总",
+      "product_type": "BI-dashboard",
+      "business_goal": "unknown",
+      "feedback_count": 22,
+      "feedback_ids": [
+        "FB5",
+        "FB11",
+        "FB36",
+        "FB39",
+        "FB41",
+        "FB49",
+        "FB51",
+        "FB63",
+        "FB67",
+        "FB69",
+        "FB82",
+        "FB90",
+        "FB92",
+        "FB100",
+        "FB107",
+        "FB113",
+        "FB116",
+        "FB121",
+        "FB125",
+        "FB130",
+        "FB132",
+        "FB144"
+      ],
+      "main_themes": [
+        "配置操作便捷",
+        "可视化功能丰富",
+        "正向; 可视化",
+        "自助分析",
+        "报表导出"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-dashboard",
+      "segment_type": "business",
+      "name": "仪表盘配置问题",
+      "product_type": "BI-dashboard",
+      "business_goal": "简化配置流程",
+      "feedback_count": 17,
+      "feedback_ids": [
+        "FB7",
+        "FB22",
+        "FB37",
+        "FB45",
+        "FB48",
+        "FB66",
+        "FB68",
+        "FB73",
+        "FB78",
+        "FB85",
+        "FB93",
+        "FB94",
+        "FB99",
+        "FB105",
+        "FB109",
+        "FB120",
+        "FB146"
+      ],
+      "main_themes": [
+        "数据可视化刷新机制不智能",
+        "筛选器配置效率低下",
+        "仪表盘配置",
+        "权限管理",
+        "仪表盘配置易用性与稳定性"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-performance",
+      "segment_type": "business",
+      "name": "查询性能问题",
+      "product_type": "BI-dashboard",
+      "business_goal": "提升查询速度",
+      "feedback_count": 17,
+      "feedback_ids": [
+        "FB8",
+        "FB17",
+        "FB24",
+        "FB27",
+        "FB29",
+        "FB35",
+        "FB42",
+        "FB58",
+        "FB61",
+        "FB79",
+        "FB86",
+        "FB103",
+        "FB104",
+        "FB110",
+        "FB124",
+        "FB126",
+        "FB147"
+      ],
+      "main_themes": [
+        "查询执行效率低下",
+        "页面加载缓慢影响领导层体验与部门形象",
+        "系统性能波动",
+        "高并发场景下性能下降",
+        "核心功能（报表生成）性能下降，影响体验与续费信心"
+      ]
+    },
+    {
+      "segment_id": "seg-unknown",
+      "segment_type": "unknown",
+      "name": "未分类反馈",
+      "product_type": "BI-dashboard",
+      "business_goal": "unknown",
+      "feedback_count": 3,
+      "feedback_ids": [
+        "FB15",
+        "FB19",
+        "FB91"
+      ],
+      "main_themes": [
+        "系统卡顿（原因未知）",
+        "跨用户环境下的数据加载失败",
+        "报表功能增强"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "segment_type": "noise",
+      "name": "噪声/无效反馈",
+      "product_type": "BI-dashboard",
+      "business_goal": "unknown",
+      "feedback_count": 2,
+      "feedback_ids": [
+        "FB16",
+        "FB62"
+      ],
+      "main_themes": [
+        "缺乏查询历史/模板保存功能",
+        "噪声"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-visualization",
+      "segment_type": "business",
+      "name": "可视化与图表问题",
+      "product_type": "BI-dashboard",
+      "business_goal": "提升可视化能力",
+      "feedback_count": 9,
+      "feedback_ids": [
+        "FB30",
+        "FB43",
+        "FB55",
+        "FB70",
+        "FB83",
+        "FB97",
+        "FB122",
+        "FB138",
+        "FB149"
+      ],
+      "main_themes": [
+        "图表样式配置复杂、不直观",
+        "地图可视化",
+        "趋势线图表",
+        "可视化图表",
+        "可视化配置与复用"
+      ]
+    }
+  ]
+}

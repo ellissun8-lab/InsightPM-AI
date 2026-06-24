@@ -1,0 +1,85 @@
+{
+  "segment_id": "seg-renewal-competition",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 8,
+    "cluster_count": 3,
+    "clustered_feedback_count": 8,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-competition-cluster-001",
+      "segment_id": "seg-renewal-competition",
+      "name": "价格和功能竞争力不足",
+      "summary": "客户反馈竞品在价格和功能上更有优势，导致竞争力下降和潜在流失风险。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB62",
+        "FB116"
+      ],
+      "secondary_themes": [
+        "competition",
+        "价格/功能竞争力",
+        "竞品优势"
+      ],
+      "possible_metrics": [
+        "价格竞争力评分",
+        "功能覆盖率",
+        "客户流失率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "进行竞品价格和功能分析，优化定价策略并优先增强核心功能，以提升竞争力。"
+    },
+    {
+      "cluster_id": "seg-renewal-competition-cluster-002",
+      "segment_id": "seg-renewal-competition",
+      "name": "AI分析功能缺失",
+      "summary": "客户指出竞品拥有AI分析功能，而我们没有，这成为关键竞争劣势，影响产品吸引力。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB29",
+        "FB83",
+        "FB137"
+      ],
+      "secondary_themes": [
+        "competition",
+        "竞品功能对比",
+        "AI功能"
+      ],
+      "possible_metrics": [
+        "AI功能采用率",
+        "客户满意度",
+        "技术差距指标"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "评估并投资开发或集成AI分析功能，以缩小技术差距并满足客户需求。"
+    },
+    {
+      "cluster_id": "seg-renewal-competition-cluster-003",
+      "segment_id": "seg-renewal-competition",
+      "name": "培训政策差异",
+      "summary": "客户对竞品提供免费培训而我们收费表示不满，这影响了客户获取和留存。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB50",
+        "FB104"
+      ],
+      "secondary_themes": [
+        "竞品培训政策",
+        "培训价格"
+      ],
+      "possible_metrics": [
+        "培训参与率",
+        "客户获取成本",
+        "培训满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "重新评估培训策略，考虑提供免费培训或捆绑服务，以提升客户价值和竞争力。"
+    }
+  ]
+}

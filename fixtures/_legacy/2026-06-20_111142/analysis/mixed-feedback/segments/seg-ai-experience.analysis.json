@@ -1,0 +1,108 @@
+{
+  "segment_id": "seg-ai-experience",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 10,
+    "cluster_count": 4,
+    "clustered_feedback_count": 10,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-ai-experience",
+      "name": "AI输出质量与准确性问题",
+      "summary": "用户反馈AI功能输出质量不稳定、准确性下降，包括总结、对话、文案生成和写作功能的问题，影响核心体验。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB11",
+        "FB55",
+        "FB62"
+      ],
+      "secondary_themes": [
+        "AI功能准确率",
+        "AI对话准确性",
+        "AI质量",
+        "AI写作功能缺陷"
+      ],
+      "possible_metrics": [
+        "输出准确率",
+        "质量一致性",
+        "用户满意度"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化AI模型算法，加强质量控制机制，确保输出准确性和稳定性，例如通过定期更新训练数据和添加反馈循环。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-ai-experience",
+      "name": "AI生成内容多样性不足",
+      "summary": "用户指出AI绘画和PPT生成功能输出内容风格单一、样式有限，缺乏多样性和美观度，限制创意和实用性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB33",
+        "FB101"
+      ],
+      "secondary_themes": [
+        "AI生成多样性",
+        "AI生成的PPT模板样式和美观度不足"
+      ],
+      "possible_metrics": [
+        "内容多样性",
+        "样式数量",
+        "用户创意满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "增加训练数据多样性，扩展生成样式和模板选项，并引入用户自定义功能以提升视觉美观度和个性化。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-ai-experience",
+      "name": "AI助手交互与产品效果不符",
+      "summary": "用户遇到AI助手中断问题，并感到产品实际效果不如宣传，导致体验失望和信任度下降。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB45",
+        "FB74"
+      ],
+      "secondary_themes": [
+        "AI助手",
+        "AI产品效果"
+      ],
+      "possible_metrics": [
+        "助手可用性",
+        "效果匹配度",
+        "期望落差"
+      ],
+      "priority": "P0",
+      "opportunity_score": 80,
+      "recommendation": "改进AI助手稳定性和错误处理机制，确保宣传内容与实际功能一致，并通过透明沟通管理用户期望。"
+    },
+    {
+      "cluster_id": "cluster-004",
+      "segment_id": "seg-ai-experience",
+      "name": "API限制与定价问题",
+      "summary": "用户反馈API调用限制过严影响业务扩展，并希望价格协商以优化成本，反映产品可扩展性和经济性问题。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB90",
+        "FB111"
+      ],
+      "secondary_themes": [
+        "API限制",
+        "AI产品性能和定价"
+      ],
+      "possible_metrics": [
+        "API调用成功率",
+        "定价合理性",
+        "业务扩展能力"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "调整API限制策略，提供更多灵活的定价套餐和协商选项，以支持业务增长和客户成本控制。"
+    }
+  ]
+}

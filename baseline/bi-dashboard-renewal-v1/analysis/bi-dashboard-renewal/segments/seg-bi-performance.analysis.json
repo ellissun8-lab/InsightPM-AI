@@ -1,0 +1,135 @@
+{
+  "segment_id": "seg-bi-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 17,
+    "cluster_count": 5,
+    "clustered_feedback_count": 17,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-performance-cluster-001",
+      "segment_id": "seg-bi-performance",
+      "name": "查询执行与仪表盘加载缓慢",
+      "summary": "用户反馈查询执行时间过长，页面和仪表盘加载缓慢，直接影响使用效率和领导层体验。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB17",
+        "FB42",
+        "FB58",
+        "FB124",
+        "FB147"
+      ],
+      "secondary_themes": [
+        "查询响应时间",
+        "页面加载速度"
+      ],
+      "possible_metrics": [
+        "查询平均响应时间",
+        "页面加载时间",
+        "用户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "优化数据库查询索引和执行计划，实施查询结果缓存，减少前端资源加载时间，优化仪表盘组件渲染。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-002",
+      "segment_id": "seg-bi-performance",
+      "name": "系统性能波动与高并发下降",
+      "summary": "性能不稳定，时快时慢，尤其在用户并发高时性能下降，影响系统可靠性和用户体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB24",
+        "FB27",
+        "FB79"
+      ],
+      "secondary_themes": [
+        "并发处理",
+        "性能监控"
+      ],
+      "possible_metrics": [
+        "性能稳定性指标",
+        "并发用户数",
+        "响应时间标准差"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "增强系统负载均衡和自动扩展能力，实施性能监控和警报，优化并发查询处理逻辑。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-003",
+      "segment_id": "seg-bi-performance",
+      "name": "报表生成、导出与实时监控延迟",
+      "summary": "报表生成速度慢，导出耗时，实时监控存在延迟，影响核心业务功能的效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB29",
+        "FB35",
+        "FB103"
+      ],
+      "secondary_themes": [
+        "报表处理效率",
+        "实时数据更新"
+      ],
+      "possible_metrics": [
+        "报表生成时间",
+        "导出完成时间",
+        "实时数据延迟"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化报表生成算法和数据提取过程，改进导出机制，确保实时数据流的低延迟传输。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-004",
+      "segment_id": "seg-bi-performance",
+      "name": "高资源消耗与复杂数据模型",
+      "summary": "产品内存占用大，限制并发用户，数据模型复杂影响查询性能和可维护性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB61",
+        "FB126"
+      ],
+      "secondary_themes": [
+        "资源效率",
+        "数据模型设计"
+      ],
+      "possible_metrics": [
+        "内存使用率",
+        "CPU利用率",
+        "查询复杂度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "优化内存管理和资源分配，简化数据模型设计，提供更友好的配置和文档。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-005",
+      "segment_id": "seg-bi-performance",
+      "name": "查询功能灵活性与业务影响",
+      "summary": "用户需要更灵活的日期维度，性能优化影响续费决策，自然语言查询准确性有待提高。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB86",
+        "FB104",
+        "FB110"
+      ],
+      "secondary_themes": [
+        "功能灵活性",
+        "业务续费",
+        "查询准确性"
+      ],
+      "possible_metrics": [
+        "功能采纳率",
+        "续费率",
+        "查询准确率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "增加日期维度选择灵活性，将关键性能优化纳入产品路线图，改进自然语言查询的算法和训练数据。"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "segment_id": "seg-bi-renewal",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 12,
+    "cluster_count": 3,
+    "clustered_feedback_count": 12,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "cluster-001",
+      "segment_id": "seg-bi-renewal",
+      "name": "数据导出质量与准确性",
+      "summary": "用户反馈在导出数据时存在格式混乱、数据不一致和准确性错误，影响数据使用和信任。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB4",
+        "FB14",
+        "FB20",
+        "FB35"
+      ],
+      "secondary_themes": [
+        "报表生成",
+        "数据验证"
+      ],
+      "possible_metrics": [
+        "导出错误率",
+        "数据一致性分数"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "优化报表导出算法，确保格式对齐；增加数据验证机制，保证导出数据与平台显示一致；提供导出预览功能。"
+    },
+    {
+      "cluster_id": "cluster-002",
+      "segment_id": "seg-bi-renewal",
+      "name": "系统性能低下",
+      "summary": "用户报告在生成报表、查询数据或加载仪表盘时性能缓慢，影响工作效率。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB25",
+        "FB39",
+        "FB84"
+      ],
+      "secondary_themes": [
+        "报表生成",
+        "数据查询",
+        "仪表盘加载"
+      ],
+      "possible_metrics": [
+        "页面加载时间",
+        "查询响应时间",
+        "系统崩溃率"
+      ],
+      "priority": "P0",
+      "opportunity_score": 80,
+      "recommendation": "优化数据库查询和缓存机制；增加服务器资源或优化架构；提供性能监控工具，提前预警。"
+    },
+    {
+      "cluster_id": "cluster-003",
+      "segment_id": "seg-bi-renewal",
+      "name": "用户体验与功能可用性",
+      "summary": "用户反馈工具界面不直观、图表样式少、数据建模复杂、学习资源不足以及权限管理问题，导致使用困难。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB16",
+        "FB97",
+        "FB113",
+        "FB31"
+      ],
+      "secondary_themes": [
+        "图表设计",
+        "看板布局",
+        "数据建模",
+        "培训资源",
+        "权限设置"
+      ],
+      "possible_metrics": [
+        "用户满意度评分",
+        "功能使用率",
+        "学习曲线时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "重新设计UI以提升直观性；增加图表样式和模板；简化数据建模过程；提供更多教程和场景化模板；优化权限管理界面，支持更灵活的访问控制。"
+    }
+  ]
+}

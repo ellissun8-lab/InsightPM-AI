@@ -1,0 +1,85 @@
+{
+  "segment_id": "seg-ecommerce-promotion",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 21,
+    "cluster_count": 3,
+    "clustered_feedback_count": 21,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-002",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "促销活动信息不准确与误导",
+      "summary": "活动页面展示过期活动、内容不真实、折扣计算错误等，导致用户困惑和信任下降。",
+      "feedback_count": 9,
+      "evidence_feedback_ids": [
+        "FB84",
+        "FB86",
+        "FB87",
+        "FB88",
+        "FB89",
+        "FB95",
+        "FB98",
+        "FB133",
+        "FB147"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "活动信息准确率",
+        "用户信任度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "加强活动页面管理，及时下架过期活动并更新信息；确保促销信息真实透明，提供清晰的规则说明和折扣计算示例。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-001",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "优惠券应用与更新失败",
+      "summary": "用户反馈优惠券在使用时出现金额未更新、显示过期、无法使用等技术问题，以及流程不清晰导致核销率低。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB82",
+        "FB83",
+        "FB85",
+        "FB90",
+        "FB96"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "优惠券使用成功率",
+        "订单金额更新准确率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化优惠券系统技术稳定性，确保金额实时更新和状态同步；简化优惠券使用流程，提供明确的操作指引和状态提示。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-promotion-cluster-003",
+      "segment_id": "seg-ecommerce-promotion",
+      "name": "促销策略设计不佳影响转化",
+      "summary": "促销套路多、门槛高、页面跳出率高，且竞品促销更频繁，导致转化率未提升。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB91",
+        "FB92",
+        "FB93",
+        "FB94",
+        "FB97",
+        "FB99"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "促销转化率",
+        "页面跳出率",
+        "用户满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "优化促销策略，减少复杂套路，设置合理的满减门槛；提升页面设计和内容质量，增加活动频率并借鉴竞品优势。"
+    }
+  ]
+}

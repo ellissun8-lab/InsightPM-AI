@@ -1,0 +1,115 @@
+{
+  "segment_id": "seg-bi-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 13,
+    "cluster_count": 5,
+    "clustered_feedback_count": 13,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-performance-cluster-001",
+      "segment_id": "seg-bi-performance",
+      "name": "大数据量处理性能下降",
+      "summary": "在处理千万级或大数据集时，系统性能严重下降，导致仪表盘不可用或浏览器卡顿。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB44",
+        "FB98",
+        "FB130"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "查询执行时间",
+        "内存使用率",
+        "浏览器响应时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 80,
+      "recommendation": "优化大数据量查询的执行计划，使用索引和分区技术，考虑数据预聚合或列式存储以减少计算负载。对于前端，实现数据懒加载和虚拟滚动以减少浏览器卡顿。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-002",
+      "segment_id": "seg-bi-performance",
+      "name": "实时数据性能与同步问题",
+      "summary": "实时数据流接入、同步延迟或缓存机制影响数据实时性，导致性能下降和显示问题。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB34",
+        "FB68",
+        "FB116"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "数据同步延迟",
+        "缓存命中率",
+        "实时数据处理吞吐量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "优化实时数据流处理架构，使用消息队列和流处理引擎。调整缓存策略，设置合理的过期时间以平衡实时性和性能。对于同步延迟，检查网络和数据库连接池配置。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-003",
+      "segment_id": "seg-bi-performance",
+      "name": "查询加载与交互响应缓慢",
+      "summary": "仪表盘加载速度不稳定、数据加载等待时间长，以及钻取操作响应慢，影响用户体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB5",
+        "FB73",
+        "FB81"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "仪表盘加载时间",
+        "用户交互响应时间",
+        "查询队列等待时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "分析查询性能瓶颈，优化查询语句和数据库索引。实施客户端缓存和预加载策略。对于钻取操作，使用增量查询和异步加载以减少响应时间。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-004",
+      "segment_id": "seg-bi-performance",
+      "name": "系统资源占用与负载不均",
+      "summary": "服务器CPU占用高，集群节点负载均衡效果不佳，影响整体性能。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB19",
+        "FB135"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "CPU使用率",
+        "内存使用率",
+        "节点负载分布"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "监控系统资源使用，识别高负载查询并进行优化。调整集群配置和负载均衡算法，确保查询请求均匀分布。考虑自动扩缩容以应对峰值负载。"
+    },
+    {
+      "cluster_id": "seg-bi-performance-cluster-005",
+      "segment_id": "seg-bi-performance",
+      "name": "跨数据源查询与配置保存超时",
+      "summary": "跨数据源关联查询性能差，配置保存操作因超时失败。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB57"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "跨数据源查询时间",
+        "配置保存成功率",
+        "超时错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "优化跨数据源查询的执行策略，使用数据联邦或物化视图减少数据移动。增加配置保存操作的超时时间，并优化保存逻辑以减少数据库负载。"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "segment_id": "seg-ai-hallucination",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 18,
+    "cluster_count": 5,
+    "clustered_feedback_count": 18,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ai-hallucination-cluster-001",
+      "segment_id": "seg-ai-hallucination",
+      "name": "生成虚构或不存在的具体信息（如引用、来源、地点、事件）",
+      "summary": "AI在回答中自信地生成了完全不存在的具体信息，包括伪造的引用来源、数据报告、案例编号、餐厅地址或虚构的事件细节，导致信息严重失真且难以察觉。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB23",
+        "FB27",
+        "FB37",
+        "FB53",
+        "FB78",
+        "FB121",
+        "FB135"
+      ],
+      "secondary_themes": [
+        "数据伪造",
+        "事实捏造"
+      ],
+      "possible_metrics": [
+        "虚构信息发生率",
+        "引用核查失败率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "1. 强制要求AI在提供具体事实（如研究、案例、地址）时，必须标注来源。2. 开发内部事实核查API，对生成的特定实体（机构、地点、案例号）进行实时或后处理校验，并对无法核实的内容进行自动标识警告。3. 在输出界面增加“核实此信息”的快捷入口，鼓励用户参与验证。"
+    },
+    {
+      "cluster_id": "seg-ai-hallucination-cluster-002",
+      "segment_id": "seg-ai-hallucination",
+      "name": "输出中的事实性错误与计算逻辑错误",
+      "summary": "AI在提供信息时出现基础事实错误（如历史日期、时间线）或执行计算、逻辑推理时出现错误，尤其在涉及数字、日期、配置步骤和代码逻辑时，可能导致业务风险或操作失败。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB93",
+        "FB101"
+      ],
+      "secondary_themes": [
+        "计算错误",
+        "逻辑漏洞"
+      ],
+      "possible_metrics": [
+        "事实准确性",
+        "代码/逻辑测试通过率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "1. 针对高风险领域（如金融计算、技术配置、历史知识），构建专门的事实知识图谱或接入权威数据库进行增强生成（RAG）。2. 在生成代码或数学计算步骤时，引入“沙盒”环境进行自动测试验证，并对复杂逻辑增加分步解释。3. 为用户提供标记“事实错误”或“计算错误”的反馈通道，用于模型微调。"
+    },
+    {
+      "cluster_id": "seg-ai-hallucination-cluster-003",
+      "segment_id": "seg-ai-hallucination",
+      "name": "输出内容风格或语境不恰当",
+      "summary": "AI在生成内容时，未能准确判断使用场景，输出了与预期语境严重不符的内容，例如在严肃商业场景中插入不相关的评价或在正式报告中添加诗意表达，虽非事实错误，但影响专业性和适用性。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB111",
+        "FB3"
+      ],
+      "secondary_themes": [
+        "场景适配性",
+        "内容风格控制"
+      ],
+      "possible_metrics": [
+        "场景适配准确率",
+        "不恰当内容投诉率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "1. 强化模型对用户意图和场景的识别能力，允许用户在输入时明确指定输出风格（如“正式”、“创意”、“技术性”）。2. 建立内容安全与风格过滤器，对明显不匹配场景的风格化表达进行后处理过滤或警告。3. 提供输出风格的选项让用户预先选择。"
+    },
+    {
+      "cluster_id": "seg-ai-hallucination-cluster-004",
+      "segment_id": "seg-ai-hallucination",
+      "name": "幻觉问题引发用户信任危机与操作负担",
+      "summary": "频繁或严重的幻觉问题导致用户对AI整体输出失去信任，迫使其投入额外精力进行人工核查，尤其在涉及关键数据和决策时，体验和效率严重受损。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB46",
+        "FB63",
+        "FB70",
+        "FB148"
+      ],
+      "secondary_themes": [
+        "用户信任",
+        "额外核查成本"
+      ],
+      "possible_metrics": [
+        "用户信任度评分",
+        "需人工核查的输出比例"
+      ],
+      "priority": "P2",
+      "opportunity_score": 50,
+      "recommendation": "1. 通过UI设计，在输出中清晰展示AI的置信度或不确定性（如用不同颜色标记高风险、可能需核实的信息），帮助用户快速定位潜在问题。2. 提供便捷的一键反馈与纠错工具，让用户能快速报告幻觉，形成闭环改进。3. 在产品内透明沟通模型的局限性，并通过定期发布准确率报告来管理用户预期。"
+    },
+    {
+      "cluster_id": "seg-ai-hallucination-cluster-005",
+      "segment_id": "seg-ai-hallucination",
+      "name": "缺乏内置的幻觉检测与可靠性验证机制",
+      "summary": "用户询问或期望AI系统具备自动化的可靠性检查机制，能对自身输出的事实、数据进行核查，而不仅仅依赖用户事后发现，反映出对系统内在安全与可信功能的需求。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB85",
+        "FB143"
+      ],
+      "secondary_themes": [
+        "自动化核查",
+        "系统可靠性"
+      ],
+      "possible_metrics": [
+        "内置核查机制覆盖率",
+        "自动拦截的幻觉比例"
+      ],
+      "priority": "P2",
+      "opportunity_score": 45,
+      "recommendation": "1. 规划并开发“可信AI”功能模块，包括事实核查、引用验证、逻辑一致性检查等子功能。2. 可从最关键的领域（如引用来源）开始试点，实现自动化验证并在UI中展示验证结果（如“来源可查证”、“来源未找到”）。3. 将此作为产品的核心安全特性进行宣传，增强用户信心。"
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "segment_id": "seg-internal-config",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 22,
+    "cluster_count": 5,
+    "clustered_feedback_count": 22,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-internal-config-cluster-001",
+      "segment_id": "seg-internal-config",
+      "name": "审批流程设计僵化导致效率低下",
+      "summary": "审批节点固化，无法根据项目大小、紧急程度动态调整，且跨部门流程不支持定制，影响审批效率和灵活性。",
+      "feedback_count": 8,
+      "evidence_feedback_ids": [
+        "FB3",
+        "FB40",
+        "FB69",
+        "FB82",
+        "FB89",
+        "FB109",
+        "FB135",
+        "FB137"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "审批流程平均处理时间",
+        "审批节点数量"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "引入可配置的审批规则引擎，支持基于金额、项目类型等条件动态设置审批路径；增加审批人临时转交和代理功能；允许跨部门流程自定义模板，以提升审批效率。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-002",
+      "segment_id": "seg-internal-config",
+      "name": "权限管理缺乏灵活性和细粒度控制",
+      "summary": "权限配置流程僵化，无法满足临时性、跨部门和细粒度需求，限制业务灵活性和用户自主性。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB12",
+        "FB60",
+        "FB90",
+        "FB96",
+        "FB148"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "权限申请处理时间",
+        "权限配置复杂度评分"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "实施基于属性（ABAC）的权限模型，支持临时权限设置和时效控制；开发自助式权限配置界面，允许业务用户在预定义范围内申请权限；引入超级用户角色协助优化配置。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-005",
+      "segment_id": "seg-internal-config",
+      "name": "配置工具与模板管理不足影响效率",
+      "summary": "配置项不足、模板自定义复杂、缺乏导出复用功能，导致依赖IT开发或线下工作，无法及时响应业务变化。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB9",
+        "FB20",
+        "FB75",
+        "FB114",
+        "FB117"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置模板使用率",
+        "IT支持请求量"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "提供丰富的预置配置模板和自定义选项，简化设置流程；支持配置导出、导入和跨部门共享；集成开发流程适配工具，如代码提交关联和异常分类自定义，减少对IT的依赖。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-003",
+      "segment_id": "seg-internal-config",
+      "name": "自动化流程条件逻辑不足",
+      "summary": "系统自动化流程的条件判断逻辑过于简单，无法处理复杂业务场景如员工类型差异或动态指标调整，导致配置僵化。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB42",
+        "FB129"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "自动化流程覆盖率",
+        "条件逻辑复杂度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "增强流程配置中的条件逻辑引擎，支持多条件组合、变量引用和动态评估；提供可视化规则编辑器，方便业务人员自定义复杂条件，减少对开发依赖。"
+    },
+    {
+      "cluster_id": "seg-internal-config-cluster-004",
+      "segment_id": "seg-internal-config",
+      "name": "监控与告警配置不灵活",
+      "summary": "缺乏灵活的告警规则配置和实时流程监控功能，无法满足动态业务通知和状态跟踪需求。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB27",
+        "FB132"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "告警规则配置数量",
+        "监控数据导出频率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "开发可配置的告警规则模块，支持阈值设置、自定义通知渠道和群组；增加流程状态实时监控仪表盘，提供数据导出和可视化分析功能。"
+    }
+  ]
+}

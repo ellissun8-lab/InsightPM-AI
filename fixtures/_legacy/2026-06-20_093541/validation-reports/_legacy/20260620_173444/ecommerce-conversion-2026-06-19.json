@@ -1,0 +1,62 @@
+{
+  "dataset": "ecommerce-conversion",
+  "status": "fail",
+  "score": 32,
+  "model_roles": {
+    "generator": "mimo",
+    "validator": "deepseek-v4-pro"
+  },
+  "summary": {
+    "feedback_count": 120,
+    "cluster_count": 6,
+    "invalid_evidence_count": 6,
+    "forbidden_metric_count": 0,
+    "hallucination_count": 2,
+    "over_inference_count": 1
+  },
+  "warning_types": [
+    "count_mismatch",
+    "partial_sample_overclaim",
+    "top5_incomplete",
+    "over_inference",
+    "markdown_json_mixed",
+    "missing_structured_evidence"
+  ],
+  "score_breakdown": {
+    "data_realism": 2,
+    "theme_coverage": 3,
+    "cluster_accuracy": 10,
+    "evidence_accuracy": 2,
+    "metric_fit": 8,
+    "format_compliance": 5,
+    "conclusion_credibility": 1,
+    "no_hallucination": 1
+  },
+  "training_decision": {
+    "usable_for_training": false,
+    "usable_for_testing": false,
+    "usable_for_regression": false,
+    "requires_human_review": true
+  },
+  "failed_checks": [
+    "报告内文称“问题聚类：3 个”，与结构化数据中的 cluster_count: 6 严重矛盾，数据真实性破坏。",
+    "仅展示3个问题簇，遗漏了物流费用不透明、搜索结果不准确、购物车体验差3个有效聚类，主题覆盖率严重不足。",
+    "Top 5 只列出3个，且声明“尚无证据支持其他2个”，而实际存在至少6个聚类，形成 partial_sample_overclaim。",
+    "代表性证据中包含至少6条不在对应簇结构化证据列表中的 ID（如 0005,0008,0031,0033,0045,0050），存在虚构证据的嫌疑。",
+    "结论高度聚焦交易闭环中后端，但忽略了搜索、购物车等前端阻塞点，基于不完整数据的过度推断。"
+  ],
+  "warnings": [
+    "count_mismatch: 报告文本与结构化 JSON 的聚类数量不一致。",
+    "partial_sample_overclaim: 仅依据主观筛选的3个簇即宣称“核心瓶颈集中在…”，未说明其他重要问题。",
+    "top5_incomplete: Top 5 未完整列出，且解释为“证据不足”，与数据实际矛盾。",
+    "over_inference: 结论将全量反馈削减为三大问题，忽视了其他明确的问题簇。",
+    "markdown_json_mixed: 分析报告与结构化 JSON 捆绑输出，影响格式合规性。",
+    "missing_structured_evidence: 每个问题簇仅提供3条证据，而报告却引用5条，缺少匹配的结构化证据映射。"
+  ],
+  "recommendations": [
+    "必须统一报告文本与结构化数据中的聚类数量，全部6个问题簇均应纳入讨论。",
+    "补充完整 Top 5 列表，并确保代表性证据与 evidence_feedback_ids 一致，不得虚构证据。",
+    "扩展结论以覆盖所有可靠聚类，避免以偏概全。",
+    "分离 Markdown 分析与结构化数据，确保格式合规。"
+  ]
+}

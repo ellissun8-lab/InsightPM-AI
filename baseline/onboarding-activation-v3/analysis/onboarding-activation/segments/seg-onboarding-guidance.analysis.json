@@ -1,0 +1,117 @@
+{
+  "segment_id": "seg-onboarding-guidance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 20,
+    "cluster_count": 4,
+    "clustered_feedback_count": 20,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-001",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "引导流程设计死板且干扰用户操作",
+      "summary": "用户反馈新手引导流程步骤强制、缺乏灵活性，且引导提示（如气泡、遮罩）常遮挡核心功能按钮，干扰正常操作。同时，引导内容未针对用户角色或需求进行个性化，导致体验不佳。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB55",
+        "FB70",
+        "FB72",
+        "FB77",
+        "FB83",
+        "FB97"
+      ],
+      "secondary_themes": [
+        "引导个性化缺失",
+        "用户控制感低"
+      ],
+      "possible_metrics": [
+        "引导完成率",
+        "引导步骤跳过率",
+        "引导期间功能按钮点击率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "1. 设计可选式引导流程，允许用户选择“完整引导”、“快速浏览”或“跳过”。2. 优化引导UI布局，确保提示信息不遮挡核心功能区域，并提供明显的“跳过”和“关闭”按钮。3. 根据用户在注册时选择的角色或试用功能，提供个性化的引导路径。4. 将长流程拆解为更短、可独立完成的模块，让用户可以按自己的节奏学习。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-002",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "文档内容质量与可读性不足",
+      "summary": "帮助文档存在多处质量问题，包括关键截图与界面过时、技术术语过多导致语言晦涩、对于高级功能（如API）的文档深度不够，且有价值的最佳实践内容难以被发现。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB73",
+        "FB76",
+        "FB78",
+        "FB79",
+        "FB84",
+        "FB85"
+      ],
+      "secondary_themes": [
+        "文档时效性差",
+        "技术化语言",
+        "内容深度不足"
+      ],
+      "possible_metrics": [
+        "文档页面跳出率",
+        "文档搜索满意度",
+        "API文档覆盖率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "1. 建立文档版本与产品版本的强关联检查流程，确保所有截图、步骤描述与当前产品界面同步。2. 提供“通俗模式”与“技术模式”的文档视图切换，降低非技术用户的理解门槛。3. 对API、权限等高级功能，补充详细的参数说明、代码示例和常见问题。4. 将“最佳实践”等高价值内容作为独立的、显眼的指南模块，并添加至文档导航首页。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-003",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "文档导航困难且关键资源加载失败",
+      "summary": "用户难以通过搜索或目录快速找到所需帮助内容，搜索结果相关性差，目录层级过深。部分用户还遇到帮助文档无法打开（404）或引导视频加载失败的问题，直接影响核心学习路径。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB16",
+        "FB71",
+        "FB80",
+        "FB81",
+        "FB82",
+        "FB144"
+      ],
+      "secondary_themes": [
+        "搜索功能失效",
+        "信息架构复杂",
+        "资源可用性故障"
+      ],
+      "possible_metrics": [
+        "文档搜索成功率",
+        "帮助中心平均访问深度",
+        "资源加载错误率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 78,
+      "recommendation": "1. 优化文档搜索引擎，引入关键词语义分析和同义词扩展，提高“如何分享”类问题的搜索结果准确性。2. 扁平化文档目录结构，使用标签、分类和智能推荐辅助导航。3. 增加文字版操作步骤指南，与视频教程并列，满足不同用户偏好。4. 立即排查并修复文档（如404页面）和引导视频的链接、服务器问题，确保基础可用性。考虑建立社区论坛作为补充支持渠道。"
+    },
+    {
+      "cluster_id": "seg-onboarding-guidance-cluster-004",
+      "segment_id": "seg-onboarding-guidance",
+      "name": "权限相关概念说明不清晰",
+      "summary": "产品权限体系的文档描述模糊，用户对不同权限角色的区别、权限继承机制（如子文件夹是否继承父文件夹权限）等核心概念理解困难，导致协作与设置时产生困惑。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB51",
+        "FB60"
+      ],
+      "secondary_themes": [
+        "权限模型复杂",
+        "缺乏示例说明"
+      ],
+      "possible_metrics": [
+        "关于权限的客服工单数量",
+        "权限设置页面的帮助文档点击率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "1. 创建专门的“权限指南”，使用对比表格、流程图清晰说明各角色（如管理员、成员、访客）的默认权限区别。2. 针对“权限继承”等关键机制，提供具体的场景示例（如创建子文件夹、共享文件），图文并茂地说明其行为。3. 在权限设置的关键界面，嵌入指向相关文档的解释性链接或浮窗说明。"
+    }
+  ]
+}

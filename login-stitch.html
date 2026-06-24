@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>登录 - ProofLoop | AI Feedback Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-surface-variant": "#434655",
+                        "surface-container": "#e9edff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-background": "#141b2b",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#bdffdb",
+                        "on-tertiary-fixed": "#002113",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary-container": "#007d55",
+                        "surface-bright": "#f9f9ff",
+                        "inverse-on-surface": "#edf0ff",
+                        "secondary": "#712ae2",
+                        "surface-variant": "#dce2f7",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-secondary-fixed": "#25005a",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "secondary-container": "#8a4cfc",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#eeefff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "inverse-surface": "#293040",
+                        "surface": "#f9f9ff",
+                        "tertiary": "#006242",
+                        "secondary-fixed": "#eaddff",
+                        "inverse-primary": "#b4c5ff",
+                        "outline-variant": "#c3c6d7",
+                        "surface-dim": "#d3daef",
+                        "primary": "#004ac6",
+                        "outline": "#737686",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#fffbff",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#141b2b",
+                        "surface-tint": "#0053db",
+                        "primary-container": "#2563eb",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "background": "#f9f9ff",
+                        "surface-container-low": "#f1f3ff",
+                        "surface-container-high": "#e1e8fd",
+                        "surface-container-highest": "#dce2f7",
+                        "on-primary-fixed": "#00174b",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "base": "4px",
+                        "sidebar-width": "260px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "md": "16px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body": ["Inter", "sans-serif"],
+                        "headline": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f9f9ff; }
+        .dotted-grid {
+            background-image: radial-gradient(#2563eb 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            opacity: 0.1;
+        }
+        .soft-shadow {
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.02), 0 12px 32px rgba(37, 99, 235, 0.04);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .brand-gradient {
+            background: linear-gradient(135deg, #f1f3ff 0%, #e9edff 100%);
+        }
+    </style>
+</head>
+<body class="text-on-surface overflow-hidden h-screen">
+<main class="flex h-full w-full">
+<!-- Left Side: Brand Panel -->
+<section class="hidden lg:flex flex-col justify-between w-5/12 brand-gradient relative p-margin-desktop overflow-hidden border-r border-outline-variant">
+<!-- Background Decoration -->
+<div class="absolute inset-0 dotted-grid"></div>
+<div class="absolute top-[-10%] right-[-10%] w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="relative z-10">
+<!-- Logo -->
+<div class="flex items-center gap-sm mb-xl">
+<div class="w-10 h-10 bg-primary-container flex items-center justify-center rounded-lg shadow-lg">
+<span class="material-symbols-outlined text-white text-[28px]" style="font-variation-settings: 'FILL' 1;">insights</span>
+</div>
+<div>
+<h1 class="text-title-lg font-bold tracking-tight text-primary">ProofLoop</h1>
+<p class="text-[10px] font-bold tracking-[0.2em] text-on-surface-variant uppercase">AI FEEDBACK ANALYSIS</p>
+</div>
+</div>
+<!-- Content -->
+<div class="max-w-md mt-12">
+<h2 class="text-[40px] leading-[1.2] font-extrabold text-on-background mb-lg">
+                        把用户反馈变成<br/>
+<span class="text-primary">可信产品洞察</span>
+</h2>
+<p class="text-body-lg text-on-surface-variant leading-relaxed mb-xl">
+                        上传原始用户反馈，自动生成产品分析报告，并通过证据链、Hard Validation 和语义评分验证每一个结论。
+                    </p>
+<!-- Feature List -->
+<ul class="space-y-md">
+<li class="flex items-start gap-md group">
+<div class="mt-1 w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">43 项 Hard Validation</h4>
+<p class="text-body-md text-on-surface-variant">自动检查结构完整性、证据链和报告质量。</p>
+</div>
+</li>
+<li class="flex items-start gap-md group">
+<div class="mt-1 w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Evidence Trace 证据链</h4>
+<p class="text-body-md text-on-surface-variant">每个结论都能追溯到原始反馈。</p>
+</div>
+</li>
+<li class="flex items-start gap-md group">
+<div class="mt-1 w-8 h-8 rounded-lg bg-tertiary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-tertiary/20 transition-colors">
+<span class="material-symbols-outlined text-tertiary text-[20px]" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">支持 Markdown / JSON 导出</h4>
+<p class="text-body-md text-on-surface-variant">方便用于汇报、归档和后续分析。</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- Footer -->
+<div class="relative z-10 text-label-md text-outline">
+                © 2024 ProofLoop Systems. All rights reserved.
+            </div>
+</section>
+<!-- Right Side: Login Form -->
+<section class="flex-1 flex items-center justify-center bg-surface relative">
+<!-- Mobile Logo (shown only on small screens) -->
+<div class="absolute top-8 left-8 lg:hidden flex items-center gap-sm">
+<div class="w-8 h-8 bg-primary-container flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-white text-[20px]" style="font-variation-settings: 'FILL' 1;">insights</span>
+</div>
+<h1 class="text-title-lg font-bold tracking-tight text-primary">ProofLoop</h1>
+</div>
+<div class="w-full max-w-[420px] px-margin-mobile">
+<!-- Login Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xl soft-shadow transition-all duration-300 hover:shadow-lg">
+<div class="mb-xl">
+<h3 class="text-headline-md font-bold text-on-background mb-xs">登录工作台</h3>
+<p class="text-body-md text-on-surface-variant">进入 ProofLoop Demo Workspace</p>
+</div>
+<form class="space-y-lg" onsubmit="return false;">
+<!-- Email Field -->
+<div class="space-y-xs">
+<label class="text-label-md font-bold text-on-surface" for="email">工作邮箱</label>
+<div class="relative group">
+<input class="w-full h-12 px-md bg-surface-container-low border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-outline" id="email" placeholder="name@company.com" type="email"/>
+<div class="absolute right-md top-1/2 -translate-y-1/2 opacity-0 group-focus-within:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-outline text-md">alternate_email</span>
+</div>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-xs">
+<div class="flex justify-between items-center">
+<label class="text-label-md font-bold text-on-surface" for="password">密码</label>
+<a class="text-label-md font-bold text-primary hover:underline" href="#">忘记密码？</a>
+</div>
+<div class="relative group">
+<input class="w-full h-12 px-md bg-surface-container-low border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-outline" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-outline hover:text-on-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-md">visibility</span>
+</button>
+</div>
+</div>
+<!-- Options Row -->
+<div class="flex items-center">
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary/20 cursor-pointer" type="checkbox"/>
+<span class="text-label-md text-on-surface-variant group-hover:text-on-surface transition-colors">记住我</span>
+</label>
+</div>
+<!-- Login Button -->
+<button class="w-full h-12 bg-primary-container text-white font-bold rounded-lg flex items-center justify-center gap-sm hover:bg-primary transition-all active:scale-[0.98] shadow-sm" type="submit">
+                            登录
+                            <span class="material-symbols-outlined text-md">arrow_forward</span>
+</button>
+<!-- Divider -->
+<div class="relative flex items-center py-sm">
+<div class="flex-grow border-t border-outline-variant"></div>
+<span class="flex-shrink mx-md text-label-sm text-outline font-medium">或者</span>
+<div class="flex-grow border-t border-outline-variant"></div>
+</div>
+<!-- Demo Button -->
+<button class="w-full h-12 bg-white border border-outline-variant text-on-surface font-bold rounded-lg flex items-center justify-center gap-sm hover:bg-surface-container-low transition-all active:scale-[0.98]" type="button">
+                            使用 Demo Access Code
+                        </button>
+</form>
+<!-- Card Footer -->
+<div class="mt-xl text-center space-y-md">
+<p class="text-body-md text-on-surface-variant">
+                            还没有账号？ <a class="text-primary font-bold hover:underline" href="#">创建账号</a>
+</p>
+<div class="pt-md border-t border-outline-variant/50">
+<div class="flex items-center justify-center gap-xs text-outline text-[11px] leading-tight">
+<span class="material-symbols-outlined text-[14px]">info</span>
+<span>当前账号系统将在 SaaS 版本启用。</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Micro-interaction for form focus effects -->
+<script>
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.closest('.group')?.classList.add('focused');
+            });
+            input.addEventListener('blur', () => {
+                input.closest('.group')?.classList.remove('focused');
+            });
+        });
+
+        // Simple button active state visual
+        const primaryBtn = document.querySelector('button[type="submit"]');
+        primaryBtn.addEventListener('click', function() {
+            this.innerHTML = '<span class="material-symbols-outlined animate-spin text-md">progress_activity</span>';
+            setTimeout(() => {
+                this.innerHTML = '登录 <span class="material-symbols-outlined text-md">arrow_forward</span>';
+            }, 1500);
+        });
+    </script>
+</body></html>

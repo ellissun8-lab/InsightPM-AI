@@ -1,0 +1,52 @@
+{
+  "dataset": "internal-system-cost",
+  "status": "warning",
+  "score": 72,
+  "model_roles": {
+    "generator": "mimo",
+    "validator": "deepseek-v4-pro"
+  },
+  "summary": {
+    "feedback_count": 120,
+    "cluster_count": 3,
+    "invalid_evidence_count": 0,
+    "forbidden_metric_count": 0,
+    "hallucination_count": 1,
+    "over_inference_count": 1
+  },
+  "warning_types": [
+    "count_mismatch",
+    "partial_sample_overclaim"
+  ],
+  "score_breakdown": {
+    "data_realism": 5,
+    "theme_coverage": 10,
+    "cluster_accuracy": 14,
+    "evidence_accuracy": 13,
+    "metric_fit": 10,
+    "format_compliance": 10,
+    "conclusion_credibility": 7,
+    "no_hallucination": 3
+  },
+  "training_decision": {
+    "usable_for_training": false,
+    "usable_for_testing": false,
+    "usable_for_regression": false,
+    "requires_human_review": true
+  },
+  "failed_checks": [
+    "count_mismatch: 报告声称已分析120条、已归类120条，但三个聚类反馈总和仅为50条，且证据ID仅覆盖前50条样本。",
+    "partial_sample_overclaim: 实际仅分析了前50条样本，但在摘要和结构化数据中声称已分析并聚类全部120条，属于部分样本冒充全量结论。",
+    "hallucination/over_inference: 分析数量、归类数量与实际证据严重不一致，存在明显的虚假全量分析表述。"
+  ],
+  "warnings": [
+    "报告正文注明“基于已分析的前50条样本”，但开头“实际分析数量”、“已归类反馈数量”等数据仍按全量计算，造成前后矛盾。",
+    "结构化JSON中summary的analyzed_feedback_count为120，但证据和聚类仅到第50条，数据一致性存在严重问题。",
+    "核心结论和高频问题基于50条样本推导，对外宣称120条全量分析，可能误导决策。"
+  ],
+  "recommendations": [
+    "修正摘要和统计口径，明确声明实际分析样本量（50条），并将剩余70条标记为“未分析”或“待分析”。",
+    "如实反映聚类基数，避免在全量分析声明中使用部分样本结论。",
+    "如需全量结论，应补全后70条反馈的分析与归类，再更新报告。"
+  ]
+}

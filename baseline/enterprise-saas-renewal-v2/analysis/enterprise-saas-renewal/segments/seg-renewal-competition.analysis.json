@@ -1,0 +1,62 @@
+{
+  "segment_id": "seg-renewal-competition",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 8,
+    "cluster_count": 2,
+    "clustered_feedback_count": 8,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-renewal-competition-cluster-001",
+      "segment_id": "seg-renewal-competition",
+      "name": "产品功能与定价落后于竞品",
+      "summary": "客户反馈在功能全面性、具体功能点、定价以及服务支持方面，存在落后于主要竞品的明确感知。这构成了客户考虑流失和评估替代方案的核心原因。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB117",
+        "FB121",
+        "FB125",
+        "FB126"
+      ],
+      "secondary_themes": [
+        "pricing",
+        "service support"
+      ],
+      "possible_metrics": [
+        "竞品功能覆盖率",
+        "价格竞争力指数",
+        "客户服务满意度"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "立即启动竞品功能与定价的专项分析，识别关键差距；优先优化产品路线图以补齐核心功能短板；评估现有定价模型，并考虑针对高流失风险客群提供价值捆绑或忠诚度方案。"
+    },
+    {
+      "cluster_id": "seg-renewal-competition-cluster-002",
+      "segment_id": "seg-renewal-competition",
+      "name": "客户竞品评估与流失风险",
+      "summary": "客户在沟通中表现出对竞品的主动评估、比较行为，或已存在明确的换系统意图。这些是直接的流失风险信号，表明客户正处于决策周期的关键阶段。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB118",
+        "FB119",
+        "FB120",
+        "FB123"
+      ],
+      "secondary_themes": [
+        "competitive-evaluation",
+        "churn-risk"
+      ],
+      "possible_metrics": [
+        "竞品评估活动频率",
+        "客户流失预警率",
+        "竞品提及率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 90,
+      "recommendation": "建立针对处于评估期客户的主动干预机制；销售与客户成功团队需联动，基于收集到的竞品优势信息进行针对性价值重申；考虑提供迁移支持或试点项目以降低客户转换决策门槛。"
+    }
+  ]
+}

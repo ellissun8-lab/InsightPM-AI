@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>新建分析 - ProofLoop</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#bdffdb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#006242",
+                        "surface-tint": "#0053db",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#dce2f7",
+                        "surface": "#f9f9ff",
+                        "on-surface-variant": "#434655",
+                        "inverse-on-surface": "#edf0ff",
+                        "on-primary-fixed": "#00174b",
+                        "on-secondary-container": "#fffbff",
+                        "tertiary-container": "#007d55",
+                        "surface-container": "#e9edff",
+                        "inverse-surface": "#293040",
+                        "surface-bright": "#f9f9ff",
+                        "outline": "#737686",
+                        "background": "#f9f9ff",
+                        "on-secondary-fixed": "#25005a",
+                        "inverse-primary": "#b4c5ff",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "secondary-container": "#8a4cfc",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-surface": "#141b2b",
+                        "on-background": "#141b2b",
+                        "surface-container-high": "#e1e8fd",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-primary": "#ffffff",
+                        "primary": "#004ac6",
+                        "outline-variant": "#c3c6d7",
+                        "surface-dim": "#d3daef",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dbe1ff",
+                        "secondary": "#712ae2",
+                        "on-primary-container": "#eeefff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-variant": "#dce2f7",
+                        "primary-container": "#2563eb",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f1f3ff",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#eaddff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "sidebar-width": "260px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .shadow-ambient {
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.02), 0 12px 24px rgba(37, 99, 235, 0.04);
+        }
+        .shadow-soft {
+            box-shadow: 0 1px 3px rgba(37, 99, 235, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased font-body-md h-screen overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-inverse-surface w-[260px] h-full fixed left-0 top-0 border-r border-outline-variant dark:border-outline flex flex-col h-full py-md overflow-y-auto z-50">
+<div class="px-lg pb-lg">
+<h1 class="text-title-lg font-title-lg font-bold text-primary dark:text-inverse-primary">ProofLoop</h1>
+<p class="text-label-md font-label-md text-on-surface-variant mt-xs">AI Feedback Analysis</p>
+</div>
+<ul class="flex-1 px-sm space-y-sm text-body-md font-body-md">
+<li>
+<a class="flex items-center px-md py-sm rounded text-on-surface-variant dark:text-surface-variant hover:text-on-surface hover:bg-surface-container dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-md">dashboard</span>
+                    控制台
+                </a>
+</li>
+<li>
+<a class="flex items-center px-md py-sm rounded text-primary dark:text-inverse-primary bg-primary-container/10 dark:bg-primary-container/20 border-l-2 border-primary font-bold scale-[0.99] transition-transform" href="#">
+<span class="material-symbols-outlined mr-md" style="font-variation-settings: 'FILL' 1;">add_chart</span>
+                    新建分析
+                </a>
+</li>
+<li>
+<a class="flex items-center px-md py-sm rounded text-on-surface-variant dark:text-surface-variant hover:text-on-surface hover:bg-surface-container dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-md">history</span>
+                    运行历史
+                </a>
+</li>
+<li>
+<a class="flex items-center px-md py-sm rounded text-on-surface-variant dark:text-surface-variant hover:text-on-surface hover:bg-surface-container dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-md">assessment</span>
+                    分析报告
+                </a>
+</li>
+<li>
+<a class="flex items-center px-md py-sm rounded text-on-surface-variant dark:text-surface-variant hover:text-on-surface hover:bg-surface-container dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-md">fact_check</span>
+                    评估校验
+                </a>
+</li>
+<li>
+<a class="flex items-center px-md py-sm rounded text-on-surface-variant dark:text-surface-variant hover:text-on-surface hover:bg-surface-container dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-md">storage</span>
+                    训练数据
+                </a>
+</li>
+<li>
+<a class="flex items-center px-md py-sm rounded text-on-surface-variant dark:text-surface-variant hover:text-on-surface hover:bg-surface-container dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-md">settings</span>
+                    系统设置
+                </a>
+</li>
+</ul>
+</nav>
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-inverse-surface text-primary dark:text-inverse-primary h-16 w-[calc(100%-260px)] fixed top-0 right-0 z-40 border-b border-outline-variant dark:border-outline flex justify-between items-center px-lg">
+<div class="hidden text-title-lg font-title-lg font-bold text-primary dark:text-inverse-primary">ProofLoop</div>
+<div class="flex items-center bg-surface-container-low rounded-full px-md py-sm w-1/3 max-w-md ml-0 mr-auto border border-outline-variant/30 focus-within:border-primary/50 focus-within:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md w-full p-0 text-on-surface placeholder-on-surface-variant/70" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center space-x-md">
+<button class="text-on-surface-variant hover:bg-surface-container-high/50 dark:hover:bg-surface-variant/20 rounded-full p-sm transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-high/50 dark:hover:bg-surface-variant/20 rounded-full p-sm transition-all">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high ml-sm border border-outline-variant/30">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAKA0NYWCcth3mtb5lmhE27tjZzn72duldve0hAbpL8Q7jMCUg3uJaY5MFHIGNr1ygM0hDzt_AX3sqa1rm6LsLeDxWLI2nIPA_OosiVme18_Imy9yzf6KY-z15sBoa2ZVbCXOsb0ZRMrKC6Jn4HLHpu2k983N8B-9uL7_IMf22z6FpCGLKZ1V0NpHh-bHiLcuVHJ2ysUXntKsSk5yJphACxdC9hFj9Nih6LNXoWbgAUp7ElsdiwEk2tAMVqVzQLaVYgZ4y5q22jc32"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-[260px] mt-16 p-margin-desktop w-[calc(100%-260px)] h-[calc(100vh-64px)] overflow-y-auto">
+<!-- Page Header -->
+<div class="mb-xl">
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-xs">新建分析 (New Analysis)</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant">上传数据并配置您的 AI 分析流水线。</p>
+</div>
+<!-- Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-xl">
+<!-- Left Column: Upload -->
+<div class="lg:col-span-7 flex flex-col">
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant shadow-soft flex-1 flex flex-col">
+<div class="p-lg border-b border-outline-variant/50 flex items-center justify-between">
+<h3 class="text-title-lg font-title-lg text-on-surface">上传反馈数据</h3>
+<span class="material-symbols-outlined text-on-surface-variant">upload_file</span>
+</div>
+<div class="p-lg flex-1 flex flex-col">
+<p class="text-body-md font-body-md text-on-surface-variant mb-md">支持 raw customer feedback CSV 格式.</p>
+<div class="flex-1 border-2 border-dashed border-primary-container/30 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col items-center justify-center p-xl cursor-pointer group">
+<div class="w-16 h-16 rounded-full bg-primary-container/10 flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary-container text-[32px]">cloud_upload</span>
+</div>
+<p class="text-body-lg font-body-lg text-on-surface font-medium mb-xs">拖拽 CSV 文件至此处，或点击浏览</p>
+<p class="text-label-md font-label-md text-on-surface-variant">最大支持 50MB. (仅限 .csv)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Configuration -->
+<div class="lg:col-span-5 flex flex-col">
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant shadow-soft flex-1 flex flex-col">
+<div class="p-lg border-b border-outline-variant/50 flex items-center justify-between">
+<h3 class="text-title-lg font-title-lg text-on-surface">运行配置</h3>
+<span class="material-symbols-outlined text-on-surface-variant">tune</span>
+</div>
+<div class="p-lg flex-1 space-y-lg overflow-y-auto">
+<!-- Scenario Name -->
+<div>
+<label class="block text-label-sm font-label-sm uppercase text-on-surface-variant mb-sm tracking-wider">Scenario Name</label>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-md px-md py-sm text-body-md font-body-md text-on-surface focus:ring-1 focus:ring-primary focus:border-primary appearance-none pr-xl">
+<option>Customer Support QA</option>
+<option>Product Feedback Extraction</option>
+<option>Bug Report Triage</option>
+<option>General Sentiment Analysis</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 transform -translate-y-1/2 text-on-surface-variant pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<!-- Semantic Model -->
+<div>
+<label class="block text-label-sm font-label-sm uppercase text-on-surface-variant mb-sm tracking-wider">Semantic Model</label>
+<div class="p-md rounded-md bg-surface-container-low border border-outline-variant/50 flex items-center justify-between">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-secondary mr-sm">smart_toy</span>
+<span class="text-body-md font-body-md text-on-surface font-medium">DeepSeek V4 Pro</span>
+</div>
+<span class="text-label-sm font-label-sm text-primary-container bg-primary-container/10 px-2 py-1 rounded">Default</span>
+</div>
+</div>
+<!-- Hard Validation Rules -->
+<div>
+<label class="block text-label-sm font-label-sm uppercase text-on-surface-variant mb-sm tracking-wider">Hard Validation Rules</label>
+<div class="space-y-sm">
+<label class="flex items-start">
+<input checked="" class="mt-1 mr-sm rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md font-body-md text-on-surface">Require Minimum Word Count (&gt;10)</span>
+</label>
+<label class="flex items-start">
+<input checked="" class="mt-1 mr-sm rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md font-body-md text-on-surface">Filter PII (Personally Identifiable Information)</span>
+</label>
+<label class="flex items-start">
+<input class="mt-1 mr-sm rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md font-body-md text-on-surface">Strict JSON Format Output</span>
+</label>
+</div>
+</div>
+<!-- Threshold Setting -->
+<div>
+<div class="flex justify-between items-center mb-sm">
+<label class="block text-label-sm font-label-sm uppercase text-on-surface-variant tracking-wider">Threshold Setting</label>
+<span class="text-body-md font-body-md font-bold text-primary">85</span>
+</div>
+<input class="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary" max="100" min="0" type="range" value="85"/>
+<div class="flex justify-between mt-1 text-label-md font-label-md text-outline">
+<span>Loose (0)</span>
+<span>Strict (100)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Full Width Bottom Section: Pipeline Preview -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant shadow-soft mb-xl">
+<div class="p-lg border-b border-outline-variant/50">
+<h3 class="text-title-lg font-title-lg text-on-surface">Pipeline Preview (流水线预览)</h3>
+</div>
+<div class="p-xl overflow-x-auto">
+<div class="flex items-center min-w-max space-x-sm">
+<!-- Step 1 -->
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-on-surface-variant">description</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface text-center w-24">Raw CSV</span>
+</div>
+<div class="w-8 h-[2px] bg-outline-variant"></div>
+<span class="material-symbols-outlined text-outline-variant text-[16px] -ml-2 bg-surface-container-lowest z-10">arrow_forward_ios</span>
+<!-- Step 2 -->
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-primary">data_object</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface text-center w-24">Normalized JSON</span>
+</div>
+<div class="w-8 h-[2px] bg-outline-variant"></div>
+<span class="material-symbols-outlined text-outline-variant text-[16px] -ml-2 bg-surface-container-lowest z-10">arrow_forward_ios</span>
+<!-- Step 3 -->
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-primary">view_agenda</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface text-center w-24">Segments</span>
+</div>
+<div class="w-8 h-[2px] bg-outline-variant"></div>
+<span class="material-symbols-outlined text-outline-variant text-[16px] -ml-2 bg-surface-container-lowest z-10">arrow_forward_ios</span>
+<!-- Step 4 -->
+<div class="flex flex-col items-center relative">
+<div class="absolute -top-6 text-label-sm font-label-sm text-secondary bg-secondary/10 px-2 py-1 rounded">AI Model</div>
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 border border-secondary/30 flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-secondary">psychology</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface text-center w-24">Analysis JSON</span>
+</div>
+<div class="w-8 h-[2px] bg-outline-variant"></div>
+<span class="material-symbols-outlined text-outline-variant text-[16px] -ml-2 bg-surface-container-lowest z-10">arrow_forward_ios</span>
+<!-- Step 5 -->
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-primary">article</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface text-center w-24">Markdown Report</span>
+</div>
+<div class="w-8 h-[2px] bg-outline-variant"></div>
+<span class="material-symbols-outlined text-outline-variant text-[16px] -ml-2 bg-surface-container-lowest z-10">arrow_forward_ios</span>
+<!-- Step 6 -->
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface text-center w-24">Validation</span>
+</div>
+<div class="w-8 h-[2px] bg-outline-variant"></div>
+<span class="material-symbols-outlined text-outline-variant text-[16px] -ml-2 bg-surface-container-lowest z-10">arrow_forward_ios</span>
+<!-- Step 7 -->
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-tertiary/10 border border-tertiary/30 flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface text-center w-24">Accepted Dataset</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CTA Section -->
+<div class="flex justify-end pb-xl">
+<button class="bg-primary-container text-on-primary-container px-xl py-md rounded-lg text-body-lg font-body-lg font-bold shadow-ambient hover:opacity-90 transition-opacity flex items-center">
+                开始分析 (Start Analysis)
+                <span class="material-symbols-outlined ml-sm">play_arrow</span>
+</button>
+</div>
+</main>
+</body></html>

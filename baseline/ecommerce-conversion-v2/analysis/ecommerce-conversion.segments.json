@@ -1,0 +1,301 @@
+{
+  "dataset": "ecommerce-conversion",
+  "is_mixed_dataset": true,
+  "segment_count": 9,
+  "business_segment_count": 7,
+  "noise_segment_count": 1,
+  "positive_segment_count": 1,
+  "segments": [
+    {
+      "segment_id": "seg-ecommerce-performance",
+      "segment_type": "business",
+      "name": "性能与加载问题",
+      "product_type": "ecommerce",
+      "business_goal": "提升页面加载速度",
+      "feedback_count": 29,
+      "feedback_ids": [
+        "FB1",
+        "FB2",
+        "FB8",
+        "FB9",
+        "FB14",
+        "FB19",
+        "FB25",
+        "FB46",
+        "FB47",
+        "FB48",
+        "FB49",
+        "FB50",
+        "FB51",
+        "FB52",
+        "FB53",
+        "FB54",
+        "FB55",
+        "FB56",
+        "FB57",
+        "FB58",
+        "FB59",
+        "FB60",
+        "FB61",
+        "FB62",
+        "FB63",
+        "FB124",
+        "FB125",
+        "FB132",
+        "FB149"
+      ],
+      "main_themes": [
+        "checkout_performance",
+        "性能",
+        "性能与加载"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-checkout",
+      "segment_type": "business",
+      "name": "下单流程问题",
+      "product_type": "ecommerce",
+      "business_goal": "提升下单成功率",
+      "feedback_count": 20,
+      "feedback_ids": [
+        "FB3",
+        "FB4",
+        "FB5",
+        "FB6",
+        "FB7",
+        "FB10",
+        "FB11",
+        "FB12",
+        "FB15",
+        "FB16",
+        "FB17",
+        "FB18",
+        "FB20",
+        "FB21",
+        "FB22",
+        "FB23",
+        "FB24",
+        "FB129",
+        "FB138",
+        "FB145"
+      ],
+      "main_themes": [
+        "checkout_process",
+        "下单流程",
+        "订单管理"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-promotion",
+      "segment_type": "business",
+      "name": "促销与优惠问题",
+      "product_type": "ecommerce",
+      "business_goal": "提升促销转化",
+      "feedback_count": 21,
+      "feedback_ids": [
+        "FB13",
+        "FB82",
+        "FB83",
+        "FB84",
+        "FB85",
+        "FB86",
+        "FB87",
+        "FB88",
+        "FB89",
+        "FB90",
+        "FB91",
+        "FB92",
+        "FB93",
+        "FB94",
+        "FB95",
+        "FB96",
+        "FB97",
+        "FB98",
+        "FB99",
+        "FB133",
+        "FB147"
+      ],
+      "main_themes": [
+        "promotion_process",
+        "促销优惠",
+        "促销效果",
+        "促销活动设计",
+        "优惠券体验"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-payment",
+      "segment_type": "business",
+      "name": "支付失败问题",
+      "product_type": "ecommerce",
+      "business_goal": "降低支付失败率",
+      "feedback_count": 23,
+      "feedback_ids": [
+        "FB26",
+        "FB27",
+        "FB28",
+        "FB29",
+        "FB30",
+        "FB31",
+        "FB32",
+        "FB33",
+        "FB34",
+        "FB35",
+        "FB36",
+        "FB37",
+        "FB38",
+        "FB39",
+        "FB40",
+        "FB41",
+        "FB42",
+        "FB43",
+        "FB44",
+        "FB45",
+        "FB121",
+        "FB131",
+        "FB140"
+      ],
+      "main_themes": [
+        "payment_process",
+        "支付",
+        "移动端稳定性",
+        "支付流程",
+        "支付方式"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-recommendation",
+      "segment_type": "business",
+      "name": "推荐与搜索问题",
+      "product_type": "ecommerce",
+      "business_goal": "提升推荐准确性",
+      "feedback_count": 21,
+      "feedback_ids": [
+        "FB64",
+        "FB65",
+        "FB66",
+        "FB67",
+        "FB68",
+        "FB69",
+        "FB70",
+        "FB71",
+        "FB72",
+        "FB73",
+        "FB74",
+        "FB75",
+        "FB76",
+        "FB77",
+        "FB78",
+        "FB79",
+        "FB80",
+        "FB81",
+        "FB130",
+        "FB136",
+        "FB144"
+      ],
+      "main_themes": [
+        "推荐搜索",
+        "推荐与搜索"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-data",
+      "segment_type": "business",
+      "name": "数据打通问题",
+      "product_type": "ecommerce",
+      "business_goal": "提升数据一致性",
+      "feedback_count": 18,
+      "feedback_ids": [
+        "FB100",
+        "FB101",
+        "FB102",
+        "FB103",
+        "FB104",
+        "FB105",
+        "FB106",
+        "FB107",
+        "FB108",
+        "FB109",
+        "FB110",
+        "FB111",
+        "FB112",
+        "FB113",
+        "FB114",
+        "FB135",
+        "FB142",
+        "FB148"
+      ],
+      "main_themes": [
+        "数据同步",
+        "数据一致性",
+        "数据同步时效性",
+        "数据完整性/准确性",
+        "数据同步准确性"
+      ]
+    },
+    {
+      "segment_id": "seg-ecommerce-mobile",
+      "segment_type": "business",
+      "name": "移动端体验问题",
+      "product_type": "ecommerce",
+      "business_goal": "提升移动端转化",
+      "feedback_count": 11,
+      "feedback_ids": [
+        "FB115",
+        "FB116",
+        "FB117",
+        "FB118",
+        "FB119",
+        "FB120",
+        "FB122",
+        "FB123",
+        "FB126",
+        "FB134",
+        "FB150"
+      ],
+      "main_themes": [
+        "移动端性能与体验",
+        "移动端稳定性",
+        "移动端交互体验",
+        "移动端转化效率",
+        "移动端整体体验"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "segment_type": "noise",
+      "name": "噪声/无效反馈",
+      "product_type": "ecommerce",
+      "business_goal": "unknown",
+      "feedback_count": 2,
+      "feedback_ids": [
+        "FB127",
+        "FB128"
+      ],
+      "main_themes": [
+        "无关话题"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "segment_type": "positive",
+      "name": "正向反馈汇总",
+      "product_type": "ecommerce",
+      "business_goal": "unknown",
+      "feedback_count": 5,
+      "feedback_ids": [
+        "FB137",
+        "FB139",
+        "FB141",
+        "FB143",
+        "FB146"
+      ],
+      "main_themes": [
+        "整体满意度",
+        "客户服务",
+        "业务增长",
+        "版本更新"
+      ]
+    }
+  ]
+}

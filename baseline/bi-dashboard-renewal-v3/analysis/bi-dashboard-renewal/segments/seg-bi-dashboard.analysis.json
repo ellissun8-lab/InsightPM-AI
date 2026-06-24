@@ -1,0 +1,114 @@
+{
+  "segment_id": "seg-bi-dashboard",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 17,
+    "cluster_count": 5,
+    "clustered_feedback_count": 17,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-001",
+      "segment_id": "seg-bi-dashboard",
+      "name": "仪表盘配置复杂性与高学习曲线",
+      "summary": "用户反馈配置过程过于复杂，需要技术知识，小部件设置困难，导致学习曲线陡峭，成为续费阻碍。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB46",
+        "FB54",
+        "FB55",
+        "FB60",
+        "FB149",
+        "FB128"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "配置完成率",
+        "用户支持请求量"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "简化配置界面，引入步骤式向导和预设模板，降低技术门槛；提供交互式教程和上下文帮助，减少用户学习成本。"
+    },
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-002",
+      "segment_id": "seg-bi-dashboard",
+      "name": "性能与响应延迟问题",
+      "summary": "操作如小部件拖放、仪表盘加载和查询响应缓慢，导致用户体验卡顿和交互延迟。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB51",
+        "FB66",
+        "FB77",
+        "FB138"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "平均加载时间",
+        "操作响应时间"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "优化前端和后端代码，减少资源加载时间；实施懒加载和缓存策略，改善拖放响应；添加性能监控工具以识别瓶颈。"
+    },
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-005",
+      "segment_id": "seg-bi-dashboard",
+      "name": "权限与设置管理问题",
+      "summary": "共享设置与权限管理存在问题，过滤器设置不直观，性能监控配置不足。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB53",
+        "FB57",
+        "FB58"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "权限配置错误率",
+        "过滤器使用效率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "简化共享和权限管理界面，使用更直观的标签和选项；改进过滤器设计，提供可视化条件构建器；集成性能监控仪表板，便于配置优化。"
+    },
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-003",
+      "segment_id": "seg-bi-dashboard",
+      "name": "布局保存与显示问题",
+      "summary": "布局保存后再次打开时显示混乱，且响应式设计不佳导致移动端显示不清晰。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB47",
+        "FB56"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "布局保存成功率",
+        "移动端满意度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "修复布局保存逻辑，确保数据持久化正确；增强响应式设计框架，优化移动端自适应显示，进行跨设备测试。"
+    },
+    {
+      "cluster_id": "seg-bi-dashboard-cluster-004",
+      "segment_id": "seg-bi-dashboard",
+      "name": "用户引导与功能发现不足",
+      "summary": "缺乏足够的配置模板和向导，高级功能入口隐藏较深，导致新用户上手困难。",
+      "feedback_count": 2,
+      "evidence_feedback_ids": [
+        "FB50",
+        "FB59"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "新用户激活率",
+        "功能使用率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "增加更多仪表盘配置模板和交互式向导；重新设计UI，使高级功能更易访问，提供引导式提示和搜索功能。"
+    }
+  ]
+}

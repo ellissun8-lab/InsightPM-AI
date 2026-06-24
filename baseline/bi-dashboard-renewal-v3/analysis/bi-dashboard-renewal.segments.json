@@ -1,0 +1,312 @@
+{
+  "dataset": "bi-dashboard-renewal",
+  "is_mixed_dataset": true,
+  "segment_count": 10,
+  "business_segment_count": 7,
+  "noise_segment_count": 1,
+  "positive_segment_count": 1,
+  "segments": [
+    {
+      "segment_id": "seg-bi-export",
+      "segment_type": "business",
+      "name": "报表导出问题",
+      "product_type": "BI-dashboard",
+      "business_goal": "提升导出可靠性",
+      "feedback_count": 11,
+      "feedback_ids": [
+        "FB1",
+        "FB6",
+        "FB8",
+        "FB15",
+        "FB19",
+        "FB116",
+        "FB126",
+        "FB134",
+        "FB136",
+        "FB144",
+        "FB146"
+      ],
+      "main_themes": [
+        "格式错乱",
+        "导出失败",
+        "API失败",
+        "格式调整繁琐",
+        "功能不稳定"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-accuracy",
+      "segment_type": "business",
+      "name": "数据准确性问题",
+      "product_type": "BI-dashboard",
+      "business_goal": "提升数据可信度",
+      "feedback_count": 27,
+      "feedback_ids": [
+        "FB2",
+        "FB7",
+        "FB12",
+        "FB16",
+        "FB17",
+        "FB21",
+        "FB22",
+        "FB26",
+        "FB27",
+        "FB28",
+        "FB29",
+        "FB30",
+        "FB31",
+        "FB32",
+        "FB34",
+        "FB35",
+        "FB37",
+        "FB38",
+        "FB39",
+        "FB40",
+        "FB41",
+        "FB43",
+        "FB45",
+        "FB71",
+        "FB127",
+        "FB137",
+        "FB147"
+      ],
+      "main_themes": [
+        "数据格式错误",
+        "精度丢失",
+        "数据过滤失效",
+        "公式错误",
+        "字符编码错误"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-performance",
+      "segment_type": "business",
+      "name": "查询性能问题",
+      "product_type": "BI-dashboard",
+      "business_goal": "提升查询速度",
+      "feedback_count": 33,
+      "feedback_ids": [
+        "FB3",
+        "FB5",
+        "FB9",
+        "FB13",
+        "FB18",
+        "FB23",
+        "FB25",
+        "FB36",
+        "FB48",
+        "FB61",
+        "FB62",
+        "FB63",
+        "FB64",
+        "FB65",
+        "FB67",
+        "FB68",
+        "FB69",
+        "FB70",
+        "FB72",
+        "FB73",
+        "FB74",
+        "FB75",
+        "FB76",
+        "FB78",
+        "FB79",
+        "FB80",
+        "FB117",
+        "FB118",
+        "FB129",
+        "FB133",
+        "FB139",
+        "FB143",
+        "FB148"
+      ],
+      "main_themes": [
+        "系统崩溃",
+        "导出速度慢",
+        "系统卡顿",
+        "服务器负载",
+        "网络超时"
+      ]
+    },
+    {
+      "segment_id": "seg-positive",
+      "segment_type": "positive",
+      "name": "正向反馈汇总",
+      "product_type": "BI-dashboard",
+      "business_goal": "unknown",
+      "feedback_count": 9,
+      "feedback_ids": [
+        "FB4",
+        "FB10",
+        "FB14",
+        "FB20",
+        "FB24",
+        "FB44",
+        "FB49",
+        "FB124",
+        "FB125"
+      ],
+      "main_themes": [
+        "功能便捷",
+        "功能扩展",
+        "速度可接受",
+        "功能智能化",
+        "易用性"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-visualization",
+      "segment_type": "business",
+      "name": "可视化与图表问题",
+      "product_type": "BI-dashboard",
+      "business_goal": "提升可视化能力",
+      "feedback_count": 11,
+      "feedback_ids": [
+        "FB11",
+        "FB52",
+        "FB111",
+        "FB112",
+        "FB113",
+        "FB114",
+        "FB115",
+        "FB119",
+        "FB120",
+        "FB132",
+        "FB142"
+      ],
+      "main_themes": [
+        "图表清晰度",
+        "可视化图表"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-integration",
+      "segment_type": "business",
+      "name": "数据源集成问题",
+      "product_type": "BI-dashboard",
+      "business_goal": "提升数据集成度",
+      "feedback_count": 15,
+      "feedback_ids": [
+        "FB33",
+        "FB42",
+        "FB93",
+        "FB101",
+        "FB102",
+        "FB103",
+        "FB104",
+        "FB105",
+        "FB106",
+        "FB107",
+        "FB108",
+        "FB109",
+        "FB110",
+        "FB131",
+        "FB141"
+      ],
+      "main_themes": [
+        "数据源集成"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-dashboard",
+      "segment_type": "business",
+      "name": "仪表盘配置问题",
+      "product_type": "BI-dashboard",
+      "business_goal": "简化配置流程",
+      "feedback_count": 17,
+      "feedback_ids": [
+        "FB46",
+        "FB47",
+        "FB50",
+        "FB51",
+        "FB53",
+        "FB54",
+        "FB55",
+        "FB56",
+        "FB57",
+        "FB58",
+        "FB59",
+        "FB60",
+        "FB66",
+        "FB77",
+        "FB128",
+        "FB138",
+        "FB149"
+      ],
+      "main_themes": [
+        "仪表盘配置"
+      ]
+    },
+    {
+      "segment_id": "seg-bi-value",
+      "segment_type": "business",
+      "name": "续费价值感知",
+      "product_type": "BI-dashboard",
+      "business_goal": "提升价值感知",
+      "feedback_count": 24,
+      "feedback_ids": [
+        "FB81",
+        "FB82",
+        "FB83",
+        "FB84",
+        "FB85",
+        "FB86",
+        "FB87",
+        "FB88",
+        "FB89",
+        "FB90",
+        "FB91",
+        "FB92",
+        "FB94",
+        "FB95",
+        "FB96",
+        "FB97",
+        "FB98",
+        "FB99",
+        "FB100",
+        "FB130",
+        "FB135",
+        "FB140",
+        "FB145",
+        "FB150"
+      ],
+      "main_themes": [
+        "续费价值",
+        "技术支持",
+        "续费价格",
+        "功能更新",
+        "续费决策"
+      ]
+    },
+    {
+      "segment_id": "seg-noise",
+      "segment_type": "noise",
+      "name": "噪声/无效反馈",
+      "product_type": "BI-dashboard",
+      "business_goal": "unknown",
+      "feedback_count": 2,
+      "feedback_ids": [
+        "FB121",
+        "FB123"
+      ],
+      "main_themes": [
+        "产品问题",
+        "服务器状态"
+      ]
+    },
+    {
+      "segment_id": "seg-unknown",
+      "segment_type": "unknown",
+      "name": "未分类反馈",
+      "product_type": "BI-dashboard",
+      "business_goal": "unknown",
+      "feedback_count": 1,
+      "feedback_ids": [
+        "FB122"
+      ],
+      "main_themes": [
+        "功能问题"
+      ]
+    }
+  ]
+}

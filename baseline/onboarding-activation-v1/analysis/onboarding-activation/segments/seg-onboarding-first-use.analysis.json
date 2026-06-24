@@ -1,0 +1,90 @@
+{
+  "segment_id": "seg-onboarding-first-use",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 13,
+    "cluster_count": 3,
+    "clustered_feedback_count": 13,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-first-use-cluster-001",
+      "segment_id": "seg-onboarding-first-use",
+      "name": "核心功能引导缺失与初期设置体验不佳",
+      "summary": "用户在首次使用过程中面临核心功能引导不足、设置流程复杂、第三方服务绑定困惑、导航不便以及客服响应慢等问题，导致上手时间延长和挫败感，可能引发放弃。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB31",
+        "FB36",
+        "FB44",
+        "FB59",
+        "FB67"
+      ],
+      "secondary_themes": [
+        "首次使用引导",
+        "设置流程",
+        "客服支持"
+      ],
+      "possible_metrics": [
+        "首次任务完成时间",
+        "设置放弃率",
+        "用户支持请求量"
+      ],
+      "priority": "P1",
+      "opportunity_score": 80,
+      "recommendation": "优化首次使用引导，为创建报表等核心功能添加交互式教程；简化设置步骤，将非必要第三方服务绑定改为可选；改进导航结构，减少功能入口层级；提升客服响应速度，或在设置阶段提供实时帮助选项。"
+    },
+    {
+      "cluster_id": "seg-onboarding-first-use-cluster-002",
+      "segment_id": "seg-onboarding-first-use",
+      "name": "技术错误与用户界面不一致问题",
+      "summary": "用户在首次使用时遇到页面卡死、数据导入失败错误信息模糊、以及登录后意外跳转到旧版界面等问题，严重影响操作流畅性和产品信任度。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB38",
+        "FB79",
+        "FB91"
+      ],
+      "secondary_themes": [
+        "技术稳定性",
+        "错误处理",
+        "界面一致性"
+      ],
+      "possible_metrics": [
+        "错误发生率",
+        "用户中断率",
+        "界面切换投诉量"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "修复页面卡死bug，确保用户数据自动保存；改进错误提示信息，提供具体失败原因和解决步骤；加强界面版本控制，避免意外跳转，并为用户提供清晰的界面切换指南。"
+    },
+    {
+      "cluster_id": "seg-onboarding-first-use-cluster-003",
+      "segment_id": "seg-onboarding-first-use",
+      "name": "正面体验与竞争对手差距改进机会",
+      "summary": "用户赞赏产品的简洁设计、数据导入向导和案例模板等优点，但指出竞争对手上手体验更优，需在保持优势的同时针对性改进整体首次使用流程。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB122",
+        "FB128",
+        "FB147",
+        "FB150"
+      ],
+      "secondary_themes": [
+        "用户体验满意度",
+        "竞争分析"
+      ],
+      "possible_metrics": [
+        "用户满意度评分",
+        "净推荐值（NPS）",
+        "功能使用深度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "继续优化数据导入向导和案例模板，作为差异化卖点；深入分析竞争对手的上手体验优势，识别自身短板，如简化注册到核心功能的流程，或增强个性化引导，以提升整体满意度。"
+    }
+  ]
+}

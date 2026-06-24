@@ -1,0 +1,13 @@
+{
+  "techStack": ["typescript", "react"],
+  "rulePacks": [
+    "d:/工作/ai产品分析工具/Code-Spec-Plugin/rule-packs/common",
+    "d:/工作/ai产品分析工具/Code-Spec-Plugin/rule-packs/typescript",
+    "d:/工作/ai产品分析工具/Code-Spec-Plugin/rule-packs/react"
+  ],
+  "enableLlmJudge": false,
+  "output": {
+    "format": "json",
+    "language": "zh"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "segment_id": "seg-unknown",
+  "segment_type": "unknown",
+  "summary": {
+    "feedback_count": 1,
+    "cluster_count": 1,
+    "clustered_feedback_count": 1,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-unknown-cluster-001",
+      "segment_id": "seg-unknown",
+      "name": "未分类反馈",
+      "summary": "未分类反馈相关反馈",
+      "feedback_count": 1,
+      "evidence_feedback_ids": [
+        "FB122"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [],
+      "priority": "P3",
+      "opportunity_score": 0,
+      "recommendation": "需要人工复核。"
+    }
+  ]
+}

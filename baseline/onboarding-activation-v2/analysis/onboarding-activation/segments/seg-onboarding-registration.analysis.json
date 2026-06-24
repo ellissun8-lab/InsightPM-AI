@@ -1,0 +1,150 @@
+{
+  "segment_id": "seg-onboarding-registration",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 32,
+    "cluster_count": 5,
+    "clustered_feedback_count": 32,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-004",
+      "segment_id": "seg-onboarding-registration",
+      "name": "登录可靠性、身份验证和会话管理问题",
+      "summary": "报告包括登录错误、频繁设备验证、强制手机号绑定、账号封禁无通知、登录状态不保持、页面空白等，严重影响用户体验。",
+      "feedback_count": 11,
+      "evidence_feedback_ids": [
+        "FB14",
+        "FB26",
+        "FB27",
+        "FB28",
+        "FB31",
+        "FB32",
+        "FB33",
+        "FB34",
+        "FB35",
+        "FB39",
+        "FB43"
+      ],
+      "secondary_themes": [
+        "登录问题",
+        "登录体验",
+        "seg-onboarding-registration"
+      ],
+      "possible_metrics": [
+        "登录成功率",
+        "会话持续时长",
+        "用户支持请求量"
+      ],
+      "priority": "P0",
+      "opportunity_score": 85,
+      "recommendation": "改进错误提示和账户恢复流程，优化设备信任机制减少频繁验证，提供邮箱登录选项，确保账号状态变更通知，修复会话持久性和页面渲染Bug。"
+    },
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-001",
+      "segment_id": "seg-onboarding-registration",
+      "name": "注册过程中的技术和用户界面问题",
+      "summary": "用户报告注册按钮无响应、邮箱验证链接失效、密码规则不清晰、手机界面字体小等技术和UI问题，导致注册流程中断。",
+      "feedback_count": 6,
+      "evidence_feedback_ids": [
+        "FB1",
+        "FB3",
+        "FB4",
+        "FB11",
+        "FB16",
+        "FB21"
+      ],
+      "secondary_themes": [
+        "注册引导",
+        "页面元素问题"
+      ],
+      "possible_metrics": [
+        "注册成功率",
+        "页面加载时间",
+        "移动端兼容性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 75,
+      "recommendation": "优化前端代码确保注册按钮可靠，改进邮箱验证流程以减少链接失效，提供清晰密码规则提示，并优化移动端UI适配以提升可读性。"
+    },
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-002",
+      "segment_id": "seg-onboarding-registration",
+      "name": "注册流程复杂性和用户体验不佳",
+      "summary": "用户反馈企业注册信息过多、流程繁琐，邮箱域名限制和单一账号限制影响团队试用，整体注册体验差。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB6",
+        "FB7",
+        "FB12",
+        "FB20"
+      ],
+      "secondary_themes": [
+        "注册体验",
+        "注册限制"
+      ],
+      "possible_metrics": [
+        "注册完成率",
+        "用户满意度",
+        "注册时长"
+      ],
+      "priority": "P1",
+      "opportunity_score": 70,
+      "recommendation": "简化注册表单减少必填字段，验证常见企业邮箱域名以避免无效限制，并允许一个邮箱创建多个账号或团队空间以支持团队试用。"
+    },
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-003",
+      "segment_id": "seg-onboarding-registration",
+      "name": "验证码接收延迟、失败和可用性问题",
+      "summary": "用户遇到验证码收不到、延迟发送、过期时间短、图形难辨识以及国际漫游短信延迟，影响注册和登录。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB8",
+        "FB19",
+        "FB29",
+        "FB40",
+        "FB44"
+      ],
+      "secondary_themes": [
+        "验证码问题",
+        "用户界面问题"
+      ],
+      "possible_metrics": [
+        "验证码送达率",
+        "验证码输入错误率",
+        "国际用户登录成功率"
+      ],
+      "priority": "P1",
+      "opportunity_score": 65,
+      "recommendation": "增加验证码发送渠道如邮件备份，延长过期时间至10分钟以上，优化验证码图形可读性，并为国际用户提供如邮箱验证等替代方式。"
+    },
+    {
+      "cluster_id": "seg-onboarding-registration-cluster-005",
+      "segment_id": "seg-onboarding-registration",
+      "name": "第三方登录和SSO集成的稳定性和兼容性问题",
+      "summary": "用户反馈第三方账号授权后同步失败、SSO集成不稳定、扫码登录不便，以及需要更多登录方式选择。",
+      "feedback_count": 5,
+      "evidence_feedback_ids": [
+        "FB13",
+        "FB36",
+        "FB38",
+        "FB41",
+        "FB45"
+      ],
+      "secondary_themes": [
+        "登录方式改进",
+        "seg-onboarding-registration"
+      ],
+      "possible_metrics": [
+        "第三方登录成功率",
+        "SSO集成故障率",
+        "登录方式多样性"
+      ],
+      "priority": "P1",
+      "opportunity_score": 60,
+      "recommendation": "加强第三方API集成测试和错误处理以提高稳定性，优化SSO连接以支持更多企业场景，改进扫码登录流程的易用性，并增加安全邮箱等备用登录方式。"
+    }
+  ]
+}

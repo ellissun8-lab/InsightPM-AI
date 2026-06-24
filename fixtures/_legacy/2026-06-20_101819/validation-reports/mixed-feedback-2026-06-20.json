@@ -1,0 +1,53 @@
+{
+  "dataset": "mixed-feedback",
+  "status": "warning",
+  "score": 77,
+  "model_roles": {
+    "generator": "mimo",
+    "validator": "deepseek-v4-pro"
+  },
+  "summary": {
+    "feedback_count": 120,
+    "cluster_count": 29,
+    "invalid_evidence_count": 0,
+    "forbidden_metric_count": 0,
+    "hallucination_count": 0,
+    "over_inference_count": 0
+  },
+  "warning_types": [
+    "count_mismatch",
+    "markdown_json_mixed",
+    "missing_analysis_json"
+  ],
+  "score_breakdown": {
+    "data_realism": 8,
+    "theme_coverage": 14,
+    "cluster_accuracy": 10,
+    "evidence_accuracy": 12,
+    "metric_fit": 9,
+    "format_compliance": 7,
+    "conclusion_credibility": 7,
+    "no_hallucination": 10
+  },
+  "training_decision": {
+    "usable_for_training": false,
+    "usable_for_testing": false,
+    "usable_for_regression": false,
+    "requires_human_review": true
+  },
+  "failed_checks": [
+    "B端 SaaS 续费风险 segment feedback_count=25, 但其6个cluster的feedback_count之和为24，丢失1条反馈",
+    "电商转化问题 segment feedback_count=15, 但其5个cluster的feedback_count之和为13，丢失2条反馈",
+    "所有cluster的feedback_count总和为117，与总反馈数120不一致"
+  ],
+  "warnings": [
+    "count_mismatch: 两个业务分组内部cluster的反馈数量与分组总量不符",
+    "markdown_json_mixed: 报告正文混入了JSON结构数据，未保持纯Markdown或独立文件",
+    "missing_analysis_json: 缺少独立的analysis.json文件，所有信息嵌入在Markdown中"
+  ],
+  "recommendations": [
+    "修正B端SaaS续费风险与电商转化问题的cluster反馈计数，确保segment feedback_count与cluster feedback_count之和一致",
+    "将结构化数据抽取为独立的analysis.json，保持报告格式纯净",
+    "重新验证并补全缺失的反馈在对应cluster中的分配"
+  ]
+}

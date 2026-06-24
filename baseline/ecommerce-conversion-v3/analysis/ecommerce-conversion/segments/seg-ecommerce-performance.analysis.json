@@ -1,0 +1,140 @@
+{
+  "segment_id": "seg-ecommerce-performance",
+  "segment_type": "business",
+  "summary": {
+    "feedback_count": 25,
+    "cluster_count": 6,
+    "clustered_feedback_count": 25,
+    "unclustered_feedback_count": 0
+  },
+  "issue_clusters": [
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-001",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "页面加载速度缓慢",
+      "summary": "用户反馈多个页面如订单确认页、搜索结果页和商品详情页加载时间过长，影响浏览和购物体验。",
+      "feedback_count": 7,
+      "evidence_feedback_ids": [
+        "FB2",
+        "FB46",
+        "FB49",
+        "FB51",
+        "FB53",
+        "FB57",
+        "FB62"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "页面加载时间",
+        "首屏渲染时间"
+      ],
+      "priority": "P1",
+      "opportunity_score": 85,
+      "recommendation": "优化关键页面如订单确认页、搜索结果页的服务器端渲染，减少初始加载资源大小，并实施懒加载策略。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-002",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "结账与支付流程性能问题",
+      "summary": "用户在下单过程中遇到订单生成慢、按钮无响应和支付选项加载失败，导致交易中断。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB11",
+        "FB15",
+        "FB19",
+        "FB23"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "订单生成时间",
+        "结账步骤完成率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 75,
+      "recommendation": "优化订单处理后端逻辑，预加载支付选项，并确保前端按钮有即时反馈和错误处理。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-003",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "App启动慢和内存占用高",
+      "summary": "App启动时间长、内存占用大以及页面切换卡顿，影响移动端用户体验。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB48",
+        "FB50",
+        "FB124"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "App启动时间",
+        "内存使用率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 65,
+      "recommendation": "优化App启动流程，减少初始加载模块，并定期清理缓存和优化内存管理。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-004",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "多媒体资源加载失败",
+      "summary": "图片、视频和CSS文件加载失败或缓慢，导致页面显示不全或错乱。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB47",
+        "FB54",
+        "FB59",
+        "FB63"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "资源加载成功率",
+        "页面布局完整性"
+      ],
+      "priority": "P2",
+      "opportunity_score": 70,
+      "recommendation": "压缩图片和视频文件大小，使用CDN加速资源分发，并确保CSS文件正确加载和缓存。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-005",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "服务器和API响应延迟",
+      "summary": "服务器响应超时、API请求延迟高，尤其在促销期间，以及移动端网络加载慢。",
+      "feedback_count": 4,
+      "evidence_feedback_ids": [
+        "FB55",
+        "FB60",
+        "FB61",
+        "FB121"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "服务器响应时间",
+        "API延迟",
+        "移动端加载速度"
+      ],
+      "priority": "P2",
+      "opportunity_score": 60,
+      "recommendation": "增加服务器容量以应对促销高峰，优化API查询效率，并针对移动网络优化资源加载策略。"
+    },
+    {
+      "cluster_id": "seg-ecommerce-performance-cluster-006",
+      "segment_id": "seg-ecommerce-performance",
+      "name": "加载动画、数据缓存和JavaScript错误",
+      "summary": "加载动画时间长影响体验，缓存导致数据不更新，以及JavaScript错误引发页面崩溃。",
+      "feedback_count": 3,
+      "evidence_feedback_ids": [
+        "FB52",
+        "FB56",
+        "FB58"
+      ],
+      "secondary_themes": [],
+      "possible_metrics": [
+        "用户满意度",
+        "错误率"
+      ],
+      "priority": "P2",
+      "opportunity_score": 55,
+      "recommendation": "优化加载动画设计，实现智能缓存更新机制，并加强JavaScript错误监控和修复。"
+    }
+  ]
+}
