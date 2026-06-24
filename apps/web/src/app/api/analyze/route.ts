@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
 
     // Cloud 模式：创建 pending run 记录到 Supabase
     if (mode === "cloud") {
-      const run = await createRun({
+      const { data: run, error: createError } = await createRun({
         case_name: caseName,
         dataset: dataset || "mixed-feedback",
         count: count || 0,
@@ -30,9 +30,17 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      if (!run) {
+      if (createError || !run) {
+        console.error("createRun failed:", createError);
         return NextResponse.json(
-          { error: "创建分析任务失败" },
+          {
+            ok: false,
+            mode: "cloud",
+            error: "创建分析任务失败",
+            detail: createError?.message || "Unknown error",
+            code: createError?.code,
+            hint: createError?.hint,
+          },
           { status: 500 }
         );
       }

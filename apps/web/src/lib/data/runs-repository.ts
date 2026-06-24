@@ -48,11 +48,11 @@ export async function createRun(input: {
   status?: string;
   workspace_id?: string;
   metadata?: Record<string, any>;
-}): Promise<RunRecord | null> {
+}): Promise<{ data: RunRecord | null; error: any }> {
   if (isCloudMode()) {
     return createRunInSupabase(input);
   }
-  return null;
+  return { data: null, error: null };
 }
 
 /**
@@ -134,7 +134,7 @@ async function createRunInSupabase(input: {
   status?: string;
   workspace_id?: string;
   metadata?: Record<string, any>;
-}): Promise<RunRecord | null> {
+}): Promise<{ data: RunRecord | null; error: any }> {
   const supabase = await getSupabaseClient();
   const now = new Date().toISOString();
 
@@ -157,11 +157,12 @@ async function createRunInSupabase(input: {
     .select()
     .single();
 
-  if (error || !data) {
-    console.error("Error creating run in Supabase:", error);
-    return null;
+  if (error) {
+    console.error("createRun failed:", error);
+    return { data: null, error };
   }
-  return mapSupabaseRunToRecord(data);
+
+  return { data: mapSupabaseRunToRecord(data), error: null };
 }
 
 async function updateRunInSupabase(caseName: string, input: Partial<RunRecord>): Promise<boolean> {
