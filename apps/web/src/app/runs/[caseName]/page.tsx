@@ -26,7 +26,7 @@ export default async function RunDetailPage({
 }: {
   params: { caseName: string };
 }) {
-  const { caseName } = params;
+  const caseName = decodeURIComponent(params.caseName);
   const runDir = path.join(ROOT, "runs", caseName);
 
   const summary = loadJson(path.join(runDir, "run-summary.json"));
@@ -80,19 +80,22 @@ export default async function RunDetailPage({
     return (
       <div className="flex min-h-screen bg-surface">
         <Sidebar />
-        <div className="ml-[280px] flex-1 p-margin-desktop">
-          <h1 className="text-headline-lg font-headline-lg text-on-surface mb-md">
-            {caseName}
-          </h1>
-          <div className="bg-surface-container-lowest rounded-xl p-xl text-center border border-outline-variant">
-            <p className="text-body-md font-body-md text-on-surface-variant">
-              未找到 run-summary.json
+        <div className="ml-[280px] flex-1 p-margin-desktop flex items-center justify-center">
+          <div className="max-w-md text-center">
+            <div className="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mx-auto mb-lg">
+              <Clock size={32} className="text-on-surface-variant" />
+            </div>
+            <h1 className="text-headline-md font-headline-md text-on-surface mb-sm">
+              报告尚未生成
+            </h1>
+            <p className="text-body-lg font-body-lg text-on-surface-variant mb-lg">
+              该分析任务「{caseName}」还没有可用报告。请返回运行历史查看任务状态。
             </p>
             <a
               href="/runs"
-              className="text-body-md font-body-md text-primary hover:underline mt-sm inline-block"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary-container text-white rounded-lg font-label-md text-label-md hover:bg-primary transition-colors"
             >
-              返回运行列表
+              返回运行历史
             </a>
           </div>
         </div>

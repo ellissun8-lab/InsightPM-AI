@@ -53,10 +53,19 @@ export default function NewAnalysisPage() {
       });
       const data = await res.json();
       if (data.ok) {
-        setResult("分析完成");
-        window.location.href = `/runs/${caseName}`;
+        if (data.mode === "cloud") {
+          // Cloud 模式：显示提示，跳转到运行历史
+          setResult("线上分析任务已创建，后台分析 Worker 将在后续版本启用。");
+          setTimeout(() => {
+            window.location.href = "/runs";
+          }, 2000);
+        } else {
+          // Local 模式：跳转到详情页
+          setResult("分析完成");
+          window.location.href = `/runs/${caseName}`;
+        }
       } else {
-        setResult("分析失败: " + (data.error || "unknown"));
+        setResult("分析失败: " + (data.error || "未知错误"));
       }
     } catch (e: any) {
       setResult("分析失败: " + e.message);
