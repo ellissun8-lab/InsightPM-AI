@@ -30,16 +30,20 @@ async function getCloudReport(caseName: string) {
 
   const artifacts = await getReportArtifactsByRunId(run.id, "overall-md");
   const reportArtifact = artifacts[0];
+  const metadata = reportArtifact?.metadata || {};
 
   let reportContent: string | null = null;
-  if (reportArtifact?.metadata?.content) {
-    reportContent = reportArtifact.metadata.content;
+  if (metadata.markdown) {
+    reportContent = metadata.markdown;
+  } else if (metadata.content) {
+    reportContent = metadata.content;
   }
 
   return {
     run,
     reportContent,
     hasReport: !!reportContent,
+    metadata,
   };
 }
 
@@ -141,7 +145,8 @@ export default async function RunDetailPage({
       );
     }
 
-    const { run, reportContent } = cloudData;
+    const { run, reportContent, metadata } = cloudData;
+    const feedbackCount = metadata?.feedbackCount || run.feedbackCount || 0;
 
     return (
       <div className="flex min-h-screen bg-surface">
@@ -158,7 +163,7 @@ export default async function RunDetailPage({
               </span>
             </div>
             <p className="text-body-lg font-body-lg text-on-surface-variant">
-              {run.scenario || run.dataset} · 生成于{" "}
+              {run.scenario || run.dataset} · {feedbackCount} 条反馈 · 生成于{" "}
               {run.finishedAt
                 ? new Date(run.finishedAt).toLocaleString("zh-CN")
                 : run.updatedAt
@@ -197,7 +202,7 @@ export default async function RunDetailPage({
                 反馈数
               </div>
               <div className="text-headline-md font-headline-md text-on-surface">
-                {run.feedbackCount}
+                {feedbackCount}
               </div>
             </div>
           </div>

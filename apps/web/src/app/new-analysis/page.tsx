@@ -21,10 +21,33 @@ export default function NewAnalysisPage() {
   const [caseName, setCaseName] = useState("");
   const [dataset, setDataset] = useState("enterprise-saas-renewal");
   const [file, setFile] = useState<File | null>(null);
+  const [feedbackCount, setFeedbackCount] = useState(0);
   const [uploading, setUploading] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
   const [result, setResult] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const parseCsvCount = async (f: File): Promise<number> => {
+    try {
+      const text = await f.text();
+      const lines = text.split("\n").filter((line) => line.trim().length > 0);
+      // 排除表头
+      return Math.max(0, lines.length - 1);
+    } catch {
+      return 0;
+    }
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0] || null;
+    setFile(f);
+    if (f) {
+      const count = await parseCsvCount(f);
+      setFeedbackCount(count);
+    } else {
+      setFeedbackCount(0);
+    }
+  };
 
   const handleUpload = async () => {
     if (!file || !caseName) return;
@@ -51,7 +74,7 @@ export default function NewAnalysisPage() {
       const res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ caseName, dataset, count: 0 }),
+        body: JSON.stringify({ caseName, dataset, count: feedbackCount }),
       });
       const data = await res.json();
       if (data.ok) {
@@ -120,13 +143,18 @@ export default function NewAnalysisPage() {
                     type="file"
                     accept=".csv"
                     className="hidden"
-                    onChange={(e) => setFile(e.target.files?.[0] || null)}
+                    onChange={handleFileChange}
                   />
                 </div>
                 {file && (
                   <div className="mt-md flex items-center gap-xs font-label-md text-label-md text-on-surface">
                     <FileText size={16} className="text-primary" />
                     {file.name} ({(file.size / 1024).toFixed(1)} KB)
+                    {feedbackCount > 0 && (
+                      <span className="text-on-surface-variant ml-2">
+                        · {feedbackCount} 条反馈
+                      </span>
+                    )}
                   </div>
                 )}
               </div>
