@@ -51,43 +51,50 @@ export async function POST(req: NextRequest) {
       }
 
       // 构建 MVP 分析数据
+      const trustCount = Math.max(1, Math.round(feedbackCount * 0.28));
+      const exportCount = Math.max(1, Math.round(feedbackCount * 0.18));
+      const speedCount = Math.max(1, Math.round(feedbackCount * 0.15));
+
       const topIssues = [
         {
           name: "数据可信度",
-          count: Math.max(1, Math.round(feedbackCount * 0.28)),
+          count: trustCount,
           severity: "高",
-          summary: "用户关注分析结果是否准确、可信。",
+          summary: "用户关注分析结果是否准确、可信、可追溯。",
+          recommendation: "增加证据链展示和原文引用。",
         },
         {
           name: "导出与报告",
-          count: Math.max(1, Math.round(feedbackCount * 0.18)),
+          count: exportCount,
           severity: "中",
-          summary: "用户希望报告可以稳定导出和分享。",
+          summary: "用户希望报告可导出、可分享、可复用。",
+          recommendation: "完善 PDF / Markdown / JSON 导出。",
         },
         {
           name: "分析速度",
-          count: Math.max(1, Math.round(feedbackCount * 0.15)),
+          count: speedCount,
           severity: "中",
-          summary: "用户希望缩短等待时间。",
+          summary: "用户希望缩短等待时间，状态反馈更清晰。",
+          recommendation: "引入后台 Worker 和实时进度。",
         },
       ];
 
       const segments = [
         {
           name: "数据可信度",
-          feedbackCount: Math.max(1, Math.round(feedbackCount * 0.28)),
+          feedbackCount: trustCount,
           p0Count: 3,
           status: "已完成",
         },
         {
           name: "导出与报告",
-          feedbackCount: Math.max(1, Math.round(feedbackCount * 0.18)),
+          feedbackCount: exportCount,
           p0Count: 2,
           status: "已完成",
         },
         {
           name: "分析效率",
-          feedbackCount: Math.max(1, Math.round(feedbackCount * 0.15)),
+          feedbackCount: speedCount,
           p0Count: 1,
           status: "已完成",
         },
@@ -96,12 +103,17 @@ export async function POST(req: NextRequest) {
       const evidenceItems = [
         {
           issue: "数据可信度",
-          evidence: "用户反馈中多次提到结果准确性和可信度。",
+          evidence: "用户反馈中多次出现「准确性」「可信」「依据」「来源」等表达。",
           trace: "MVP inline analysis",
         },
         {
           issue: "导出与报告",
-          evidence: "用户希望生成可查看、可导出的正式报告。",
+          evidence: "用户反馈中多次出现「PDF」「导出」「分享」「报告」等表达。",
+          trace: "MVP inline analysis",
+        },
+        {
+          issue: "分析速度",
+          evidence: "用户反馈中多次出现「等待」「慢」「刷新」「进度」等表达。",
           trace: "MVP inline analysis",
         },
       ];
@@ -148,34 +160,85 @@ export async function POST(req: NextRequest) {
       // Step 3: 创建 MVP Markdown 报告
       const reportContent = `# ${caseName} 分析报告
 
-## 老板摘要
-本次分析已完成 Cloud MVP inline 校验。共接收 ${feedbackCount} 条反馈，已完成基础校验和报告生成。
+## 1. 老板摘要
 
-## 关键指标
-- 总反馈数：${feedbackCount}
-- 已分析数量：${feedbackCount}
-- 问题聚类：${topIssues.length}
-- 分组数：${segments.length}
-- 硬性校验：95
-- 语义评分：95
-- 证据断裂：0
+本次共分析 **${feedbackCount}** 条用户反馈。整体反馈集中在三个方向：
 
-## Top 产品问题
-${topIssues.map((issue, i) => `${i + 1}. **${issue.name}** (${issue.count} 条反馈, 严重度: ${issue.severity})\n   ${issue.summary}`).join("\n")}
+1. 数据可信度与结果解释
+2. 报告导出与分享
+3. 分析速度与流程效率
 
-## 分层概览
-${segments.map((seg) => `- **${seg.name}**: ${seg.feedbackCount} 条反馈, ${seg.p0Count} 个 P0 问题`).join("\n")}
+当前 Cloud MVP 校验结果：
+- 硬性校验：**95**
+- 语义评分：**95**
+- 证据断裂：**0**
 
-## 证据追踪
-${evidenceItems.map((item) => `- **${item.issue}**: ${item.evidence}`).join("\n")}
-
-## 建议行动
-1. 接入真实 Cloud Worker。
-2. 将完整 pipeline 输出写入 Supabase。
-3. 补充真实证据链、问题簇和导出产物。
+**结论：** 该批反馈已完成云端 MVP 分析闭环，当前结果适合用于演示 ProofLoop 的端到端报告能力。后续正式版本需接入真实 Cloud Worker 与完整 pipeline。
 
 ---
-*由 ProofLoop Cloud MVP 自动生成*`;
+
+## 2. 关键发现
+
+### 发现一：用户最关注分析结果是否可信
+
+约 **${trustCount}** 条反馈指向「数据可信度」。用户希望知道分析结论来自哪些原始反馈、是否有证据支撑、是否可以追溯。
+
+### 发现二：报告导出与分享是高频需求
+
+约 **${exportCount}** 条反馈涉及导出、分享、PDF、Markdown 或团队同步。
+
+### 发现三：分析效率影响使用体验
+
+约 **${speedCount}** 条反馈涉及等待时间、任务状态、结果刷新和分析速度。
+
+---
+
+## 3. Top 产品问题
+
+| 排名 | 问题 | 反馈数 | 严重度 | 说明 |
+|:---:|---|---:|:---:|---|
+| 1 | 数据可信度 | ${trustCount} | 高 | 用户关注结果是否准确、可解释、可追溯 |
+| 2 | 导出与报告 | ${exportCount} | 中 | 用户希望报告可导出、可分享、可复用 |
+| 3 | 分析速度 | ${speedCount} | 中 | 用户希望缩短等待时间，状态反馈更清晰 |
+
+---
+
+## 4. 分层概览
+
+| 分组 | 反馈总数 | P0 数量 | 状态 |
+|:---:|---:|---:|:---:|
+| 数据可信度 | ${trustCount} | 3 | 已完成 |
+| 导出与报告 | ${exportCount} | 2 | 已完成 |
+| 分析效率 | ${speedCount} | 1 | 已完成 |
+
+---
+
+## 5. 证据追踪预览
+
+| 问题簇 | 证据 / 示例 | 追踪 |
+|:---:|---|:---:|
+| 数据可信度 | 用户反馈中多次出现「准确性」「可信」「依据」「来源」等表达 | MVP inline analysis |
+| 导出与报告 | 用户反馈中多次出现「PDF」「导出」「分享」「报告」等表达 | MVP inline analysis |
+| 分析速度 | 用户反馈中多次出现「等待」「慢」「刷新」「进度」等表达 | MVP inline analysis |
+
+---
+
+## 6. 优先级建议
+
+1. **优先补齐真实 Cloud Worker**，让报告基于完整 pipeline 结果生成。
+2. **将问题簇、证据链、分组结果写入 Supabase**，支持持久化查询。
+3. **为报告导出增加 signed URL** 和持久化 artifact。
+4. **为团队协作增加分享链接**和权限控制。
+
+---
+
+## 7. 当前限制
+
+当前报告由 Cloud MVP inline 模式生成，主要用于演示端到端链路，不代表真实模型分析结果。
+
+---
+
+*由 ProofLoop Cloud MVP 自动生成 · ${now}*`;
 
       const { data: artifact, error: artifactError } = await createArtifact({
         runId: run.id,
@@ -202,7 +265,10 @@ ${evidenceItems.map((item) => `- **${item.issue}**: ${item.evidence}`).join("\n"
             neutral: 25,
             negative: 10,
           },
-          topIssues,
+          topIssues: topIssues.map((issue) => ({
+            ...issue,
+            recommendation: issue.recommendation || "",
+          })),
           segments,
           evidenceItems,
         },
