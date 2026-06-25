@@ -111,7 +111,10 @@ export async function processRun(run: RunRecord): Promise<void> {
         pipelineExecuted: false,
         pipelineStdoutPreview: pipelineResult.stdout,
         pipelineStderrPreview: pipelineResult.stderr,
-        error: { message: "Pipeline execution failed", stderr: pipelineResult.stderr },
+        error: pipelineResult.error || {
+          message: "Pipeline execution failed",
+          stderr: pipelineResult.stderr,
+        },
         failedAt: new Date().toISOString(),
       });
       return;
