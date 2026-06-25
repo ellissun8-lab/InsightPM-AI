@@ -1,8 +1,13 @@
-import { type RunRecord, updateRunStatus } from "./supabase.js";
+import { type RunRecord, updateRunStatus, supabase } from "./supabase.js";
+import * as fs from "fs";
+import * as path from "path";
+import * as os from "os";
+
+const WORKER_TMP_DIR = process.env.WORKER_TMP_DIR || path.join(os.tmpdir(), "proofloop-worker");
 
 /**
  * 处理单个 run
- * Step 3: 状态流转验证 pending → running → completed
+ * Step 4: 下载 CSV 到临时目录
  */
 export async function processRun(run: RunRecord): Promise<void> {
   const now = new Date().toISOString();
@@ -17,7 +22,7 @@ export async function processRun(run: RunRecord): Promise<void> {
   const runningMetadata = {
     ...run.metadata,
     worker: "cloud-worker",
-    workerStep: "state-transition-test",
+    workerStep: "download-csv",
     workerStartedAt: now,
   };
 
@@ -34,18 +39,59 @@ export async function processRun(run: RunRecord): Promise<void> {
   console.log(`[Worker] Updated run ${run.id} to running`);
 
   try {
-    // Step 2: 模拟处理 2-3 秒
-    console.log(`[Worker] Simulating processing for run ${run.id}...`);
-    await sleep(2000 + Math.random() * 1000);
-    console.log(`[Worker] Simulated processing complete`);
+    // Step 2: 检查 inputFile metadata
+    const inputFile = run.metadata?.inputFile;
+    if (!inputFile || !inputFile.bucket || !inputFile.path) {
+      console.error(`[Worker] Missing inputFile metadata for run ${run.id}`);
+      await updateRunStatus(run.id, "failed", {
+        ...runningMetadata,
+        error: { message: "Missing inputFile metadata" },
+        failedAt: now,
+      });
+      return;
+    }
 
-    // Step 3: 更新状态为 completed
-    const completedNow = new Date().toISOString();
-    console.log(`[Worker] Updating run ${run.id} to status: completed`);
+    console.log(`[Worker] inputFile bucket: ${inputFile.bucket}`);
+    console.log(`[Worker] inputFile path: ${inputFile.path}`);
+    console.log(`[Worker] inputFile originalName: ${inputFile.originalName}`);
+
+    // Step 3: 下载 CSV
+    console.log(`[Worker] Downloading input CSV...`);
+    const { data: fileData, error: downloadError } = await supabase.storage
+      .from(inputFile.bucket)
+      .download(inputFile.path);
+
+    if (downloadError || !fileData) {
+      console.error(`[Worker] Failed to download CSV:`, downloadError);
+      await updateRunStatus(run.id, "failed", {
+        ...runningMetadata,
+        error: { message: `Failed to download CSV: ${downloadError?.message || "Unknown error"}` },
+        failedAt: now,
+      });
+      return;
+    }
+
+    // Step 4: 保存到本地临时目录
+    const localDir = path.join(WORKER_TMP_DIR, run.id);
+    const localPath = path.join(localDir, "input.csv");
+
+    fs.mkdirSync(localDir, { recursive: true });
+
+    const buffer = Buffer.from(await fileData.arrayBuffer());
+    fs.writeFileSync(localPath, buffer);
+
+    console.log(`[Worker] Saved input to local path: ${localPath}`);
+    console.log(`[Worker] File size: ${buffer.length} bytes`);
+
+    // Step 5: 更新 metadata
+    const downloadedNow = new Date().toISOString();
+    console.log(`[Worker] Updating run ${run.id} metadata: download-input-ok`);
     const completedMetadata = {
       ...runningMetadata,
-      workerCompletedAt: completedNow,
-      workerResult: "state-transition-ok",
+      inputDownloaded: true,
+      localInputPath: localPath,
+      downloadedAt: downloadedNow,
+      workerResult: "download-input-ok",
       hasReport: false,
     };
 
@@ -55,12 +101,12 @@ export async function processRun(run: RunRecord): Promise<void> {
       await updateRunStatus(run.id, "failed", {
         ...runningMetadata,
         error: { message: "Failed to update to completed status" },
-        failedAt: completedNow,
+        failedAt: downloadedNow,
       });
       return;
     }
     console.log(`[Worker] Updated run ${run.id} to completed`);
-    console.log(`[Worker] Run ${run.id} state transition test PASSED`);
+    console.log(`[Worker] Run ${run.id} Step 4 PASSED`);
 
   } catch (err: any) {
     const failedNow = new Date().toISOString();
@@ -71,8 +117,4 @@ export async function processRun(run: RunRecord): Promise<void> {
       failedAt: failedNow,
     });
   }
-}
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
