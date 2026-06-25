@@ -72,39 +72,18 @@ export default function NewAnalysisPage() {
     setResult("分析中...");
 
     try {
-      // Step 1: 上传文件到 Supabase Storage (如果在 cloud mode)
-      let inputFile = null;
+      // 使用 multipart/form-data 发送文件和参数到 /api/analyze
+      const formData = new FormData();
+      formData.append("caseName", caseName);
+      formData.append("dataset", dataset);
+      formData.append("count", String(feedbackCount));
       if (file) {
-        const formData = new FormData();
         formData.append("file", file);
-        formData.append("runId", `run-${Date.now()}`);
-
-        const uploadRes = await fetch("/api/storage/upload", {
-          method: "POST",
-          body: formData,
-        });
-        const uploadData = await uploadRes.json();
-
-        if (uploadData.ok) {
-          inputFile = {
-            bucket: uploadData.bucket,
-            path: uploadData.path,
-            originalName: file.name,
-            feedbackCount,
-          };
-        }
       }
 
-      // Step 2: 创建分析任务
       const res = await fetch("/api/analyze", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          caseName,
-          dataset,
-          count: feedbackCount,
-          inputFile,
-        }),
+        body: formData,
       });
       const data = await res.json();
 

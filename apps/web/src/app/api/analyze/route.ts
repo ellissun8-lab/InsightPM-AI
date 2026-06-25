@@ -2,11 +2,35 @@ import { NextRequest, NextResponse } from "next/server";
 import { getStorageMode } from "@/lib/data/storage-mode";
 import { createRun, updateRunById } from "@/lib/data/runs-repository";
 import { createArtifact } from "@/lib/data/artifacts-repository";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { caseName, dataset, count } = body;
+    const mode = getStorageMode();
+    const cloudAnalysisMode = process.env.CLOUD_ANALYSIS_MODE || "worker";
+
+    // 解析请求：支持 JSON 和 multipart/form-data
+    let caseName: string;
+    let dataset: string;
+    let feedbackCount: number;
+    let file: File | null = null;
+
+    const contentType = req.headers.get("content-type") || "";
+
+    if (contentType.includes("multipart/form-data")) {
+      // multipart/form-data 格式
+      const formData = await req.formData();
+      caseName = (formData.get("caseName") as string) || "";
+      dataset = (formData.get("dataset") as string) || "mixed-feedback";
+      feedbackCount = Number(formData.get("count") ?? formData.get("feedbackCount") ?? 0);
+      file = formData.get("file") as File | null;
+    } else {
+      // JSON 格式
+      const body = await req.json();
+      caseName = body.caseName;
+      dataset = body.dataset || "mixed-feedback";
+      feedbackCount = Number(body.count ?? body.feedbackCount ?? 0);
+    }
 
     if (!caseName) {
       return NextResponse.json(
@@ -15,19 +39,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const mode = getStorageMode();
-    const feedbackCount = Number(body.count ?? body.feedbackCount ?? 0);
-    const cloudAnalysisMode = process.env.CLOUD_ANALYSIS_MODE || "worker";
-
     // Cloud 模式
     if (mode === "cloud") {
       const now = new Date().toISOString();
 
-      // Worker 模式：只创建 pending run，不执行分析
+      // Worker 模式：创建 pending run 并上传文件
       if (cloudAnalysisMode === "worker") {
+        // Step 1: 创建 pending run
         const { data: run, error: createError } = await createRun({
           case_name: caseName,
-          dataset: dataset || "mixed-feedback",
+          dataset: dataset,
           count: feedbackCount,
           status: "pending",
           metadata: {
@@ -35,7 +56,6 @@ export async function POST(req: NextRequest) {
             analysisMode: "worker",
             source: "vercel",
             feedbackCount,
-            inputFile: body.inputFile || null,
           },
         });
 
@@ -54,6 +74,53 @@ export async function POST(req: NextRequest) {
           );
         }
 
+        // Step 2: 上传文件到 Supabase Storage
+        let inputFile = null;
+        if (file) {
+          try {
+            const supabase = createAdminClient();
+            const bucket = "uploads";
+            const filePath = `demo/${run.id}/input.csv`;
+
+            // 上传文件
+            const { error: uploadError } = await supabase.storage
+              .from(bucket)
+              .upload(filePath, file, {
+                contentType: file.type || "text/csv",
+                upsert: true,
+              });
+
+            if (uploadError) {
+              console.error("Upload to Supabase Storage failed:", uploadError);
+            } else {
+              inputFile = {
+                bucket,
+                path: filePath,
+                originalName: file.name,
+                feedbackCount,
+              };
+            }
+          } catch (uploadErr) {
+            console.error("Upload error:", uploadErr);
+          }
+        }
+
+        // Step 3: 更新 run metadata 包含 inputFile
+        const { data: updatedRun, error: updateError } = await updateRunById(run.id, {
+          metadata: {
+            mode: "cloud",
+            analysisMode: "worker",
+            source: "vercel",
+            feedbackCount,
+            inputFile,
+          },
+        });
+
+        if (updateError) {
+          console.error("updateRunById failed:", updateError);
+          // 即使更新失败，run 已创建，返回它
+        }
+
         return NextResponse.json({
           ok: true,
           mode: "cloud",
@@ -64,18 +131,17 @@ export async function POST(req: NextRequest) {
             id: run.id,
             caseName: run.caseName,
             scenario: run.scenario,
-            status: run.status,
-            feedbackCount: run.feedbackCount,
+            status: "pending",
+            feedbackCount,
             createdAt: run.createdAt,
           },
         });
       }
 
       // Inline-mvp 模式：保留原有逻辑作为 Demo fallback
-      // Step 1: 创建 pending run
       const { data: run, error: createError } = await createRun({
         case_name: caseName,
-        dataset: dataset || "mixed-feedback",
+        dataset: dataset,
         count: feedbackCount,
         status: "pending",
         metadata: {
@@ -101,33 +167,15 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      // 构建 MVP 分析数据
+      // MVP 分析数据
       const trustCount = Math.max(1, Math.round(feedbackCount * 0.28));
       const exportCount = Math.max(1, Math.round(feedbackCount * 0.18));
       const speedCount = Math.max(1, Math.round(feedbackCount * 0.15));
 
       const topIssues = [
-        {
-          name: "数据可信度",
-          count: trustCount,
-          severity: "高",
-          summary: "用户关注分析结果是否准确、可信、可追溯。",
-          recommendation: "增加证据链展示和原文引用。",
-        },
-        {
-          name: "导出与报告",
-          count: exportCount,
-          severity: "中",
-          summary: "用户希望报告可导出、可分享、可复用。",
-          recommendation: "完善 PDF / Markdown / JSON 导出。",
-        },
-        {
-          name: "分析速度",
-          count: speedCount,
-          severity: "中",
-          summary: "用户希望缩短等待时间，状态反馈更清晰。",
-          recommendation: "引入后台 Worker 和实时进度。",
-        },
+        { name: "数据可信度", count: trustCount, severity: "高", summary: "用户关注分析结果是否准确、可信、可追溯。", recommendation: "增加证据链展示和原文引用。" },
+        { name: "导出与报告", count: exportCount, severity: "中", summary: "用户希望报告可导出、可分享、可复用。", recommendation: "完善 PDF / Markdown / JSON 导出。" },
+        { name: "分析速度", count: speedCount, severity: "中", summary: "用户希望缩短等待时间，状态反馈更清晰。", recommendation: "引入后台 Worker 和实时进度。" },
       ];
 
       const segments = [
@@ -142,7 +190,7 @@ export async function POST(req: NextRequest) {
         { issue: "分析速度", evidence: "用户反馈中多次出现「等待」「慢」「刷新」「进度」等表达。", trace: "MVP inline analysis" },
       ];
 
-      // Step 2: 立即更新为 completed
+      // 立即更新为 completed
       const { data: completedRun, error: updateError } = await updateRunById(run.id, {
         status: "completed",
         hardScore: 95,
@@ -171,48 +219,15 @@ export async function POST(req: NextRequest) {
       if (updateError || !completedRun) {
         console.error("updateRunById failed:", updateError);
         return NextResponse.json(
-          {
-            ok: false,
-            error: "更新分析结果失败",
-            detail: updateError?.message || "Unknown error",
-            code: updateError?.code,
-            hint: updateError?.hint,
-          },
+          { ok: false, error: "更新分析结果失败", detail: updateError?.message || "Unknown error" },
           { status: 500 }
         );
       }
 
-      // Step 3: 创建 MVP Markdown 报告
-      const reportContent = `# ${caseName} 分析报告
+      // 创建 MVP Markdown 报告
+      const reportContent = `# ${caseName} 分析报告\n\n## 1. 老板摘要\n\n本次共分析 **${feedbackCount}** 条用户反馈。\n\n- 硬性校验：**95**\n- 语义评分：**95**\n- 证据断裂：**0**\n\n---\n\n*由 ProofLoop Cloud MVP 自动生成*`;
 
-## 1. 老板摘要
-
-本次共分析 **${feedbackCount}** 条用户反馈。整体反馈集中在三个方向：
-
-1. 数据可信度与结果解释
-2. 报告导出与分享
-3. 分析速度与流程效率
-
-当前 Cloud MVP 校验结果：
-- 硬性校验：**95**
-- 语义评分：**95**
-- 证据断裂：**0**
-
----
-
-## 2. Top 产品问题
-
-| 排名 | 问题 | 反馈数 | 严重度 | 说明 |
-|:---:|---|---:|:---:|---|
-| 1 | 数据可信度 | ${trustCount} | 高 | 用户关注结果是否准确、可解释、可追溯 |
-| 2 | 导出与报告 | ${exportCount} | 中 | 用户希望报告可导出、可分享、可复用 |
-| 3 | 分析速度 | ${speedCount} | 中 | 用户希望缩短等待时间，状态反馈更清晰 |
-
----
-
-*由 ProofLoop Cloud MVP 自动生成 · ${now}*`;
-
-      const { data: artifact, error: artifactError } = await createArtifact({
+      const { error: artifactError } = await createArtifact({
         runId: run.id,
         artifactType: "overall-md",
         fileName: `${caseName}.analysis.md`,
@@ -223,16 +238,9 @@ export async function POST(req: NextRequest) {
           title: `${caseName} 分析报告`,
           markdown: reportContent,
           feedbackCount,
-          analyzedCount: feedbackCount,
-          issueCount: topIssues.length,
-          clusterCount: topIssues.length,
-          segmentCount: segments.length,
-          businessSegmentCount: segments.length,
-          topIssueCount: topIssues.length,
           hardScore: 95,
           semanticScore: 95,
-          evidenceBroken: 0,
-          topIssues: topIssues.map((issue) => ({ ...issue, recommendation: issue.recommendation || "" })),
+          topIssues,
           segments,
           evidenceItems,
         },
@@ -256,13 +264,11 @@ export async function POST(req: NextRequest) {
           feedbackCount: completedRun.feedbackCount,
           hardScore: completedRun.hardScore,
           semanticScore: completedRun.semanticScore,
-          evidenceBroken: completedRun.evidenceBroken,
           createdAt: completedRun.createdAt,
           updatedAt: completedRun.updatedAt,
           finishedAt: completedRun.finishedAt,
           hasReport: !artifactError,
         },
-        reportCreated: !artifactError,
       });
     }
 
@@ -272,16 +278,15 @@ export async function POST(req: NextRequest) {
     const ROOT = path.resolve(process.cwd(), "../..");
 
     const scriptPath = path.join(ROOT, "scripts", "run-pipeline.ts");
-    const cmd = `tsx "${scriptPath}" --case ${caseName} --dataset ${dataset || "mixed-feedback"} --count ${feedbackCount}`;
+    const cmd = `tsx "${scriptPath}" --case ${caseName} --dataset ${dataset} --count ${feedbackCount}`;
 
     const output = execSync(cmd, {
       cwd: ROOT,
       encoding: "utf-8",
-      timeout: 300000, // 5 minutes
+      timeout: 300000,
       stdio: ["pipe", "pipe", "pipe"],
     });
 
-    // 读取 run summary
     const summaryPath = path.join(ROOT, "runs", caseName, "run-summary.json");
     let summary: any = null;
     try {
@@ -298,10 +303,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (err: any) {
     return NextResponse.json(
-      {
-        error: err.message,
-        stderr: err.stderr?.toString()?.slice(-2000),
-      },
+      { error: err.message, stderr: err.stderr?.toString()?.slice(-2000) },
       { status: 500 }
     );
   }
