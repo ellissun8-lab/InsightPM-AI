@@ -14,24 +14,24 @@ export interface Artifact {
   contentType: string;
   sizeBytes: number;
   createdAt: string;
+  metadata: any;
 }
 
 export interface CreateArtifactInput {
   runId: string;
   artifactType: string;
-  fileName: string;
-  storageBucket: string;
-  storagePath: string;
-  contentType: string;
-  sizeBytes: number;
+  fileName?: string;
+  storageBucket?: string;
+  storagePath?: string;
+  contentType?: string;
+  sizeBytes?: number;
+  metadata?: Record<string, any>;
 }
 
 /**
  * Get all artifacts for a run
  */
-export async function getArtifactsForRun(
-  runId: string
-): Promise<Artifact[]> {
+export async function getArtifactsForRun(runId: string): Promise<Artifact[]> {
   if (isCloudMode()) {
     return getArtifactsForRunFromSupabase(runId);
   }
@@ -39,16 +39,28 @@ export async function getArtifactsForRun(
 }
 
 /**
+ * Get report artifacts by run id and type
+ */
+export async function getReportArtifactsByRunId(
+  runId: string,
+  artifactType?: string
+): Promise<Artifact[]> {
+  if (isCloudMode()) {
+    return getReportArtifactsByRunIdFromSupabase(runId, artifactType);
+  }
+  return [];
+}
+
+/**
  * Create a new artifact record
  */
 export async function createArtifact(
   input: CreateArtifactInput
-): Promise<Artifact | null> {
+): Promise<{ data: Artifact | null; error: any }> {
   if (isCloudMode()) {
     return createArtifactInSupabase(input);
   }
-  // Local mode: artifacts are files, not database records
-  return null;
+  return { data: null, error: null };
 }
 
 /**
@@ -60,7 +72,6 @@ export async function getArtifactDownloadUrl(
   if (isCloudMode()) {
     return getArtifactDownloadUrlFromSupabase(artifactId);
   }
-  // Local mode: return local file path (not a URL)
   return null;
 }
 
@@ -69,9 +80,6 @@ export async function getArtifactDownloadUrl(
 // ===========================================
 
 function getArtifactsForRunFromLocal(runId: string): Artifact[] {
-  // In local mode, artifacts are files in the runs directory
-  // We don't have a database, so we return an empty array
-  // The actual files are accessed directly by the API routes
   return [];
 }
 
@@ -79,15 +87,13 @@ function getArtifactsForRunFromLocal(runId: string): Artifact[] {
 // Supabase Mode Implementation
 // ===========================================
 
-async function getSupabaseClient() {
-  const { createServerClient } = await import("@/lib/supabase/server");
-  return createServerClient();
+async function getAdminClient() {
+  const { createAdminClient } = await import("@/lib/supabase/admin");
+  return createAdminClient();
 }
 
-async function getArtifactsForRunFromSupabase(
-  runId: string
-): Promise<Artifact[]> {
-  const supabase = await getSupabaseClient();
+async function getArtifactsForRunFromSupabase(runId: string): Promise<Artifact[]> {
+  const supabase = await getAdminClient();
 
   const { data, error } = await supabase
     .from("report_artifacts")
@@ -103,39 +109,64 @@ async function getArtifactsForRunFromSupabase(
   return (data || []).map(mapSupabaseArtifact);
 }
 
+async function getReportArtifactsByRunIdFromSupabase(
+  runId: string,
+  artifactType?: string
+): Promise<Artifact[]> {
+  const supabase = await getAdminClient();
+
+  let query = supabase
+    .from("report_artifacts")
+    .select("*")
+    .eq("run_id", runId);
+
+  if (artifactType) {
+    query = query.eq("artifact_type", artifactType);
+  }
+
+  const { data, error } = await query.order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching report artifacts:", error);
+    return [];
+  }
+
+  return (data || []).map(mapSupabaseArtifact);
+}
+
 async function createArtifactInSupabase(
   input: CreateArtifactInput
-): Promise<Artifact | null> {
-  const supabase = await getSupabaseClient();
+): Promise<{ data: Artifact | null; error: any }> {
+  const supabase = await getAdminClient();
 
   const { data, error } = await supabase
     .from("report_artifacts")
     .insert({
       run_id: input.runId,
       artifact_type: input.artifactType,
-      file_name: input.fileName,
-      storage_bucket: input.storageBucket,
-      storage_path: input.storagePath,
-      content_type: input.contentType,
-      size_bytes: input.sizeBytes,
+      file_name: input.fileName || null,
+      storage_bucket: input.storageBucket || null,
+      storage_path: input.storagePath || null,
+      content_type: input.contentType || "text/markdown",
+      size_bytes: input.sizeBytes || 0,
+      metadata: input.metadata || {},
     })
     .select()
     .single();
 
-  if (error || !data) {
+  if (error) {
     console.error("Error creating artifact in Supabase:", error);
-    return null;
+    return { data: null, error };
   }
 
-  return mapSupabaseArtifact(data);
+  return { data: mapSupabaseArtifact(data), error: null };
 }
 
 async function getArtifactDownloadUrlFromSupabase(
   artifactId: string
 ): Promise<string | null> {
-  const supabase = await getSupabaseClient();
+  const supabase = await getAdminClient();
 
-  // First, get the artifact record
   const { data: artifact, error } = await supabase
     .from("report_artifacts")
     .select("storage_bucket, storage_path")
@@ -147,10 +178,13 @@ async function getArtifactDownloadUrlFromSupabase(
     return null;
   }
 
-  // Generate a signed URL
+  if (!artifact.storage_bucket || !artifact.storage_path) {
+    return null;
+  }
+
   const { data: urlData, error: urlError } = await supabase.storage
     .from(artifact.storage_bucket)
-    .createSignedUrl(artifact.storage_path, 86400); // 24 hours
+    .createSignedUrl(artifact.storage_path, 86400);
 
   if (urlError || !urlData) {
     console.error("Error creating signed URL:", urlError);
@@ -175,5 +209,6 @@ function mapSupabaseArtifact(row: any): Artifact {
     contentType: row.content_type || "",
     sizeBytes: row.size_bytes || 0,
     createdAt: row.created_at,
+    metadata: row.metadata || {},
   };
 }

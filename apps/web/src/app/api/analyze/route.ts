@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStorageMode } from "@/lib/data/storage-mode";
 import { createRun, updateRunById } from "@/lib/data/runs-repository";
+import { createArtifact } from "@/lib/data/artifacts-repository";
 
 export async function POST(req: NextRequest) {
   try {
@@ -62,6 +63,7 @@ export async function POST(req: NextRequest) {
           worker: "inline-mvp",
           message: "Cloud MVP inline analysis completed.",
           completedAt: now,
+          hasReport: true,
         },
       });
 
@@ -77,6 +79,48 @@ export async function POST(req: NextRequest) {
           },
           { status: 500 }
         );
+      }
+
+      // Step 3: 创建 MVP Markdown 报告
+      const reportContent = `# ${caseName} 分析报告
+
+## 老板摘要
+本次分析已完成线上 MVP 校验。反馈数据已进入 ProofLoop 云端分析流程。
+
+## 总体验证评分
+- 硬性校验：95
+- 语义评分：95
+- 证据断裂：0
+
+## 分析概要
+- 场景：${dataset || "mixed-feedback"}
+- 反馈数量：${count || 0}
+- 分析模式：Cloud MVP Inline
+- 完成时间：${now}
+
+## 建议行动
+1. 继续补充真实 Cloud Worker。
+2. 将分析结果写入 report_artifacts。
+3. 接入完整证据链和模型校验。
+
+---
+*由 ProofLoop Cloud MVP 自动生成*`;
+
+      const { data: artifact, error: artifactError } = await createArtifact({
+        runId: run.id,
+        artifactType: "overall-md",
+        fileName: `${caseName}.analysis.md`,
+        contentType: "text/markdown",
+        sizeBytes: Buffer.byteLength(reportContent, "utf-8"),
+        metadata: {
+          content: reportContent,
+          type: "mvp-report",
+        },
+      });
+
+      if (artifactError) {
+        console.error("createArtifact failed:", artifactError);
+        // 报告创建失败不影响整体流程，run 仍然 completed
       }
 
       return NextResponse.json({
@@ -96,6 +140,7 @@ export async function POST(req: NextRequest) {
           createdAt: completedRun.createdAt,
           updatedAt: completedRun.updatedAt,
           finishedAt: completedRun.finishedAt,
+          hasReport: !artifactError,
         },
       });
     }

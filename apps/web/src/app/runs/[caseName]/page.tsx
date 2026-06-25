@@ -2,6 +2,9 @@ import fs from "fs";
 import path from "path";
 import Sidebar from "@/components/Sidebar";
 import { CheckCircle, XCircle, Link, Clock } from "lucide-react";
+import { isCloudMode } from "@/lib/data/storage-mode";
+import { getRunByCaseName } from "@/lib/data/runs-repository";
+import { getReportArtifactsByRunId } from "@/lib/data/artifacts-repository";
 
 const ROOT = path.resolve(process.cwd(), "../..");
 
@@ -21,12 +24,26 @@ function loadMd(p: string): string | null {
   }
 }
 
-export default async function RunDetailPage({
-  params,
-}: {
-  params: { caseName: string };
-}) {
-  const caseName = decodeURIComponent(params.caseName);
+async function getCloudReport(caseName: string) {
+  const run = await getRunByCaseName(caseName);
+  if (!run) return null;
+
+  const artifacts = await getReportArtifactsByRunId(run.id, "overall-md");
+  const reportArtifact = artifacts[0];
+
+  let reportContent: string | null = null;
+  if (reportArtifact?.metadata?.content) {
+    reportContent = reportArtifact.metadata.content;
+  }
+
+  return {
+    run,
+    reportContent,
+    hasReport: !!reportContent,
+  };
+}
+
+function getLocalReport(caseName: string) {
   const runDir = path.join(ROOT, "runs", caseName);
 
   const summary = loadJson(path.join(runDir, "run-summary.json"));
@@ -75,6 +92,140 @@ export default async function RunDetailPage({
       }
     }
   }
+
+  return {
+    summary,
+    hardVal,
+    semVal,
+    overallMd,
+    evidenceTrace,
+    hasReport: !!summary,
+  };
+}
+
+export default async function RunDetailPage({
+  params,
+}: {
+  params: { caseName: string };
+}) {
+  const caseName = decodeURIComponent(params.caseName);
+
+  // Cloud mode: 从 Supabase 读取
+  if (isCloudMode()) {
+    const cloudData = await getCloudReport(caseName);
+
+    if (!cloudData || !cloudData.run) {
+      return (
+        <div className="flex min-h-screen bg-surface">
+          <Sidebar />
+          <div className="ml-[280px] flex-1 p-margin-desktop flex items-center justify-center">
+            <div className="max-w-md text-center">
+              <div className="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mx-auto mb-lg">
+                <Clock size={32} className="text-on-surface-variant" />
+              </div>
+              <h1 className="text-headline-md font-headline-md text-on-surface mb-sm">
+                报告尚未生成
+              </h1>
+              <p className="text-body-lg font-body-lg text-on-surface-variant mb-lg">
+                该分析任务「{caseName}」还没有可用报告。请返回运行历史查看任务状态。
+              </p>
+              <a
+                href="/runs"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary-container text-white rounded-lg font-label-md text-label-md hover:bg-primary transition-colors"
+              >
+                返回运行历史
+              </a>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const { run, reportContent } = cloudData;
+
+    return (
+      <div className="flex min-h-screen bg-surface">
+        <Sidebar />
+        <div className="ml-[280px] flex-1 p-margin-desktop">
+          <div className="mb-xl">
+            <div className="flex items-center space-x-sm mb-1">
+              <h1 className="text-headline-lg font-headline-lg text-on-surface">
+                {caseName}
+              </h1>
+              <span className="px-2 py-1 rounded-md text-label-sm font-label-sm border flex items-center bg-emerald-50 text-emerald-700 border-emerald-200">
+                <CheckCircle size={14} className="mr-1" />
+                已完成
+              </span>
+            </div>
+            <p className="text-body-lg font-body-lg text-on-surface-variant">
+              {run.scenario || run.dataset} · 生成于{" "}
+              {run.finishedAt
+                ? new Date(run.finishedAt).toLocaleString("zh-CN")
+                : run.updatedAt
+                  ? new Date(run.updatedAt).toLocaleString("zh-CN")
+                  : "-"}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-md mb-xl">
+            <div className="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
+              <div className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">
+                硬性校验
+              </div>
+              <div className="text-headline-md font-headline-md text-on-surface">
+                {run.hardScore ?? "-"}
+              </div>
+            </div>
+            <div className="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
+              <div className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">
+                语义评分
+              </div>
+              <div className="text-headline-md font-headline-md text-emerald-600">
+                {run.semanticScore ?? "-"}
+              </div>
+            </div>
+            <div className="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
+              <div className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">
+                证据断裂
+              </div>
+              <div className="text-headline-md font-headline-md text-on-surface">
+                {run.evidenceBroken ?? 0}
+              </div>
+            </div>
+            <div className="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
+              <div className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">
+                反馈数
+              </div>
+              <div className="text-headline-md font-headline-md text-on-surface">
+                {run.feedbackCount}
+              </div>
+            </div>
+          </div>
+
+          {reportContent ? (
+            <div className="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg mb-xl">
+              <h3 className="text-title-lg font-title-lg text-on-surface mb-md">
+                分析报告
+              </h3>
+              <pre className="whitespace-pre-wrap font-body-md text-body-md text-on-surface bg-surface-container-low rounded-lg p-md border border-outline-variant max-h-[600px] overflow-y-auto">
+                {reportContent}
+              </pre>
+            </div>
+          ) : (
+            <div className="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg mb-xl text-center">
+              <p className="text-body-lg font-body-lg text-on-surface-variant">
+                报告内容暂未生成
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // Local mode: 从本地文件系统读取
+  const localData = getLocalReport(caseName);
+  const { summary, hardVal, semVal, overallMd, evidenceTrace } = localData;
 
   if (!summary) {
     return (
