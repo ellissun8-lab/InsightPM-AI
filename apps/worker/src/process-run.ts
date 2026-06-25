@@ -1,5 +1,6 @@
 import { type RunRecord, updateRunStatus, supabase } from "./supabase.js";
 import { runPipeline } from "./pipeline-runner.js";
+import { discoverArtifacts, uploadAndRecordArtifacts } from "./artifacts.js";
 import * as fs from "fs";
 import * as path from "path";
 import * as os from "os";
@@ -8,7 +9,7 @@ const WORKER_TMP_DIR = process.env.WORKER_TMP_DIR || path.join(os.tmpdir(), "pro
 
 /**
  * 处理单个 run
- * Step 5: 执行真实 pipeline
+ * Step 6: 执行 pipeline 并写入真实 report_artifacts
  */
 export async function processRun(run: RunRecord): Promise<void> {
   const now = new Date().toISOString();
@@ -23,7 +24,7 @@ export async function processRun(run: RunRecord): Promise<void> {
   const runningMetadata = {
     ...run.metadata,
     worker: "cloud-worker",
-    workerStep: "pipeline-execution",
+    workerStep: "pipeline-and-artifacts",
     workerStartedAt: now,
   };
 
@@ -123,7 +124,34 @@ export async function processRun(run: RunRecord): Promise<void> {
     console.log(`[Worker] Hard score: ${pipelineResult.hardScore}`);
     console.log(`[Worker] Semantic score: ${pipelineResult.semanticScore}`);
 
-    // Step 5: 更新 run 为 completed
+    // Step 5: 发现并上传 artifacts
+    const artifacts = discoverArtifacts(outputDir, run.case_name);
+
+    const artifactResult = await uploadAndRecordArtifacts(
+      run.id,
+      run.case_name,
+      artifacts
+    );
+
+    if (!artifactResult.success) {
+      console.error(`[Worker] Artifact upload failed: ${artifactResult.error}`);
+      await updateRunStatus(run.id, "failed", {
+        ...runningMetadata,
+        inputDownloaded: true,
+        localInputPath,
+        pipelineExecuted: true,
+        pipelineOutputDir: outputDir,
+        pipelineStdoutPreview: pipelineResult.stdout,
+        pipelineStderrPreview: pipelineResult.stderr,
+        error: { message: artifactResult.error || "Artifact upload failed" },
+        failedAt: new Date().toISOString(),
+      });
+      return;
+    }
+
+    console.log(`[Worker] Artifacts written: ${artifactResult.artifactTypes.join(", ")}`);
+
+    // Step 6: 更新 run 为 completed
     const completedNow = new Date().toISOString();
     const completedMetadata = {
       ...runningMetadata,
@@ -133,9 +161,12 @@ export async function processRun(run: RunRecord): Promise<void> {
       pipelineOutputDir: outputDir,
       pipelineStdoutPreview: pipelineResult.stdout,
       pipelineStderrPreview: pipelineResult.stderr,
-      workerResult: "pipeline-run-ok",
+      hasReport: true,
+      artifactWritten: true,
+      artifactWrittenAt: completedNow,
+      artifactTypes: artifactResult.artifactTypes,
+      workerResult: "artifacts-written-ok",
       workerCompletedAt: completedNow,
-      hasReport: false,
     };
 
     // 构建更新数据
@@ -176,7 +207,7 @@ export async function processRun(run: RunRecord): Promise<void> {
     }
 
     console.log(`[Worker] Updated run ${run.id} to completed`);
-    console.log(`[Worker] Run ${run.id} Step 5 PASSED`);
+    console.log(`[Worker] Run ${run.id} Step 6 PASSED`);
 
   } catch (err: any) {
     const failedNow = new Date().toISOString();
