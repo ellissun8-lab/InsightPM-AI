@@ -49,9 +49,9 @@ export default function AnalysisReportPage() {
     let segments = meta.segments ?? [];
     if (segments.length === 0) {
       segments = [
-        { name: "数据可信度", feedbackCount: Math.max(1, Math.round(feedbackCount * 0.28)), p0Count: 3, status: "已完成" },
-        { name: "导出与报告", feedbackCount: Math.max(1, Math.round(feedbackCount * 0.18)), p0Count: 2, status: "已完成" },
-        { name: "分析效率", feedbackCount: Math.max(1, Math.round(feedbackCount * 0.15)), p0Count: 1, status: "已完成" },
+        { name: "数据可信度", feedbackCount: Math.max(1, Math.round(feedbackCount * 0.28)), p0Count: 3, status: "已完成", summary: "用户关注分析结果是否准确、可信、可追溯。", recommendation: "增加证据链展示和原文引用。" },
+        { name: "导出与报告", feedbackCount: Math.max(1, Math.round(feedbackCount * 0.18)), p0Count: 2, status: "已完成", summary: "用户希望报告可导出、可分享、可复用。", recommendation: "完善 PDF / Markdown / JSON 导出。" },
+        { name: "分析效率", feedbackCount: Math.max(1, Math.round(feedbackCount * 0.15)), p0Count: 1, status: "已完成", summary: "用户希望缩短等待时间，状态反馈更清晰。", recommendation: "引入后台 Worker 和实时进度。" },
       ];
     }
     let evidenceItems = meta.evidenceItems ?? [];
@@ -114,7 +114,7 @@ export default function AnalysisReportPage() {
         semVal={{ semanticScore: reportData.semanticScore, criticalIssues: 0, evidenceBroken: reportData.evidenceBroken }}
         overallMd={reportData.overallMd}
         clusters={reportData.topIssues.map((issue: any, i: number) => ({ cluster_id: `cluster-${i}`, name: issue.name, summary: issue.summary, feedback_count: issue.count, evidence_feedback_ids: [], priority: i === 0 ? "P0" : "P1", opportunity_score: 90 - i * 5, recommendation: issue.recommendation || issue.summary, impact: issue.severity, action: "", score: 90 - i * 5, segment_name: issue.name, segment_id: `seg-${i}` }))}
-        segments={reportData.segments.map((seg: any, i: number) => ({ segmentId: `seg-${i}`, name: seg.name, type: "business", businessGoal: "", feedbackCount: seg.feedbackCount }))}
+        segments={reportData.segments.map((seg: any, i: number) => ({ segmentId: `seg-${i}`, name: seg.name, type: "business", businessGoal: "", feedbackCount: seg.feedbackCount, p0Count: seg.p0Count || 0, status: seg.status || "已完成", summary: seg.summary || "", recommendation: seg.recommendation || "" }))}
         selectedSegmentId={null}
         segmentData={null}
         segmentMd={null}

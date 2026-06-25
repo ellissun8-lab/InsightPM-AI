@@ -574,6 +574,35 @@ function TabSegment({
           hardVal={hardVal}
           semVal={semVal}
         />
+      ) : segments.length > 0 ? (
+        <div className="space-y-4">
+          {segments.map((seg, i) => (
+            <div key={seg.segmentId || i} className="bg-surface-container-lowest rounded-xl border border-outline-variant p-6">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-title-lg font-title-lg text-on-surface">{seg.name}</h3>
+                <span className="px-2 py-0.5 rounded text-label-sm font-label-sm bg-[#E7ECDD] text-[#2F6B3F] border border-[#CAD5B8]">
+                  {seg.status || "已完成"}
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-4 mb-3">
+                <div>
+                  <span className="text-label-sm text-on-surface-variant">反馈数</span>
+                  <p className="text-headline-md font-headline-md text-on-surface">{seg.feedbackCount || 0}</p>
+                </div>
+                <div>
+                  <span className="text-label-sm text-on-surface-variant">P0 数量</span>
+                  <p className="text-headline-md font-headline-md text-on-surface">{seg.p0Count || 0}</p>
+                </div>
+              </div>
+              {seg.summary && (
+                <p className="text-body-md text-on-surface-variant mb-2">{seg.summary}</p>
+              )}
+              {seg.recommendation && (
+                <p className="text-body-sm text-primary">建议：{seg.recommendation}</p>
+              )}
+            </div>
+          ))}
+        </div>
       ) : (
         <EmptyState message="该报告暂无可用分组分析数据。请确认 pipeline 已生成 segment analysis JSON 和 Markdown。" />
       )}

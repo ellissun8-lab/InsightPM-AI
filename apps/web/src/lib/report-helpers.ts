@@ -12,6 +12,10 @@ export interface SegmentMeta {
   type: string;
   businessGoal: string;
   feedbackCount: number;
+  p0Count?: number;
+  status?: string;
+  summary?: string;
+  recommendation?: string;
 }
 
 export interface IssueCluster {
