@@ -4,7 +4,7 @@ import Sidebar from "@/components/Sidebar";
 import { CheckCircle, XCircle, Link, Clock } from "lucide-react";
 import { isCloudMode } from "@/lib/data/storage-mode";
 import { getRunByCaseName } from "@/lib/data/runs-repository";
-import { getReportArtifactsByRunId } from "@/lib/data/artifacts-repository";
+import { getMarkdownReportByRunId, getSummaryArtifactByRunId } from "@/lib/data/artifacts-repository";
 
 const ROOT = path.resolve(process.cwd(), "../..");
 
@@ -28,22 +28,19 @@ async function getCloudReport(caseName: string) {
   const run = await getRunByCaseName(caseName);
   if (!run) return null;
 
-  const artifacts = await getReportArtifactsByRunId(run.id, "overall-md");
-  const reportArtifact = artifacts[0];
-  const metadata = reportArtifact?.metadata || {};
+  const { markdown, artifact: mdArtifact } = await getMarkdownReportByRunId(run.id);
+  const { summary, artifact: summaryArtifact } = await getSummaryArtifactByRunId(run.id);
 
-  let reportContent: string | null = null;
-  if (metadata.markdown) {
-    reportContent = metadata.markdown;
-  } else if (metadata.content) {
-    reportContent = metadata.content;
-  }
+  const metadata = run.metadata || {};
+  const isReal = metadata.workerResult === "artifacts-written-ok" || metadata.artifactWritten === true || metadata.worker === "cloud-worker";
 
   return {
     run,
-    reportContent,
-    hasReport: !!reportContent,
-    metadata,
+    reportContent: markdown,
+    hasReport: !!markdown,
+    metadata: mdArtifact?.metadata || {},
+    summary,
+    isRealAnalysis: isReal,
   };
 }
 
@@ -145,8 +142,8 @@ export default async function RunDetailPage({
       );
     }
 
-    const { run, reportContent, metadata } = cloudData;
-    const feedbackCount = metadata?.feedbackCount || run.feedbackCount || 0;
+    const { run, reportContent, metadata, isRealAnalysis } = cloudData;
+    const feedbackCount = run.feedbackCount || 0;
 
     return (
       <div className="flex min-h-screen bg-surface">
@@ -161,6 +158,11 @@ export default async function RunDetailPage({
                 <CheckCircle size={14} className="mr-1" />
                 已完成
               </span>
+              {isRealAnalysis && (
+                <span className="px-2 py-0.5 rounded text-label-sm font-label-sm bg-[#E7ECDD] text-[#2F6B3F] border border-[#CAD5B8]">
+                  真实分析
+                </span>
+              )}
             </div>
             <p className="text-body-lg font-body-lg text-on-surface-variant">
               {run.scenario || run.dataset} · {feedbackCount} 条反馈 · 生成于{" "}

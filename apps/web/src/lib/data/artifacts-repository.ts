@@ -75,6 +75,30 @@ export async function getArtifactDownloadUrl(
   return null;
 }
 
+/**
+ * Get markdown report by run id
+ */
+export async function getMarkdownReportByRunId(
+  runId: string
+): Promise<{ markdown: string | null; artifact: Artifact | null }> {
+  if (isCloudMode()) {
+    return getMarkdownReportByRunIdFromSupabase(runId);
+  }
+  return { markdown: null, artifact: null };
+}
+
+/**
+ * Get summary artifact by run id
+ */
+export async function getSummaryArtifactByRunId(
+  runId: string
+): Promise<{ summary: any | null; artifact: Artifact | null }> {
+  if (isCloudMode()) {
+    return getSummaryArtifactByRunIdFromSupabase(runId);
+  }
+  return { summary: null, artifact: null };
+}
+
 // ===========================================
 // Local Mode Implementation
 // ===========================================
@@ -192,6 +216,69 @@ async function getArtifactDownloadUrlFromSupabase(
   }
 
   return urlData.signedUrl;
+}
+
+async function getMarkdownReportByRunIdFromSupabase(
+  runId: string
+): Promise<{ markdown: string | null; artifact: Artifact | null }> {
+  const supabase = await getAdminClient();
+
+  // 查找 markdown artifact
+  const { data, error } = await supabase
+    .from("report_artifacts")
+    .select("*")
+    .eq("run_id", runId)
+    .in("artifact_type", ["overall-md", "markdown"])
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .single();
+
+  if (error || !data) {
+    // 尝试通过 content_type 查找
+    const { data: data2, error: error2 } = await supabase
+      .from("report_artifacts")
+      .select("*")
+      .eq("run_id", runId)
+      .eq("content_type", "text/markdown")
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .single();
+
+    if (error2 || !data2) {
+      return { markdown: null, artifact: null };
+    }
+
+    const artifact = mapSupabaseArtifact(data2);
+    const markdown = artifact.metadata?.markdown || null;
+    return { markdown, artifact };
+  }
+
+  const artifact = mapSupabaseArtifact(data);
+  const markdown = artifact.metadata?.markdown || null;
+  return { markdown, artifact };
+}
+
+async function getSummaryArtifactByRunIdFromSupabase(
+  runId: string
+): Promise<{ summary: any | null; artifact: Artifact | null }> {
+  const supabase = await getAdminClient();
+
+  const { data, error } = await supabase
+    .from("report_artifacts")
+    .select("*")
+    .eq("run_id", runId)
+    .eq("artifact_type", "summary-json")
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .single();
+
+  if (error || !data) {
+    return { summary: null, artifact: null };
+  }
+
+  const artifact = mapSupabaseArtifact(data);
+  const summary = artifact.metadata?.summary || null;
+  return { summary, artifact };
 }
 
 // ===========================================
