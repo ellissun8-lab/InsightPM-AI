@@ -1,7 +1,7 @@
 import { type RunRecord, updateRunStatus, supabase } from "./supabase.js";
 import { runPipeline } from "./pipeline-runner.js";
 import { discoverArtifacts, uploadAndRecordArtifacts } from "./artifacts.js";
-import * as fs from "fs";
+import { downloadFromStorage } from "./storage-downloader.js";
 import * as path from "path";
 import * as os from "os";
 
@@ -9,7 +9,7 @@ const WORKER_TMP_DIR = process.env.WORKER_TMP_DIR || path.join(os.tmpdir(), "pro
 
 /**
  * 处理单个 run
- * Step 6: 执行 pipeline 并写入真实 report_artifacts
+ * Step 7: 改进 Storage 下载逻辑
  */
 export async function processRun(run: RunRecord): Promise<void> {
   const now = new Date().toISOString();
@@ -55,34 +55,32 @@ export async function processRun(run: RunRecord): Promise<void> {
 
     console.log(`[Worker] inputFile bucket: ${inputFile.bucket}`);
     console.log(`[Worker] inputFile path: ${inputFile.path}`);
+    console.log(`[Worker] inputFile originalName: ${inputFile.originalName}`);
 
-    // Step 3: 下载 CSV
+    // Step 3: 下载 CSV（使用改进的下载逻辑）
     console.log(`[Worker] Downloading input CSV...`);
-    const { data: fileData, error: downloadError } = await supabase.storage
-      .from(inputFile.bucket)
-      .download(inputFile.path);
+    const localDir = path.join(WORKER_TMP_DIR, run.id);
 
-    if (downloadError || !fileData) {
-      console.error(`[Worker] failed to download CSV:`, downloadError);
+    const downloadResult = await downloadFromStorage(
+      inputFile.bucket,
+      inputFile.path,
+      localDir,
+      inputFile.originalName || "input.csv"
+    );
+
+    if (!downloadResult.success) {
+      console.error(`[Worker] Failed to download CSV:`, downloadResult.error);
       await updateRunStatus(run.id, "failed", {
         ...runningMetadata,
-        error: { message: `Failed to download CSV: ${downloadError?.message || "Unknown error"}` },
+        error: downloadResult.error,
         failedAt: now,
       });
       return;
     }
 
-    // 保存到本地临时目录
-    const localDir = path.join(WORKER_TMP_DIR, run.id);
-    const localInputPath = path.join(localDir, "input.csv");
-
-    fs.mkdirSync(localDir, { recursive: true });
-
-    const buffer = Buffer.from(await fileData.arrayBuffer());
-    fs.writeFileSync(localInputPath, buffer);
-
-    console.log(`[Worker] Saved input to local path: ${localInputPath}`);
-    console.log(`[Worker] File size: ${buffer.length} bytes`);
+    const localInputPath = downloadResult.localPath!;
+    console.log(`[Worker] Download successful: ${localInputPath}`);
+    console.log(`[Worker] File size: ${downloadResult.fileSize} bytes`);
 
     // Step 4: 执行真实 pipeline
     const outputDir = path.join(WORKER_TMP_DIR, run.id, "output");
@@ -207,14 +205,14 @@ export async function processRun(run: RunRecord): Promise<void> {
     }
 
     console.log(`[Worker] Updated run ${run.id} to completed`);
-    console.log(`[Worker] Run ${run.id} Step 6 PASSED`);
+    console.log(`[Worker] Run ${run.id} processing PASSED`);
 
   } catch (err: any) {
     const failedNow = new Date().toISOString();
     console.error(`[Worker] Error processing run ${run.id}:`, err.message);
     await updateRunStatus(run.id, "failed", {
       ...runningMetadata,
-      error: { message: err.message },
+      error: { message: err.message, stack: err.stack },
       failedAt: failedNow,
     });
   }
