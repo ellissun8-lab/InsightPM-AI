@@ -242,9 +242,13 @@ async function main() {
 
   // ── Step 1: generate_raw_feedback ──────────────────────────────
   const step1 = await runStep("generate_raw_feedback", async () => {
-    // 如果指定了 --input 且文件存在，跳过生成步骤
+    // 如果指定了 --input 且文件存在，复制到 inputDir 以兼容后续步骤
     if (config.input && fs.existsSync(config.input)) {
-      return `Using provided input file: ${config.input}`;
+      ensureDir(inputDir);
+      const targetPath = path.join(inputDir, `${config.dataset}.csv`);
+      fs.copyFileSync(config.input, targetPath);
+      console.log(`  Copied input file to: ${targetPath}`);
+      return `Using provided input file: ${config.input} -> ${targetPath}`;
     }
     const baselineInput = path.join(BASELINE_DIR, config.baseline, "input");
     if (!config.generate && fs.existsSync(baselineInput)) {
