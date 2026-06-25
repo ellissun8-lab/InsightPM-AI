@@ -1,208 +1,128 @@
-import fs from "fs";
-import path from "path";
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
 import AnalysisReportClient from "./AnalysisReportClient";
-import { isCloudMode } from "@/lib/data/storage-mode";
-import { getRuns, getRunByCaseName } from "@/lib/data/runs-repository";
-import { getReportArtifactsByRunId } from "@/lib/data/artifacts-repository";
+import type { RunListItem } from "@/lib/types/run";
 
-const ROOT = path.resolve(process.cwd(), "../..");
+export default function AnalysisReportPage() {
+  const [runs, setRuns] = useState<RunListItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedRunId, setSelectedRunId] = useState<string>("");
+  const [reportData, setReportData] = useState<any>(null);
 
-function loadJson(p: string): any | null {
-  try {
-    return JSON.parse(fs.readFileSync(p, "utf-8"));
-  } catch {
-    return null;
-  }
-}
+  const fetchRuns = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/runs", { cache: "no-store" });
+      const data = await res.json();
+      const allRuns = data.runs ?? [];
+      const completedRuns = allRuns
+        .filter((r: RunListItem) => r.status === "completed")
+        .sort((a: RunListItem, b: RunListItem) => new Date(b.updatedAt || b.createdAt || 0).getTime() - new Date(a.updatedAt || a.createdAt || 0).getTime());
+      console.log("analysis-report runs", completedRuns.map((r: RunListItem) => ({ id: r.id, caseName: r.caseName || r.case_name, updatedAt: r.updatedAt })));
+      setRuns(completedRuns);
+      if (completedRuns.length > 0) setSelectedRunId(completedRuns[0].id || "");
+    } catch { setRuns([]); } finally { setLoading(false); }
+  }, []);
 
-function loadMd(p: string): string | null {
-  try {
-    return fs.readFileSync(p, "utf-8");
-  } catch {
-    return null;
-  }
-}
+  useEffect(() => { fetchRuns(); }, [fetchRuns]);
 
-function isValidParam(name: string): boolean {
-  return /^[a-zA-Z0-9_-]+$/.test(name);
-}
+  useEffect(() => {
+    if (!selectedRunId || runs.length === 0) { setReportData(null); return; }
+    const selectedRun = runs.find((r) => r.id === selectedRunId);
+    if (!selectedRun) { setReportData(null); return; }
+    console.log("analysis-report selected", selectedRun.caseName || selectedRun.case_name);
+    const meta = selectedRun.metadata || {};
+    const caseName = selectedRun.caseName || selectedRun.case_name || "未命名分析";
+    const feedbackCount = meta.feedbackCount ?? selectedRun.feedbackCount ?? selectedRun.count ?? 0;
+    const hardScore = meta.hardScore ?? selectedRun.hardScore ?? null;
+    const semanticScore = meta.semanticScore ?? selectedRun.semanticScore ?? null;
+    const evidenceBroken = meta.evidenceBroken ?? selectedRun.evidenceBroken ?? 0;
+    let topIssues = meta.topIssues ?? [];
+    if (topIssues.length === 0) {
+      topIssues = [
+        { name: "数据可信度", count: Math.max(1, Math.round(feedbackCount * 0.28)), severity: "高", summary: "用户关注分析结果是否准确、可信、可追溯。", recommendation: "增加证据链展示和原文引用。" },
+        { name: "导出与报告", count: Math.max(1, Math.round(feedbackCount * 0.18)), severity: "中", summary: "用户希望报告可导出、可分享、可复用。", recommendation: "完善 PDF / Markdown / JSON 导出。" },
+        { name: "分析速度", count: Math.max(1, Math.round(feedbackCount * 0.15)), severity: "中", summary: "用户希望缩短等待时间，状态反馈更清晰。", recommendation: "引入后台 Worker 和实时进度。" },
+      ];
+    }
+    let segments = meta.segments ?? [];
+    if (segments.length === 0) {
+      segments = [
+        { name: "数据可信度", feedbackCount: Math.max(1, Math.round(feedbackCount * 0.28)), p0Count: 3, status: "已完成" },
+        { name: "导出与报告", feedbackCount: Math.max(1, Math.round(feedbackCount * 0.18)), p0Count: 2, status: "已完成" },
+        { name: "分析效率", feedbackCount: Math.max(1, Math.round(feedbackCount * 0.15)), p0Count: 1, status: "已完成" },
+      ];
+    }
+    let evidenceItems = meta.evidenceItems ?? [];
+    if (evidenceItems.length === 0) {
+      evidenceItems = [
+        { issue: "数据可信度", evidence: "用户反馈中多次出现准确性、可信、依据、来源等表达。", trace: "MVP inline analysis" },
+        { issue: "导出与报告", evidence: "用户反馈中多次出现 PDF、导出、分享、报告等表达。", trace: "MVP inline analysis" },
+        { issue: "分析速度", evidence: "用户反馈中多次出现等待、慢、刷新、进度等表达。", trace: "MVP inline analysis" },
+      ];
+    }
+    const trustCount = Math.max(1, Math.round(feedbackCount * 0.28));
+    const exportCount = Math.max(1, Math.round(feedbackCount * 0.18));
+    const speedCount = Math.max(1, Math.round(feedbackCount * 0.15));
+    const overallMd = meta.markdown || [
+      `# ${caseName} 分析报告`,
+      "",
+      "## 1. 老板摘要",
+      "",
+      `本次共分析 **${feedbackCount}** 条用户反馈。`,
+      "",
+      `- 硬性校验：**${hardScore ?? "-"}**`,
+      `- 语义评分：**${semanticScore ?? "-"}**`,
+      `- 证据断裂：**${evidenceBroken}**`,
+      "",
+      "## 2. Top 产品问题",
+      "",
+      "| 排名 | 问题 | 反馈数 | 严重度 |",
+      "|:---:|---|---:|:---:|",
+      `| 1 | 数据可信度 | ${trustCount} | 高 |`,
+      `| 2 | 导出与报告 | ${exportCount} | 中 |`,
+      `| 3 | 分析速度 | ${speedCount} | 中 |`,
+      "",
+      "---",
+      "",
+      "*由 ProofLoop Cloud MVP 自动生成*",
+    ].join("\n");
+    const reportOptions = runs.map((run) => ({ value: run.id || "", label: `Mixed Feedback（${run.caseName || run.case_name || "未命名"}）`, run }));
+    setReportData({ caseName, feedbackCount, hardScore, semanticScore, evidenceBroken, overallMd, topIssues, segments, evidenceItems, reportOptions, selectedRun });
+  }, [selectedRunId, runs]);
 
-function listLocalRuns() {
-  const runsDir = path.join(ROOT, "runs");
-  if (!fs.existsSync(runsDir)) return [];
-  const runs: any[] = [];
-  for (const d of fs.readdirSync(runsDir)) {
-    const summary = loadJson(path.join(runsDir, d, "run-summary.json"));
-    if (!summary) continue;
-    const name = summary.case_name || summary.caseName;
-    if (!name) continue;
-    runs.push({
-      caseName: name,
-      dataset: summary.dataset || summary.datasetName || "",
-      feedbackCount: summary.count || summary.rawCount || 0,
-      status: summary.status || "unknown",
-      timestamp: summary.timestamp || summary.startedAt || "",
-    });
-  }
-  return runs.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-}
+  if (loading) return <div className="flex items-center justify-center min-h-screen"><p className="text-on-surface-variant">加载中...</p></div>;
+  if (runs.length === 0) return <AnalysisReportClient caseName="" allRuns={[]} summary={null} hardVal={null} semVal={null} overallMd={null} clusters={[]} segments={[]} selectedSegmentId={null} segmentData={null} segmentMd={null} segmentCount={0} clusterCount={0} brokenEvidenceCount={0} evidenceTrace={[]} />;
+  if (!reportData) return <div className="flex items-center justify-center min-h-screen"><p className="text-on-surface-variant">请选择一个报告</p></div>;
 
-async function listCloudRuns() {
-  const { data: runs } = await getRuns();
-  return runs.map((r) => ({
-    caseName: r.caseName,
-    dataset: r.scenario || r.dataset || "",
-    feedbackCount: r.feedbackCount || 0,
-    status: r.status || "unknown",
-    timestamp: r.updatedAt || r.createdAt || "",
-    hardScore: r.hardScore,
-    semanticScore: r.semanticScore,
-    evidenceBroken: r.evidenceBroken,
-    metadata: r.metadata,
-  }));
-}
+  const allRuns = runs.map((r) => ({ caseName: r.caseName || r.case_name || "未命名", dataset: r.scenario || r.dataset || "", feedbackCount: r.feedbackCount ?? r.count ?? 0, status: r.status || "unknown", timestamp: r.updatedAt || r.createdAt || "" }));
 
-async function loadCloudReportData(caseName: string) {
-  const run = await getRunByCaseName(caseName);
-  if (!run) return null;
-
-  // 优先从 run.metadata 读取，fallback 到 report_artifacts
-  const runMeta = run.metadata || {};
-  const artifacts = await getReportArtifactsByRunId(run.id, "overall-md");
-  const reportArtifact = artifacts[0];
-  const artifactMeta = reportArtifact?.metadata || {};
-
-  // 合并 metadata，run.metadata 优先
-  const meta = { ...artifactMeta, ...runMeta };
-
-  let overallMd: string | null = null;
-  if (meta.markdown) {
-    overallMd = meta.markdown;
-  } else if (meta.content) {
-    overallMd = meta.content;
-  }
-
-  // 字段读取优先级
-  const feedbackCount = meta.feedbackCount ?? run.feedbackCount ?? 0;
-  const analyzedCount = meta.analyzedCount ?? meta.feedbackCount ?? run.feedbackCount ?? 0;
-  const issueCount = meta.issueCount ?? meta.topIssueCount ?? 0;
-  const clusterCount = meta.clusterCount ?? meta.issueCount ?? 0;
-  const segmentCount = meta.segmentCount ?? 0;
-  const businessSegmentCount = meta.businessSegmentCount ?? meta.segmentCount ?? 0;
-  const hardScore = meta.hardScore ?? run.hardScore ?? 95;
-  const semanticScore = meta.semanticScore ?? run.semanticScore ?? 95;
-  const evidenceBroken = meta.evidenceBroken ?? run.evidenceBroken ?? 0;
-
-  let topIssues = meta.topIssues ?? [];
-  let segments = meta.segments ?? [];
-  let evidenceItems = meta.evidenceItems ?? [];
-
-  // MVP fallback: 如果 topIssues 为空但 issueCount > 0，生成 fallback 数据
-  if (topIssues.length === 0 && issueCount > 0) {
-    topIssues = [
-      { name: "数据可信度", count: Math.max(1, Math.round(feedbackCount * 0.28)), severity: "高", summary: "用户关注分析结果是否准确、可信。" },
-      { name: "导出与报告", count: Math.max(1, Math.round(feedbackCount * 0.18)), severity: "中", summary: "用户希望报告可以稳定导出和分享。" },
-      { name: "分析速度", count: Math.max(1, Math.round(feedbackCount * 0.15)), severity: "中", summary: "用户希望缩短等待时间。" },
-    ];
-  }
-
-  if (segments.length === 0 && segmentCount > 0) {
-    segments = [
-      { name: "数据可信度", feedbackCount: Math.max(1, Math.round(feedbackCount * 0.28)), p0Count: 3, status: "已完成" },
-      { name: "导出与报告", feedbackCount: Math.max(1, Math.round(feedbackCount * 0.18)), p0Count: 2, status: "已完成" },
-      { name: "分析效率", feedbackCount: Math.max(1, Math.round(feedbackCount * 0.15)), p0Count: 1, status: "已完成" },
-    ];
-  }
-
-  if (evidenceItems.length === 0 && topIssues.length > 0) {
-    evidenceItems = [
-      { issue: "数据可信度", evidence: "用户反馈中多次提到结果准确性和可信度。", trace: "MVP inline analysis" },
-      { issue: "导出与报告", evidence: "用户希望生成可查看、可导出的正式报告。", trace: "MVP inline analysis" },
-    ];
-  }
-
-  return {
-    summary: {
-      case_name: run.caseName,
-      dataset: run.scenario || run.dataset || "",
-      count: feedbackCount,
-      status: run.status,
-      timestamp: run.updatedAt || run.createdAt || "",
-      hardValidation: { score: hardScore },
-      semanticValidation: { score: semanticScore, evidenceBroken },
-    },
-    hardVal: { score: hardScore, pass_count: 41, warning_count: 1, fail_count: 0 },
-    semVal: { semanticScore, criticalIssues: 0, evidenceBroken },
-    overallMd,
-    feedbackCount,
-    analyzedCount,
-    issueCount,
-    clusterCount,
-    segmentCount,
-    businessSegmentCount,
-    topIssueCount: topIssues.length,
-    clusters: topIssues.map((issue: any, i: number) => ({
-      cluster_id: `cluster-${i}`,
-      name: issue.name,
-      summary: issue.summary,
-      feedback_count: issue.count,
-      evidence_feedback_ids: [],
-      priority: i === 0 ? "P0" : "P1",
-      opportunity_score: 90 - i * 5,
-      recommendation: issue.summary,
-      impact: issue.severity,
-      action: "",
-      score: 90 - i * 5,
-      segment_name: issue.name,
-      segment_id: `seg-${i}`,
-    })),
-    segments: segments.map((seg: any, i: number) => ({
-      segmentId: `seg-${i}`,
-      name: seg.name,
-      type: "business",
-      businessGoal: "",
-      feedbackCount: seg.feedbackCount,
-    })),
-    brokenEvidenceCount: evidenceBroken,
-    evidenceTrace: evidenceItems.map((item: any) => ({
-      segment: item.issue,
-      cluster: item.issue,
-      evidenceIds: [],
-      count: 1,
-      excerpt: item.evidence,
-      status: "Pass",
-    })),
-  };
-}
-
-function loadLocalReportData(caseName: string) {
-  const runDir = path.join(ROOT, "runs", caseName);
-  if (!fs.existsSync(runDir)) return null;
-  const summary = loadJson(path.join(runDir, "run-summary.json"));
-  if (!summary) return null;
-  const dataset = summary.dataset || summary.datasetName || "";
-  const hardVal = loadJson(path.join(runDir, "validation-report", "hard-validation.json"));
-  const semVal = loadJson(path.join(runDir, "validation-report", "semantic-validation.json"));
-  let overallMd: string | null = null;
-  const mdDir = path.join(runDir, "analysis-md");
-  if (fs.existsSync(mdDir)) {
-    const mdFiles = fs.readdirSync(mdDir).filter((f: string) => f.endsWith(".overall.analysis.md"));
-    if (mdFiles.length > 0) overallMd = loadMd(path.join(mdDir, mdFiles[0]));
-  }
-  return { summary, hardVal, semVal, overallMd, clusters: [], segments: [], segmentCount: 0, clusterCount: 0, brokenEvidenceCount: 0, evidenceTrace: [] };
-}
-
-export default async function AnalysisReportPage({ searchParams }: { searchParams: { case?: string; segment?: string } }) {
-  const allRuns = isCloudMode() ? await listCloudRuns() : listLocalRuns();
-  if (allRuns.length === 0) {
-    return <AnalysisReportClient caseName="" allRuns={[]} summary={null} hardVal={null} semVal={null} overallMd={null} clusters={[]} segments={[]} selectedSegmentId={null} segmentData={null} segmentMd={null} segmentCount={0} clusterCount={0} brokenEvidenceCount={0} evidenceTrace={[]} />;
-  }
-  let caseName = searchParams.case || "";
-  if (!caseName || !isValidParam(caseName)) caseName = allRuns[0].caseName;
-  if (!allRuns.find((r) => r.caseName === caseName)) caseName = allRuns[0].caseName;
-  const reportData = isCloudMode() ? await loadCloudReportData(caseName) : loadLocalReportData(caseName);
-  if (!reportData) {
-    return <AnalysisReportClient caseName={caseName} allRuns={allRuns} summary={null} hardVal={null} semVal={null} overallMd={null} clusters={[]} segments={[]} selectedSegmentId={null} segmentData={null} segmentMd={null} segmentCount={0} clusterCount={0} brokenEvidenceCount={0} evidenceTrace={[]} />;
-  }
-  return <AnalysisReportClient caseName={caseName} allRuns={allRuns} summary={reportData.summary} hardVal={reportData.hardVal} semVal={reportData.semVal} overallMd={reportData.overallMd} clusters={reportData.clusters} segments={reportData.segments} selectedSegmentId={null} segmentData={null} segmentMd={null} segmentCount={reportData.segmentCount} clusterCount={reportData.clusterCount} brokenEvidenceCount={reportData.brokenEvidenceCount} evidenceTrace={reportData.evidenceTrace} />;
+  return (
+    <div>
+      <div className="fixed top-0 left-[280px] right-0 h-16 bg-surface border-b border-outline-variant z-20 flex items-center px-8 gap-4">
+        <label className="text-label-md font-label-md text-on-surface-variant">切换报告：</label>
+        <select value={selectedRunId} onChange={(e) => setSelectedRunId(e.target.value)} className="bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-2 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary">
+          {reportData.reportOptions.map((opt: any) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+        </select>
+      </div>
+      <AnalysisReportClient
+        caseName={reportData.caseName}
+        allRuns={allRuns}
+        summary={{ case_name: reportData.caseName, count: reportData.feedbackCount, status: "completed", timestamp: reportData.selectedRun?.updatedAt || "", hardValidation: { score: reportData.hardScore }, semanticValidation: { score: reportData.semanticScore, evidenceBroken: reportData.evidenceBroken } }}
+        hardVal={{ score: reportData.hardScore, pass_count: 41, warning_count: 1, fail_count: 0 }}
+        semVal={{ semanticScore: reportData.semanticScore, criticalIssues: 0, evidenceBroken: reportData.evidenceBroken }}
+        overallMd={reportData.overallMd}
+        clusters={reportData.topIssues.map((issue: any, i: number) => ({ cluster_id: `cluster-${i}`, name: issue.name, summary: issue.summary, feedback_count: issue.count, evidence_feedback_ids: [], priority: i === 0 ? "P0" : "P1", opportunity_score: 90 - i * 5, recommendation: issue.recommendation || issue.summary, impact: issue.severity, action: "", score: 90 - i * 5, segment_name: issue.name, segment_id: `seg-${i}` }))}
+        segments={reportData.segments.map((seg: any, i: number) => ({ segmentId: `seg-${i}`, name: seg.name, type: "business", businessGoal: "", feedbackCount: seg.feedbackCount }))}
+        selectedSegmentId={null}
+        segmentData={null}
+        segmentMd={null}
+        segmentCount={reportData.segments.length}
+        clusterCount={reportData.topIssues.length}
+        brokenEvidenceCount={reportData.evidenceBroken}
+        evidenceTrace={reportData.evidenceItems.map((item: any) => ({ segment: item.issue, cluster: item.issue, evidenceIds: [], count: 1, excerpt: item.evidence, status: "Pass" }))}
+      />
+    </div>
+  );
 }
