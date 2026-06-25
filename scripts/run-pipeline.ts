@@ -23,6 +23,8 @@ interface PipelineConfig {
   skipSemantic: boolean;
   resume: boolean;
   stage: "hard" | "semantic" | "full";
+  input?: string;  // 自定义输入文件路径
+  output?: string; // 自定义输出目录路径
 }
 
 interface StepTiming {
@@ -61,6 +63,8 @@ function parseArgs(): PipelineConfig {
   let skipSemantic = false;
   let resume = false;
   let stage: "hard" | "semantic" | "full" = "full";
+  let input: string | undefined;
+  let output: string | undefined;
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--case" && args[i + 1]) caseName = args[++i];
@@ -71,6 +75,8 @@ function parseArgs(): PipelineConfig {
     if (args[i] === "--skip-semantic") skipSemantic = true;
     if (args[i] === "--resume") resume = true;
     if (args[i] === "--stage" && args[i + 1]) stage = args[++i] as any;
+    if (args[i] === "--input" && args[i + 1]) input = args[++i];
+    if (args[i] === "--output" && args[i + 1]) output = args[++i];
   }
 
   if (!dataset) {
@@ -78,7 +84,7 @@ function parseArgs(): PipelineConfig {
     dataset = match ? match[1] : baseline;
   }
 
-  return { caseName, dataset, count, generate, baseline, skipSemantic, resume, stage };
+  return { caseName, dataset, count, generate, baseline, skipSemantic, resume, stage, input, output };
 }
 
 function ensureDir(dir: string) {
@@ -190,7 +196,8 @@ async function runStep(
 
 async function main() {
   const config = parseArgs();
-  const runDir = path.join(RUNS_DIR, config.caseName);
+  // 如果指定了 --output，使用它作为输出目录；否则使用默认的 runs/{caseName}
+  const runDir = config.output || path.join(RUNS_DIR, config.caseName);
   const startedAt = new Date().toISOString();
   const startMs = Date.now();
   const steps: StepTiming[] = [];
@@ -206,7 +213,8 @@ async function main() {
   const segMdDir = path.join(analysisMdDir, config.dataset, "segments");
 
   // Key file paths
-  const inputCsv = path.join(inputDir, `${config.dataset}.csv`);
+  // 如果指定了 --input，使用它作为输入文件；否则使用默认路径
+  const inputCsv = config.input || path.join(inputDir, `${config.dataset}.csv`);
   const normalizedJson = path.join(normalizedDir, `${config.dataset}.normalized.json`);
   const segmentsJson = path.join(analysisDir, `${config.dataset}.segments.json`);
   const overallJson = path.join(analysisDir, `${config.dataset}.overall.analysis.json`);
@@ -221,6 +229,8 @@ async function main() {
   console.log(`  Stage: ${config.stage}`);
   console.log(`  Resume: ${config.resume}`);
   console.log(`  Skip Semantic: ${config.skipSemantic}`);
+  if (config.input) console.log(`  Input: ${config.input}`);
+  if (config.output) console.log(`  Output: ${config.output}`);
   console.log("=".repeat(60));
   console.log("");
 
@@ -232,12 +242,16 @@ async function main() {
 
   // ── Step 1: generate_raw_feedback ──────────────────────────────
   const step1 = await runStep("generate_raw_feedback", async () => {
+    // 如果指定了 --input 且文件存在，跳过生成步骤
+    if (config.input && fs.existsSync(config.input)) {
+      return `Using provided input file: ${config.input}`;
+    }
     const baselineInput = path.join(BASELINE_DIR, config.baseline, "input");
     if (!config.generate && fs.existsSync(baselineInput)) {
       copyDir(baselineInput, inputDir);
       return `Copied from baseline (${config.count} rows)`;
     }
-    throw new Error("AI generation not implemented yet. Use baseline copy.");
+    throw new Error("AI generation not implemented yet. Use baseline copy or --input.");
   }, {
     resume: config.resume,
     resumeCheckFile: inputCsv,

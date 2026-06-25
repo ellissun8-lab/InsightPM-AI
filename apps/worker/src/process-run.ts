@@ -1,4 +1,5 @@
 import { type RunRecord, updateRunStatus, supabase } from "./supabase.js";
+import { runPipeline } from "./pipeline-runner.js";
 import * as fs from "fs";
 import * as path from "path";
 import * as os from "os";
@@ -7,7 +8,7 @@ const WORKER_TMP_DIR = process.env.WORKER_TMP_DIR || path.join(os.tmpdir(), "pro
 
 /**
  * 处理单个 run
- * Step 4: 下载 CSV 到临时目录
+ * Step 5: 执行真实 pipeline
  */
 export async function processRun(run: RunRecord): Promise<void> {
   const now = new Date().toISOString();
@@ -22,13 +23,13 @@ export async function processRun(run: RunRecord): Promise<void> {
   const runningMetadata = {
     ...run.metadata,
     worker: "cloud-worker",
-    workerStep: "download-csv",
+    workerStep: "pipeline-execution",
     workerStartedAt: now,
   };
 
   const runningOk = await updateRunStatus(run.id, "running", runningMetadata);
   if (!runningOk) {
-    console.error(`[Worker] Failed to update run ${run.id} to running`);
+    console.error(`[Worker] failed to update run ${run.id} to running`);
     await updateRunStatus(run.id, "failed", {
       ...run.metadata,
       error: { message: "Failed to update to running status" },
@@ -53,7 +54,6 @@ export async function processRun(run: RunRecord): Promise<void> {
 
     console.log(`[Worker] inputFile bucket: ${inputFile.bucket}`);
     console.log(`[Worker] inputFile path: ${inputFile.path}`);
-    console.log(`[Worker] inputFile originalName: ${inputFile.originalName}`);
 
     // Step 3: 下载 CSV
     console.log(`[Worker] Downloading input CSV...`);
@@ -62,7 +62,7 @@ export async function processRun(run: RunRecord): Promise<void> {
       .download(inputFile.path);
 
     if (downloadError || !fileData) {
-      console.error(`[Worker] Failed to download CSV:`, downloadError);
+      console.error(`[Worker] failed to download CSV:`, downloadError);
       await updateRunStatus(run.id, "failed", {
         ...runningMetadata,
         error: { message: `Failed to download CSV: ${downloadError?.message || "Unknown error"}` },
@@ -71,42 +71,112 @@ export async function processRun(run: RunRecord): Promise<void> {
       return;
     }
 
-    // Step 4: 保存到本地临时目录
+    // 保存到本地临时目录
     const localDir = path.join(WORKER_TMP_DIR, run.id);
-    const localPath = path.join(localDir, "input.csv");
+    const localInputPath = path.join(localDir, "input.csv");
 
     fs.mkdirSync(localDir, { recursive: true });
 
     const buffer = Buffer.from(await fileData.arrayBuffer());
-    fs.writeFileSync(localPath, buffer);
+    fs.writeFileSync(localInputPath, buffer);
 
-    console.log(`[Worker] Saved input to local path: ${localPath}`);
+    console.log(`[Worker] Saved input to local path: ${localInputPath}`);
     console.log(`[Worker] File size: ${buffer.length} bytes`);
 
-    // Step 5: 更新 metadata
-    const downloadedNow = new Date().toISOString();
-    console.log(`[Worker] Updating run ${run.id} metadata: download-input-ok`);
-    const completedMetadata = {
-      ...runningMetadata,
-      inputDownloaded: true,
-      localInputPath: localPath,
-      downloadedAt: downloadedNow,
-      workerResult: "download-input-ok",
-      hasReport: false,
-    };
+    // Step 4: 执行真实 pipeline
+    const outputDir = path.join(WORKER_TMP_DIR, run.id, "output");
+    const dataset = run.scenario || run.metadata?.dataset || "mixed-feedback";
+    const feedbackCount = run.feedback_count || run.metadata?.feedbackCount || 0;
 
-    const completedOk = await updateRunStatus(run.id, "completed", completedMetadata);
-    if (!completedOk) {
-      console.error(`[Worker] Failed to update run ${run.id} to completed`);
+    console.log(`[Worker] Starting pipeline execution...`);
+    console.log(`[Worker]   caseName: ${run.case_name}`);
+    console.log(`[Worker]   dataset: ${dataset}`);
+    console.log(`[Worker]   feedbackCount: ${feedbackCount}`);
+    console.log(`[Worker]   inputPath: ${localInputPath}`);
+    console.log(`[Worker]   outputDir: ${outputDir}`);
+
+    const pipelineResult = await runPipeline(
+      run.case_name,
+      dataset,
+      feedbackCount,
+      localInputPath,
+      outputDir
+    );
+
+    if (!pipelineResult.success) {
+      console.error(`[Worker] Pipeline failed for run ${run.id}`);
       await updateRunStatus(run.id, "failed", {
         ...runningMetadata,
-        error: { message: "Failed to update to completed status" },
-        failedAt: downloadedNow,
+        inputDownloaded: true,
+        localInputPath,
+        pipelineExecuted: false,
+        pipelineStdoutPreview: pipelineResult.stdout,
+        pipelineStderrPreview: pipelineResult.stderr,
+        error: { message: "Pipeline execution failed", stderr: pipelineResult.stderr },
+        failedAt: new Date().toISOString(),
       });
       return;
     }
+
+    console.log(`[Worker] Pipeline completed successfully`);
+    console.log(`[Worker] Output dir: ${pipelineResult.outputDir}`);
+    console.log(`[Worker] Hard score: ${pipelineResult.hardScore}`);
+    console.log(`[Worker] Semantic score: ${pipelineResult.semanticScore}`);
+
+    // Step 5: 更新 run 为 completed
+    const completedNow = new Date().toISOString();
+    const completedMetadata = {
+      ...runningMetadata,
+      inputDownloaded: true,
+      localInputPath,
+      pipelineExecuted: true,
+      pipelineOutputDir: outputDir,
+      pipelineStdoutPreview: pipelineResult.stdout,
+      pipelineStderrPreview: pipelineResult.stderr,
+      workerResult: "pipeline-run-ok",
+      workerCompletedAt: completedNow,
+      hasReport: false,
+    };
+
+    // 构建更新数据
+    const updateData: any = {
+      status: "completed",
+      finished_at: completedNow,
+      updated_at: completedNow,
+      metadata: completedMetadata,
+    };
+
+    // 只在有值时更新分数
+    if (pipelineResult.hardScore !== null) {
+      updateData.hard_score = pipelineResult.hardScore;
+    }
+    if (pipelineResult.semanticScore !== null) {
+      updateData.semantic_score = pipelineResult.semanticScore;
+    }
+    if (pipelineResult.evidenceBroken !== null) {
+      updateData.evidence_broken = pipelineResult.evidenceBroken;
+    }
+    if (pipelineResult.durationMs !== null) {
+      updateData.duration_ms = pipelineResult.durationMs;
+    }
+
+    const { error: updateError } = await supabase
+      .from("runs")
+      .update(updateData)
+      .eq("id", run.id);
+
+    if (updateError) {
+      console.error(`[Worker] failed to update run ${run.id}:`, updateError);
+      await updateRunStatus(run.id, "failed", {
+        ...runningMetadata,
+        error: { message: `Failed to update run: ${updateError.message}` },
+        failedAt: completedNow,
+      });
+      return;
+    }
+
     console.log(`[Worker] Updated run ${run.id} to completed`);
-    console.log(`[Worker] Run ${run.id} Step 4 PASSED`);
+    console.log(`[Worker] Run ${run.id} Step 5 PASSED`);
 
   } catch (err: any) {
     const failedNow = new Date().toISOString();
