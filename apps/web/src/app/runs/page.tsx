@@ -174,7 +174,7 @@ export default function RunsPage() {
                           : "-"}
                       </td>
                       <td className="py-4 px-lg text-right">
-                        {status === "completed" && (r.metadata?.hasReport === true) ? (
+                        {status === "completed" && r.metadata?.hasReport === true ? (
                           <a
                             href={`/runs/${encodeURIComponent(caseName)}`}
                             className="text-on-surface font-label-md font-medium hover:underline transition-colors"
@@ -185,9 +185,18 @@ export default function RunsPage() {
                           <span className="text-on-surface-variant font-label-md">
                             报告待生成
                           </span>
+                        ) : status === "running" ? (
+                          <span className="text-on-surface-variant font-label-md flex items-center gap-1">
+                            <span className="animate-spin">⏳</span>
+                            处理中...
+                          </span>
+                        ) : status === "failed" ? (
+                          <span className="text-[#8A2F2F] font-label-md">
+                            查看错误
+                          </span>
                         ) : (
                           <span className="text-on-surface-variant font-label-md">
-                            等待报告
+                            等待中
                           </span>
                         )}
                       </td>

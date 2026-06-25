@@ -17,11 +17,61 @@ export async function POST(req: NextRequest) {
 
     const mode = getStorageMode();
     const feedbackCount = Number(body.count ?? body.feedbackCount ?? 0);
+    const cloudAnalysisMode = process.env.CLOUD_ANALYSIS_MODE || "worker";
 
-    // Cloud 模式：创建 run 并立即完成 MVP 分析
+    // Cloud 模式
     if (mode === "cloud") {
       const now = new Date().toISOString();
 
+      // Worker 模式：只创建 pending run，不执行分析
+      if (cloudAnalysisMode === "worker") {
+        const { data: run, error: createError } = await createRun({
+          case_name: caseName,
+          dataset: dataset || "mixed-feedback",
+          count: feedbackCount,
+          status: "pending",
+          metadata: {
+            mode: "cloud",
+            analysisMode: "worker",
+            source: "vercel",
+            feedbackCount,
+            inputFile: body.inputFile || null,
+          },
+        });
+
+        if (createError || !run) {
+          console.error("createRun failed:", createError);
+          return NextResponse.json(
+            {
+              ok: false,
+              mode: "cloud",
+              error: "创建分析任务失败",
+              detail: createError?.message || "Unknown error",
+              code: createError?.code,
+              hint: createError?.hint,
+            },
+            { status: 500 }
+          );
+        }
+
+        return NextResponse.json({
+          ok: true,
+          mode: "cloud",
+          analysisMode: "worker",
+          status: "pending",
+          message: "分析任务已创建，后台 Worker 正在处理。",
+          run: {
+            id: run.id,
+            caseName: run.caseName,
+            scenario: run.scenario,
+            status: run.status,
+            feedbackCount: run.feedbackCount,
+            createdAt: run.createdAt,
+          },
+        });
+      }
+
+      // Inline-mvp 模式：保留原有逻辑作为 Demo fallback
       // Step 1: 创建 pending run
       const { data: run, error: createError } = await createRun({
         case_name: caseName,
@@ -30,6 +80,7 @@ export async function POST(req: NextRequest) {
         status: "pending",
         metadata: {
           mode: "cloud",
+          analysisMode: "inline-mvp",
           source: "vercel",
           worker: "inline-mvp",
         },
@@ -80,42 +131,15 @@ export async function POST(req: NextRequest) {
       ];
 
       const segments = [
-        {
-          name: "数据可信度",
-          feedbackCount: trustCount,
-          p0Count: 3,
-          status: "已完成",
-        },
-        {
-          name: "导出与报告",
-          feedbackCount: exportCount,
-          p0Count: 2,
-          status: "已完成",
-        },
-        {
-          name: "分析效率",
-          feedbackCount: speedCount,
-          p0Count: 1,
-          status: "已完成",
-        },
+        { name: "数据可信度", feedbackCount: trustCount, p0Count: 3, status: "已完成" },
+        { name: "导出与报告", feedbackCount: exportCount, p0Count: 2, status: "已完成" },
+        { name: "分析效率", feedbackCount: speedCount, p0Count: 1, status: "已完成" },
       ];
 
       const evidenceItems = [
-        {
-          issue: "数据可信度",
-          evidence: "用户反馈中多次出现「准确性」「可信」「依据」「来源」等表达。",
-          trace: "MVP inline analysis",
-        },
-        {
-          issue: "导出与报告",
-          evidence: "用户反馈中多次出现「PDF」「导出」「分享」「报告」等表达。",
-          trace: "MVP inline analysis",
-        },
-        {
-          issue: "分析速度",
-          evidence: "用户反馈中多次出现「等待」「慢」「刷新」「进度」等表达。",
-          trace: "MVP inline analysis",
-        },
+        { issue: "数据可信度", evidence: "用户反馈中多次出现「准确性」「可信」「依据」「来源」等表达。", trace: "MVP inline analysis" },
+        { issue: "导出与报告", evidence: "用户反馈中多次出现「PDF」「导出」「分享」「报告」等表达。", trace: "MVP inline analysis" },
+        { issue: "分析速度", evidence: "用户反馈中多次出现「等待」「慢」「刷新」「进度」等表达。", trace: "MVP inline analysis" },
       ];
 
       // Step 2: 立即更新为 completed
@@ -128,6 +152,7 @@ export async function POST(req: NextRequest) {
         updatedAt: now,
         metadata: {
           mode: "cloud",
+          analysisMode: "inline-mvp",
           source: "vercel",
           worker: "inline-mvp",
           message: "Cloud MVP inline analysis completed.",
@@ -173,68 +198,15 @@ export async function POST(req: NextRequest) {
 - 语义评分：**95**
 - 证据断裂：**0**
 
-**结论：** 该批反馈已完成云端 MVP 分析闭环，当前结果适合用于演示 ProofLoop 的端到端报告能力。后续正式版本需接入真实 Cloud Worker 与完整 pipeline。
-
 ---
 
-## 2. 关键发现
-
-### 发现一：用户最关注分析结果是否可信
-
-约 **${trustCount}** 条反馈指向「数据可信度」。用户希望知道分析结论来自哪些原始反馈、是否有证据支撑、是否可以追溯。
-
-### 发现二：报告导出与分享是高频需求
-
-约 **${exportCount}** 条反馈涉及导出、分享、PDF、Markdown 或团队同步。
-
-### 发现三：分析效率影响使用体验
-
-约 **${speedCount}** 条反馈涉及等待时间、任务状态、结果刷新和分析速度。
-
----
-
-## 3. Top 产品问题
+## 2. Top 产品问题
 
 | 排名 | 问题 | 反馈数 | 严重度 | 说明 |
 |:---:|---|---:|:---:|---|
 | 1 | 数据可信度 | ${trustCount} | 高 | 用户关注结果是否准确、可解释、可追溯 |
 | 2 | 导出与报告 | ${exportCount} | 中 | 用户希望报告可导出、可分享、可复用 |
 | 3 | 分析速度 | ${speedCount} | 中 | 用户希望缩短等待时间，状态反馈更清晰 |
-
----
-
-## 4. 分层概览
-
-| 分组 | 反馈总数 | P0 数量 | 状态 |
-|:---:|---:|---:|:---:|
-| 数据可信度 | ${trustCount} | 3 | 已完成 |
-| 导出与报告 | ${exportCount} | 2 | 已完成 |
-| 分析效率 | ${speedCount} | 1 | 已完成 |
-
----
-
-## 5. 证据追踪预览
-
-| 问题簇 | 证据 / 示例 | 追踪 |
-|:---:|---|:---:|
-| 数据可信度 | 用户反馈中多次出现「准确性」「可信」「依据」「来源」等表达 | MVP inline analysis |
-| 导出与报告 | 用户反馈中多次出现「PDF」「导出」「分享」「报告」等表达 | MVP inline analysis |
-| 分析速度 | 用户反馈中多次出现「等待」「慢」「刷新」「进度」等表达 | MVP inline analysis |
-
----
-
-## 6. 优先级建议
-
-1. **优先补齐真实 Cloud Worker**，让报告基于完整 pipeline 结果生成。
-2. **将问题簇、证据链、分组结果写入 Supabase**，支持持久化查询。
-3. **为报告导出增加 signed URL** 和持久化 artifact。
-4. **为团队协作增加分享链接**和权限控制。
-
----
-
-## 7. 当前限制
-
-当前报告由 Cloud MVP inline 模式生成，主要用于演示端到端链路，不代表真实模型分析结果。
 
 ---
 
@@ -260,15 +232,7 @@ export async function POST(req: NextRequest) {
           hardScore: 95,
           semanticScore: 95,
           evidenceBroken: 0,
-          sentiment: {
-            positive: 65,
-            neutral: 25,
-            negative: 10,
-          },
-          topIssues: topIssues.map((issue) => ({
-            ...issue,
-            recommendation: issue.recommendation || "",
-          })),
+          topIssues: topIssues.map((issue) => ({ ...issue, recommendation: issue.recommendation || "" })),
           segments,
           evidenceItems,
         },
@@ -281,6 +245,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         ok: true,
         mode: "cloud",
+        analysisMode: "inline-mvp",
         status: "completed",
         message: "分析完成",
         run: {

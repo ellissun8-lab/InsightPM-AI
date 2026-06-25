@@ -70,17 +70,53 @@ export default function NewAnalysisPage() {
     if (!caseName) return;
     setAnalyzing(true);
     setResult("分析中...");
+
     try {
+      // Step 1: 上传文件到 Supabase Storage (如果在 cloud mode)
+      let inputFile = null;
+      if (file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("runId", `run-${Date.now()}`);
+
+        const uploadRes = await fetch("/api/storage/upload", {
+          method: "POST",
+          body: formData,
+        });
+        const uploadData = await uploadRes.json();
+
+        if (uploadData.ok) {
+          inputFile = {
+            bucket: uploadData.bucket,
+            path: uploadData.path,
+            originalName: file.name,
+            feedbackCount,
+          };
+        }
+      }
+
+      // Step 2: 创建分析任务
       const res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ caseName, dataset, count: feedbackCount }),
+        body: JSON.stringify({
+          caseName,
+          dataset,
+          count: feedbackCount,
+          inputFile,
+        }),
       });
       const data = await res.json();
+
       if (data.ok) {
         if (data.mode === "cloud") {
-          // Cloud 模式：显示提示，跳转到运行历史
-          setResult("线上分析任务已创建，后台分析 Worker 将在后续版本启用。");
+          if (data.analysisMode === "worker") {
+            // Worker 模式：任务已创建，等待 Worker 处理
+            setResult("分析任务已创建，后台 Worker 正在处理。");
+          } else {
+            // Inline MVP 模式
+            setResult("线上分析任务已创建，后台分析 Worker 将在后续版本启用。");
+          }
           setTimeout(() => {
             router.push("/runs");
             router.refresh();
