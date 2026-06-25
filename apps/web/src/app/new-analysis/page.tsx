@@ -70,6 +70,7 @@ export default function NewAnalysisPage() {
     if (!caseName) return;
     setAnalyzing(true);
     setResult("分析中...");
+    console.log("analyze count", feedbackCount);
     try {
       const res = await fetch("/api/analyze", {
         method: "POST",

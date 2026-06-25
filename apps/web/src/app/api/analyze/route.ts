@@ -16,7 +16,9 @@ export async function POST(req: NextRequest) {
     }
 
     const mode = getStorageMode();
-    const feedbackCount = count || 0;
+    const feedbackCount = Number(body.count ?? body.feedbackCount ?? 0);
+
+    console.log("/api/analyze: received count =", count, "feedbackCount =", feedbackCount);
 
     // Cloud 模式：创建 run 并立即完成 MVP 分析
     if (mode === "cloud") {
