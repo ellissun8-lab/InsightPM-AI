@@ -174,14 +174,14 @@ export default function RunsPage() {
                           : "-"}
                       </td>
                       <td className="py-4 px-lg text-right">
-                        {r.status === "completed" && r.metadata?.hasReport ? (
+                        {status === "completed" && (r.metadata?.hasReport === true) ? (
                           <a
                             href={`/runs/${encodeURIComponent(caseName)}`}
-                            className="text-primary hover:text-primary font-label-md transition-colors opacity-0 group-hover:opacity-100"
+                            className="text-on-surface font-label-md font-medium hover:underline transition-colors"
                           >
                             查看报告
                           </a>
-                        ) : r.status === "completed" ? (
+                        ) : status === "completed" ? (
                           <span className="text-on-surface-variant font-label-md">
                             报告待生成
                           </span>
