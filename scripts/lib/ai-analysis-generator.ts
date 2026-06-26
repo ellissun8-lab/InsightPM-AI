@@ -125,8 +125,28 @@ export async function generateAIAnalysis(
 1. **evidence_feedback_ids 必须引用真实的 feedback_id**，不能凭空编造
 2. **如果反馈信息不足，应该输出"信息不足/无法判断"**，不能编造具体问题
 3. **问题描述必须基于实际反馈内容**，不能过度推断
-4. **优先级划分**：P0=高频+高影响，P1=中频或需验证，P2=低频或建议性
-5. **机会评分**应与反馈数量和优先级匹配
+4. **机会评分**应与反馈数量和优先级匹配
+
+## 优先级规则（必须严格遵守）
+
+**P0 只允许用于高频、高影响、证据充足的问题：**
+- feedback_count >= 5 才能标记为 P0
+- 必须有明确的用户痛点和业务影响
+- 证据必须充分（至少 5 条 feedback 支持）
+
+**P1 用于中频或需验证的问题：**
+- feedback_count >= 3 可以标记为 P1
+- 问题需要进一步验证或影响范围有限
+
+**P2 用于低频或建议性问题：**
+- feedback_count < 3 最高只能是 P2
+- 建议性反馈或低优先级改进
+
+**绝对禁止：**
+- 不允许为了显得严重而把低样本问题标为 P0
+- feedback_count < 5 的问题禁止标记为 P0
+- feedback_count < 3 的问题最高只能是 P2
+- 如果证据不足，必须降级，不得夸大
 
 请只输出 JSON，不要输出其他内容。`;
 
@@ -218,6 +238,40 @@ ${feedbackTexts.map((f) => `- [${f.id}] ${f.text}`).join("\n")}
         cluster.evidence_feedback_ids = cluster.evidence_feedback_ids.filter((id: string) =>
           validFeedbackIds.has(id)
         );
+      }
+    }
+
+    // Deterministic post-processing guard: 优先级降级
+    // 确保低样本问题不会被标记为高优先级
+    console.log(`[AIAnalysis] Applying priority guard...`);
+    for (const cluster of aiResult.issue_clusters || []) {
+      const feedbackCount = cluster.feedback_count || cluster.evidence_feedback_ids?.length || 0;
+      const originalPriority = cluster.priority;
+
+      if (feedbackCount < 3 && cluster.priority !== "P2") {
+        cluster.priority = "P2";
+        console.log(`[AIAnalysis] Downgraded "${cluster.name}" from ${originalPriority} to P2 (feedback_count=${feedbackCount})`);
+      } else if (feedbackCount < 5 && cluster.priority === "P0") {
+        cluster.priority = "P1";
+        console.log(`[AIAnalysis] Downgraded "${cluster.name}" from P0 to P1 (feedback_count=${feedbackCount})`);
+      }
+
+      // 同步更新 opportunity_score
+      if (cluster.priority === "P2" && cluster.opportunity_score > 70) {
+        cluster.opportunity_score = 70;
+      } else if (cluster.priority === "P1" && cluster.opportunity_score > 85) {
+        cluster.opportunity_score = 85;
+      }
+    }
+
+    // 更新 segment 的 p0Count
+    for (const segment of aiResult.segments || []) {
+      const segClusters = (aiResult.issue_clusters || []).filter(
+        (c: any) => c.segment_id === segment.segment_id
+      );
+      const p0Count = segClusters.filter((c: any) => c.priority === "P0").length;
+      if (segment.p0Count !== undefined) {
+        segment.p0Count = p0Count;
       }
     }
 
