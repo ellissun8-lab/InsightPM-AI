@@ -27,7 +27,8 @@
     "insightpm:batch-run": "tsx scripts/batch-run.ts",
     "insightpm:ci-smoke": "tsx scripts/ci-smoke-test.ts",
     "insightpm:create-eval-split": "tsx scripts/create-eval-split.ts",
-    "insightpm:evaluate": "tsx scripts/evaluate.ts"
+    "insightpm:evaluate": "tsx scripts/evaluate.ts",
+    "verify:cloud-final": "tsx scripts/verify-cloud-final.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
