@@ -22,6 +22,13 @@ export const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
   },
 });
 
+/**
+ * Create admin client (alias for supabase, for compatibility)
+ */
+export function createAdminClient() {
+  return supabase;
+}
+
 export interface RunRecord {
   id: string;
   case_name: string;

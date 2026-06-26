@@ -11,6 +11,14 @@ console.log("[Worker] ProofLoop Cloud Worker starting...");
 console.log(`[Worker] Supabase URL: ${process.env.SUPABASE_URL ? "configured" : "NOT SET"}`);
 console.log(`[Worker] Service Role Key: ${process.env.SUPABASE_SERVICE_ROLE_KEY ? "configured" : "NOT SET"}`);
 console.log(`[Worker] Poll interval: ${POLL_INTERVAL_MS}ms`);
+console.log("[Worker] Environment check:");
+console.log(`  AI_PROVIDER: ${process.env.AI_PROVIDER || "NOT SET"}`);
+console.log(`  OPENAI_MODEL: ${process.env.OPENAI_MODEL || "NOT SET"}`);
+console.log(`  OPENAI_BASE_URL: ${process.env.OPENAI_BASE_URL || "NOT SET"}`);
+console.log(`  OPENAI_API_KEY: ${process.env.OPENAI_API_KEY ? "configured" : "NOT SET"}`);
+console.log(`  DEEPSEEK_API_KEY: ${process.env.DEESEEK_API_KEY ? "configured" : "NOT SET"}`);
+console.log(`  DEEPSEEK_BASE_URL: ${process.env.DEESEEK_BASE_URL || "NOT SET"}`);
+console.log(`  DEEPSEEK_VALIDATION_MODEL: ${process.env.DEESEEK_VALIDATION_MODEL || "NOT SET"}`);
 console.log("[Worker] Waiting for pending runs...");
 
 let isRunning = false;
