@@ -780,8 +780,10 @@ ${segClusters.flatMap((c: any) => c.evidence_feedback_ids).join(", ") || "暂无
   // ── Step 10: promote_to_training ───────────────────────────────
   const baselineType = config.baseline.replace(/-v\d+$/, "");
   const step10 = await runStep("promote_to_training", async () => {
+    // 如果指定了 --output，传递给 promote-to-training
+    const outputArg = config.output ? ` --output "${config.output}"` : "";
     execSync(
-      `npx tsx scripts/promote-to-training.ts --case ${config.caseName} --baseline-type ${baselineType}`,
+      `npx tsx scripts/promote-to-training.ts --case ${config.caseName} --baseline-type ${baselineType}${outputArg}`,
       { cwd: PROJECT_ROOT, stdio: "pipe" }
     );
     return "Promoted to training data";

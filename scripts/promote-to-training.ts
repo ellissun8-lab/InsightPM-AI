@@ -40,18 +40,21 @@ function parseArgs() {
   const args = process.argv.slice(2);
   let caseName = "";
   let baselineType = "unknown";
+  let output: string | undefined;
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--case" && args[i + 1]) caseName = args[++i];
     if (args[i] === "--baseline-type" && args[i + 1]) baselineType = args[++i];
+    if (args[i] === "--output" && args[i + 1]) output = args[++i];
+    if (args[i] === "--run-dir" && args[i + 1]) output = args[++i];
   }
 
   if (!caseName) {
-    console.error("Usage: tsx scripts/promote-to-training.ts --case <caseName> [--baseline-type <type>]");
+    console.error("Usage: tsx scripts/promote-to-training.ts --case <caseName> [--baseline-type <type>] [--output <path>]");
     process.exit(1);
   }
 
-  return { caseName, baselineType };
+  return { caseName, baselineType, output };
 }
 
 function loadJson(p: string): any {
@@ -100,8 +103,9 @@ function assertConsistency(hardValPath: string, semanticJsonPath: string, summar
 }
 
 function main() {
-  const { caseName, baselineType } = parseArgs();
-  const runDir = path.join(RUNS_DIR, caseName);
+  const { caseName, baselineType, output } = parseArgs();
+  // 如果指定了 --output，使用该目录；否则使用默认的 runs/{caseName}
+  const runDir = output || path.join(RUNS_DIR, caseName);
 
   if (!fs.existsSync(runDir)) {
     console.error(`Run directory not found: ${runDir}`);
@@ -110,6 +114,7 @@ function main() {
 
   console.log("=".repeat(60));
   console.log(`Promote to Training Data: ${caseName}`);
+  console.log(`Run directory: ${runDir}`);
   console.log("=".repeat(60));
 
   // Load validation artifacts
