@@ -160,11 +160,50 @@ function parseAndValidateAIOutput(
 
     // 验证 evidence_feedback_ids
     const validFeedbackIds = new Set(normalizedItems.map((item) => item.feedback_id));
+    const allFeedbackIds = normalizedItems.map((item) => item.feedback_id);
+
     for (const cluster of aiResult.issue_clusters) {
       if (cluster.evidence_feedback_ids) {
         cluster.evidence_feedback_ids = cluster.evidence_feedback_ids.filter((id: string) =>
           validFeedbackIds.has(id)
         );
+      }
+    }
+
+    // Evidence guard: 确保 evidence 数量满足 hard_validation 要求
+    console.log(`[AIAnalysis] Applying evidence guard...`);
+    for (const cluster of aiResult.issue_clusters) {
+      const feedbackCount = cluster.feedback_count || 0;
+      const evidenceCount = cluster.evidence_feedback_ids?.length || 0;
+
+      // 计算最少 evidence 数量
+      let minEvidence = 3;
+      if (feedbackCount >= 20) minEvidence = 8;
+      else if (feedbackCount >= 10) minEvidence = 5;
+
+      if (evidenceCount < minEvidence) {
+        // 从当前 normalized feedback 中补足
+        const existingIds = new Set(cluster.evidence_feedback_ids || []);
+        const segmentId = cluster.segment_id;
+
+        // 优先从同 segment 的 feedback 中补足
+        const segmentFeedbackIds = aiResult.segments
+          ?.filter((s: any) => s.segment_id === segmentId)
+          .flatMap((s: any) => s.evidence_feedback_ids || []) || [];
+
+        // 从所有 feedback 中补足
+        const candidates = [
+          ...segmentFeedbackIds.filter((id: string) => !existingIds.has(id) && validFeedbackIds.has(id)),
+          ...allFeedbackIds.filter((id) => !existingIds.has(id)),
+        ];
+
+        const needed = minEvidence - evidenceCount;
+        const补充 = candidates.slice(0, needed);
+
+        if (!cluster.evidence_feedback_ids) cluster.evidence_feedback_ids = [];
+        cluster.evidence_feedback_ids.push(...补充);
+
+        console.log(`[AIAnalysis] Supplemented "${cluster.name}" evidence: ${evidenceCount} → ${cluster.evidence_feedback_ids.length} (min: ${minEvidence})`);
       }
     }
 
@@ -290,10 +329,20 @@ export async function generateAIAnalysis(
 - P1: feedback_count >= 3，中频或需验证
 - P2: feedback_count < 3，低频或建议性
 
+## Evidence 规则（必须严格遵守）
+
+每个 issue_cluster 的 evidence_feedback_ids 数量必须与 feedback_count 匹配：
+- feedback_count >= 20：至少 8 条 evidence_feedback_ids
+- feedback_count >= 10：至少 5 条 evidence_feedback_ids
+- feedback_count < 10：至少 3 条 evidence_feedback_ids
+
+evidence_feedback_ids 必须来自当前 normalized feedback IDs，不允许编造。
+
 ## 禁止行为
 
 - 不允许编造 evidence_feedback_ids
 - 不允许把低样本问题标为 P0
+- 不允许只给固定 3 条 evidence（高反馈量 cluster 需要更多 evidence）
 - 不允许输出推理过程`;
 
   const userPrompt = `分析以下反馈数据，输出 JSON：
