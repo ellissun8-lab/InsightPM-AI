@@ -297,6 +297,9 @@ async function main() {
           category: null,
           sentiment: null,
           priority: null,
+          // 显式设置为 null，避免 undefined === undefined 触发 hard_validation
+          detected_theme: null,
+          expected_theme: null,
         };
 
         // 如果 CSV 有 raw_id 字段，使用它
