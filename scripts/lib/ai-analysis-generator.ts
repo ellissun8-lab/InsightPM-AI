@@ -135,20 +135,114 @@ async function callAIModel(
 }
 
 /**
+ * 从 AI 输出中提取 JSON 字符串
+ */
+function extractJsonFromContent(content: string): string | null {
+  // 1. 尝试提取 ```json code block
+  const codeBlockMatch = content.match(/```(?:json)?\s*\n?([\s\S]*?)\n?\s*```/);
+  if (codeBlockMatch) {
+    return codeBlockMatch[1].trim();
+  }
+
+  // 2. 提取第一个完整的 JSON object
+  const firstBrace = content.indexOf("{");
+  if (firstBrace === -1) return null;
+
+  let depth = 0;
+  let inString = false;
+  let escape = false;
+
+  for (let i = firstBrace; i < content.length; i++) {
+    const ch = content[i];
+
+    if (escape) {
+      escape = false;
+      continue;
+    }
+
+    if (ch === "\\") {
+      escape = true;
+      continue;
+    }
+
+    if (ch === '"') {
+      inString = !inString;
+      continue;
+    }
+
+    if (inString) continue;
+
+    if (ch === "{") depth++;
+    if (ch === "}") {
+      depth--;
+      if (depth === 0) {
+        return content.substring(firstBrace, i + 1);
+      }
+    }
+  }
+
+  // 3. 如果没有找到匹配的 }，返回从第一个 { 到结尾
+  return content.substring(firstBrace);
+}
+
+/**
+ * 清理 JSON 字符串
+ */
+function sanitizeJsonString(jsonStr: string): string {
+  // 移除 BOM
+  let cleaned = jsonStr.replace(/^﻿/, "");
+
+  // 移除控制字符（保留换行和制表符）
+  cleaned = cleaned.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, "");
+
+  // 移除 JSON 之后的尾部文本（补充/说明等）
+  const lastBrace = cleaned.lastIndexOf("}");
+  if (lastBrace !== -1) {
+    cleaned = cleaned.substring(0, lastBrace + 1);
+  }
+
+  // 修复常见的 trailing comma
+  cleaned = cleaned.replace(/,\s*([}\]])/g, "$1");
+
+  return cleaned;
+}
+
+/**
  * 解析并验证 AI 输出的 JSON
  */
 function parseAndValidateAIOutput(
   content: string,
   normalizedItems: NormalizedItem[]
-): { success: boolean; analysis?: any; error?: string } {
-  // 提取 JSON
-  const jsonMatch = content.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) {
-    return { success: false, error: "Failed to extract JSON from AI response" };
+): { success: boolean; analysis?: any; error?: string; parseStage?: string } {
+  // Step 1: 提取 JSON
+  let jsonStr = extractJsonFromContent(content);
+
+  if (!jsonStr) {
+    return { success: false, error: "Failed to extract JSON from AI response", parseStage: "extract" };
   }
 
+  // Step 2: 清理 JSON
+  jsonStr = sanitizeJsonString(jsonStr);
+
+  // Step 3: 尝试解析
+  let aiResult: any;
   try {
-    const aiResult = JSON.parse(jsonMatch[0]);
+    aiResult = JSON.parse(jsonStr);
+  } catch (parseError: any) {
+    // 记录错误信息
+    const contentPreviewHead = content.slice(0, 1000);
+    const contentPreviewTail = content.slice(-1000);
+
+    console.error(`[AIAnalysis] JSON parse failed:`, parseError.message);
+    console.error(`[AIAnalysis] Content preview (head):`, contentPreviewHead);
+    console.error(`[AIAnalysis] Content preview (tail):`, contentPreviewTail);
+
+    return {
+      success: false,
+      error: `Failed to parse JSON: ${parseError.message}`,
+      parseStage: "parse",
+    };
+  }
 
     // 验证必需字段
     if (!aiResult.segments || !Array.isArray(aiResult.segments)) {
@@ -198,10 +292,10 @@ function parseAndValidateAIOutput(
         ];
 
         const needed = minEvidence - evidenceCount;
-        const补充 = candidates.slice(0, needed);
+        const补充的Ids = candidates.slice(0, needed);
 
         if (!cluster.evidence_feedback_ids) cluster.evidence_feedback_ids = [];
-        cluster.evidence_feedback_ids.push(...补充);
+        cluster.evidence_feedback_ids.push(...补充的Ids);
 
         console.log(`[AIAnalysis] Supplemented "${cluster.name}" evidence: ${evidenceCount} → ${cluster.evidence_feedback_ids.length} (min: ${minEvidence})`);
       }
@@ -366,17 +460,47 @@ ${feedbackTexts.map((f) => `[${f.id}] ${f.text}`).join("\n")}
 
     // 如果解析失败，尝试一次 repair retry
     if (!parseResult.success) {
-      console.log(`[AIAnalysis] First parse failed, attempting repair retry...`);
-      const repairPrompt = `请把以下内容转换为合法 JSON，只输出 JSON，不要解释：\n\n${result.content!.slice(0, 3000)}`;
-      const repairResult = await callAIModel(apiKey, baseUrl, model, "只输出合法 JSON", repairPrompt);
+      console.log(`[AIAnalysis] First parse failed (stage: ${parseResult.parseStage}), attempting repair retry...`);
+
+      // 只传上一次模型输出，让模型修格式
+      const extractedJson = extractJsonFromContent(result.content!) || result.content!.slice(0, 3000);
+      const repairSystemPrompt = `你是一个 JSON 修复专家。只输出合法 JSON，不要输出其他内容。
+
+规则：
+- 只输出合法 JSON
+- 不要输出"补充"、解释、Markdown、代码块
+- 不要 trailing comma
+- 所有 key 和字符串必须用双引号
+- 输出必须以 { 开头，以 } 结束`;
+
+      const repairPrompt = `修复以下 JSON，只输出合法 JSON：\n\n${extractedJson.slice(0, 4000)}`;
+      const repairResult = await callAIModel(apiKey, baseUrl, model, repairSystemPrompt, repairPrompt);
 
       if (repairResult.success) {
         parseResult = parseAndValidateAIOutput(repairResult.content!, normalizedItems);
       }
     }
 
+    // 如果仍然失败，尝试本地 sanitize
     if (!parseResult.success) {
-      return { success: false, error: parseResult.error };
+      console.log(`[AIAnalysis] Repair retry failed, attempting local sanitize...`);
+      const extractedJson = extractJsonFromContent(result.content!);
+      if (extractedJson) {
+        const sanitized = sanitizeJsonString(extractedJson);
+        try {
+          const aiResult = JSON.parse(sanitized);
+          if (aiResult.segments && aiResult.issue_clusters) {
+            parseResult = { success: true, analysis: aiResult, parseStage: "sanitize" };
+          }
+        } catch {}
+      }
+    }
+
+    if (!parseResult.success) {
+      return {
+        success: false,
+        error: parseResult.error,
+      };
     }
 
     // 构建完整 analysis
