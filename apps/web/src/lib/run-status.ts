@@ -6,155 +6,299 @@ export type RunDisplayStatus =
   | "partial"
   | "pending";
 
-export interface RunLike {
-  status?: string;
-  hardValidation?: {
-    status?: string;
-    score?: number;
-    pass?: number;
-    warning?: number;
-    fail?: number;
-  };
-  semanticValidation?: {
-    status?: string;
-    score?: number;
-    criticalIssues?: number;
-    evidenceBroken?: number;
-  };
-  validation?: {
-    score?: number;
-    hardScore?: number;
-    passed?: boolean;
-  };
-  hardScore?: number | null;
-  semanticScore?: number | null;
-  hardValidationPassed?: boolean;
-  isRunning?: boolean;
-  error?: string;
+export type RunLike = {
+  [key: string]: unknown;
+  status?: string | null;
+  isRunning?: boolean | null;
+  error?: unknown;
+  errors?: unknown;
+  hardScore?: number | string | null;
+  hardValidationScore?: number | string | null;
+  hardValidationPassed?: boolean | null;
+  semanticScore?: number | string | null;
+  evidenceBroken?: number | string | null;
+  criticalIssues?: number | string | null;
+  validation?: unknown;
+  summary?: unknown;
+  hard?: unknown;
+  hardValidation?: unknown;
+  semanticValidation?: unknown;
+  artifacts?: unknown;
+  metadata?: unknown;
+};
+
+const STATUS_LABELS: Record<RunDisplayStatus, string> = {
+  completed: "已完成",
+  running: "处理中",
+  review: "需复核",
+  failed: "失败",
+  partial: "部分完成",
+  pending: "等待中",
+};
+
+const STATUS_BADGE_CLASSES: Record<RunDisplayStatus, string> = {
+  completed: "bg-[#E7ECDD] text-[#2F6B3F] border-[#CAD5B8]",
+  running: "bg-[#EFE4CC] text-[#6F5E3B] border-[#D8CDBA]",
+  review: "bg-[#F3E5C8] text-[#8A5A00] border-[#E7C77B]",
+  failed: "bg-[#F3DCDC] text-[#8A2F2F] border-[#D8A0A0]",
+  partial: "bg-[#EEE8DA] text-[#6F6A5F] border-[#D8CDBA]",
+  pending: "bg-[#EEE8DA] text-[#6F6A5F] border-[#D8CDBA]",
+};
+
+function asRecord(value: unknown): Record<string, unknown> | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  return value as Record<string, unknown>;
 }
 
-/**
- * 判断 run 的展示状态
- * 优先级：
- * 1. 明确的 status 值（completed/running/failed/pending）
- * 2. 模糊的 status 值（warning/review/needs_review）→ 根据产物推断
- * 3. 无 status → 根据产物推断
- */
-export function getRunDisplayStatus(run: RunLike): RunDisplayStatus {
-  // 1. 明确的 status 值直接映射
-  if (run.status) {
-    const status = run.status.toLowerCase();
-    switch (status) {
-      case "completed":
-      case "success":
-      case "passed":
-      case "pass":
-      case "done":
-        return "completed";
-      case "running":
-      case "processing":
-      case "in_progress":
-        return "running";
-      case "failed":
-      case "error":
-        return "failed";
-      case "pending":
-        return "pending";
-    }
+function readPath(source: unknown, path: string[]): unknown {
+  let current: unknown = source;
+  for (const key of path) {
+    const record = asRecord(current);
+    if (!record || !(key in record)) return undefined;
+    current = record[key];
+  }
+  return current;
+}
+
+function toNumber(value: unknown): number | null {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (typeof value === "string" && value.trim() !== "") {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+  return null;
+}
+
+function firstNumber(run: RunLike, paths: string[][]): number | null {
+  for (const path of paths) {
+    const value = toNumber(readPath(run, path));
+    if (value !== null) return value;
+  }
+  return null;
+}
+
+function firstBoolean(run: RunLike, paths: string[][]): boolean | null {
+  for (const path of paths) {
+    const value = readPath(run, path);
+    if (typeof value === "boolean") return value;
+  }
+  return null;
+}
+
+function hasSignal(value: unknown): boolean {
+  if (value === true) return true;
+  if (typeof value === "string") return value.trim().length > 0;
+  if (typeof value === "number") return value > 0;
+  if (Array.isArray(value)) return value.length > 0;
+  const record = asRecord(value);
+  return !!record && Object.keys(record).length > 0;
+}
+
+function normalizeStatus(status: unknown): string {
+  return typeof status === "string" ? status.trim().toLowerCase() : "";
+}
+
+export function getRunHardScore(run: RunLike): number | null {
+  return firstNumber(run, [
+    ["hardScore"],
+    ["hardValidationScore"],
+    ["validation", "hardScore"],
+    ["summary", "hardScore"],
+    ["hard"],
+    ["hard", "score"],
+    ["hardValidation", "score"],
+    ["validation", "score"],
+  ]);
+}
+
+export function getRunSemanticScore(run: RunLike): number | null {
+  return firstNumber(run, [
+    ["semanticScore"],
+    ["semanticValidation", "score"],
+    ["validation", "semanticScore"],
+    ["summary", "semanticScore"],
+  ]);
+}
+
+function getRunEvidenceBroken(run: RunLike): number | null {
+  return firstNumber(run, [
+    ["evidenceBroken"],
+    ["semanticValidation", "evidenceBroken"],
+    ["validation", "evidenceBroken"],
+    ["summary", "evidenceBroken"],
+  ]);
+}
+
+function getRunCriticalIssues(run: RunLike): number | null {
+  return firstNumber(run, [
+    ["criticalIssues"],
+    ["semanticValidation", "criticalIssues"],
+    ["validation", "criticalIssues"],
+    ["summary", "criticalIssues"],
+  ]);
+}
+
+function getRunHardValidationPassed(run: RunLike): boolean | null {
+  const explicit = firstBoolean(run, [
+    ["hardValidationPassed"],
+    ["validation", "hardValidationPassed"],
+    ["validation", "passed"],
+    ["hardValidation", "passed"],
+  ]);
+  if (explicit !== null) return explicit;
+
+  const hardStatus = normalizeStatus(readPath(run, ["hardValidation", "status"]));
+  if (["pass", "passed", "success", "completed", "done"].includes(hardStatus)) {
+    return true;
+  }
+  if (["fail", "failed", "error"].includes(hardStatus)) {
+    return false;
   }
 
-  // 2. 模糊 status 或无 status → 根据产物推断
-  if (run.isRunning) return "running";
+  return null;
+}
 
-  const hardScore =
-    run.hardScore ??
-    run.hardValidation?.score ??
-    run.validation?.hardScore ??
-    run.validation?.score;
-  const hardPassed =
-    run.hardValidationPassed ?? run.validation?.passed ?? false;
-  const semanticScore = run.semanticValidation?.score;
-  const evidenceBroken = run.semanticValidation?.evidenceBroken ?? 0;
-  const criticalIssues = run.semanticValidation?.criticalIssues ?? 0;
+function hasCompletedArtifact(run: RunLike): boolean {
+  const artifactPaths = [
+    ["artifacts", "markdown"],
+    ["artifacts", "md"],
+    ["artifacts", "report"],
+    ["artifacts", "json"],
+    ["artifacts", "hasMarkdown"],
+    ["artifacts", "hasReport"],
+    ["artifacts", "hasJson"],
+    ["metadata", "artifacts", "markdown"],
+    ["metadata", "artifacts", "report"],
+    ["metadata", "artifacts", "json"],
+    ["metadata", "hasReport"],
+    ["hasReport"],
+    ["markdown"],
+    ["report"],
+    ["json"],
+    ["reportPath"],
+    ["markdownPath"],
+    ["jsonPath"],
+  ];
 
-  // failed: 有 error / hardScore === 0 / criticalIssues > 0
-  if (run.error || hardScore === 0 || criticalIssues > 0) {
+  return artifactPaths.some((path) => hasSignal(readPath(run, path)));
+}
+
+function hasErrorSignal(run: RunLike): boolean {
+  return hasSignal(run.error) || hasSignal(run.errors) || hasSignal(readPath(run, ["metadata", "error"]));
+}
+
+function hasReviewSignal(run: RunLike): boolean {
+  return [
+    ["warning"],
+    ["warnings"],
+    ["needsValidation"],
+    ["validation", "warning"],
+    ["validation", "warnings"],
+    ["validation", "needsValidation"],
+    ["summary", "warning"],
+    ["summary", "warnings"],
+    ["summary", "needsValidation"],
+    ["metadata", "warning"],
+    ["metadata", "warnings"],
+    ["metadata", "needsValidation"],
+  ].some((path) => hasSignal(readPath(run, path)));
+}
+
+function isFreshlyCreated(run: RunLike): boolean {
+  const createdAt =
+    readPath(run, ["createdAt"]) ??
+    readPath(run, ["startedAt"]) ??
+    readPath(run, ["timestamp"]);
+  if (typeof createdAt !== "string" || createdAt.trim() === "") return false;
+
+  const createdTime = new Date(createdAt).getTime();
+  if (!Number.isFinite(createdTime)) return false;
+
+  const finishedAt = readPath(run, ["finishedAt"]);
+  const updatedAt = readPath(run, ["updatedAt"]);
+  const hasFinishedTime =
+    (typeof finishedAt === "string" && finishedAt.trim() !== "") ||
+    (typeof updatedAt === "string" && updatedAt.trim() !== "" && updatedAt !== createdAt);
+
+  return !hasFinishedTime && Date.now() - createdTime < 15 * 60 * 1000;
+}
+
+export function getRunDisplayStatus(run: RunLike): RunDisplayStatus {
+  const explicitStatus = normalizeStatus(run.status);
+
+  if (["completed", "success", "passed", "pass", "done"].includes(explicitStatus)) {
+    return "completed";
+  }
+  if (["running", "processing", "in_progress"].includes(explicitStatus)) {
+    return "running";
+  }
+  if (["failed", "fail", "error"].includes(explicitStatus)) {
+    return "failed";
+  }
+  if (explicitStatus === "pending") {
+    return "pending";
+  }
+
+  if (run.isRunning === true) return "running";
+
+  const hardScore = getRunHardScore(run);
+  const hardPassed = getRunHardValidationPassed(run);
+  const semanticScore = getRunSemanticScore(run);
+  const evidenceBroken = getRunEvidenceBroken(run);
+  const criticalIssues = getRunCriticalIssues(run);
+  const hasArtifact = hasCompletedArtifact(run);
+  const hasReviewStatus = ["review", "needs_review", "warning"].includes(explicitStatus);
+
+  if (hasErrorSignal(run) || hardScore === 0 || (criticalIssues !== null && criticalIssues > 0)) {
     return "failed";
   }
 
-  // completed: hardScore >= 85 或 passed, semanticScore >= 85, evidenceBroken === 0
-  if (
-    (hardScore !== undefined && hardScore >= 85 || hardPassed) &&
-    semanticScore !== undefined &&
-    semanticScore >= 85 &&
-    evidenceBroken === 0
-  ) {
+  const hardOk = (hardScore !== null && hardScore >= 85) || hardPassed === true;
+  const semanticOk = semanticScore !== null && semanticScore >= 85;
+  const evidenceOk = evidenceBroken !== null && evidenceBroken === 0;
+
+  if (hardOk && semanticOk && evidenceOk && hasArtifact) {
     return "completed";
   }
 
-  // review: semanticScore < 85 或 evidenceBroken > 0
   if (
-    (semanticScore !== undefined && semanticScore < 85) ||
-    evidenceBroken > 0
+    (semanticScore !== null && semanticScore < 85) ||
+    (evidenceBroken !== null && evidenceBroken > 0) ||
+    hasReviewSignal(run) ||
+    hasReviewStatus
   ) {
     return "review";
   }
 
-  // partial: 有部分数据但不完整
-  if (hardScore !== undefined || semanticScore !== undefined) {
+  const hasHardInfo = hardScore !== null || hardPassed !== null;
+  if ((hasArtifact || hasHardInfo || semanticScore !== null) && (!hasHardInfo || semanticScore === null)) {
     return "partial";
   }
 
-  // pending: 无足够信息
+  if (isFreshlyCreated(run)) return "running";
+
   return "pending";
 }
 
-/** 状态中文标签 */
 export function getRunStatusLabel(status: RunDisplayStatus): string {
-  const map: Record<RunDisplayStatus, string> = {
-    completed: "已完成",
-    running: "处理中",
-    review: "需复核",
-    failed: "失败",
-    partial: "部分完成",
-    pending: "等待中",
-  };
-  return map[status];
+  return STATUS_LABELS[status];
 }
 
-/** 状态 Badge 样式 (Renance 暖色风格) */
 export function getRunStatusBadgeClass(status: RunDisplayStatus): string {
-  switch (status) {
-    case "completed":
-      return "bg-[#E7ECDD] text-[#2F6B3F] border-[#CAD5B8]";
-    case "running":
-      return "bg-[#EFE4CC] text-[#6F5E3B] border-[#D8CDBA]";
-    case "review":
-      return "bg-[#F3E5C8] text-[#8A5A00] border-[#E7C77B]";
-    case "failed":
-      return "bg-[#F3DCDC] text-[#8A2F2F] border-[#D8A0A0]";
-    case "partial":
-      return "bg-[#EEE8DA] text-[#6F6A5F] border-[#D8CDBA]";
-    case "pending":
-      return "bg-[#EEE8DA] text-[#6F6A5F] border-[#D8CDBA]";
-  }
+  return STATUS_BADGE_CLASSES[status];
 }
 
-/** 硬性校验显示文本 */
-export function getRunHardScoreLabel(run: RunLike): string {
-  const score =
-    run.hardScore ??
-    run.hardValidation?.score ??
-    run.validation?.hardScore ??
-    run.validation?.score;
+export function getRunHardValidationLabel(run: RunLike): string {
+  const hardScore = getRunHardScore(run);
+  if (hardScore !== null) return String(hardScore);
 
-  if (score !== undefined && score !== null) {
-    return String(score);
-  }
-
-  if (run.hardValidationPassed === true) {
-    return "通过";
-  }
+  const hardPassed = getRunHardValidationPassed(run);
+  if (hardPassed === true) return "通过";
+  if (hardPassed === false) return "未通过";
 
   return "未生成";
+}
+
+export function hasRunReportArtifact(run: RunLike): boolean {
+  return hasCompletedArtifact(run);
 }

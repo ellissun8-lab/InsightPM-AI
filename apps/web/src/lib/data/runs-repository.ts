@@ -4,6 +4,12 @@ import { isCloudMode } from "./storage-mode";
 
 const ROOT = path.resolve(process.cwd(), "../..");
 
+type RunArtifacts = {
+  markdown: boolean;
+  report: boolean;
+  json: boolean;
+};
+
 export interface RunRecord {
   // Primary camelCase fields
   id: string;
@@ -17,6 +23,7 @@ export interface RunRecord {
   evidenceBroken: number | null;
   hardValidation: any | null;
   semanticValidation: any | null;
+  artifacts: RunArtifacts | null;
   createdAt: string | null;
   updatedAt: string | null;
   startedAt: string | null;
@@ -106,6 +113,13 @@ function getRunsFromLocal(): RunRecord[] {
       const updatedAt = s.finishedAt || s.startedAt || s.timestamp || s.date || null;
       const feedbackCount = s.count || s.rawCount || 0;
       const dataset = s.dataset || s.datasetName || "";
+      const runDir = path.join(runsDir, d);
+      const artifacts = getLocalRunArtifacts(runDir);
+      const metadata = {
+        ...(s.metadata && typeof s.metadata === "object" ? s.metadata : {}),
+        artifacts,
+        hasReport: artifacts.markdown || artifacts.report || artifacts.json,
+      };
 
       runs.push({
         // Primary camelCase fields
@@ -120,12 +134,13 @@ function getRunsFromLocal(): RunRecord[] {
         evidenceBroken: s.semanticValidation?.evidenceBroken ?? null,
         hardValidation: s.hardValidation || null,
         semanticValidation: s.semanticValidation || null,
+        artifacts,
         createdAt,
         updatedAt,
         startedAt: createdAt,
         finishedAt: s.finishedAt || null,
         durationMs: s.duration_ms || s.durationMs || null,
-        metadata: null,
+        metadata,
 
         // Legacy compatibility
         case_name: name,
@@ -138,6 +153,36 @@ function getRunsFromLocal(): RunRecord[] {
   }
 
   return runs.sort((a, b) => new Date(b.updatedAt || 0).getTime() - new Date(a.updatedAt || 0).getTime());
+}
+
+function getLocalRunArtifacts(runDir: string): RunArtifacts {
+  const artifactDirs = ["analysis", "analysis-md", "insights", "validation-report"]
+    .map((name) => path.join(runDir, name))
+    .filter((dir) => fs.existsSync(dir));
+
+  const markdown = artifactDirs.some((dir) => directoryHasFile(dir, [".md"]));
+  const json = artifactDirs.some((dir) => directoryHasFile(dir, [".json"]));
+  const report = artifactDirs.some((dir) => directoryHasFile(dir, [".md", ".json", ".html", ".pdf"]));
+
+  return { markdown, report, json };
+}
+
+function directoryHasFile(dir: string, extensions: string[]): boolean {
+  try {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory() && directoryHasFile(fullPath, extensions)) {
+        return true;
+      }
+      if (entry.isFile() && extensions.includes(path.extname(entry.name).toLowerCase())) {
+        return true;
+      }
+    }
+  } catch {
+    return false;
+  }
+
+  return false;
 }
 
 function getRunByCaseNameFromLocal(caseName: string): RunRecord | null {
@@ -283,6 +328,7 @@ function mapSupabaseRunToRecord(row: any): RunRecord {
     semanticValidation: row.semantic_score != null
       ? { score: row.semantic_score, evidenceBroken: row.evidence_broken || 0, criticalIssues: 0, status: "pass" }
       : null,
+    artifacts: row.metadata?.artifacts ?? null,
     createdAt,
     updatedAt,
     startedAt: row.started_at || null,

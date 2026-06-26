@@ -10,6 +10,20 @@ export type RunListItem = {
   evidenceBroken?: number | null;
   hardValidation?: any | null;
   semanticValidation?: any | null;
+  artifacts?: {
+    markdown?: boolean;
+    report?: boolean;
+    json?: boolean;
+  } | null;
+  validation?: any | null;
+  summary?: any | null;
+  hard?: number | string | { score?: number | string } | null;
+  hardValidationScore?: number | string | null;
+  hardValidationPassed?: boolean | null;
+  criticalIssues?: number | null;
+  isRunning?: boolean | null;
+  error?: unknown;
+  errors?: unknown;
   createdAt?: string | null;
   updatedAt?: string | null;
   startedAt?: string | null;
