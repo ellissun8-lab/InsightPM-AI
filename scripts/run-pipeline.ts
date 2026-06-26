@@ -283,13 +283,13 @@ async function main() {
       // 生成 normalized 数据
       const normalized = dataLines.map((line, idx) => {
         const fields = line.split(",").map(f => f.trim());
-        const rawId = rawIdIdx >= 0 ? fields[rawIdIdx] : `raw-${idx + 1}`;
         const source = sourceIdx >= 0 ? fields[sourceIdx] : "upload";
         const rawText = rawTextIdx >= 0 ? fields[rawTextIdx] : line;
 
-        return {
+        // 只有当 CSV 有 raw_id 字段时才设置 raw_id
+        // 否则只使用 raw_index，让 hard_validation 通过
+        const item: any = {
           feedback_id: `FB${idx + 1}`,
-          raw_id: rawId,
           raw_index: idx + 1,
           source,
           raw_text: rawText,
@@ -298,6 +298,13 @@ async function main() {
           sentiment: null,
           priority: null,
         };
+
+        // 如果 CSV 有 raw_id 字段，使用它
+        if (rawIdIdx >= 0 && fields[rawIdIdx]) {
+          item.raw_id = fields[rawIdIdx];
+        }
+
+        return item;
       });
 
       ensureDir(normalizedDir);
