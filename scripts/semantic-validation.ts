@@ -49,11 +49,14 @@ function parseArgs() {
   let caseName = "mixed-feedback-realism-v1";
   let model = process.env.DEEPSEEK_VALIDATION_MODEL || "deepseek-v4-pro";
   let dataset = "";
+  let output: string | undefined;
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--case" && args[i + 1]) caseName = args[++i];
     if (args[i] === "--model" && args[i + 1]) model = args[++i];
     if (args[i] === "--dataset" && args[i + 1]) dataset = args[++i];
+    if (args[i] === "--output" && args[i + 1]) output = args[++i];
+    if (args[i] === "--run-dir" && args[i + 1]) output = args[++i];
   }
 
   // Derive dataset from caseName if not specified:
@@ -63,7 +66,7 @@ function parseArgs() {
     dataset = match ? match[1] : "mixed-feedback";
   }
 
-  return { caseName, model, dataset };
+  return { caseName, model, dataset, output };
 }
 
 function loadJson(p: string): any {
@@ -265,8 +268,9 @@ function assertValidationConsistency(
 }
 
 async function main() {
-  const { caseName, model, dataset } = parseArgs();
-  const runDir = path.join(RUNS_DIR, caseName);
+  const { caseName, model, dataset, output } = parseArgs();
+  // 如果指定了 --output / --run-dir，使用该目录；否则使用默认的 runs/{caseName}
+  const runDir = output || path.join(RUNS_DIR, caseName);
   const validationDir = path.join(runDir, "validation-report");
 
   if (!fs.existsSync(runDir)) {

@@ -687,8 +687,10 @@ ${segClusters.flatMap((c: any) => c.evidence_feedback_ids).join(", ") || "暂无
   const skipSemantic = config.skipSemantic;
   const step8 = await runStep("semantic_validation", async () => {
     // Run semantic validation via CLI
+    // 如果指定了 --output，传递给 semantic-validation
+    const outputArg = config.output ? ` --output "${config.output}"` : "";
     execSync(
-      `npx tsx scripts/semantic-validation.ts --case ${config.caseName} --dataset ${config.dataset} --model deepseek-v4-pro`,
+      `npx tsx scripts/semantic-validation.ts --case ${config.caseName} --dataset ${config.dataset} --model deepseek-v4-pro${outputArg}`,
       { cwd: PROJECT_ROOT, stdio: "pipe" }
     );
     return "Semantic validation complete";
