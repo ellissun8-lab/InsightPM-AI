@@ -1,4 +1,3 @@
-import { supabase } from "./supabase.js";
 import * as fs from "fs";
 import * as path from "path";
 import * as https from "https";
@@ -14,15 +13,16 @@ export interface DownloadResult {
     path: string;
     originalName: string;
     listError?: string;
-    downloadError?: string;
+    sdkDownloadError?: string;
+    restDownloadError?: string;
     signedUrlError?: string;
-    cause?: string;
-    stack?: string;
+    nodeVersion?: string;
   };
 }
 
 /**
  * 从 Supabase Storage 下载文件
+ * 优先使用 SDK，失败时 fallback 到 REST API + node:https
  */
 export async function downloadFromStorage(
   bucket: string,
@@ -31,89 +31,108 @@ export async function downloadFromStorage(
   originalName: string
 ): Promise<DownloadResult> {
   const localPath = path.join(localDir, "input.csv");
+  const nodeVersion = process.version;
 
   console.log(`[StorageDownloader] bucket: ${bucket}`);
   console.log(`[StorageDownloader] path: ${storagePath}`);
   console.log(`[StorageDownloader] localPath: ${localPath}`);
+  console.log(`[StorageDownloader] nodeVersion: ${nodeVersion}`);
 
-  const parentDir = path.dirname(storagePath);
-  const fileName = path.basename(storagePath);
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-  // Step 1: Best-effort 检查文件是否存在
-  // list 失败只是 warning，不阻止下载
+  // 错误收集
   let listError: string | undefined;
-  console.log(`[StorageDownloader] Checking if file exists (best-effort)...`);
-  try {
-    const { data: listData, error: le } = await supabase.storage
-      .from(bucket)
-      .list(parentDir);
+  let sdkDownloadError: string | undefined;
+  let restDownloadError: string | undefined;
+  let signedUrlError: string | undefined;
 
-    if (le) {
-      console.warn(`[StorageDownloader] list failed (non-fatal):`, le.message);
-      listError = le.message;
-    } else {
-      const fileExists = listData?.some((f) => f.name === fileName);
-      if (!fileExists) {
-        console.error(`[StorageDownloader] File not found in list: ${storagePath}`);
-        return {
-          success: false,
-          error: {
-            message: "Input CSV not found in Supabase Storage",
-            bucket,
-            path: storagePath,
-            originalName,
-            listError: `File '${fileName}' not found in '${parentDir}'`,
-          },
-        };
+  // Step 1: 尝试 SDK 下载
+  try {
+    console.log(`[StorageDownloader] Attempting SDK download...`);
+    const { createAdminClient } = await import("./supabase.js");
+    const supabase = createAdminClient();
+
+    // Best-effort list
+    const parentDir = path.dirname(storagePath);
+    const fileName = path.basename(storagePath);
+    try {
+      const { data: listData, error: le } = await supabase.storage
+        .from(bucket)
+        .list(parentDir);
+
+      if (le) {
+        console.warn(`[StorageDownloader] SDK list failed (non-fatal):`, le.message);
+        listError = le.message;
+      } else {
+        const fileExists = listData?.some((f) => f.name === fileName);
+        if (!fileExists) {
+          console.error(`[StorageDownloader] File not found in list: ${storagePath}`);
+          return {
+            success: false,
+            error: { message: "Input CSV not found in Supabase Storage", bucket, path: storagePath, originalName, listError: `File '${fileName}' not found` },
+          };
+        }
       }
-      console.log(`[StorageDownloader] File exists in list`);
+    } catch (listErr: any) {
+      console.warn(`[StorageDownloader] SDK list exception (non-fatal):`, listErr.message);
+      listError = listErr.message;
     }
-  } catch (listErr: any) {
-    console.warn(`[StorageDownloader] list threw exception (non-fatal):`, listErr.message);
-    listError = listErr.message;
-  }
 
-  // Step 2: 尝试直接下载
-  let downloadError: string | undefined;
-  try {
-    console.log(`[StorageDownloader] Attempting direct download...`);
+    // SDK download
     const { data: fileData, error: dlError } = await supabase.storage
       .from(bucket)
       .download(storagePath);
 
-    if (dlError) {
-      downloadError = dlError.message;
-      console.error(`[StorageDownloader] Direct download failed:`, downloadError);
-      throw new Error(downloadError);
+    if (!dlError && fileData) {
+      fs.mkdirSync(localDir, { recursive: true });
+      const buffer = Buffer.from(await fileData.arrayBuffer());
+      fs.writeFileSync(localPath, buffer);
+      console.log(`[StorageDownloader] SDK download successful, size: ${buffer.length}`);
+      return { success: true, localPath, fileSize: buffer.length };
     }
 
-    if (!fileData) {
-      downloadError = "Download returned no data";
-      throw new Error(downloadError);
-    }
-
-    // 保存文件
-    fs.mkdirSync(localDir, { recursive: true });
-    const buffer = Buffer.from(await fileData.arrayBuffer());
-    fs.writeFileSync(localPath, buffer);
-
-    console.log(`[StorageDownloader] Direct download successful`);
-    console.log(`[StorageDownloader] File size: ${buffer.length} bytes`);
-
-    return {
-      success: true,
-      localPath,
-      fileSize: buffer.length,
-    };
-  } catch (directError: any) {
-    console.error(`[StorageDownloader] Direct download error:`, directError.message);
-    if (!downloadError) downloadError = directError.message;
+    sdkDownloadError = dlError?.message || "SDK download returned no data";
+    console.error(`[StorageDownloader] SDK download failed:`, sdkDownloadError);
+  } catch (sdkErr: any) {
+    sdkDownloadError = sdkErr.message;
+    console.error(`[StorageDownloader] SDK download exception:`, sdkDownloadError);
   }
 
-  // Step 3: Fallback - 使用 signed URL
-  let signedUrlError: string | undefined;
+  // Step 2: REST API + node:https 直接下载
+  if (supabaseUrl && serviceRoleKey) {
+    try {
+      console.log(`[StorageDownloader] Attempting REST API download...`);
+      const encodedPath = storagePath.split("/").map(encodeURIComponent).join("/");
+      const restUrl = `${supabaseUrl}/storage/v1/object/${bucket}/${encodedPath}`;
+
+      console.log(`[StorageDownloader] REST URL: ${restUrl}`);
+
+      const fileBuffer = await downloadViaHttps(restUrl, {
+        Authorization: `Bearer ${serviceRoleKey}`,
+        apikey: serviceRoleKey,
+      });
+
+      fs.mkdirSync(localDir, { recursive: true });
+      fs.writeFileSync(localPath, fileBuffer);
+
+      console.log(`[StorageDownloader] REST download successful, size: ${fileBuffer.length}`);
+      return { success: true, localPath, fileSize: fileBuffer.length };
+    } catch (restErr: any) {
+      restDownloadError = restErr.message;
+      console.error(`[StorageDownloader] REST download failed:`, restDownloadError);
+    }
+  } else {
+    console.warn(`[StorageDownloader] Skipping REST download: missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY`);
+    restDownloadError = "Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY";
+  }
+
+  // Step 3: Signed URL fallback
   try {
-    console.log(`[StorageDownloader] Trying signed URL fallback...`);
+    console.log(`[StorageDownloader] Attempting signed URL fallback...`);
+    const { createAdminClient } = await import("./supabase.js");
+    const supabase = createAdminClient();
+
     const { data: urlData, error: urlError } = await supabase.storage
       .from(bucket)
       .createSignedUrl(storagePath, 60);
@@ -121,28 +140,19 @@ export async function downloadFromStorage(
     if (urlError || !urlData?.signedUrl) {
       signedUrlError = urlError?.message || "Failed to create signed URL";
       console.error(`[StorageDownloader] Failed to create signed URL:`, signedUrlError);
-      throw new Error(signedUrlError);
+    } else {
+      console.log(`[StorageDownloader] Signed URL created, downloading...`);
+      const fileBuffer = await downloadViaHttps(urlData.signedUrl, {});
+
+      fs.mkdirSync(localDir, { recursive: true });
+      fs.writeFileSync(localPath, fileBuffer);
+
+      console.log(`[StorageDownloader] Signed URL download successful, size: ${fileBuffer.length}`);
+      return { success: true, localPath, fileSize: fileBuffer.length };
     }
-
-    console.log(`[StorageDownloader] Signed URL created, downloading via https...`);
-
-    // 使用 node:https 下载
-    const fileBuffer = await downloadViaHttps(urlData.signedUrl);
-
-    fs.mkdirSync(localDir, { recursive: true });
-    fs.writeFileSync(localPath, fileBuffer);
-
-    console.log(`[StorageDownloader] Signed URL download successful`);
-    console.log(`[StorageDownloader] File size: ${fileBuffer.length} bytes`);
-
-    return {
-      success: true,
-      localPath,
-      fileSize: fileBuffer.length,
-    };
-  } catch (fallbackError: any) {
-    console.error(`[StorageDownloader] Signed URL download failed:`, fallbackError.message);
-    if (!signedUrlError) signedUrlError = fallbackError.message;
+  } catch (suErr: any) {
+    signedUrlError = suErr.message;
+    console.error(`[StorageDownloader] Signed URL download failed:`, signedUrlError);
   }
 
   // 所有方法都失败
@@ -150,13 +160,15 @@ export async function downloadFromStorage(
   return {
     success: false,
     error: {
-      message: `Failed to download CSV after all attempts`,
+      message: "Failed to download CSV after all attempts",
       bucket,
       path: storagePath,
       originalName,
       listError,
-      downloadError,
+      sdkDownloadError,
+      restDownloadError,
       signedUrlError,
+      nodeVersion,
     },
   };
 }
@@ -164,26 +176,43 @@ export async function downloadFromStorage(
 /**
  * 使用 node:https 下载文件
  */
-function downloadViaHttps(url: string): Promise<Buffer> {
+function downloadViaHttps(
+  url: string,
+  headers: Record<string, string>
+): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const protocol = url.startsWith("https") ? https : http;
+    const timeout = 30000; // 30 seconds
 
-    protocol.get(url, (res) => {
+    const req = protocol.get(url, { headers, timeout }, (res) => {
+      // 跟随重定向
       if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        // 跟随重定向
-        downloadViaHttps(res.headers.location).then(resolve).catch(reject);
+        downloadViaHttps(res.headers.location, headers).then(resolve).catch(reject);
         return;
       }
 
-      if (res.statusCode !== 200) {
-        reject(new Error(`HTTP ${res.statusCode}: ${res.statusMessage}`));
+      // 检查状态码
+      if (res.statusCode && res.statusCode >= 400) {
+        const chunks: Buffer[] = [];
+        res.on("data", (chunk) => chunks.push(chunk));
+        res.on("end", () => {
+          const body = Buffer.concat(chunks).toString("utf-8").slice(0, 500);
+          reject(new Error(`HTTP ${res.statusCode}: ${body}`));
+        });
         return;
       }
 
+      // 下载文件
       const chunks: Buffer[] = [];
       res.on("data", (chunk) => chunks.push(chunk));
       res.on("end", () => resolve(Buffer.concat(chunks)));
       res.on("error", reject);
-    }).on("error", reject);
+    });
+
+    req.on("error", reject);
+    req.on("timeout", () => {
+      req.destroy();
+      reject(new Error("Request timeout"));
+    });
   });
 }
