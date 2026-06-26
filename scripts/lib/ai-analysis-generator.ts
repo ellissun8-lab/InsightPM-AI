@@ -148,7 +148,16 @@ ${feedbackTexts.map((f) => `- [${f.id}] ${f.text}`).join("\n")}
   try {
     console.log(`[AIAnalysis] Calling AI model...`);
 
-    const response = await fetch(`${baseUrl}/v1/chat/completions`, {
+    // 构建端点 URL
+    // 如果 baseUrl 已经包含 /v1，直接使用 /chat/completions
+    // 否则使用 /v1/chat/completions
+    const endpoint = baseUrl.endsWith("/v1")
+      ? `${baseUrl}/chat/completions`
+      : `${baseUrl}/v1/chat/completions`;
+
+    console.log(`[AIAnalysis] endpoint: ${endpoint}`);
+
+    const response = await fetch(endpoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -161,7 +170,7 @@ ${feedbackTexts.map((f) => `- [${f.id}] ${f.text}`).join("\n")}
           { role: "user", content: userPrompt },
         ],
         temperature: 0.1,
-        max_tokens: 4000,
+        max_tokens: 8000,
       }),
     });
 
@@ -170,22 +179,33 @@ ${feedbackTexts.map((f) => `- [${f.id}] ${f.text}`).join("\n")}
       console.error(`[AIAnalysis] API error: ${response.status} - ${errorText}`);
       return {
         success: false,
-        error: `AI API error: ${response.status} - ${errorText}`,
+        error: `AI API error: ${response.status} - ${errorText}. Provider: ${provider}, Model: ${model}, BaseURL: ${baseUrl}`,
       };
     }
 
     const data = await response.json();
-    const content = data.choices[0]?.message?.content || "";
+    console.log(`[AIAnalysis] Response data:`, JSON.stringify(data).slice(0, 500));
+
+    const content = data.choices?.[0]?.message?.content || data.content || data.text || "";
 
     console.log(`[AIAnalysis] AI response length: ${content.length}`);
+    console.log(`[AIAnalysis] AI response preview: ${content.slice(0, 200)}`);
+
+    if (!content || content.trim().length === 0) {
+      console.error(`[AIAnalysis] Empty response from AI model`);
+      return {
+        success: false,
+        error: `Empty response from AI model. Provider: ${provider}, Model: ${model}`,
+      };
+    }
 
     // 解析 JSON
     const jsonMatch = content.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
-      console.error(`[AIAnalysis] Failed to extract JSON from response`);
+      console.error(`[AIAnalysis] failed to extract JSON from response`);
       return {
         success: false,
-        error: "Failed to extract JSON from AI response",
+        error: `Failed to extract JSON from AI response. Response: ${content.slice(0, 200)}`,
       };
     }
 
