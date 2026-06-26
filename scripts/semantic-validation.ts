@@ -171,10 +171,10 @@ function buildUserPrompt(
     .map(s => `### ${s.id}\n${truncate(s.md, 2000)}`)
     .join("\n\n");
 
-  // Summarize normalized data
-  const feedbackSummary = normalized.slice(0, 10).map(n => ({
+  // Summarize normalized data - 传递所有 feedback，以便 AI 验证 evidence_feedback_ids
+  const feedbackSummary = normalized.map(n => ({
     feedback_id: n.feedback_id,
-    text: (n.cleaned_content || n.text || "").substring(0, 80),
+    text: (n.cleaned_content || n.text || n.normalized_text || "").substring(0, 80),
     detected_theme: n.detected_theme,
   }));
 
