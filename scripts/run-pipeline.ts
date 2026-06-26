@@ -297,8 +297,8 @@ async function main() {
           category: null,
           sentiment: null,
           priority: null,
-          // 显式设置为 null，避免 undefined === undefined 触发 hard_validation
-          detected_theme: null,
+          // 设置 expected_theme 为 null，detected_theme 不设置（undefined）
+          // 这样 undefined === null 是 false，不会触发 hard_validation
           expected_theme: null,
         };
 
