@@ -265,6 +265,46 @@ async function main() {
 
   // ── Step 2: normalize_feedback ─────────────────────────────────
   const step2 = await runStep("normalize_feedback", async () => {
+    // 如果指定了 --input，需要从 raw input 重新生成 normalized 数据
+    // 不能从 baseline 复制，因为 raw_id 可能不匹配
+    if (config.input && fs.existsSync(config.input)) {
+      // 读取 raw input
+      const rawContent = fs.readFileSync(inputCsv, "utf-8");
+      const rawLines = rawContent.split("\n").filter(l => l.trim());
+      const header = rawLines[0];
+      const dataLines = rawLines.slice(1);
+
+      // 解析 header 确定字段位置
+      const headerFields = header.split(",").map(f => f.trim().toLowerCase());
+      const rawIdIdx = headerFields.indexOf("raw_id");
+      const sourceIdx = headerFields.indexOf("source");
+      const rawTextIdx = headerFields.indexOf("raw_text");
+
+      // 生成 normalized 数据
+      const normalized = dataLines.map((line, idx) => {
+        const fields = line.split(",").map(f => f.trim());
+        const rawId = rawIdIdx >= 0 ? fields[rawIdIdx] : `raw-${idx + 1}`;
+        const source = sourceIdx >= 0 ? fields[sourceIdx] : "upload";
+        const rawText = rawTextIdx >= 0 ? fields[rawTextIdx] : line;
+
+        return {
+          feedback_id: `FB${idx + 1}`,
+          raw_id: rawId,
+          raw_index: idx + 1,
+          source,
+          raw_text: rawText,
+          normalized_text: rawText,
+          category: null,
+          sentiment: null,
+          priority: null,
+        };
+      });
+
+      ensureDir(normalizedDir);
+      fs.writeFileSync(normalizedJson, JSON.stringify(normalized, null, 2));
+      return `Generated ${normalized.length} normalized items from input CSV`;
+    }
+
     const baselineNorm = path.join(BASELINE_DIR, config.baseline, "normalized");
     if (!config.generate && fs.existsSync(baselineNorm)) {
       copyDir(baselineNorm, normalizedDir);
