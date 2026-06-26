@@ -9,6 +9,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { execSync } from "child_process";
 import { runHardValidation } from "./lib/hard-validation";
+import { generateAIAnalysis } from "./lib/ai-analysis-generator";
 
 const PROJECT_ROOT = path.join(__dirname, "..");
 const BASELINE_DIR = path.join(PROJECT_ROOT, "baseline");
@@ -456,7 +457,7 @@ async function main() {
 
   // ── Step 3: build_segments ─────────────────────────────────────
   const step3 = await runStep("build_segments", async () => {
-    // 如果指定了 --input，基于当前 normalized 数据生成 deterministic analysis
+    // 如果指定了 --input，使用 AI 模型或 deterministic 生成 analysis
     // 不能复用 baseline，因为 evidence IDs 会不匹配
     if (config.input && fs.existsSync(config.input)) {
       const normalizedData = loadJsonSafe(normalizedJson);
@@ -464,8 +465,20 @@ async function main() {
         throw new Error("Normalized data not found or empty");
       }
 
-      // 生成 deterministic analysis.json
-      const analysis = generateDeterministicAnalysis(normalizedData, config.dataset);
+      // 尝试使用 AI 模型生成 analysis
+      const aiResult = await generateAIAnalysis(normalizedData, config.dataset);
+
+      let analysis: any;
+      if (aiResult.success && aiResult.analysis) {
+        console.log(`  Using AI-generated analysis`);
+        analysis = aiResult.analysis;
+      } else {
+        // AI 失败时使用 deterministic fallback
+        console.log(`  AI analysis failed: ${aiResult.error}`);
+        console.log(`  Falling back to deterministic analysis`);
+        analysis = generateDeterministicAnalysis(normalizedData, config.dataset);
+      }
+
       ensureDir(analysisDir);
       fs.writeFileSync(overallJson, JSON.stringify(analysis, null, 2));
 
