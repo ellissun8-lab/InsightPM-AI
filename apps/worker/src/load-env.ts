@@ -44,11 +44,14 @@ export function loadEnv(): void {
         if (isEmpty) {
           const match = content.match(new RegExp(`^${varName}=(.+)$`, "m"));
           if (match) {
-            process.env[varName] = match[1].trim();
-            console.log(`[load-env] Set ${varName}: ${process.env[varName] ? "configured" : "FAILED"}`);
+            const value = match[1].trim();
+            process.env[varName] = value;
+            console.log(`[load-env] Set ${varName}: ${value ? "configured (length=" + value.length + ")" : "FAILED"}`);
           } else {
             console.log(`[load-env] ${varName}: not found in ${envPath}`);
           }
+        } else {
+          console.log(`[load-env] ${varName}: already set`);
         }
       }
 

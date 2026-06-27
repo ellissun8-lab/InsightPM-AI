@@ -2,6 +2,9 @@
 import { loadEnv } from "./load-env.js";
 loadEnv();
 
+// 调试：检查 DEEPSEEK_API_KEY
+console.log("[Worker] DEBUG: DEEPSEEK_API_KEY =", process.env.DEESEEK_API_KEY ? "configured" : "NOT SET");
+
 import { getPendingRuns } from "./supabase.js";
 import { processRun } from "./process-run.js";
 
