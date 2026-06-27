@@ -189,7 +189,7 @@ export async function processRun(run: RunRecord): Promise<void> {
       updateData.evidence_broken = pipelineResult.evidenceBroken;
     }
     if (pipelineResult.durationMs !== null) {
-      updateData.duration_ms = pipelineResult.durationMs;
+      if (pipelineResult.durationMs) completedMetadata.durationMs = pipelineResult.durationMs;
     }
 
     const { error: updateError } = await supabase

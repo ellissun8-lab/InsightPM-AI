@@ -1,4 +1,41 @@
-import "dotenv/config";
+import * as dotenv from "dotenv";
+import * as path from "path";
+import * as fs from "fs";
+
+// 按优先级加载 .env 文件
+const envPaths = [
+  path.resolve(process.cwd(), ".env"),
+  path.resolve(process.cwd(), "../.env.local"),
+  path.resolve(process.cwd(), "../.env"),
+];
+
+console.log("[Worker] ProofLoop Cloud Worker starting...");
+console.log(`[Worker] process.cwd(): ${process.cwd()}`);
+
+let envLoaded = false;
+for (const envPath of envPaths) {
+  const exists = fs.existsSync(envPath);
+  console.log(`[Worker] Checking ${envPath}: ${exists ? "exists" : "not found"}`);
+  if (exists && !envLoaded) {
+    dotenv.config({ path: envPath, override: false });
+    console.log(`[Worker] Loaded env from: ${envPath}`);
+    envLoaded = true;
+  }
+}
+
+// 打印环境变量状态（不打印原文）
+console.log("[Worker] Environment check:");
+console.log(`  SUPABASE_URL: ${process.env.SUPABASE_URL ? "configured" : "NOT SET"}`);
+console.log(`  SUPABASE_SERVICE_ROLE_KEY: ${process.env.SUPABASE_SERVICE_ROLE_KEY ? "configured" : "NOT SET"}`);
+console.log(`  AI_PROVIDER: ${process.env.AI_PROVIDER || "NOT SET"}`);
+console.log(`  OPENAI_API_KEY: ${process.env.OPENAI_API_KEY ? "configured" : "NOT SET"}`);
+console.log(`  OPENAI_BASE_URL: ${process.env.OPENAI_BASE_URL || "NOT SET"}`);
+console.log(`  OPENAI_MODEL: ${process.env.OPENAI_MODEL || "NOT SET"}`);
+console.log(`  VALIDATION_AI_PROVIDER: ${process.env.VALIDATION_AI_PROVIDER || "NOT SET"}`);
+console.log(`  DEEPSEEK_API_KEY: ${process.env.DEESEEK_API_KEY ? "configured" : "NOT SET"}`);
+console.log(`  DEEPSEEK_BASE_URL: ${process.env.DEESEEK_BASE_URL || "NOT SET"}`);
+console.log(`  DEEPSEEK_VALIDATION_MODEL: ${process.env.DEESEEK_VALIDATION_MODEL || "NOT SET"}`);
+
 import { getPendingRuns } from "./supabase.js";
 import { processRun } from "./process-run.js";
 
@@ -7,18 +44,7 @@ const POLL_INTERVAL_MS = parseInt(
   10
 );
 
-console.log("[Worker] ProofLoop Cloud Worker starting...");
-console.log(`[Worker] Supabase URL: ${process.env.SUPABASE_URL ? "configured" : "NOT SET"}`);
-console.log(`[Worker] Service Role Key: ${process.env.SUPABASE_SERVICE_ROLE_KEY ? "configured" : "NOT SET"}`);
 console.log(`[Worker] Poll interval: ${POLL_INTERVAL_MS}ms`);
-console.log("[Worker] Environment check:");
-console.log(`  AI_PROVIDER: ${process.env.AI_PROVIDER || "NOT SET"}`);
-console.log(`  OPENAI_MODEL: ${process.env.OPENAI_MODEL || "NOT SET"}`);
-console.log(`  OPENAI_BASE_URL: ${process.env.OPENAI_BASE_URL || "NOT SET"}`);
-console.log(`  OPENAI_API_KEY: ${process.env.OPENAI_API_KEY ? "configured" : "NOT SET"}`);
-console.log(`  DEEPSEEK_API_KEY: ${process.env.DEESEEK_API_KEY ? "configured" : "NOT SET"}`);
-console.log(`  DEEPSEEK_BASE_URL: ${process.env.DEESEEK_BASE_URL || "NOT SET"}`);
-console.log(`  DEEPSEEK_VALIDATION_MODEL: ${process.env.DEESEEK_VALIDATION_MODEL || "NOT SET"}`);
 console.log("[Worker] Waiting for pending runs...");
 
 let isRunning = false;
