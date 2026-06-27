@@ -223,46 +223,19 @@ function parseAndValidateAIOutput(
     }
   }
 
-  // Step 6: Evidence guard - 补足 evidence 到 feedback_count 数量
-  // 同时确保同一个 feedback_id 不会被多个 segment 使用
+  // Step 6: Evidence guard - 确保 evidence 数量与 feedback_count 匹配
+  // 如果 evidence 不足，降低 feedback_count 而不是补不相关的 evidence
   console.log(`[AIAnalysis] Applying evidence guard...`);
-  const usedFeedbackIds = new Set<string>();
-  for (const cluster of aiResult.issue_clusters) {
-    // 先标记当前 cluster 已有的 evidence
-    for (const id of (cluster.evidence_feedback_ids || [])) {
-      usedFeedbackIds.add(id);
-    }
-  }
-
   for (const cluster of aiResult.issue_clusters) {
     const feedbackCount = cluster.feedback_count || 0;
     const evidenceCount = cluster.evidence_feedback_ids?.length || 0;
 
     if (evidenceCount < feedbackCount) {
-      const existingIds = new Set(cluster.evidence_feedback_ids || []);
-
-      // 从所有 feedback 中补足，但排除已被其他 segment 使用的
-      const candidates = allFeedbackIds.filter(
-        (id) => !existingIds.has(id) && validFeedbackIds.has(id) && !usedFeedbackIds.has(id)
-      );
-
-      const needed = feedbackCount - evidenceCount;
-      const supplementedIds = candidates.slice(0, needed);
-
-      if (!cluster.evidence_feedback_ids) cluster.evidence_feedback_ids = [];
-      cluster.evidence_feedback_ids.push(...supplementedIds);
-
-      // 标记这些 feedback_id 已被使用
-      for (const id of supplementedIds) {
-        usedFeedbackIds.add(id);
-      }
-
-      console.log(`[AIAnalysis] Supplemented "${cluster.name}" evidence: ${evidenceCount} -> ${cluster.evidence_feedback_ids.length} (target: ${feedbackCount})`);
+      // 降低 feedback_count 到实际 evidence 数量
+      cluster.feedback_count = evidenceCount;
+      console.log(`[AIAnalysis] Adjusted "${cluster.name}" feedback_count: ${feedbackCount} -> ${evidenceCount} (evidence count)`);
     }
   }
-
-
-
 
 
 
