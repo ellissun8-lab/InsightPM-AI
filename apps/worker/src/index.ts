@@ -17,22 +17,22 @@ for (const envPath of envPaths) {
   const exists = fs.existsSync(envPath);
   console.log(`[Worker] Checking ${envPath}: ${exists ? "exists" : "not found"}`);
   if (exists && !envLoaded) {
-    dotenv.config({ path: envPath, override: false });
-    console.log(`[Worker] Loaded env from: ${envPath}`);
-    envLoaded = true;
-
-    // Fallback: 手动解析关键环境变量（dotenv 可能解析失败）
+    // 先手动解析（确保关键变量一定加载）
     const content = fs.readFileSync(envPath, "utf-8");
-    const varsToCheck = ["DEEPSEEK_API_KEY", "DEEPSEEK_BASE_URL", "DEEPSEEK_VALIDATION_MODEL"];
+    const varsToCheck = ["DEEPSEEK_API_KEY", "DEEPSEEK_BASE_URL", "DEEPSEEK_VALIDATION_MODEL", "SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY", "OPENAI_API_KEY", "OPENAI_BASE_URL", "OPENAI_MODEL"];
     for (const varName of varsToCheck) {
-      if (!process.env[varName]) {
+      if (!process.env[varName] || process.env[varName] === "") {
         const match = content.match(new RegExp(`${varName}=(.+)`));
         if (match) {
           process.env[varName] = match[1].trim();
-          console.log(`[Worker] Fallback loaded ${varName}`);
         }
       }
     }
+
+    // 再用 dotenv 加载其他变量
+    dotenv.config({ path: envPath, override: false });
+    console.log(`[Worker] Loaded env from: ${envPath}`);
+    envLoaded = true;
   }
 }
 
