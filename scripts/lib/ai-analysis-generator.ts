@@ -223,17 +223,25 @@ function parseAndValidateAIOutput(
     }
   }
 
-  // Step 6: Evidence guard - 确保 evidence 数量与 feedback_count 匹配
-  // 如果 evidence 不足，降低 feedback_count 而不是补不相关的 evidence
+  // Step 6: Evidence guard - 去重 + 降低 feedback_count
   console.log(`[AIAnalysis] Applying evidence guard...`);
+  const usedEvidenceIds = new Set<string>();
   for (const cluster of aiResult.issue_clusters) {
+    // 去重：移除已被其他 cluster 使用的 evidence
+    if (cluster.evidence_feedback_ids) {
+      cluster.evidence_feedback_ids = cluster.evidence_feedback_ids.filter((id: string) => {
+        if (usedEvidenceIds.has(id)) return false;
+        usedEvidenceIds.add(id);
+        return true;
+      });
+    }
+
     const feedbackCount = cluster.feedback_count || 0;
     const evidenceCount = cluster.evidence_feedback_ids?.length || 0;
 
     if (evidenceCount < feedbackCount) {
-      // 降低 feedback_count 到实际 evidence 数量
       cluster.feedback_count = evidenceCount;
-      console.log(`[AIAnalysis] Adjusted "${cluster.name}" feedback_count: ${feedbackCount} -> ${evidenceCount} (evidence count)`);
+      console.log(`[AIAnalysis] Adjusted "${cluster.name}" feedback_count: ${feedbackCount} -> ${evidenceCount}`);
     }
   }
 
