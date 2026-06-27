@@ -10,19 +10,18 @@ export function loadEnv(): void {
   console.log("[load-env] Starting environment variable loading...");
   console.log(`[load-env] process.cwd(): ${process.cwd()}`);
 
-  // 按优先级加载 .env 文件
+  // 按优先级加载 .env 文件（后面的文件不覆盖前面的）
   const envPaths = [
     path.resolve(process.cwd(), ".env"),
     path.resolve(process.cwd(), "../../.env.local"),
     path.resolve(process.cwd(), "../../.env"),
   ];
 
-  let envLoaded = false;
   for (const envPath of envPaths) {
     const exists = fs.existsSync(envPath);
     console.log(`[load-env] ${envPath}: ${exists ? "exists" : "not found"}`);
 
-    if (exists && !envLoaded) {
+    if (exists) {
       // 先手动解析关键变量（确保一定加载）
       const content = fs.readFileSync(envPath, "utf-8");
       const criticalVars = [
@@ -47,10 +46,9 @@ export function loadEnv(): void {
         }
       }
 
-      // 再用 dotenv 加载其他变量
+      // 再用 dotenv 加载其他变量（不覆盖已存在的）
       dotenv.config({ path: envPath, override: false });
       console.log(`[load-env] Loaded env from: ${envPath}`);
-      envLoaded = true;
     }
   }
 
