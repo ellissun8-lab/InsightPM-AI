@@ -73,4 +73,8 @@ export function loadEnv(): void {
   console.log(`  DEEPSEEK_API_KEY: ${process.env.DEESEEK_API_KEY ? "configured" : "NOT SET"}`);
   console.log(`  DEEPSEEK_BASE_URL: ${process.env.DEESEEK_BASE_URL || "NOT SET"}`);
   console.log(`  DEEPSEEK_VALIDATION_MODEL: ${process.env.DEESEEK_VALIDATION_MODEL || "NOT SET"}`);
+
+  // 调试：直接读取 process.env.DEESEEK_API_KEY
+  console.log("[load-env] DEBUG: process.env.DEESEEK_API_KEY =", process.env.DEESEEK_API_KEY);
+  console.log("[load-env] DEBUG: typeof process.env.DEESEEK_API_KEY =", typeof process.env.DEESEEK_API_KEY);
 }
