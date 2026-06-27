@@ -1,33 +1,43 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+let _supabase: SupabaseClient | null = null;
 
-if (!supabaseUrl) {
-  throw new Error("Missing SUPABASE_URL environment variable");
-}
+/**
+ * 获取 Supabase 客户端（延迟初始化）
+ */
+export function getSupabaseClient(): SupabaseClient {
+  if (_supabase) return _supabase;
 
-if (!supabaseServiceRoleKey) {
-  throw new Error("Missing SUPABASE_SERVICE_ROLE_KEY environment variable");
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl) {
+    throw new Error("Missing SUPABASE_URL environment variable");
+  }
+
+  if (!supabaseServiceRoleKey) {
+    throw new Error("Missing SUPABASE_SERVICE_ROLE_KEY environment variable");
+  }
+
+  _supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  });
+
+  return _supabase;
 }
 
 /**
- * Supabase client for Worker
- * Uses service role key to bypass RLS
+ * Supabase client for Worker (兼容旧代码)
  */
-export const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false,
+export const supabase = new Proxy({} as SupabaseClient, {
+  get(_target, prop) {
+    const client = getSupabaseClient();
+    return (client as any)[prop];
   },
 });
-
-/**
- * Create admin client (alias for supabase, for compatibility)
- */
-export function createAdminClient() {
-  return supabase;
-}
 
 export interface RunRecord {
   id: string;
@@ -49,7 +59,8 @@ export interface RunRecord {
  * 查询 pending runs
  */
 export async function getPendingRuns(): Promise<RunRecord[]> {
-  const { data, error } = await supabase
+  const client = getSupabaseClient();
+  const { data, error } = await client
     .from("runs")
     .select("*")
     .eq("status", "pending")
@@ -72,6 +83,7 @@ export async function updateRunStatus(
   status: string,
   metadata?: Record<string, any>
 ): Promise<boolean> {
+  const client = getSupabaseClient();
   const updateData: any = {
     status,
     updated_at: new Date().toISOString(),
@@ -81,7 +93,7 @@ export async function updateRunStatus(
     updateData.metadata = metadata;
   }
 
-  const { error } = await supabase
+  const { error } = await client
     .from("runs")
     .update(updateData)
     .eq("id", runId);
@@ -92,4 +104,11 @@ export async function updateRunStatus(
   }
 
   return true;
+}
+
+/**
+ * Create admin client (alias for compatibility)
+ */
+export function createAdminClient() {
+  return getSupabaseClient();
 }

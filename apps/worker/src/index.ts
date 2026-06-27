@@ -20,6 +20,19 @@ for (const envPath of envPaths) {
     dotenv.config({ path: envPath, override: false });
     console.log(`[Worker] Loaded env from: ${envPath}`);
     envLoaded = true;
+
+    // Fallback: 手动解析关键环境变量（dotenv 可能解析失败）
+    const content = fs.readFileSync(envPath, "utf-8");
+    const varsToCheck = ["DEEPSEEK_API_KEY", "DEEPSEEK_BASE_URL", "DEEPSEEK_VALIDATION_MODEL"];
+    for (const varName of varsToCheck) {
+      if (!process.env[varName]) {
+        const match = content.match(new RegExp(`${varName}=(.+)`));
+        if (match) {
+          process.env[varName] = match[1].trim();
+          console.log(`[Worker] Fallback loaded ${varName}`);
+        }
+      }
+    }
   }
 }
 
