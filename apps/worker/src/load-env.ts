@@ -6,9 +6,11 @@ import * as fs from "fs";
  * 统一环境变量加载
  * 优先级：apps/worker/.env > 项目根目录 .env.local > 项目根目录 .env
  */
-export function loadEnv(): void {
+export function loadEnv(): Record<string, string> {
   console.log("[load-env] Starting environment variable loading...");
   console.log(`[load-env] process.cwd(): ${process.cwd()}`);
+
+  const loadedVars: Record<string, string> = {};
 
   // 按优先级加载 .env 文件（后面的文件不覆盖前面的）
   const envPaths = [
@@ -38,20 +40,13 @@ export function loadEnv(): void {
       ];
 
       for (const varName of criticalVars) {
-        const currentValue = process.env[varName];
-        const isEmpty = !currentValue || currentValue === "";
-
-        if (isEmpty) {
+        if (!loadedVars[varName]) {
           const match = content.match(new RegExp(`^${varName}=(.+)$`, "m"));
           if (match) {
             const value = match[1].trim();
+            loadedVars[varName] = value;
             process.env[varName] = value;
-            console.log(`[load-env] Set ${varName}: ${value ? "configured (length=" + value.length + ")" : "FAILED"}`);
-          } else {
-            console.log(`[load-env] ${varName}: not found in ${envPath}`);
           }
-        } else {
-          console.log(`[load-env] ${varName}: already set`);
         }
       }
 
@@ -63,18 +58,23 @@ export function loadEnv(): void {
 
   // 打印环境变量状态（不打印原文）
   console.log("[load-env] Environment check:");
-  console.log(`  SUPABASE_URL: ${process.env.SUPABASE_URL ? "configured" : "NOT SET"}`);
-  console.log(`  SUPABASE_SERVICE_ROLE_KEY: ${process.env.SUPABASE_SERVICE_ROLE_KEY ? "configured" : "NOT SET"}`);
-  console.log(`  AI_PROVIDER: ${process.env.AI_PROVIDER || "NOT SET"}`);
-  console.log(`  OPENAI_API_KEY: ${process.env.OPENAI_API_KEY ? "configured" : "NOT SET"}`);
-  console.log(`  OPENAI_BASE_URL: ${process.env.OPENAI_BASE_URL || "NOT SET"}`);
-  console.log(`  OPENAI_MODEL: ${process.env.OPENAI_MODEL || "NOT SET"}`);
-  console.log(`  VALIDATION_AI_PROVIDER: ${process.env.VALIDATION_AI_PROVIDER || "NOT SET"}`);
-  console.log(`  DEEPSEEK_API_KEY: ${process.env.DEESEEK_API_KEY ? "configured" : "NOT SET"}`);
-  console.log(`  DEEPSEEK_BASE_URL: ${process.env.DEESEEK_BASE_URL || "NOT SET"}`);
-  console.log(`  DEEPSEEK_VALIDATION_MODEL: ${process.env.DEESEEK_VALIDATION_MODEL || "NOT SET"}`);
+  const varsToCheck = [
+    "SUPABASE_URL",
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "AI_PROVIDER",
+    "OPENAI_API_KEY",
+    "OPENAI_BASE_URL",
+    "OPENAI_MODEL",
+    "VALIDATION_AI_PROVIDER",
+    "DEEPSEEK_API_KEY",
+    "DEEPSEEK_BASE_URL",
+    "DEEPSEEK_VALIDATION_MODEL",
+  ];
 
-  // 调试：直接读取 process.env.DEESEEK_API_KEY
-  console.log("[load-env] DEBUG: process.env.DEESEEK_API_KEY =", process.env.DEESEEK_API_KEY);
-  console.log("[load-env] DEBUG: typeof process.env.DEESEEK_API_KEY =", typeof process.env.DEESEEK_API_KEY);
+  for (const varName of varsToCheck) {
+    const value = loadedVars[varName] || process.env[varName];
+    console.log(`  ${varName}: ${value ? "configured" : "NOT SET"}`);
+  }
+
+  return loadedVars;
 }

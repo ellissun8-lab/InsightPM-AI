@@ -1,9 +1,6 @@
 // 必须在最顶部加载环境变量
 import { loadEnv } from "./load-env.js";
-loadEnv();
-
-// 调试：检查 DEEPSEEK_API_KEY
-console.log("[Worker] DEBUG: DEEPSEEK_API_KEY =", process.env.DEESEEK_API_KEY ? "configured" : "NOT SET");
+const envVars = loadEnv();
 
 import { getPendingRuns } from "./supabase.js";
 import { processRun } from "./process-run.js";
