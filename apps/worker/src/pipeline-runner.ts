@@ -112,6 +112,15 @@ export async function runPipeline(
         ...process.env,
         // 确保 Node.js 能找到 tsx
         PATH: `${path.join(PROJECT_ROOT, "node_modules/.bin")}${isWindows ? ";" : ":"}${process.env.PATH}`,
+        // 显式传递 AI 相关环境变量
+        VALIDATION_AI_PROVIDER: process.env.VALIDATION_AI_PROVIDER || "",
+        DEEPSEEK_API_KEY: process.env.DEESEEK_API_KEY || "",
+        DEEPSEEK_BASE_URL: process.env.DEESEEK_BASE_URL || "",
+        DEEPSEEK_VALIDATION_MODEL: process.env.DEESEEK_VALIDATION_MODEL || "",
+        AI_PROVIDER: process.env.AI_PROVIDER || "",
+        OPENAI_API_KEY: process.env.OPENAI_API_KEY || "",
+        OPENAI_BASE_URL: process.env.OPENAI_BASE_URL || "",
+        OPENAI_MODEL: process.env.OPENAI_MODEL || "",
       },
       windowsHide: true,
     });
