@@ -38,10 +38,16 @@ export function loadEnv(): void {
       ];
 
       for (const varName of criticalVars) {
-        if (!process.env[varName] || process.env[varName] === "") {
+        const currentValue = process.env[varName];
+        const isEmpty = !currentValue || currentValue === "";
+
+        if (isEmpty) {
           const match = content.match(new RegExp(`^${varName}=(.+)$`, "m"));
           if (match) {
             process.env[varName] = match[1].trim();
+            console.log(`[load-env] Set ${varName}: ${process.env[varName] ? "configured" : "FAILED"}`);
+          } else {
+            console.log(`[load-env] ${varName}: not found in ${envPath}`);
           }
         }
       }
