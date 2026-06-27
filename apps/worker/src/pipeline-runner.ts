@@ -102,26 +102,38 @@ export async function runPipeline(
   let stdout = "";
   let stderr = "";
 
+  // 构建子进程环境变量（只传递非空的）
+  const childEnv: Record<string, string> = {
+    ...process.env as Record<string, string>,
+    PATH: `${path.join(PROJECT_ROOT, "node_modules/.bin")}${isWindows ? ";" : ":"}${process.env.PATH || ""}`,
+  };
+
+  // 显式传递 AI 相关环境变量（只传递非空的）
+  const aiVars = [
+    "VALIDATION_AI_PROVIDER",
+    "DEEPSEEK_API_KEY",
+    "DEEPSEEK_BASE_URL",
+    "DEEPSEEK_VALIDATION_MODEL",
+    "AI_PROVIDER",
+    "OPENAI_API_KEY",
+    "OPENAI_BASE_URL",
+    "OPENAI_MODEL",
+  ];
+  for (const varName of aiVars) {
+    if (process.env[varName]) {
+      childEnv[varName] = process.env[varName]!;
+    }
+  }
+
+  console.log(`[PipelineRunner] childEnv DEEPSEEK_API_KEY: ${childEnv.DEESEEK_API_KEY ? "configured" : "NOT SET"}`);
+
   try {
     stdout = execSync(cmdString, {
       cwd: PROJECT_ROOT,
       encoding: "utf-8",
       timeout: 600000, // 10 minutes
       stdio: ["pipe", "pipe", "pipe"],
-      env: {
-        ...process.env,
-        // 确保 Node.js 能找到 tsx
-        PATH: `${path.join(PROJECT_ROOT, "node_modules/.bin")}${isWindows ? ";" : ":"}${process.env.PATH}`,
-        // 显式传递 AI 相关环境变量
-        VALIDATION_AI_PROVIDER: process.env.VALIDATION_AI_PROVIDER || "",
-        DEEPSEEK_API_KEY: process.env.DEESEEK_API_KEY || "",
-        DEEPSEEK_BASE_URL: process.env.DEESEEK_BASE_URL || "",
-        DEEPSEEK_VALIDATION_MODEL: process.env.DEESEEK_VALIDATION_MODEL || "",
-        AI_PROVIDER: process.env.AI_PROVIDER || "",
-        OPENAI_API_KEY: process.env.OPENAI_API_KEY || "",
-        OPENAI_BASE_URL: process.env.OPENAI_BASE_URL || "",
-        OPENAI_MODEL: process.env.OPENAI_MODEL || "",
-      },
+      env: childEnv,
       windowsHide: true,
     });
 
