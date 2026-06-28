@@ -60,6 +60,8 @@ export interface RunRecord {
  */
 export async function getPendingRuns(): Promise<RunRecord[]> {
   const client = getSupabaseClient();
+  console.log("[Supabase] Querying pending runs...");
+
   const { data, error } = await client
     .from("runs")
     .select("*")
@@ -68,8 +70,13 @@ export async function getPendingRuns(): Promise<RunRecord[]> {
     .limit(1);
 
   if (error) {
-    console.error("Error fetching pending runs:", error);
+    console.error("[Supabase] Error fetching pending runs:", error);
     return [];
+  }
+
+  console.log(`[Supabase] Found ${data?.length || 0} pending runs`);
+  if (data && data.length > 0) {
+    console.log(`[Supabase] First pending run: ${data[0].id} - ${data[0].case_name}`);
   }
 
   return data || [];
