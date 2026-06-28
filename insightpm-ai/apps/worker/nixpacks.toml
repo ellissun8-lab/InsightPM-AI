@@ -1,0 +1,5 @@
+[phases.setup]
+nixPkgs = ["nodejs", "python3"]
+
+[variables]
+PYTHON_BIN = "python3"

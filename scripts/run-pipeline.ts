@@ -8,6 +8,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { execSync } from "child_process";
+import { resolvePythonCommand } from "./lib/python-command";
 import { runHardValidation } from "./lib/hard-validation";
 import { generateAIAnalysis } from "./lib/ai-analysis-generator";
 
@@ -597,8 +598,10 @@ ${segClusters.flatMap((c: any) => c.evidence_feedback_ids).join(", ") || "暂无
     if (config.input && fs.existsSync(config.input)) {
       return `Skipped: segment files already generated in build_segments step`;
     }
+    const pythonCmd = resolvePythonCommand();
+    console.log(`[Pipeline] Python command: ${pythonCmd}`);
     execSync(
-      `python scripts/split-segments.py --dataset ${config.dataset} --base-dir "${analysisDir}"`,
+      `${pythonCmd} scripts/split-segments.py --dataset ${config.dataset} --base-dir "${analysisDir}"`,
       { cwd: PROJECT_ROOT, stdio: "pipe" }
     );
     return "Segment JSONs split from overall";
@@ -615,8 +618,9 @@ ${segClusters.flatMap((c: any) => c.evidence_feedback_ids).join(", ") || "暂无
 
   // ── Step 5: rebuild_overall_json ───────────────────────────────
   const step5 = await runStep("rebuild_overall_json", async () => {
+    const pythonCmd = resolvePythonCommand();
     execSync(
-      `python scripts/rebuild-overall.py --dataset ${config.dataset} --base-dir "${analysisDir}" --total-count ${config.count}`,
+      `${pythonCmd} scripts/rebuild-overall.py --dataset ${config.dataset} --base-dir "${analysisDir}" --total-count ${config.count}`,
       { cwd: PROJECT_ROOT, stdio: "pipe" }
     );
     return "Overall JSON rebuilt";
