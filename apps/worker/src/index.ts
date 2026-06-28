@@ -34,7 +34,7 @@ async function poll() {
 
       for (const run of pendingRuns) {
         try {
-          await processRun(run);
+          await processRun(run, envVars);
         } catch (err) {
           console.error(`[Worker] Error processing run ${run.id}:`, err);
         }

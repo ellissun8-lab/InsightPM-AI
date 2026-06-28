@@ -9,9 +9,8 @@ const WORKER_TMP_DIR = process.env.WORKER_TMP_DIR || path.join(os.tmpdir(), "pro
 
 /**
  * 处理单个 run
- * Step 7: 改进 Storage 下载逻辑
  */
-export async function processRun(run: RunRecord): Promise<void> {
+export async function processRun(run: RunRecord, loadedVars?: Record<string, string>): Promise<void> {
   const now = new Date().toISOString();
 
   console.log(`[Worker] Picked pending run: ${run.id}`);
@@ -99,7 +98,8 @@ export async function processRun(run: RunRecord): Promise<void> {
       dataset,
       feedbackCount,
       localInputPath,
-      outputDir
+      outputDir,
+      loadedVars
     );
 
     if (!pipelineResult.success) {

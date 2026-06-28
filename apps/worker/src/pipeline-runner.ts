@@ -56,7 +56,8 @@ export async function runPipeline(
   dataset: string,
   feedbackCount: number,
   inputPath: string,
-  outputDir: string
+  outputDir: string,
+  loadedVars?: Record<string, string>
 ): Promise<PipelineResult> {
   const scriptPath = path.join(PROJECT_ROOT, "scripts", "run-pipeline.ts");
   const nodeVersion = process.version;
@@ -74,6 +75,7 @@ export async function runPipeline(
   console.log(`[PipelineRunner] nodeVersion: ${nodeVersion}`);
   console.log(`[PipelineRunner] platform: ${os.platform()}`);
   console.log(`[PipelineRunner] envPresence:`, JSON.stringify(envPresence));
+  console.log(`[PipelineRunner] loadedVars DEEPSEEK_API_KEY: ${loadedVars?.DEEPSEEK_API_KEY ? "configured" : "NOT SET"}`);
 
   // 确保输出目录存在
   fs.mkdirSync(outputDir, { recursive: true });
@@ -102,33 +104,14 @@ export async function runPipeline(
   let stdout = "";
   let stderr = "";
 
-  // 调试：检查 process.env 中的 AI 变量
-  console.log(`[PipelineRunner] process.env.DEESEEK_API_KEY: ${process.env.DEESEEK_API_KEY ? "configured" : "NOT SET"}`);
-  console.log(`[PipelineRunner] process.env.OPENAI_API_KEY: ${process.env.OPENAI_API_KEY ? "configured" : "NOT SET"}`);
-
-  // 构建子进程环境变量（只传递非空的）
+  // 构建子进程环境变量（合并 loadedVars 和 process.env）
   const childEnv: Record<string, string> = {
     ...process.env as Record<string, string>,
+    ...loadedVars,
     PATH: `${path.join(PROJECT_ROOT, "node_modules/.bin")}${isWindows ? ";" : ":"}${process.env.PATH || ""}`,
   };
 
-  // 显式传递 AI 相关环境变量（只传递非空的）
-  const aiVars = [
-    "VALIDATION_AI_PROVIDER",
-    "DEEPSEEK_API_KEY",
-    "DEEPSEEK_BASE_URL",
-    "DEEPSEEK_VALIDATION_MODEL",
-    "AI_PROVIDER",
-    "OPENAI_API_KEY",
-    "OPENAI_BASE_URL",
-    "OPENAI_MODEL",
-  ];
-  for (const varName of aiVars) {
-    if (process.env[varName]) {
-      childEnv[varName] = process.env[varName]!;
-    }
-  }
-
+  // 调试：检查子进程环境变量
   console.log(`[PipelineRunner] childEnv DEEPSEEK_API_KEY: ${childEnv.DEESEEK_API_KEY ? "configured" : "NOT SET"}`);
   console.log(`[PipelineRunner] childEnv OPENAI_API_KEY: ${childEnv.OPENAI_API_KEY ? "configured" : "NOT SET"}`);
 
