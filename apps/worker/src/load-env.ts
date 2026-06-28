@@ -46,6 +46,7 @@ export function loadEnv(): Record<string, string> {
             const value = match[1].trim();
             loadedVars[varName] = value;
             process.env[varName] = value;
+            console.log(`[load-env] Set ${varName}: ${value ? "configured" : "FAILED"}`);
           }
         }
       }

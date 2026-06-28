@@ -102,6 +102,10 @@ export async function runPipeline(
   let stdout = "";
   let stderr = "";
 
+  // 调试：检查 process.env 中的 AI 变量
+  console.log(`[PipelineRunner] process.env.DEESEEK_API_KEY: ${process.env.DEESEEK_API_KEY ? "configured" : "NOT SET"}`);
+  console.log(`[PipelineRunner] process.env.OPENAI_API_KEY: ${process.env.OPENAI_API_KEY ? "configured" : "NOT SET"}`);
+
   // 构建子进程环境变量（只传递非空的）
   const childEnv: Record<string, string> = {
     ...process.env as Record<string, string>,
@@ -126,6 +130,7 @@ export async function runPipeline(
   }
 
   console.log(`[PipelineRunner] childEnv DEEPSEEK_API_KEY: ${childEnv.DEESEEK_API_KEY ? "configured" : "NOT SET"}`);
+  console.log(`[PipelineRunner] childEnv OPENAI_API_KEY: ${childEnv.OPENAI_API_KEY ? "configured" : "NOT SET"}`);
 
   try {
     stdout = execSync(cmdString, {
