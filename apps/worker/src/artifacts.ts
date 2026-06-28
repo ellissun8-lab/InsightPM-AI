@@ -270,7 +270,8 @@ function findFiles(dir: string, pattern: string): string[] {
       if (entry.isDirectory()) {
         walk(fullPath);
       } else if (entry.isFile()) {
-        const relativePath = path.relative(dir, fullPath);
+        // 将 Windows 反斜杠转换为正斜杠进行匹配
+        const relativePath = path.relative(dir, fullPath).replace(/\\/g, "/");
         if (regex.test(relativePath)) {
           results.push(fullPath);
         }
