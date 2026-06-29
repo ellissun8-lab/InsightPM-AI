@@ -134,8 +134,25 @@ export async function claimNextRun(workerId: string): Promise<RunRecord | null> 
     return null;
   }
 
-  console.log(`[Supabase] Claimed run: ${data[0].run_id} - ${data[0].case_name}`);
-  return data[0] as RunRecord;
+  const claimed = data[0];
+  console.log(`[Supabase] Claimed run: ${claimed.run_id} - ${claimed.case_name}`);
+
+  // 将 claim_next_run 返回的数据转换为 RunRecord 格式
+  return {
+    id: claimed.run_id,
+    case_name: claimed.case_name,
+    scenario: claimed.scenario || null,
+    status: "running",
+    feedback_count: claimed.feedback_count || 0,
+    hard_score: null,
+    semantic_score: null,
+    evidence_broken: null,
+    started_at: new Date().toISOString(),
+    finished_at: null,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    metadata: claimed.metadata || {},
+  };
 }
 
 /**
