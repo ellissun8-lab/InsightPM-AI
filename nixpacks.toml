@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["nodejs_22", "python312"]
+
+[phases.install]
+cmds = [
+  "npm install --include=dev",
+  "cd apps/worker && npm install --include=dev"
+]
+
+[start]
+cmd = "cd apps/worker && npm run start"

@@ -2,6 +2,7 @@
 import { loadEnv } from "./load-env.js";
 const envVars = loadEnv();
 
+import { execSync } from "child_process";
 import { getPendingRuns, updateRunStatus } from "./supabase.js";
 import { processRun } from "./process-run.js";
 
@@ -10,8 +11,23 @@ const POLL_INTERVAL_MS = parseInt(
   10
 );
 
+// 检查 Python 版本
+function checkPythonVersion() {
+  const commands = ["python3 --version", "python --version", "py -3 --version"];
+  for (const cmd of commands) {
+    try {
+      const output = execSync(cmd, { encoding: "utf-8", stdio: "pipe" }).trim();
+      console.log(`[Worker] Python: ${output}`);
+      return;
+    } catch {}
+  }
+  console.warn("[Worker] Python: NOT FOUND (pipeline may fail)");
+}
+
 console.log("[Worker] ProofLoop Cloud Worker started");
 console.log(`[Worker] Poll interval: ${POLL_INTERVAL_MS}ms`);
+console.log(`[Worker] PYTHON_BIN: ${process.env.PYTHON_BIN || "not set"}`);
+checkPythonVersion();
 console.log("[Worker] Waiting for pending runs...");
 
 let isRunning = false;
