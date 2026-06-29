@@ -13,31 +13,41 @@ const WORKER_TMP_DIR = process.env.WORKER_TMP_DIR || path.join(os.tmpdir(), "pro
 export async function processRun(run: RunRecord, loadedVars?: Record<string, string>): Promise<void> {
   const now = new Date().toISOString();
 
-  console.log(`[Worker] Picked pending run: ${run.id}`);
+  console.log(`[Worker] ==============================`);
+  console.log(`[Worker] Starting processRun...`);
+  console.log(`[Worker]   run.id: ${run.id}`);
   console.log(`[Worker]   caseName: ${run.case_name}`);
   console.log(`[Worker]   scenario: ${run.scenario}`);
   console.log(`[Worker]   feedback_count: ${run.feedback_count}`);
+  console.log(`[Worker]   inputFile: ${JSON.stringify(run.metadata?.inputFile || null)}`);
+  console.log(`[Worker] ==============================`);
 
-  // Step 1: 更新状态为 running
-  console.log(`[Worker] Updating run ${run.id} to status: running`);
+  // Step 1: 更新状态为 running，记录 worker 信息
+  console.log(`[Worker] Claiming run ${run.id}...`);
   const runningMetadata = {
     ...run.metadata,
-    worker: "cloud-worker",
-    workerStep: "pipeline-and-artifacts",
+    worker: "railway-worker",
+    workerStep: "process-run-started",
     workerStartedAt: now,
+    inputFile: run.metadata?.inputFile || null,
   };
 
   const runningOk = await updateRunStatus(run.id, "running", runningMetadata);
   if (!runningOk) {
-    console.error(`[Worker] failed to update run ${run.id} to running`);
+    console.error(`[Worker] Claim failed for run ${run.id}`);
     await updateRunStatus(run.id, "failed", {
       ...run.metadata,
-      error: { message: "Failed to update to running status" },
+      error: {
+        message: "Failed to update to running status",
+        failedAt: now,
+        workerStep: "claim-failed",
+        source: "railway-worker",
+      },
       failedAt: now,
     });
     return;
   }
-  console.log(`[Worker] Updated run ${run.id} to running`);
+  console.log(`[Worker] Claim success for run ${run.id}`);
 
   try {
     // Step 2: 检查 inputFile metadata
@@ -212,10 +222,24 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
 
   } catch (err: any) {
     const failedNow = new Date().toISOString();
-    console.error(`[Worker] Error processing run ${run.id}:`, err.message);
+    console.error(`[Worker] ==============================`);
+    console.error(`[Worker] processRun EXCEPTION for ${run.id}`);
+    console.error(`[Worker] Error: ${err.message}`);
+    console.error(`[Worker] Stack: ${err.stack}`);
+    console.error(`[Worker] ==============================`);
+
     await updateRunStatus(run.id, "failed", {
       ...runningMetadata,
-      error: { message: err.message, stack: err.stack },
+      error: {
+        message: err.message || "Unknown error",
+        stack: err.stack || "",
+        name: err.name || "Error",
+        failedAt: failedNow,
+        workerStep: runningMetadata.workerStep || "process-run-exception",
+        source: "railway-worker",
+        inputPath: runningMetadata.localInputPath || null,
+        outputDir: runningMetadata.pipelineOutputDir || null,
+      },
       failedAt: failedNow,
     });
   }

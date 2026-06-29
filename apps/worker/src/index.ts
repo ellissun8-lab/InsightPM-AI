@@ -2,7 +2,7 @@
 import { loadEnv } from "./load-env.js";
 const envVars = loadEnv();
 
-import { getPendingRuns } from "./supabase.js";
+import { getPendingRuns, updateRunStatus } from "./supabase.js";
 import { processRun } from "./process-run.js";
 
 const POLL_INTERVAL_MS = parseInt(
@@ -33,15 +33,52 @@ async function poll() {
       console.log(`[Worker] Found ${pendingRuns.length} pending run(s)`);
 
       for (const run of pendingRuns) {
+        console.log(`[Worker] ==============================`);
+        console.log(`[Worker] Picked pending run: ${run.id}`);
+        console.log(`[Worker]   caseName: ${run.case_name}`);
+        console.log(`[Worker]   status: ${run.status}`);
+        console.log(`[Worker]   feedback_count: ${run.feedback_count}`);
+        console.log(`[Worker]   inputFile: ${JSON.stringify(run.metadata?.inputFile || null)}`);
+        console.log(`[Worker] ==============================`);
+
         try {
+          console.log(`[Worker] Starting processRun...`);
           await processRun(run, envVars);
-        } catch (err) {
-          console.error(`[Worker] Error processing run ${run.id}:`, err);
+          console.log(`[Worker] processRun completed for ${run.id}`);
+        } catch (err: any) {
+          console.error(`[Worker] ==============================`);
+          console.error(`[Worker] processRun FAILED for ${run.id}`);
+          console.error(`[Worker] Error: ${err.message}`);
+          console.error(`[Worker] Stack: ${err.stack}`);
+          console.error(`[Worker] ==============================`);
+
+          // 写入失败状态到 Supabase
+          try {
+            await updateRunStatus(run.id, "failed", {
+              ...run.metadata,
+              error: {
+                message: err.message || "Unknown error",
+                stack: err.stack || "",
+                name: err.name || "Error",
+                failedAt: new Date().toISOString(),
+                workerStep: "process-run-exception",
+                source: "railway-worker",
+              },
+              failedAt: new Date().toISOString(),
+            });
+            console.log(`[Worker] Updated run ${run.id} to failed`);
+          } catch (updateErr) {
+            console.error(`[Worker] Failed to update run status:`, updateErr);
+          }
         }
       }
     }
-  } catch (err) {
-    console.error("[Worker] Error during poll:", err);
+  } catch (err: any) {
+    console.error("[Worker] ==============================");
+    console.error("[Worker] Error during poll:");
+    console.error("[Worker] Error:", err.message);
+    console.error("[Worker] Stack:", err.stack);
+    console.error("[Worker] ==============================");
   } finally {
     isRunning = false;
   }
