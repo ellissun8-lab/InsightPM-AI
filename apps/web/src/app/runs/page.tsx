@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { Filter, FolderOpen, Play } from "lucide-react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { FolderOpen, Play, Search, X, ChevronLeft, ChevronRight } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import { getScenarioDisplayName } from "@/lib/report-display";
 import {
@@ -10,82 +11,142 @@ import {
   getRunSemanticScore,
   getRunStatusBadgeClass,
   getRunStatusLabel,
-  hasRunReportArtifact,
   isStaleRunning,
   getWorkerStep,
-  type RunDisplayStatus,
   type RunLike,
 } from "@/lib/run-status";
 import type { RunListItem } from "@/lib/types/run";
 
-const STATUS_OPTIONS: Array<{ value: RunDisplayStatus | "all"; label: string }> = [
+const STATUS_OPTIONS = [
   { value: "all", label: "全部状态" },
   { value: "completed", label: "已完成" },
-  { value: "review", label: "需复核" },
-  { value: "failed", label: "失败" },
-  { value: "partial", label: "部分完成" },
   { value: "running", label: "处理中" },
-  { value: "pending", label: "等待中" },
+  { value: "failed", label: "失败" },
+  { value: "pending", label: "排队中" },
 ];
 
-function formatDuration(duration: number | null | undefined) {
-  if (!duration) return "-";
-  return duration < 1000 ? `${duration}ms` : `${(duration / 1000).toFixed(1)}s`;
-}
+const ARTIFACT_OPTIONS = [
+  { value: "all", label: "全部产物" },
+  { value: "has-report", label: "有完整报告" },
+  { value: "missing-report", label: "缺少完整报告" },
+  { value: "has-artifacts", label: "有任意产物" },
+  { value: "no-artifacts", label: "无产物" },
+];
+
+const RANGE_OPTIONS = [
+  { value: "all", label: "全部时间" },
+  { value: "today", label: "今天" },
+  { value: "7d", label: "最近 7 天" },
+  { value: "30d", label: "最近 30 天" },
+];
+
+const SORT_OPTIONS = [
+  { value: "newest", label: "最新创建" },
+  { value: "oldest", label: "最早创建" },
+  { value: "updated", label: "最近更新" },
+  { value: "score", label: "语义评分" },
+];
+
+const PAGE_SIZE_OPTIONS = [20, 50, 100];
 
 export default function RunsPage() {
+  return (
+    <Suspense fallback={<div className="flex min-h-screen bg-surface"><Sidebar /><div className="ml-[280px] mt-16 flex-1 p-margin-desktop text-on-surface-variant">加载中...</div></div>}>
+      <RunsPageInner />
+    </Suspense>
+  );
+}
+
+function RunsPageInner() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Read all filter state from URL
+  const q = searchParams.get("q") || "";
+  const status = searchParams.get("status") || "all";
+  const artifact = searchParams.get("artifact") || "all";
+  const range = searchParams.get("range") || "all";
+  const sort = searchParams.get("sort") || "newest";
+  const page = parseInt(searchParams.get("page") || "1", 10);
+  const pageSize = parseInt(searchParams.get("pageSize") || "20", 10);
+
   const [runs, setRuns] = useState<RunListItem[]>([]);
+  const [total, setTotal] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [artifactSummary, setArtifactSummary] = useState<Record<string, { count: number; hasOverallMd: boolean; types: string[] }>>({});
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState<RunDisplayStatus | "all">("all");
-  const [scenarioFilter, setScenarioFilter] = useState("all");
+  const [searchInput, setSearchInput] = useState(q);
+
+  // Sync searchInput with URL q on navigation
+  useEffect(() => {
+    setSearchInput(q);
+  }, [q]);
+
+  const updateParams = useCallback((updates: Record<string, string | undefined>) => {
+    const params = new URLSearchParams(searchParams.toString());
+    for (const [key, value] of Object.entries(updates)) {
+      if (value === undefined || value === "" || value === "all" || (key === "page" && value === "1") || (key === "pageSize" && value === "20") || (key === "sort" && value === "newest")) {
+        params.delete(key);
+      } else {
+        params.set(key, value);
+      }
+    }
+    router.push(`/runs${params.toString() ? "?" + params.toString() : ""}`);
+  }, [router, searchParams]);
 
   const fetchRuns = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/runs", { cache: "no-store" });
+      const params = new URLSearchParams();
+      if (q) params.set("q", q);
+      if (status !== "all") params.set("status", status);
+      if (artifact !== "all") params.set("artifact", artifact);
+      if (range !== "all") params.set("range", range);
+      if (sort !== "newest") params.set("sort", sort);
+      params.set("page", String(page));
+      params.set("pageSize", String(pageSize));
+
+      const res = await fetch(`/api/runs?${params.toString()}`, { cache: "no-store" });
       const data = await res.json();
-      setRuns(data.runs ?? []);
+
+      if (data.runs) {
+        setRuns(data.runs);
+        setTotal(data.total || 0);
+        setTotalPages(data.totalPages || 0);
+        setArtifactSummary(data.artifactSummary || {});
+      } else {
+        setRuns([]);
+        setTotal(0);
+        setTotalPages(0);
+      }
     } catch {
       setRuns([]);
+      setTotal(0);
+      setTotalPages(0);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [q, status, artifact, range, sort, page, pageSize]);
 
   useEffect(() => {
     fetchRuns();
   }, [fetchRuns]);
 
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateParams({ q: searchInput || undefined, page: undefined });
+  };
+
+  const clearFilters = () => {
+    setSearchInput("");
+    router.push("/runs");
+  };
+
+  const hasActiveFilters = q || status !== "all" || artifact !== "all" || range !== "all" || sort !== "newest";
+
   const getCaseName = (run: RunListItem) => run.caseName || run.case_name || "未命名分析";
   const getScenario = (run: RunListItem) => run.scenario || run.dataset || "mixed-feedback";
   const getFeedbackCount = (run: RunListItem) => run.feedbackCount ?? run.count ?? 0;
-  const getDuration = (run: RunListItem) => run.durationMs ?? run.duration_ms ?? null;
-
-  const scenarioOptions = useMemo(() => {
-    const unique = Array.from(new Set(runs.map((run) => getScenario(run)).filter(Boolean)));
-    return unique.sort();
-  }, [runs]);
-
-  const filteredRuns = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-    return runs.filter((run) => {
-      const caseName = getCaseName(run);
-      const scenario = getScenario(run);
-      const status = getRunDisplayStatus(run as RunLike);
-
-      if (normalizedQuery && !caseName.toLowerCase().includes(normalizedQuery)) {
-        return false;
-      }
-      if (statusFilter !== "all" && status !== statusFilter) {
-        return false;
-      }
-      if (scenarioFilter !== "all" && scenario !== scenarioFilter) {
-        return false;
-      }
-      return true;
-    });
-  }, [query, runs, scenarioFilter, statusFilter]);
 
   return (
     <div className="flex min-h-screen bg-surface">
@@ -93,9 +154,7 @@ export default function RunsPage() {
       <div className="ml-[280px] mt-16 flex-1 p-margin-desktop bg-surface">
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h2 className="text-headline-lg font-headline-lg text-on-surface tracking-tight">
-              运行历史
-            </h2>
+            <h2 className="text-headline-lg font-headline-lg text-on-surface tracking-tight">运行历史</h2>
             <p className="text-body-md font-body-md text-on-surface-variant mt-1">
               查看并管理历史 AI 分析执行记录。
             </p>
@@ -109,188 +168,197 @@ export default function RunsPage() {
           </a>
         </div>
 
-        <div className="bg-surface-container-lowest border border-outline-variant rounded-xl card-shadow overflow-hidden flex flex-col">
-          <div className="p-lg border-b border-outline-variant bg-surface-container-low flex items-center gap-4">
-            <div className="flex-1 flex items-center bg-surface-container-lowest border border-outline-variant rounded-lg px-3 py-2 max-w-sm focus-within:border-primary transition-colors">
-              <Filter size={18} className="text-on-surface-variant mr-2" />
+        {/* Filter Bar */}
+        <div className="bg-surface-container-lowest border border-outline-variant rounded-xl card-shadow overflow-hidden mb-md">
+          <div className="p-base border-b border-outline-variant bg-surface-container-low flex items-center gap-3 flex-wrap">
+            {/* Search */}
+            <form onSubmit={handleSearch} className="flex items-center bg-surface-container-lowest border border-outline-variant rounded-lg px-3 py-1.5 max-w-xs focus-within:border-primary transition-colors">
+              <Search size={16} className="text-on-surface-variant mr-2 shrink-0" />
               <input
-                className="bg-transparent border-none p-0 focus:ring-0 text-body-md text-on-surface w-full placeholder:text-on-surface-variant/70 outline-none"
-                placeholder="按案例名称筛选..."
+                className="bg-transparent border-none p-0 focus:ring-0 text-body-md text-on-surface w-full placeholder:text-on-surface-variant/70 outline-none min-w-[120px]"
+                placeholder="搜索案例名称..."
                 type="text"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
               />
-            </div>
+              {searchInput && (
+                <button type="button" onClick={() => { setSearchInput(""); updateParams({ q: undefined, page: undefined }); }} className="text-on-surface-variant hover:text-on-surface ml-1 cursor-pointer">
+                  <X size={14} />
+                </button>
+              )}
+            </form>
+
+            {/* Status */}
             <select
-              className="bg-surface-container-lowest border border-outline-variant text-on-surface text-body-md font-body-md rounded-lg px-4 py-2 appearance-none"
-              value={statusFilter}
-              onChange={(event) => setStatusFilter(event.target.value as RunDisplayStatus | "all")}
+              className="bg-surface-container-lowest border border-outline-variant text-on-surface text-label-md font-label-md rounded-lg px-3 py-1.5 appearance-none"
+              value={status}
+              onChange={(e) => updateParams({ status: e.target.value, page: undefined })}
             >
-              {STATUS_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  状态：{option.label}
-                </option>
-              ))}
+              {STATUS_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
+
+            {/* Artifact */}
             <select
-              className="bg-surface-container-lowest border border-outline-variant text-on-surface text-body-md font-body-md rounded-lg px-4 py-2 appearance-none"
-              value={scenarioFilter}
-              onChange={(event) => setScenarioFilter(event.target.value)}
+              className="bg-surface-container-lowest border border-outline-variant text-on-surface text-label-md font-label-md rounded-lg px-3 py-1.5 appearance-none"
+              value={artifact}
+              onChange={(e) => updateParams({ artifact: e.target.value, page: undefined })}
             >
-              <option value="all">场景：全部</option>
-              {scenarioOptions.map((scenario) => (
-                <option key={scenario} value={scenario}>
-                  {getScenarioDisplayName(scenario)}
-                </option>
-              ))}
+              {ARTIFACT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
+
+            {/* Range */}
+            <select
+              className="bg-surface-container-lowest border border-outline-variant text-on-surface text-label-md font-label-md rounded-lg px-3 py-1.5 appearance-none"
+              value={range}
+              onChange={(e) => updateParams({ range: e.target.value, page: undefined })}
+            >
+              {RANGE_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+            </select>
+
+            {/* Sort */}
+            <select
+              className="bg-surface-container-lowest border border-outline-variant text-on-surface text-label-md font-label-md rounded-lg px-3 py-1.5 appearance-none"
+              value={sort}
+              onChange={(e) => updateParams({ sort: e.target.value, page: undefined })}
+            >
+              {SORT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+            </select>
+
+            {/* Clear */}
+            {hasActiveFilters && (
+              <button
+                onClick={clearFilters}
+                className="text-label-md font-label-md text-on-surface-variant hover:text-on-surface px-2 py-1.5 cursor-pointer"
+              >
+                清空筛选
+              </button>
+            )}
           </div>
 
+          {/* Table */}
           <div className="overflow-x-auto w-full">
             <table className="w-full text-left whitespace-nowrap">
               <thead>
                 <tr className="bg-surface-container-low border-b border-outline-variant">
-                  <th className="py-3 px-lg text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
-                    案例名称
-                  </th>
-                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
-                    场景
-                  </th>
-                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
-                    反馈数
-                  </th>
-                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
-                    状态
-                  </th>
-                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
-                    硬性校验
-                  </th>
-                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
-                    语义评分
-                  </th>
-                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
-                    重试
-                  </th>
-                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
-                    Worker 步骤
-                  </th>
-                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
-                    心跳
-                  </th>
-                  <th className="py-3 px-lg text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold text-right">
-                    操作
-                  </th>
+                  <th className="py-3 px-lg text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">案例名称</th>
+                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">场景</th>
+                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">反馈数</th>
+                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">状态</th>
+                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">硬性校验</th>
+                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">语义评分</th>
+                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">产物</th>
+                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">重试</th>
+                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Worker 步骤</th>
+                  <th className="py-3 px-lg text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold text-right">操作</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-outline-variant/50">
                 {loading && (
+                  <tr><td colSpan={10} className="py-8 px-6 text-center text-on-surface-variant">加载中...</td></tr>
+                )}
+                {!loading && runs.length === 0 && (
                   <tr>
-                    <td colSpan={8} className="py-8 px-6 text-center text-on-surface-variant">
-                      加载中...
+                    <td colSpan={10} className="py-8 px-6 text-center text-on-surface-variant">
+                      {hasActiveFilters ? "没有找到匹配的运行记录。请调整筛选条件。" : "还没有分析任务，去新建一个。"}
                     </td>
                   </tr>
                 )}
-                {!loading && filteredRuns.length === 0 && (
-                  <tr>
-                    <td colSpan={8} className="py-8 px-6 text-center text-on-surface-variant">
-                      暂无运行记录
-                    </td>
-                  </tr>
-                )}
-                {!loading &&
-                  filteredRuns.map((run) => {
-                    const caseName = getCaseName(run);
-                    const semanticScore = getRunSemanticScore(run as RunLike);
-                    const status = getRunDisplayStatus(run as RunLike);
-                    const hasReport = hasRunReportArtifact(run as RunLike);
-                    const stale = isStaleRunning(run as RunLike);
-                    const workerStep = getWorkerStep(run as RunLike);
-                    const retryCount = (run as any).retryCount ?? 0;
-                    const maxRetry = (run as any).maxRetry ?? 2;
-                    const heartbeatAt = (run as any).heartbeatAt as string | null | undefined;
+                {!loading && runs.map((run) => {
+                  const caseName = getCaseName(run);
+                  const semanticScore = getRunSemanticScore(run as RunLike);
+                  const statusVal = getRunDisplayStatus(run as RunLike);
+                  const stale = isStaleRunning(run as RunLike);
+                  const workerStep = getWorkerStep(run as RunLike);
+                  const retryCount = (run as any).retryCount ?? 0;
+                  const maxRetry = (run as any).maxRetry ?? 2;
+                  const artSummary = artifactSummary[run.id || ""];
+                  const hasOverallMd = artSummary?.hasOverallMd ?? (run as any).artifacts?.markdown ?? false;
+                  const artCount = artSummary?.count ?? 0;
 
-                    const statusBadgeClass = stale
-                      ? "bg-[#FEF3C7] text-[#92400E] border-[#FCD34D]"
-                      : getRunStatusBadgeClass(status);
-                    const statusLabel = stale ? "可能卡住" : getRunStatusLabel(status);
+                  const badgeClass = stale ? "bg-[#FEF3C7] text-[#92400E] border-[#FCD34D]" : getRunStatusBadgeClass(statusVal);
+                  const label = stale ? "可能卡住" : getRunStatusLabel(statusVal);
 
-                    return (
-                      <tr
-                        key={run.id || caseName}
-                        className="hover:bg-surface-container-low transition-colors group"
-                      >
-                        <td className="py-4 px-lg text-body-md font-body-md text-on-surface font-medium">
-                          <div className="flex items-center gap-2">
-                            <FolderOpen size={16} className="text-on-surface-variant/60" />
-                            <a href={`/runs/${encodeURIComponent(caseName)}`} className="hover:underline">
-                              {caseName}
-                            </a>
-                          </div>
-                        </td>
-                        <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
-                          {getScenarioDisplayName(getScenario(run))}
-                        </td>
-                        <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
-                          {getFeedbackCount(run)}
-                        </td>
-                        <td className="py-4 px-4">
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold border ${statusBadgeClass}`}>
-                            {statusLabel}
+                  return (
+                    <tr key={run.id || caseName} className="hover:bg-surface-container-low transition-colors group">
+                      <td className="py-4 px-lg text-body-md font-body-md text-on-surface font-medium">
+                        <div className="flex items-center gap-2">
+                          <FolderOpen size={16} className="text-on-surface-variant/60" />
+                          <a href={`/runs/${encodeURIComponent(caseName)}`} className="hover:underline">{caseName}</a>
+                        </div>
+                      </td>
+                      <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">{getScenarioDisplayName(getScenario(run))}</td>
+                      <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">{getFeedbackCount(run)}</td>
+                      <td className="py-4 px-4">
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold border ${badgeClass}`}>{label}</span>
+                      </td>
+                      <td className="py-4 px-4">
+                        <span className="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high text-primary">{getRunHardValidationLabel(run as RunLike)}</span>
+                      </td>
+                      <td className="py-4 px-4">
+                        <span className="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high text-primary">{semanticScore !== null ? semanticScore : "未生成"}</span>
+                      </td>
+                      <td className="py-4 px-4">
+                        {artCount > 0 ? (
+                          <span className={`inline-flex items-center px-2 py-0.5 rounded text-label-sm font-label-sm ${hasOverallMd ? "bg-emerald-50 text-emerald-700" : "bg-yellow-50 text-yellow-700"}`}>
+                            {hasOverallMd ? `${artCount} 产物` : `${artCount} 缺报告`}
                           </span>
-                        </td>
-                        <td className="py-4 px-4">
-                          <span className="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high text-primary">
-                            {getRunHardValidationLabel(run as RunLike)}
-                          </span>
-                        </td>
-                        <td className="py-4 px-4">
-                          <span className="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high text-primary">
-                            {semanticScore !== null ? semanticScore : "未生成"}
-                          </span>
-                        </td>
-                        <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
-                          {retryCount} / {maxRetry}
-                        </td>
-                        <td className="py-4 px-4 text-label-md font-label-md text-on-surface-variant max-w-[160px] truncate" title={workerStep || undefined}>
-                          {workerStep || "-"}
-                        </td>
-                        <td className="py-4 px-4 text-label-md font-label-md text-on-surface-variant">
-                          {status === "running" && heartbeatAt
-                            ? new Date(heartbeatAt).toLocaleTimeString("zh-CN")
-                            : "-"}
-                        </td>
-                        <td className="py-4 px-lg text-right">
-                          {hasReport ? (
-                            <a
-                              href={`/runs/${encodeURIComponent(caseName)}`}
-                              className="text-primary font-label-md font-medium hover:underline transition-colors"
-                            >
-                              查看报告
-                            </a>
-                          ) : status === "running" ? (
-                            <span className="text-blue-600 font-label-md flex items-center justify-end gap-1">
-                              <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse inline-block" />
-                              处理中
-                            </span>
-                          ) : status === "failed" ? (
-                            <a
-                              href={`/runs/${encodeURIComponent(caseName)}`}
-                              className="text-[#8A2F2F] font-label-md font-medium hover:underline transition-colors"
-                            >
-                              查看错误
-                            </a>
-                          ) : status === "pending" ? (
-                            <span className="text-on-surface-variant font-label-md">排队中</span>
-                          ) : (
-                            <span className="text-on-surface-variant font-label-md">报告待生成</span>
-                          )}
-                        </td>
-                      </tr>
-                    );
-                  })}
+                        ) : (
+                          <span className="text-label-sm font-label-sm text-on-surface-variant">-</span>
+                        )}
+                      </td>
+                      <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">{retryCount} / {maxRetry}</td>
+                      <td className="py-4 px-4 text-label-md font-label-md text-on-surface-variant max-w-[140px] truncate" title={workerStep || undefined}>{workerStep || "-"}</td>
+                      <td className="py-4 px-lg text-right">
+                        {hasOverallMd ? (
+                          <a href={`/runs/${encodeURIComponent(caseName)}`} className="text-primary font-label-md font-medium hover:underline">查看报告</a>
+                        ) : statusVal === "running" ? (
+                          <span className="text-blue-600 font-label-md flex items-center justify-end gap-1"><span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse inline-block" />处理中</span>
+                        ) : statusVal === "failed" ? (
+                          <a href={`/runs/${encodeURIComponent(caseName)}`} className="text-[#8A2F2F] font-label-md font-medium hover:underline">查看错误</a>
+                        ) : statusVal === "pending" ? (
+                          <span className="text-on-surface-variant font-label-md">排队中</span>
+                        ) : (
+                          <span className="text-on-surface-variant font-label-md">报告待生成</span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
+
+          {/* Pagination */}
+          {!loading && total > 0 && (
+            <div className="px-lg py-md border-t border-outline-variant bg-surface-container-low flex items-center justify-between">
+              <div className="text-label-md font-label-md text-on-surface-variant">
+                共 {total} 条，第 {page} / {totalPages} 页
+              </div>
+              <div className="flex items-center gap-3">
+                <select
+                  className="bg-surface-container-lowest border border-outline-variant text-on-surface text-label-md font-label-md rounded px-2 py-1 appearance-none"
+                  value={pageSize}
+                  onChange={(e) => updateParams({ pageSize: e.target.value, page: undefined })}
+                >
+                  {PAGE_SIZE_OPTIONS.map((s) => <option key={s} value={s}>{s} 条/页</option>)}
+                </select>
+                <button
+                  disabled={page <= 1}
+                  onClick={() => updateParams({ page: String(page - 1) })}
+                  className="px-3 py-1.5 rounded border border-outline-variant text-label-md font-label-md text-on-surface disabled:opacity-40 hover:bg-surface-container-lowest transition-colors cursor-pointer disabled:cursor-default"
+                >
+                  <ChevronLeft size={16} />
+                </button>
+                <button
+                  disabled={page >= totalPages}
+                  onClick={() => updateParams({ page: String(page + 1) })}
+                  className="px-3 py-1.5 rounded border border-outline-variant text-label-md font-label-md text-on-surface disabled:opacity-40 hover:bg-surface-container-lowest transition-colors cursor-pointer disabled:cursor-default"
+                >
+                  <ChevronRight size={16} />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

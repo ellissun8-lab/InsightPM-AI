@@ -59,6 +59,263 @@ export async function getRuns(): Promise<{ data: RunRecord[]; error: any }> {
   return { data: getRunsFromLocal(), error: null };
 }
 
+export interface RunsQueryParams {
+  q?: string;
+  status?: string;
+  artifactFilter?: string;
+  range?: string;
+  sort?: string;
+  page?: number;
+  pageSize?: number;
+}
+
+export interface RunsQueryResult {
+  runs: RunRecord[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  artifactSummary?: Record<string, { count: number; hasOverallMd: boolean; types: string[] }>;
+}
+
+/**
+ * Get runs with pagination, search, filtering, and sorting.
+ */
+export async function getRunsWithPagination(params: RunsQueryParams): Promise<{ data: RunsQueryResult; error: any }> {
+  if (isCloudMode()) {
+    return getRunsWithPaginationFromSupabase(params);
+  }
+  return getRunsWithPaginationFromLocal(params);
+}
+
+async function getRunsWithPaginationFromSupabase(params: RunsQueryParams): Promise<{ data: RunsQueryResult; error: any }> {
+  const supabase = await getAdminClient();
+  const page = Math.max(1, params.page || 1);
+  const pageSize = Math.min(100, Math.max(1, params.pageSize || 20));
+  const offset = (page - 1) * pageSize;
+
+  // Build query
+  let query = supabase.from("runs").select("*", { count: "exact" });
+  let countQuery = supabase.from("runs").select("id", { count: "exact", head: true });
+
+  // Search filter
+  if (params.q) {
+    const q = `%${params.q}%`;
+    query = query.or(`case_name.ilike.${q},scenario.ilike.${q}`);
+    countQuery = countQuery.or(`case_name.ilike.${q},scenario.ilike.${q}`);
+  }
+
+  // Status filter
+  if (params.status && params.status !== "all") {
+    query = query.eq("status", params.status);
+    countQuery = countQuery.eq("status", params.status);
+  }
+
+  // Time range filter
+  if (params.range && params.range !== "all") {
+    const now = new Date();
+    let since: Date;
+    switch (params.range) {
+      case "today":
+        since = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        break;
+      case "7d":
+        since = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        break;
+      case "30d":
+        since = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+        break;
+      default:
+        since = new Date(0);
+    }
+    query = query.gte("created_at", since.toISOString());
+    countQuery = countQuery.gte("created_at", since.toISOString());
+  }
+
+  // Sorting
+  const sort = params.sort || "newest";
+  switch (sort) {
+    case "oldest":
+      query = query.order("created_at", { ascending: true });
+      break;
+    case "updated":
+      query = query.order("updated_at", { ascending: false });
+      break;
+    case "score":
+      query = query.order("semantic_score", { ascending: false, nullsFirst: false });
+      break;
+    case "newest":
+    default:
+      query = query.order("created_at", { ascending: false });
+      break;
+  }
+
+  // Get total count
+  const { count: total, error: countError } = await countQuery;
+  if (countError) {
+    console.error("getRunsWithPagination count error:", countError);
+    return { data: { runs: [], total: 0, page, pageSize, totalPages: 0 }, error: countError };
+  }
+
+  // Get page data
+  const { data, error } = await query.range(offset, offset + pageSize - 1);
+  if (error) {
+    console.error("getRunsWithPagination data error:", error);
+    return { data: { runs: [], total: 0, page, pageSize, totalPages: 0 }, error };
+  }
+
+  const runs = (data || []).map(mapSupabaseRunToRecord);
+  const totalSafe = total || 0;
+  const totalPages = Math.ceil(totalSafe / pageSize);
+
+  // Batch query artifacts for this page's run IDs
+  const runIds = runs.map((r) => r.id).filter(Boolean);
+  let artifactSummary: Record<string, { count: number; hasOverallMd: boolean; types: string[] }> = {};
+
+  if (runIds.length > 0) {
+    const { data: arts, error: artsError } = await supabase
+      .from("report_artifacts")
+      .select("run_id, artifact_type")
+      .in("run_id", runIds);
+
+    if (!artsError && arts) {
+      for (const art of arts) {
+        const rid = art.run_id;
+        if (!artifactSummary[rid]) {
+          artifactSummary[rid] = { count: 0, hasOverallMd: false, types: [] };
+        }
+        artifactSummary[rid].count++;
+        artifactSummary[rid].types.push(art.artifact_type);
+        if (art.artifact_type === "overall-md") {
+          artifactSummary[rid].hasOverallMd = true;
+        }
+      }
+    }
+
+    // Artifact filter: post-filter runs based on artifact status
+    if (params.artifactFilter && params.artifactFilter !== "all") {
+      const filtered = runs.filter((r) => {
+        const summary = artifactSummary[r.id || ""];
+        switch (params.artifactFilter) {
+          case "has-report":
+            return summary?.hasOverallMd === true;
+          case "missing-report":
+            return !summary?.hasOverallMd;
+          case "has-artifacts":
+            return (summary?.count || 0) > 0;
+          case "no-artifacts":
+            return !summary || summary.count === 0;
+          default:
+            return true;
+        }
+      });
+      // Note: total is approximate after artifact filtering (pre-filter count)
+      return {
+        data: { runs: filtered, total: totalSafe, page, pageSize, totalPages, artifactSummary },
+        error: null,
+      };
+    }
+  }
+
+  return {
+    data: { runs, total: totalSafe, page, pageSize, totalPages, artifactSummary },
+    error: null,
+  };
+}
+
+function getRunsWithPaginationFromLocal(params: RunsQueryParams): { data: RunsQueryResult; error: any } {
+  let allRuns = getRunsFromLocal();
+
+  // Search
+  if (params.q) {
+    const q = params.q.toLowerCase();
+    allRuns = allRuns.filter((r) => {
+      const name = (r.caseName || r.case_name || "").toLowerCase();
+      const scenario = (r.scenario || r.dataset || "").toLowerCase();
+      const originalName = (r.metadata?.inputFile?.originalName || "").toLowerCase();
+      return name.includes(q) || scenario.includes(q) || originalName.includes(q);
+    });
+  }
+
+  // Status
+  if (params.status && params.status !== "all") {
+    allRuns = allRuns.filter((r) => r.status === params.status);
+  }
+
+  // Time range
+  if (params.range && params.range !== "all") {
+    const now = new Date();
+    let since: Date;
+    switch (params.range) {
+      case "today":
+        since = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        break;
+      case "7d":
+        since = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        break;
+      case "30d":
+        since = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+        break;
+      default:
+        since = new Date(0);
+    }
+    allRuns = allRuns.filter((r) => {
+      const created = r.createdAt || r.timestamp;
+      return created && new Date(created) >= since;
+    });
+  }
+
+  // Sort
+  const sort = params.sort || "newest";
+  switch (sort) {
+    case "oldest":
+      allRuns.sort((a, b) => new Date(a.createdAt || 0).getTime() - new Date(b.createdAt || 0).getTime());
+      break;
+    case "updated":
+      allRuns.sort((a, b) => new Date(b.updatedAt || 0).getTime() - new Date(a.updatedAt || 0).getTime());
+      break;
+    case "score":
+      allRuns.sort((a, b) => (b.semanticScore ?? -1) - (a.semanticScore ?? -1));
+      break;
+    case "newest":
+    default:
+      allRuns.sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
+      break;
+  }
+
+  // Artifact filter (local mode: check artifacts field)
+  if (params.artifactFilter && params.artifactFilter !== "all") {
+    allRuns = allRuns.filter((r) => {
+      const hasArtifacts = r.artifacts?.markdown || r.artifacts?.report || r.artifacts?.json;
+      switch (params.artifactFilter) {
+        case "has-report":
+          return r.artifacts?.markdown === true;
+        case "missing-report":
+          return !r.artifacts?.markdown;
+        case "has-artifacts":
+          return hasArtifacts;
+        case "no-artifacts":
+          return !hasArtifacts;
+        default:
+          return true;
+      }
+    });
+  }
+
+  // Pagination
+  const page = Math.max(1, params.page || 1);
+  const pageSize = Math.min(100, Math.max(1, params.pageSize || 20));
+  const total = allRuns.length;
+  const totalPages = Math.ceil(total / pageSize);
+  const offset = (page - 1) * pageSize;
+  const runs = allRuns.slice(offset, offset + pageSize);
+
+  return {
+    data: { runs, total, page, pageSize, totalPages },
+    error: null,
+  };
+}
+
 /**
  * Get a single run by case name
  */
