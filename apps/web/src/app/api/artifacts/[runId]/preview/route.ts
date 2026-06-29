@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getReportArtifactsByRunId } from "@/lib/data/artifacts-repository";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 const ALLOWED_TYPES = new Set(["summary-json", "overall-md", "validation-json", "segment-json"]);
 const MAX_PREVIEW_BYTES = 1024 * 1024; // 1MB
@@ -24,17 +24,26 @@ export async function GET(
       );
     }
 
-    const artifacts = await getReportArtifactsByRunId(runId, artifactType);
-    const artifact = artifacts[0];
+    const supabase = createAdminClient();
 
-    if (!artifact) {
+    // Direct query for artifact
+    const { data: artifact, error: queryError } = await supabase
+      .from("report_artifacts")
+      .select("*")
+      .eq("run_id", runId)
+      .eq("artifact_type", artifactType)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .single();
+
+    if (queryError || !artifact) {
       return NextResponse.json(
         { error: `Artifact not found: ${artifactType}` },
         { status: 404 }
       );
     }
 
-    if (!artifact.storageBucket || !artifact.storagePath) {
+    if (!artifact.storage_bucket || !artifact.storage_path) {
       return NextResponse.json(
         { error: "Artifact has no storage reference" },
         { status: 404 }
@@ -42,12 +51,9 @@ export async function GET(
     }
 
     // Download from Supabase Storage
-    const { createAdminClient } = await import("@/lib/supabase/admin");
-    const supabase = await createAdminClient();
-
     const { data: fileData, error: downloadError } = await supabase.storage
-      .from(artifact.storageBucket)
-      .download(artifact.storagePath);
+      .from(artifact.storage_bucket)
+      .download(artifact.storage_path);
 
     if (downloadError || !fileData) {
       console.error("Storage download error:", downloadError);
@@ -71,19 +77,18 @@ export async function GET(
         const parsed = JSON.parse(text);
         return NextResponse.json({
           artifactType,
-          fileName: artifact.fileName,
-          contentType: artifact.contentType,
-          sizeBytes: artifact.sizeBytes,
+          fileName: artifact.file_name,
+          contentType: artifact.content_type,
+          sizeBytes: artifact.size_bytes,
           truncated,
           content: parsed,
         });
       } catch {
-        // Not valid JSON, return as text with warning
         return NextResponse.json({
           artifactType,
-          fileName: artifact.fileName,
-          contentType: artifact.contentType,
-          sizeBytes: artifact.sizeBytes,
+          fileName: artifact.file_name,
+          contentType: artifact.content_type,
+          sizeBytes: artifact.size_bytes,
           truncated,
           content: text,
           warning: "Content is not valid JSON, returned as raw text",
@@ -94,9 +99,9 @@ export async function GET(
     // For markdown, return as text
     return NextResponse.json({
       artifactType,
-      fileName: artifact.fileName,
-      contentType: artifact.contentType,
-      sizeBytes: artifact.sizeBytes,
+      fileName: artifact.file_name,
+      contentType: artifact.content_type,
+      sizeBytes: artifact.size_bytes,
       truncated,
       content: text,
     });
