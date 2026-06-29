@@ -110,6 +110,33 @@ export default function AnalysisReportPage() {
             railway-worker
           </span>
         )}
+        {/* Download buttons */}
+        <div className="flex items-center gap-2 ml-auto">
+          <a
+            href={`/api/artifacts/${selectedRunId}/download?type=overall-md`}
+            className="px-3 py-1.5 rounded text-label-sm font-label-sm bg-surface-container-lowest border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors inline-flex items-center gap-1"
+          >
+            下载报告
+          </a>
+          <a
+            href={`/api/artifacts/${selectedRunId}/download?type=summary-json`}
+            className="px-3 py-1.5 rounded text-label-sm font-label-sm bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors inline-flex items-center gap-1"
+          >
+            摘要 JSON
+          </a>
+          <a
+            href={`/api/artifacts/${selectedRunId}/download?type=validation-json`}
+            className="px-3 py-1.5 rounded text-label-sm font-label-sm bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors inline-flex items-center gap-1"
+          >
+            验证 JSON
+          </a>
+          <a
+            href={`/api/artifacts/${selectedRunId}/download?type=segment-json`}
+            className="px-3 py-1.5 rounded text-label-sm font-label-sm bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors inline-flex items-center gap-1"
+          >
+            分组 JSON
+          </a>
+        </div>
       </div>
       <AnalysisReportClient
         caseName={reportData.caseName}

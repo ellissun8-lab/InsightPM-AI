@@ -1,10 +1,11 @@
 import fs from "fs";
 import path from "path";
 import Sidebar from "@/components/Sidebar";
-import { CheckCircle, XCircle, Link, Clock, AlertTriangle, FileText, Download, ChevronDown } from "lucide-react";
+import { CheckCircle, XCircle, Link, Clock, AlertTriangle, ChevronDown } from "lucide-react";
+import RunArtifactsClient from "@/components/RunArtifactsClient";
 import { isCloudMode } from "@/lib/data/storage-mode";
 import { getRunByCaseName } from "@/lib/data/runs-repository";
-import { getMarkdownReportByRunId, getSummaryArtifactByRunId, getArtifactsForRun, getArtifactDownloadUrl } from "@/lib/data/artifacts-repository";
+import { getMarkdownReportByRunId, getSummaryArtifactByRunId, getArtifactsForRun } from "@/lib/data/artifacts-repository";
 
 const ROOT = path.resolve(process.cwd(), "../..");
 
@@ -117,17 +118,6 @@ async function getCloudReport(caseName: string) {
   const metadata = run.metadata || {};
   const isReal = metadata.workerResult === "artifacts-written-ok" || metadata.artifactWritten === true || metadata.worker === "railway-worker";
 
-  // Build download URLs for artifacts
-  const artifactsWithUrls = await Promise.all(
-    artifacts.map(async (a) => {
-      let downloadUrl: string | null = null;
-      try {
-        downloadUrl = await getArtifactDownloadUrl(a.id);
-      } catch {}
-      return { ...a, downloadUrl };
-    })
-  );
-
   return {
     run,
     reportContent: markdown,
@@ -135,7 +125,7 @@ async function getCloudReport(caseName: string) {
     metadata: mdArtifact?.metadata || {},
     summary,
     isRealAnalysis: isReal,
-    artifacts: artifactsWithUrls,
+    artifacts,
   };
 }
 
@@ -262,13 +252,6 @@ export default async function RunDetailPage({
       unknown: "未知错误",
     };
 
-    const ARTIFACT_LABELS: Record<string, string> = {
-      "summary-json": "运行摘要",
-      "overall-md": "完整 Markdown 报告",
-      "validation-json": "验证结果",
-      "segment-json": "分组结构",
-    };
-
     return (
       <div className="flex min-h-screen bg-surface">
         <Sidebar />
@@ -319,49 +302,19 @@ export default async function RunDetailPage({
           )}
 
           {/* Artifacts List */}
-          {artifacts && artifacts.length > 0 && (
-            <div className="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden mb-xl">
-              <div className="px-lg py-md border-b border-outline-variant bg-surface-container-low">
-                <h3 className="text-title-lg font-title-lg text-on-surface font-semibold">
-                  报告产物
-                </h3>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left">
-                  <thead>
-                    <tr className="border-b border-outline-variant/50">
-                      <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">类型</th>
-                      <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">文件名</th>
-                      <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">来源</th>
-                      <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold text-right">操作</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-body-md font-body-md text-on-surface divide-y divide-outline-variant/50">
-                    {artifacts.map((a: any) => (
-                      <tr key={a.id} className="hover:bg-surface-container-low transition-colors">
-                        <td className="px-lg py-md">
-                          <span className="inline-flex items-center gap-1.5">
-                            <FileText size={14} className="text-on-surface-variant" />
-                            {ARTIFACT_LABELS[a.artifactType] || a.artifactType}
-                          </span>
-                        </td>
-                        <td className="px-lg py-md text-on-surface-variant font-mono text-label-md">{a.fileName}</td>
-                        <td className="px-lg py-md text-on-surface-variant">{a.metadata?.source || "-"}</td>
-                        <td className="px-lg py-md text-right">
-                          {a.downloadUrl ? (
-                            <a href={a.downloadUrl} target="_blank" rel="noopener noreferrer" className="text-primary font-label-md hover:underline inline-flex items-center gap-1">
-                              <Download size={14} /> 下载
-                            </a>
-                          ) : (
-                            <span className="text-on-surface-variant font-label-md">-</span>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          {artifacts && artifacts.length > 0 && run.id && (
+            <RunArtifactsClient
+              artifacts={artifacts.map((a: any) => ({
+                id: a.id,
+                artifactType: a.artifactType,
+                fileName: a.fileName,
+                contentType: a.contentType,
+                sizeBytes: a.sizeBytes,
+                metadata: a.metadata,
+                createdAt: a.createdAt,
+              }))}
+              runId={run.id}
+            />
           )}
 
           {/* Report Content */}
