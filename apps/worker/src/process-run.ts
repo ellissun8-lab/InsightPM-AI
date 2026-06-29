@@ -1,4 +1,4 @@
-import { type RunRecord, updateRunStatus, markRunCompleted, markRunFailed, getSupabaseClient } from "./supabase.js";
+import { type RunRecord, updateRunStatus, markRunCompleted, markRunFailed } from "./supabase.js";
 import { runPipeline } from "./pipeline-runner.js";
 import { discoverArtifacts, uploadAndRecordArtifacts } from "./artifacts.js";
 import { downloadFromStorage } from "./storage-downloader.js";
@@ -54,7 +54,7 @@ function classifyError(stdout: string, stderr: string, message: string): { categ
 }
 
 /**
- * 失败落库
+ * 失败落库 - 通过 RPC 调用 mark_run_failed
  */
 async function handleFailure(
   run: RunRecord,
@@ -68,12 +68,13 @@ async function handleFailure(
     inputPath?: string;
     outputDir?: string;
     workerStep?: string;
+    exitCode?: number | null;
+    signal?: string | null;
   }
 ) {
   const now = new Date().toISOString();
-  const client = getSupabaseClient();
 
-  const errorData = {
+  const errorPayload = {
     message: errorInfo.message,
     category: errorInfo.category,
     retryable: errorInfo.retryable,
@@ -85,58 +86,23 @@ async function handleFailure(
     command: errorInfo.command || null,
     inputPath: errorInfo.inputPath || null,
     outputDir: errorInfo.outputDir || null,
+    exitCode: errorInfo.exitCode ?? null,
+    signal: errorInfo.signal ?? null,
   };
 
   const retryCount = run.metadata?.retry_count || 0;
   const maxRetry = run.metadata?.max_retry || 2;
+  const retryable = errorInfo.retryable && retryCount < maxRetry;
 
-  if (errorInfo.retryable && retryCount < maxRetry) {
-    // 可重试：回 pending
+  if (retryable) {
     console.log(`[Worker] Retrying run ${run.id} (retry ${retryCount + 1}/${maxRetry})`);
-    const { error } = await client
-      .from("runs")
-      .update({
-        status: "pending",
-        retry_count: retryCount + 1,
-        locked_by: null,
-        locked_at: null,
-        updated_at: now,
-        metadata: {
-          ...run.metadata,
-          retryHistory: [
-            ...(run.metadata?.retryHistory || []),
-            { retryAt: now, error: errorInfo.message, category: errorInfo.category },
-          ],
-        },
-      })
-      .eq("id", run.id);
-
-    if (error) {
-      console.error(`[Worker] Failed to update run to pending:`, error);
-    }
   } else {
-    // 不可重试或超过最大重试：标记 failed
     console.log(`[Worker] Marking run ${run.id} as failed (non-retryable or max retries reached)`);
-    const { error } = await client
-      .from("runs")
-      .update({
-        status: "failed",
-        failed_at: now,
-        updated_at: now,
-        locked_by: null,
-        locked_at: null,
-        last_error: errorData,
-        metadata: {
-          ...run.metadata,
-          error: errorData,
-          failedAt: now,
-        },
-      })
-      .eq("id", run.id);
+  }
 
-    if (error) {
-      console.error(`[Worker] failed to update run to failed:`, error);
-    }
+  const ok = await markRunFailed(run.id, errorPayload, retryable);
+  if (!ok) {
+    console.error(`[Worker] markRunFailed RPC failed for run ${run.id}`);
   }
 }
 
@@ -307,6 +273,8 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
     console.error(`[Worker] processRun EXCEPTION for ${run.id}`);
     console.error(`[Worker] Error: ${err.message}`);
     console.error(`[Worker] Stack: ${err.stack}`);
+    console.error(`[Worker] Exit code: ${err.status}`);
+    console.error(`[Worker] Signal: ${err.signal}`);
     console.error(`[Worker] ==============================`);
 
     const { category, retryable } = classifyError(
@@ -325,6 +293,8 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
       inputPath: path.join(WORKER_TMP_DIR, run.id, "input.csv"),
       outputDir: path.join(WORKER_TMP_DIR, run.id, "output"),
       workerStep: "process-run-exception",
+      exitCode: err.status ?? null,
+      signal: err.signal ?? null,
     });
   } finally {
     stopHeartbeat();

@@ -206,20 +206,32 @@ export async function markRunCompleted(
 }
 
 /**
- * 标记 run 失败
+ * 标记 run 失败 - 传递完整 error payload
  */
 export async function markRunFailed(
   runId: string,
-  errorMessage: string,
-  errorCategory: string = "unknown",
+  errorPayload: {
+    message: string;
+    category: string;
+    retryable: boolean;
+    failedAt: string;
+    workerStep?: string;
+    source?: string;
+    stdoutPreview?: string | null;
+    stderrPreview?: string | null;
+    command?: string | null;
+    inputPath?: string | null;
+    outputDir?: string | null;
+    exitCode?: number | null;
+    signal?: string | null;
+  },
   retryable: boolean = false
 ): Promise<boolean> {
   const client = getSupabaseClient();
 
   const { error } = await client.rpc("mark_run_failed", {
     run_id: runId,
-    error_message: errorMessage,
-    error_category: errorCategory,
+    error_payload: errorPayload,
     retryable,
   });
 
