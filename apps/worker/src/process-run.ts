@@ -10,46 +10,63 @@ const WORKER_TMP_DIR = process.env.WORKER_TMP_DIR || path.join(os.tmpdir(), "pro
 
 /**
  * 根据 stdout/stderr 分类错误
+ *
+ * 优先级：validation（summary 优先） > network > training > artifact > ai > unknown
+ * summary 区域格式: "Semantic Validation: fail" / "Hard Validation: fail"
+ * 步骤日志格式:   "[step] hard_validation" + "FAIL"
  */
 function classifyError(stdout: string, stderr: string, message: string): { category: string; retryable: boolean } {
   const combined = `${stdout} ${stderr} ${message}`.toLowerCase();
 
-  // 网络错误 - 可重试
+  // ---- 1. Validation 失败（最高优先级） ----
+
+  // semantic_validation: summary "Semantic Validation: fail" 或步骤日志 "[step] semantic_validation ... FAIL"
+  if (
+    (combined.includes("semantic validation") && combined.includes("fail")) ||
+    (combined.includes("semantic_validation") && combined.includes("fail"))
+  ) {
+    return { category: "semantic_validation", retryable: false };
+  }
+
+  // hard_validation: summary "Hard Validation: fail" 或步骤日志 "[step] hard_validation ... FAIL"
+  // 注意："Hard Validation: warning" 不包含 "fail"，不会命中
+  if (
+    (combined.includes("hard validation") && combined.includes("fail")) ||
+    (combined.includes("hard_validation") && combined.includes("fail"))
+  ) {
+    return { category: "hard_validation", retryable: false };
+  }
+
+  // ---- 2. 网络错误 ----
+
   if (combined.includes("econnreset") || combined.includes("etimedout") || combined.includes("fetch failed") || combined.includes("timeout")) {
     return { category: "network", retryable: true };
   }
 
-  // 5xx 错误 - 可重试
   if (combined.match(/\b5\d{2}\b/) || combined.includes("500") || combined.includes("502") || combined.includes("503") || combined.includes("504")) {
     return { category: "network", retryable: true };
   }
 
-  // hard_validation 失败 - 不可重试
-  if (combined.includes("hard_validation") || combined.includes("hard validation failed")) {
-    return { category: "hard_validation", retryable: false };
-  }
+  // ---- 3. training/promote ----
 
-  // semantic_validation 失败 - 不可重试
-  if (combined.includes("semantic_validation") && combined.includes("fail")) {
-    return { category: "semantic_validation", retryable: false };
-  }
-
-  // training/promote 错误 - 不可重试
   if (combined.includes("promote_to_training") || combined.includes("dataset_index_update")) {
     return { category: "training_data", retryable: false };
   }
 
-  // artifact 写入错误 - 可重试
+  // ---- 4. artifact 写入 ----
+
   if (combined.includes("artifact")) {
     return { category: "artifact_write", retryable: true };
   }
 
-  // AI 生成错误 - 可重试
+  // ---- 5. AI 生成 ----
+
   if (combined.includes("ai_analysis") || combined.includes("ai generation")) {
     return { category: "ai_generation", retryable: true };
   }
 
-  // 默认不可重试
+  // ---- 6. 兜底 ----
+
   return { category: "unknown", retryable: false };
 }
 
