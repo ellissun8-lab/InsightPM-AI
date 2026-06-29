@@ -1,11 +1,53 @@
-import { type RunRecord, updateRunStatus, supabase } from "./supabase.js";
+import { type RunRecord, updateRunStatus, markRunCompleted, markRunFailed } from "./supabase.js";
 import { runPipeline } from "./pipeline-runner.js";
 import { discoverArtifacts, uploadAndRecordArtifacts } from "./artifacts.js";
 import { downloadFromStorage } from "./storage-downloader.js";
+import { startHeartbeat, updateHeartbeat, stopHeartbeat } from "./heartbeat.js";
 import * as path from "path";
 import * as os from "os";
 
 const WORKER_TMP_DIR = process.env.WORKER_TMP_DIR || path.join(os.tmpdir(), "proofloop-worker");
+
+/**
+ * 判断错误是否可重试
+ */
+function isRetryableError(err: any): boolean {
+  const retryableMessages = [
+    "fetch failed",
+    "ECONNRESET",
+    "ETIMEDOUT",
+    "timeout",
+    "500",
+    "502",
+    "503",
+    "504",
+  ];
+
+  const message = err.message || "";
+  return retryableMessages.some((msg) => message.includes(msg));
+}
+
+/**
+ * 获取错误分类
+ */
+function getErrorCategory(err: any, workerStep: string): string {
+  const message = err.message || "";
+
+  if (message.includes("fetch failed") || message.includes("ECONNRESET")) {
+    return "storage";
+  }
+  if (message.includes("AI") || message.includes("model")) {
+    return "ai_generation";
+  }
+  if (message.includes("validation")) {
+    return "hard_validation";
+  }
+  if (message.includes("timeout")) {
+    return "timeout";
+  }
+
+  return "unknown";
+}
 
 /**
  * 处理单个 run
@@ -22,51 +64,27 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
   console.log(`[Worker]   inputFile: ${JSON.stringify(run.metadata?.inputFile || null)}`);
   console.log(`[Worker] ==============================`);
 
-  // Step 1: 更新状态为 running，记录 worker 信息
-  console.log(`[Worker] Claiming run ${run.id}...`);
-  const runningMetadata = {
-    ...run.metadata,
-    worker: "railway-worker",
-    workerStep: "process-run-started",
-    workerStartedAt: now,
-    inputFile: run.metadata?.inputFile || null,
-  };
-
-  const runningOk = await updateRunStatus(run.id, "running", runningMetadata);
-  if (!runningOk) {
-    console.error(`[Worker] Claim failed for run ${run.id}`);
-    await updateRunStatus(run.id, "failed", {
-      ...run.metadata,
-      error: {
-        message: "Failed to update to running status",
-        failedAt: now,
-        workerStep: "claim-failed",
-        source: "railway-worker",
-      },
-      failedAt: now,
-    });
-    return;
-  }
-  console.log(`[Worker] Claim success for run ${run.id}`);
+  // 启动 heartbeat
+  startHeartbeat(run.id, 30000);
 
   try {
+    // Step 1: 更新 metadata
+    await updateHeartbeat(run.id, "process-run-started");
+
     // Step 2: 检查 inputFile metadata
     const inputFile = run.metadata?.inputFile;
     if (!inputFile || !inputFile.bucket || !inputFile.path) {
       console.error(`[Worker] Missing inputFile metadata for run ${run.id}`);
-      await updateRunStatus(run.id, "failed", {
-        ...runningMetadata,
-        error: { message: "Missing inputFile metadata" },
-        failedAt: now,
-      });
+      await markRunFailed(run.id, "Missing inputFile metadata", "storage", false);
+      stopHeartbeat();
       return;
     }
 
     console.log(`[Worker] inputFile bucket: ${inputFile.bucket}`);
     console.log(`[Worker] inputFile path: ${inputFile.path}`);
-    console.log(`[Worker] inputFile originalName: ${inputFile.originalName}`);
 
-    // Step 3: 下载 CSV（使用改进的下载逻辑）
+    // Step 3: 下载 CSV
+    await updateHeartbeat(run.id, "downloading-csv");
     console.log(`[Worker] Downloading input CSV...`);
     const localDir = path.join(WORKER_TMP_DIR, run.id);
 
@@ -78,31 +96,27 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
     );
 
     if (!downloadResult.success) {
-      console.error(`[Worker] Failed to download CSV:`, downloadResult.error);
-      await updateRunStatus(run.id, "failed", {
-        ...runningMetadata,
-        error: downloadResult.error,
-        failedAt: now,
-      });
+      console.error(`[Worker] failed to download CSV:`, downloadResult.error);
+      await markRunFailed(
+        run.id,
+        downloadResult.error?.message || "Failed to download CSV",
+        "storage",
+        true // transient error, retryable
+      );
+      stopHeartbeat();
       return;
     }
 
     const localInputPath = downloadResult.localPath!;
     console.log(`[Worker] Download successful: ${localInputPath}`);
-    console.log(`[Worker] File size: ${downloadResult.fileSize} bytes`);
 
-    // Step 4: 执行真实 pipeline
+    // Step 4: 执行 pipeline
+    await updateHeartbeat(run.id, "executing-pipeline");
     const outputDir = path.join(WORKER_TMP_DIR, run.id, "output");
     const dataset = run.scenario || run.metadata?.dataset || "mixed-feedback";
     const feedbackCount = run.feedback_count || run.metadata?.feedbackCount || 0;
 
     console.log(`[Worker] Starting pipeline execution...`);
-    console.log(`[Worker]   caseName: ${run.case_name}`);
-    console.log(`[Worker]   dataset: ${dataset}`);
-    console.log(`[Worker]   feedbackCount: ${feedbackCount}`);
-    console.log(`[Worker]   inputPath: ${localInputPath}`);
-    console.log(`[Worker]   outputDir: ${outputDir}`);
-
     const pipelineResult = await runPipeline(
       run.case_name,
       dataset,
@@ -114,28 +128,25 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
 
     if (!pipelineResult.success) {
       console.error(`[Worker] Pipeline failed for run ${run.id}`);
-      await updateRunStatus(run.id, "failed", {
-        ...runningMetadata,
-        inputDownloaded: true,
-        localInputPath,
-        pipelineExecuted: false,
-        pipelineStdoutPreview: pipelineResult.stdout,
-        pipelineStderrPreview: pipelineResult.stderr,
-        error: pipelineResult.error || {
-          message: "Pipeline execution failed",
-          stderr: pipelineResult.stderr,
-        },
-        failedAt: new Date().toISOString(),
-      });
+      const errorCategory = getErrorCategory(pipelineResult.error, "pipeline");
+      const retryable = isRetryableError(pipelineResult.error);
+
+      await markRunFailed(
+        run.id,
+        pipelineResult.error?.message || "Pipeline execution failed",
+        errorCategory,
+        retryable
+      );
+      stopHeartbeat();
       return;
     }
 
     console.log(`[Worker] Pipeline completed successfully`);
-    console.log(`[Worker] Output dir: ${pipelineResult.outputDir}`);
     console.log(`[Worker] Hard score: ${pipelineResult.hardScore}`);
     console.log(`[Worker] Semantic score: ${pipelineResult.semanticScore}`);
 
-    // Step 5: 发现并上传 artifacts
+    // Step 5: 上传 artifacts
+    await updateHeartbeat(run.id, "uploading-artifacts");
     const artifacts = discoverArtifacts(outputDir, run.case_name);
 
     const artifactResult = await uploadAndRecordArtifacts(
@@ -146,101 +157,57 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
 
     if (!artifactResult.success) {
       console.error(`[Worker] Artifact upload failed: ${artifactResult.error}`);
-      await updateRunStatus(run.id, "failed", {
-        ...runningMetadata,
-        inputDownloaded: true,
-        localInputPath,
-        pipelineExecuted: true,
-        pipelineOutputDir: outputDir,
-        pipelineStdoutPreview: pipelineResult.stdout,
-        pipelineStderrPreview: pipelineResult.stderr,
-        error: { message: artifactResult.error || "Artifact upload failed" },
-        failedAt: new Date().toISOString(),
-      });
+      await markRunFailed(
+        run.id,
+        artifactResult.error || "Artifact upload failed",
+        "artifact_write",
+        true // transient error, retryable
+      );
+      stopHeartbeat();
       return;
     }
 
     console.log(`[Worker] Artifacts written: ${artifactResult.artifactTypes.join(", ")}`);
 
-    // Step 6: 更新 run 为 completed
-    const completedNow = new Date().toISOString();
-    const completedMetadata = {
-      ...runningMetadata,
-      inputDownloaded: true,
-      localInputPath,
-      pipelineExecuted: true,
-      pipelineOutputDir: outputDir,
-      pipelineStdoutPreview: pipelineResult.stdout,
-      pipelineStderrPreview: pipelineResult.stderr,
-      hasReport: true,
-      artifactWritten: true,
-      artifactWrittenAt: completedNow,
-      artifactTypes: artifactResult.artifactTypes,
-      workerResult: "artifacts-written-ok",
-      workerCompletedAt: completedNow,
-    };
+    // Step 6: 标记完成
+    await markRunCompleted(
+      run.id,
+      pipelineResult.hardScore ?? undefined,
+      pipelineResult.semanticScore ?? undefined,
+      pipelineResult.evidenceBroken ?? undefined,
+      {
+        ...run.metadata,
+        worker: "railway-worker",
+        workerStep: "completed",
+        workerResult: "artifacts-written-ok",
+        pipelineExecuted: true,
+        artifactWritten: true,
+        artifactWrittenAt: now,
+        artifactTypes: artifactResult.artifactTypes,
+        hasReport: true,
+        workerCompletedAt: now,
+      }
+    );
 
-    // 构建更新数据
-    const updateData: any = {
-      status: "completed",
-      finished_at: completedNow,
-      updated_at: completedNow,
-      metadata: completedMetadata,
-    };
-
-    // 只在有值时更新分数
-    if (pipelineResult.hardScore !== null) {
-      updateData.hard_score = pipelineResult.hardScore;
-    }
-    if (pipelineResult.semanticScore !== null) {
-      updateData.semantic_score = pipelineResult.semanticScore;
-    }
-    if (pipelineResult.evidenceBroken !== null) {
-      updateData.evidence_broken = pipelineResult.evidenceBroken;
-    }
-    if (pipelineResult.durationMs !== null) {
-      if (pipelineResult.durationMs) completedMetadata.durationMs = pipelineResult.durationMs;
-    }
-
-    const { error: updateError } = await supabase
-      .from("runs")
-      .update(updateData)
-      .eq("id", run.id);
-
-    if (updateError) {
-      console.error(`[Worker] failed to update run ${run.id}:`, updateError);
-      await updateRunStatus(run.id, "failed", {
-        ...runningMetadata,
-        error: { message: `Failed to update run: ${updateError.message}` },
-        failedAt: completedNow,
-      });
-      return;
-    }
-
-    console.log(`[Worker] Updated run ${run.id} to completed`);
-    console.log(`[Worker] Run ${run.id} processing PASSED`);
+    console.log(`[Worker] Run ${run.id} completed successfully`);
 
   } catch (err: any) {
-    const failedNow = new Date().toISOString();
     console.error(`[Worker] ==============================`);
     console.error(`[Worker] processRun EXCEPTION for ${run.id}`);
     console.error(`[Worker] Error: ${err.message}`);
     console.error(`[Worker] Stack: ${err.stack}`);
     console.error(`[Worker] ==============================`);
 
-    await updateRunStatus(run.id, "failed", {
-      ...runningMetadata,
-      error: {
-        message: err.message || "Unknown error",
-        stack: err.stack || "",
-        name: err.name || "Error",
-        failedAt: failedNow,
-        workerStep: runningMetadata.workerStep || "process-run-exception",
-        source: "railway-worker",
-        inputPath: runningMetadata.localInputPath || null,
-        outputDir: runningMetadata.pipelineOutputDir || null,
-      },
-      failedAt: failedNow,
-    });
+    const errorCategory = getErrorCategory(err, "process-run");
+    const retryable = isRetryableError(err);
+
+    await markRunFailed(
+      run.id,
+      err.message || "Unknown error",
+      errorCategory,
+      retryable
+    );
+  } finally {
+    stopHeartbeat();
   }
 }

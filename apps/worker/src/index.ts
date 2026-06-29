@@ -3,13 +3,16 @@ import { loadEnv } from "./load-env.js";
 const envVars = loadEnv();
 
 import { execSync } from "child_process";
-import { getPendingRuns, updateRunStatus } from "./supabase.js";
+import { claimNextRun, updateRunStatus } from "./supabase.js";
 import { processRun } from "./process-run.js";
 
 const POLL_INTERVAL_MS = parseInt(
   process.env.WORKER_POLL_INTERVAL_MS || "10000",
   10
 );
+
+// 生成 worker ID
+const WORKER_ID = `worker-${process.env.RAILWAY_DEPLOYMENT_ID || Date.now()}`;
 
 // 检查 Python 版本
 function checkPythonVersion() {
@@ -25,6 +28,7 @@ function checkPythonVersion() {
 }
 
 console.log("[Worker] ProofLoop Cloud Worker started");
+console.log(`[Worker] Worker ID: ${WORKER_ID}`);
 console.log(`[Worker] Poll interval: ${POLL_INTERVAL_MS}ms`);
 console.log(`[Worker] PYTHON_BIN: ${process.env.PYTHON_BIN || "not set"}`);
 checkPythonVersion();
@@ -41,51 +45,50 @@ async function poll() {
   isRunning = true;
 
   try {
-    const pendingRuns = await getPendingRuns();
+    // 使用原子抢单
+    const run = await claimNextRun(WORKER_ID);
 
-    if (pendingRuns.length === 0) {
+    if (!run) {
       console.log(`[Worker] No pending runs found. Checking again in ${POLL_INTERVAL_MS / 1000}s...`);
     } else {
-      console.log(`[Worker] Found ${pendingRuns.length} pending run(s)`);
+      console.log(`[Worker] ==============================`);
+      console.log(`[Worker] Claimed run: ${run.id}`);
+      console.log(`[Worker]   caseName: ${run.case_name}`);
+      console.log(`[Worker]   status: ${run.status}`);
+      console.log(`[Worker]   feedback_count: ${run.feedback_count}`);
+      console.log(`[Worker]   inputFile: ${JSON.stringify(run.metadata?.inputFile || null)}`);
+      console.log(`[Worker] ==============================`);
 
-      for (const run of pendingRuns) {
-        console.log(`[Worker] ==============================`);
-        console.log(`[Worker] Picked pending run: ${run.id}`);
-        console.log(`[Worker]   caseName: ${run.case_name}`);
-        console.log(`[Worker]   status: ${run.status}`);
-        console.log(`[Worker]   feedback_count: ${run.feedback_count}`);
-        console.log(`[Worker]   inputFile: ${JSON.stringify(run.metadata?.inputFile || null)}`);
-        console.log(`[Worker] ==============================`);
+      try {
+        console.log(`[Worker] Starting processRun...`);
+        await processRun(run, envVars);
+        console.log(`[Worker] processRun completed for ${run.id}`);
+      } catch (err: any) {
+        console.error(`[Worker] ==============================`);
+        console.error(`[Worker] processRun FAILED for ${run.id}`);
+        console.error(`[Worker] Error: ${err.message}`);
+        console.error(`[Worker] Stack: ${err.stack}`);
+        console.error(`[Worker] ==============================`);
 
+        // 写入失败状态到 Supabase
         try {
-          console.log(`[Worker] Starting processRun...`);
-          await processRun(run, envVars);
-          console.log(`[Worker] processRun completed for ${run.id}`);
-        } catch (err: any) {
-          console.error(`[Worker] ==============================`);
-          console.error(`[Worker] processRun FAILED for ${run.id}`);
-          console.error(`[Worker] Error: ${err.message}`);
-          console.error(`[Worker] Stack: ${err.stack}`);
-          console.error(`[Worker] ==============================`);
-
-          // 写入失败状态到 Supabase
-          try {
-            await updateRunStatus(run.id, "failed", {
-              ...run.metadata,
-              error: {
-                message: err.message || "Unknown error",
-                stack: err.stack || "",
-                name: err.name || "Error",
-                failedAt: new Date().toISOString(),
-                workerStep: "process-run-exception",
-                source: "railway-worker",
-              },
+          await updateRunStatus(run.id, "failed", {
+            ...run.metadata,
+            error: {
+              message: err.message || "Unknown error",
+              stack: err.stack || "",
+              name: err.name || "Error",
               failedAt: new Date().toISOString(),
-            });
-            console.log(`[Worker] Updated run ${run.id} to failed`);
-          } catch (updateErr) {
-            console.error(`[Worker] Failed to update run status:`, updateErr);
-          }
+              workerStep: "process-run-exception",
+              source: "railway-worker",
+              category: "unknown",
+              retryable: false,
+            },
+            failedAt: new Date().toISOString(),
+          });
+          console.log(`[Worker] Updated run ${run.id} to failed`);
+        } catch (updateErr) {
+          console.error(`[Worker] Failed to update run status:`, updateErr);
         }
       }
     }

@@ -114,6 +114,107 @@ export async function updateRunStatus(
 }
 
 /**
+ * 原子抽数 - 使用 Supabase RPC
+ */
+export async function claimNextRun(workerId: string): Promise<RunRecord | null> {
+  const client = getSupabaseClient();
+  console.log(`[Supabase] Claiming next run for worker: ${workerId}`);
+
+  const { data, error } = await client.rpc("claim_next_run", {
+    worker_id: workerId,
+  });
+
+  if (error) {
+    console.error("[Supabase] Error claiming run:", error);
+    return null;
+  }
+
+  if (!data || data.length === 0) {
+    console.log("[Supabase] No pending or stale runs found");
+    return null;
+  }
+
+  console.log(`[Supabase] Claimed run: ${data[0].run_id} - ${data[0].case_name}`);
+  return data[0] as RunRecord;
+}
+
+/**
+ * 更新 heartbeat
+ */
+export async function updateHeartbeat(
+  runId: string,
+  workerStep: string
+): Promise<boolean> {
+  const client = getSupabaseClient();
+
+  const { error } = await client.rpc("update_run_heartbeat", {
+    run_id: runId,
+    worker_step: workerStep,
+  });
+
+  if (error) {
+    console.warn(`[Supabase] Heartbeat update failed:`, error.message);
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * 标记 run 完成
+ */
+export async function markRunCompleted(
+  runId: string,
+  hardScore?: number,
+  semanticScore?: number,
+  evidenceBroken?: number,
+  metadata?: Record<string, any>
+): Promise<boolean> {
+  const client = getSupabaseClient();
+
+  const { error } = await client.rpc("mark_run_completed", {
+    run_id: runId,
+    p_hard_score: hardScore ?? null,
+    p_semantic_score: semanticScore ?? null,
+    p_evidence_broken: evidenceBroken ?? null,
+    p_metadata: metadata ?? null,
+  });
+
+  if (error) {
+    console.error(`[Supabase] Mark run completed failed:`, error);
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * 标记 run 失败
+ */
+export async function markRunFailed(
+  runId: string,
+  errorMessage: string,
+  errorCategory: string = "unknown",
+  retryable: boolean = false
+): Promise<boolean> {
+  const client = getSupabaseClient();
+
+  const { error } = await client.rpc("mark_run_failed", {
+    run_id: runId,
+    error_message: errorMessage,
+    error_category: errorCategory,
+    retryable,
+  });
+
+  if (error) {
+    console.error(`[Supabase] Mark run failed:`, error);
+    return false;
+  }
+
+  return true;
+}
+
+/**
  * Create admin client (alias for compatibility)
  */
 export function createAdminClient() {
