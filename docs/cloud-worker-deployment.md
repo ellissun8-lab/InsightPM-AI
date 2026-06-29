@@ -1,7 +1,7 @@
 # Cloud Worker 部署指南
 
-> **版本**: Phase 2 Production  
-> **状态**: Railway 部署成功
+> **版本**: Phase 3 Production
+> **状态**: Railway 部署成功（含 Worker 稳定性）
 
 ---
 
@@ -256,28 +256,56 @@ FROM runs WHERE case_name = 'smoke-test-001';
 
 ---
 
-## 八、生产 Smoke 结果
+## 八、Supabase Migrations
 
-### prod-smoke-e2e-007
+| Migration | 说明 |
+|-----------|------|
+| `001_initial_schema.sql` | 初始表结构 |
+| `002_validation_results.sql` | 校验结果字段 |
+| `003_worker_stability.sql` | Worker 稳定性字段 + RPC（抢单/心跳/完成/失败） |
+| `004_fix_mark_run_failed.sql` | 完整 error payload + 锁清理 + 终态防护 trigger |
+
+---
+
+## 九、生产 Smoke 结果
+
+### prod-stability-success-004（成功）
 
 ```
-case_name: prod-smoke-e2e-007
-status: completed
-hard_score: 95
-semantic_score: 96
-worker: railway-worker
-source: real-pipeline
+case_name:       prod-stability-success-004
+status:          completed
+feedback_count:  124
+hard_score:      95
+semantic_score:  100
+worker:          railway-worker
+workerResult:    artifacts-written-ok
+pipelineExecuted: true
+artifactWritten:  true
+error:           null
 
 artifacts:
-- summary-json / run-summary.json
-- overall-md / prod-smoke-e2e-007.analysis.md
-- validation-json / validation-summary.json
 - segment-json / mixed-feedback.segments.json
+- validation-json / validation-summary.json
+- overall-md / prod-stability-success-004.analysis.md
+- summary-json / run-summary.json
 
 steps: 11 pass, 0 fail
 promoted: true
 ```
 
+### prod-stability-success-003（失败）
+
+```
+case_name:     prod-stability-success-003
+status:        failed
+category:      semantic_validation
+retryable:     false
+stdoutPreview: ✅ 已保存
+stderrPreview: ✅ 已保存
+locked_by:     null
+locked_at:     null
+```
+
 ---
 
-*Cloud Worker 部署指南 - Phase 2 Production*
+*Cloud Worker 部署指南 - Phase 3 Production*

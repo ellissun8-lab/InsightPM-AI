@@ -1,24 +1,41 @@
-# Cloud Real Pipeline Phase 2 Freeze
+# Cloud Real Pipeline Phase 3 Freeze
 
-> **冻结日期**: 2026-06-29  
-> **状态**: 生产 Railway Worker 端到端验收通过
+> **冻结日期**: 2026-06-29
+> **状态**: 生产 Railway Worker 端到端验收通过（含 Worker 稳定性）
 
 ---
 
 ## 最终生产验收案例
 
+### 成功链路: prod-stability-success-004
+
 ```
-case_name: prod-smoke-e2e-007
-status: completed
-hard_score: 95
-semantic_score: 96
-workerResult: artifacts-written-ok
+case_name:       prod-stability-success-004
+status:          completed
+feedback_count:  124
+hard_score:      95
+semantic_score:  100
+retry_count:     0
+max_retry:       2
+worker:          railway-worker
+workerStep:      completed
+workerResult:    artifacts-written-ok
 pipelineExecuted: true
-artifactWritten: true
-error: null
-worker: railway-worker
-storage_bucket: report-artifacts
-source: real-pipeline
+artifactWritten:  true
+error:           null
+```
+
+### 失败链路: prod-stability-success-003
+
+```
+case_name:       prod-stability-success-003
+status:          failed
+category:        semantic_validation
+retryable:       false
+stdoutPreview:   ✅ 已保存
+stderrPreview:   ✅ 已保存
+locked_by:       null
+locked_at:       null
 ```
 
 ---
@@ -27,10 +44,10 @@ source: real-pipeline
 
 | artifact_type | file_name | source |
 |---------------|-----------|--------|
-| summary-json | run-summary.json | real-pipeline |
-| overall-md | prod-smoke-e2e-007.analysis.md | real-pipeline |
-| validation-json | validation-summary.json | real-pipeline |
 | segment-json | mixed-feedback.segments.json | real-pipeline |
+| validation-json | validation-summary.json | real-pipeline |
+| overall-md | prod-stability-success-004.analysis.md | real-pipeline |
+| summary-json | run-summary.json | real-pipeline |
 
 ---
 
@@ -39,7 +56,7 @@ source: real-pipeline
 ```
 Steps: 11 pass, 0 fail, 0 skipped
 Hard Validation: warning (95/100)
-Semantic Validation: pass (96/100)
+Semantic Validation: pass (100/100)
 Promoted: true
 Worker: railway-worker
 ```
@@ -55,7 +72,7 @@ Worker: railway-worker
 - ✅ Worker 执行真实 pipeline（scripts/run-pipeline.ts）
 - ✅ MiMo 生成 analysis.json（含 evidence guard + priority guard）
 - ✅ 硬性校验通过（95/100）
-- ✅ DeepSeek 语义校验通过（96/100）
+- ✅ DeepSeek 语义校验通过（100/100）
 - ✅ consistency_guard 通过
 - ✅ promote_to_training 通过
 - ✅ dataset_index_update 通过
@@ -64,7 +81,13 @@ Worker: railway-worker
 - ✅ /runs 显示真实报告
 - ✅ /analysis-report 显示真实报告
 - ✅ Railway Worker 常驻运行
-- ✅ 失败 metadata.error 持久化
+- ✅ 失败 metadata.error 持久化（完整 stdout/stderr/exitCode/signal）
+- ✅ 原子抢单（claim_next_run + FOR UPDATE SKIP LOCKED）
+- ✅ 心跳机制（30s 间隔，10min stale 超时）
+- ✅ 自动重试（max_retry=2，retryable 错误回 pending）
+- ✅ 错误分类（7 级优先级，semantic > hard > network > training > artifact > ai > unknown）
+- ✅ 锁清理（failed/retry 均清空 locked_by/locked_at）
+- ✅ 终态保护（completed/failed 不可覆盖 + trigger 防护）
 
 ---
 
@@ -75,7 +98,11 @@ Worker: railway-worker
 | Nixpacks 安装 python312 | `nixpacks.toml` 配置 `nixPkgs = ["nodejs_22", "python312"]` |
 | PYTHON_BIN=python3 | Railway Variables 设置 |
 | training-data/manifests 自动 mkdir | `promote-to-training.ts` 写入前确保目录存在 |
-| failed metadata.error 持久化 | Worker 所有异常写入 `metadata.error` |
+| failed metadata.error 持久化 | Worker 所有异常写入 `metadata.error`（含 stdout/stderr） |
+| mark_run_failed 完整 payload | 004 迁移：error_payload JSONB 替代 flat string |
+| 锁清理 | failed/retry 路径均清空 locked_by/locked_at |
+| 终态保护 trigger | 防止 status=running + metadata.error 共存 |
+| 错误分类修复 | semantic_validation 优先于 hard_validation，warning 不误判 |
 
 ---
 
@@ -85,7 +112,6 @@ Worker: railway-worker
 - **AI 输出质量**: MiMo JSON 输出已有 repair/sanitize，但生产仍需监控
 - **Storage 稳定性**: Supabase Storage 下载已有 REST fallback，但生产仍需监控网络稳定性
 - **测试覆盖**: 124 条已完成验收，200 条建议作为压力测试
-- **自动重试**: 失败自动重试和任务恢复后续产品化
 
 ---
 
@@ -136,6 +162,8 @@ DEEPSEEK_VALIDATION_MODEL=deepseek-chat
 ## 关键提交
 
 ```
+b6b2b17 fix: classify semantic validation failures correctly
+c577092 fix: preserve pipeline failure details and finalize run status
 399c548 fix: create training data directories during promote
 9a91d2a chore: install python in railway worker
 51b365e fix: persist railway worker preflight errors
@@ -145,4 +173,4 @@ e96b86e fix: support python3 and railway env propagation
 
 ---
 
-*Cloud Real Pipeline Phase 2 生产验收通过，进入 Freeze 状态。*
+*Cloud Real Pipeline Phase 3 生产验收通过，进入 Freeze 状态。*
