@@ -38,12 +38,19 @@ function main() {
   console.log("Dataset Index Generator");
   console.log("=".repeat(60));
 
+  // 确保 manifests 目录存在
+  fs.mkdirSync(MANIFESTS_DIR, { recursive: true });
+
   if (!fs.existsSync(MANIFESTS_DIR)) {
     console.error("No manifests directory found. Run promote first.");
     process.exit(1);
   }
 
   const manifestFiles = fs.readdirSync(MANIFESTS_DIR).filter(f => f.endsWith(".json"));
+
+  if (manifestFiles.length === 0) {
+    console.log("No manifest files found. Generating empty index.");
+  }
   const datasets: DatasetEntry[] = [];
   let totalFeedbacks = 0;
   let acceptedCount = 0;

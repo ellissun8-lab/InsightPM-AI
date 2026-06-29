@@ -231,7 +231,9 @@ function main() {
   }
 
   // Save manifest
-  const manifestPath = path.join(TRAINING_DIR, "manifests", `${caseName}.json`);
+  const manifestsDir = path.join(TRAINING_DIR, "manifests");
+  fs.mkdirSync(manifestsDir, { recursive: true });
+  const manifestPath = path.join(manifestsDir, `${caseName}.json`);
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), "utf-8");
   console.log(`  Manifest: ${manifestPath}`);
 
