@@ -94,21 +94,84 @@ async function getRunsWithPaginationFromSupabase(params: RunsQueryParams): Promi
   const pageSize = Math.min(100, Math.max(1, params.pageSize || 20));
   const offset = (page - 1) * pageSize;
 
+  // If artifact filter is active, first resolve matching run IDs from report_artifacts
+  let artifactFilteredRunIds: string[] | null = null;
+  let artifactExcludedRunIds: string[] | null = null;
+
+  if (params.artifactFilter && params.artifactFilter !== "all") {
+    const { data: allArts, error: artsErr } = await supabase
+      .from("report_artifacts")
+      .select("run_id, artifact_type");
+
+    if (artsErr) {
+      console.error("getRunsWithPagination artifact query error:", artsErr);
+    } else if (allArts) {
+      // Build per-run artifact info
+      const runArtifactMap = new Map<string, { count: number; hasOverallMd: boolean }>();
+      for (const art of allArts) {
+        const rid = art.run_id;
+        if (!runArtifactMap.has(rid)) {
+          runArtifactMap.set(rid, { count: 0, hasOverallMd: false });
+        }
+        const entry = runArtifactMap.get(rid)!;
+        entry.count++;
+        if (art.artifact_type === "overall-md") {
+          entry.hasOverallMd = true;
+        }
+      }
+
+      switch (params.artifactFilter) {
+        case "has-report": {
+          // Runs that have overall-md
+          artifactFilteredRunIds = [];
+          for (const [rid, info] of runArtifactMap) {
+            if (info.hasOverallMd) artifactFilteredRunIds.push(rid);
+          }
+          break;
+        }
+        case "missing-report": {
+          // Runs that have artifacts but NOT overall-md
+          artifactFilteredRunIds = [];
+          for (const [rid, info] of runArtifactMap) {
+            if (!info.hasOverallMd) artifactFilteredRunIds.push(rid);
+          }
+          // Also need runs with NO artifacts at all
+          // We'll handle this by using NOT IN for runs that have overall-md
+          // Actually, "missing-report" = runs without overall-md (including runs with no artifacts)
+          // So we need: all runs EXCEPT those with overall-md
+          artifactExcludedRunIds = [];
+          for (const [rid, info] of runArtifactMap) {
+            if (info.hasOverallMd) artifactExcludedRunIds.push(rid);
+          }
+          artifactFilteredRunIds = null; // Use exclude instead
+          break;
+        }
+        case "has-artifacts": {
+          artifactFilteredRunIds = Array.from(runArtifactMap.keys());
+          break;
+        }
+        case "no-artifacts": {
+          // Runs NOT in the artifact map
+          artifactExcludedRunIds = Array.from(runArtifactMap.keys());
+          artifactFilteredRunIds = null; // Use exclude instead
+          break;
+        }
+      }
+    }
+  }
+
   // Build query
   let query = supabase.from("runs").select("*", { count: "exact" });
-  let countQuery = supabase.from("runs").select("id", { count: "exact", head: true });
 
   // Search filter
   if (params.q) {
     const q = `%${params.q}%`;
     query = query.or(`case_name.ilike.${q},scenario.ilike.${q}`);
-    countQuery = countQuery.or(`case_name.ilike.${q},scenario.ilike.${q}`);
   }
 
   // Status filter
   if (params.status && params.status !== "all") {
     query = query.eq("status", params.status);
-    countQuery = countQuery.eq("status", params.status);
   }
 
   // Time range filter
@@ -129,7 +192,20 @@ async function getRunsWithPaginationFromSupabase(params: RunsQueryParams): Promi
         since = new Date(0);
     }
     query = query.gte("created_at", since.toISOString());
-    countQuery = countQuery.gte("created_at", since.toISOString());
+  }
+
+  // Artifact filter: constrain by run IDs (pre-computed above)
+  if (artifactFilteredRunIds !== null) {
+    if (artifactFilteredRunIds.length === 0) {
+      // No runs match this artifact filter
+      return {
+        data: { runs: [], total: 0, page, pageSize, totalPages: 0, artifactSummary: {} },
+        error: null,
+      };
+    }
+    query = query.in("id", artifactFilteredRunIds);
+  } else if (artifactExcludedRunIds !== null && artifactExcludedRunIds.length > 0) {
+    query = query.not("id", "in", `(${artifactExcludedRunIds.join(",")})`);
   }
 
   // Sorting
@@ -150,15 +226,8 @@ async function getRunsWithPaginationFromSupabase(params: RunsQueryParams): Promi
       break;
   }
 
-  // Get total count
-  const { count: total, error: countError } = await countQuery;
-  if (countError) {
-    console.error("getRunsWithPagination count error:", countError);
-    return { data: { runs: [], total: 0, page, pageSize, totalPages: 0 }, error: countError };
-  }
-
-  // Get page data
-  const { data, error } = await query.range(offset, offset + pageSize - 1);
+  // Get page data with count
+  const { data, error, count: total } = await query.range(offset, offset + pageSize - 1);
   if (error) {
     console.error("getRunsWithPagination data error:", error);
     return { data: { runs: [], total: 0, page, pageSize, totalPages: 0 }, error };
@@ -168,15 +237,15 @@ async function getRunsWithPaginationFromSupabase(params: RunsQueryParams): Promi
   const totalSafe = total || 0;
   const totalPages = Math.ceil(totalSafe / pageSize);
 
-  // Batch query artifacts for this page's run IDs
-  const runIds = runs.map((r) => r.id).filter(Boolean);
+  // Batch query artifacts for this page's run IDs (for display)
+  const pageRunIds = runs.map((r) => r.id).filter(Boolean);
   let artifactSummary: Record<string, { count: number; hasOverallMd: boolean; types: string[] }> = {};
 
-  if (runIds.length > 0) {
+  if (pageRunIds.length > 0) {
     const { data: arts, error: artsError } = await supabase
       .from("report_artifacts")
       .select("run_id, artifact_type")
-      .in("run_id", runIds);
+      .in("run_id", pageRunIds);
 
     if (!artsError && arts) {
       for (const art of arts) {
@@ -190,30 +259,6 @@ async function getRunsWithPaginationFromSupabase(params: RunsQueryParams): Promi
           artifactSummary[rid].hasOverallMd = true;
         }
       }
-    }
-
-    // Artifact filter: post-filter runs based on artifact status
-    if (params.artifactFilter && params.artifactFilter !== "all") {
-      const filtered = runs.filter((r) => {
-        const summary = artifactSummary[r.id || ""];
-        switch (params.artifactFilter) {
-          case "has-report":
-            return summary?.hasOverallMd === true;
-          case "missing-report":
-            return !summary?.hasOverallMd;
-          case "has-artifacts":
-            return (summary?.count || 0) > 0;
-          case "no-artifacts":
-            return !summary || summary.count === 0;
-          default:
-            return true;
-        }
-      });
-      // Note: total is approximate after artifact filtering (pre-filter count)
-      return {
-        data: { runs: filtered, total: totalSafe, page, pageSize, totalPages, artifactSummary },
-        error: null,
-      };
     }
   }
 
