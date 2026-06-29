@@ -1,4 +1,4 @@
-import { type RunRecord, updateRunStatus, markRunCompleted, markRunFailed } from "./supabase.js";
+import { type RunRecord, updateRunStatus, markRunCompleted, markRunFailed, getSupabaseClient } from "./supabase.js";
 import { runPipeline } from "./pipeline-runner.js";
 import { discoverArtifacts, uploadAndRecordArtifacts } from "./artifacts.js";
 import { downloadFromStorage } from "./storage-downloader.js";
@@ -9,44 +9,135 @@ import * as os from "os";
 const WORKER_TMP_DIR = process.env.WORKER_TMP_DIR || path.join(os.tmpdir(), "proofloop-worker");
 
 /**
- * 判断错误是否可重试
+ * 根据 stdout/stderr 分类错误
  */
-function isRetryableError(err: any): boolean {
-  const retryableMessages = [
-    "fetch failed",
-    "ECONNRESET",
-    "ETIMEDOUT",
-    "timeout",
-    "500",
-    "502",
-    "503",
-    "504",
-  ];
+function classifyError(stdout: string, stderr: string, message: string): { category: string; retryable: boolean } {
+  const combined = `${stdout} ${stderr} ${message}`.toLowerCase();
 
-  const message = err.message || "";
-  return retryableMessages.some((msg) => message.includes(msg));
+  // 网络错误 - 可重试
+  if (combined.includes("econnreset") || combined.includes("etimedout") || combined.includes("fetch failed") || combined.includes("timeout")) {
+    return { category: "network", retryable: true };
+  }
+
+  // 5xx 错误 - 可重试
+  if (combined.match(/\b5\d{2}\b/) || combined.includes("500") || combined.includes("502") || combined.includes("503") || combined.includes("504")) {
+    return { category: "network", retryable: true };
+  }
+
+  // hard_validation 失败 - 不可重试
+  if (combined.includes("hard_validation") || combined.includes("hard validation failed")) {
+    return { category: "hard_validation", retryable: false };
+  }
+
+  // semantic_validation 失败 - 不可重试
+  if (combined.includes("semantic_validation") && combined.includes("fail")) {
+    return { category: "semantic_validation", retryable: false };
+  }
+
+  // training/promote 错误 - 不可重试
+  if (combined.includes("promote_to_training") || combined.includes("dataset_index_update")) {
+    return { category: "training_data", retryable: false };
+  }
+
+  // artifact 写入错误 - 可重试
+  if (combined.includes("artifact")) {
+    return { category: "artifact_write", retryable: true };
+  }
+
+  // AI 生成错误 - 可重试
+  if (combined.includes("ai_analysis") || combined.includes("ai generation")) {
+    return { category: "ai_generation", retryable: true };
+  }
+
+  // 默认不可重试
+  return { category: "unknown", retryable: false };
 }
 
 /**
- * 获取错误分类
+ * 失败落库
  */
-function getErrorCategory(err: any, workerStep: string): string {
-  const message = err.message || "";
+async function handleFailure(
+  run: RunRecord,
+  errorInfo: {
+    message: string;
+    category: string;
+    retryable: boolean;
+    stdoutPreview?: string;
+    stderrPreview?: string;
+    command?: string;
+    inputPath?: string;
+    outputDir?: string;
+    workerStep?: string;
+  }
+) {
+  const now = new Date().toISOString();
+  const client = getSupabaseClient();
 
-  if (message.includes("fetch failed") || message.includes("ECONNRESET")) {
-    return "storage";
-  }
-  if (message.includes("AI") || message.includes("model")) {
-    return "ai_generation";
-  }
-  if (message.includes("validation")) {
-    return "hard_validation";
-  }
-  if (message.includes("timeout")) {
-    return "timeout";
-  }
+  const errorData = {
+    message: errorInfo.message,
+    category: errorInfo.category,
+    retryable: errorInfo.retryable,
+    failedAt: now,
+    workerStep: errorInfo.workerStep || "unknown",
+    source: "railway-worker",
+    stdoutPreview: errorInfo.stdoutPreview?.slice(0, 2000) || null,
+    stderrPreview: errorInfo.stderrPreview?.slice(0, 2000) || null,
+    command: errorInfo.command || null,
+    inputPath: errorInfo.inputPath || null,
+    outputDir: errorInfo.outputDir || null,
+  };
 
-  return "unknown";
+  const retryCount = run.metadata?.retry_count || 0;
+  const maxRetry = run.metadata?.max_retry || 2;
+
+  if (errorInfo.retryable && retryCount < maxRetry) {
+    // 可重试：回 pending
+    console.log(`[Worker] Retrying run ${run.id} (retry ${retryCount + 1}/${maxRetry})`);
+    const { error } = await client
+      .from("runs")
+      .update({
+        status: "pending",
+        retry_count: retryCount + 1,
+        locked_by: null,
+        locked_at: null,
+        updated_at: now,
+        metadata: {
+          ...run.metadata,
+          retryHistory: [
+            ...(run.metadata?.retryHistory || []),
+            { retryAt: now, error: errorInfo.message, category: errorInfo.category },
+          ],
+        },
+      })
+      .eq("id", run.id);
+
+    if (error) {
+      console.error(`[Worker] Failed to update run to pending:`, error);
+    }
+  } else {
+    // 不可重试或超过最大重试：标记 failed
+    console.log(`[Worker] Marking run ${run.id} as failed (non-retryable or max retries reached)`);
+    const { error } = await client
+      .from("runs")
+      .update({
+        status: "failed",
+        failed_at: now,
+        updated_at: now,
+        locked_by: null,
+        locked_at: null,
+        last_error: errorData,
+        metadata: {
+          ...run.metadata,
+          error: errorData,
+          failedAt: now,
+        },
+      })
+      .eq("id", run.id);
+
+    if (error) {
+      console.error(`[Worker] failed to update run to failed:`, error);
+    }
+  }
 }
 
 /**
@@ -75,7 +166,12 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
     const inputFile = run.metadata?.inputFile;
     if (!inputFile || !inputFile.bucket || !inputFile.path) {
       console.error(`[Worker] Missing inputFile metadata for run ${run.id}`);
-      await markRunFailed(run.id, "Missing inputFile metadata", "storage", false);
+      await handleFailure(run, {
+        message: "Missing inputFile metadata",
+        category: "storage",
+        retryable: false,
+        workerStep: "check-input-file",
+      });
       stopHeartbeat();
       return;
     }
@@ -97,12 +193,12 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
 
     if (!downloadResult.success) {
       console.error(`[Worker] failed to download CSV:`, downloadResult.error);
-      await markRunFailed(
-        run.id,
-        downloadResult.error?.message || "Failed to download CSV",
-        "storage",
-        true // transient error, retryable
-      );
+      await handleFailure(run, {
+        message: downloadResult.error?.message || "Failed to download CSV",
+        category: "storage",
+        retryable: true,
+        workerStep: "download-csv",
+      });
       stopHeartbeat();
       return;
     }
@@ -128,15 +224,25 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
 
     if (!pipelineResult.success) {
       console.error(`[Worker] Pipeline failed for run ${run.id}`);
-      const errorCategory = getErrorCategory(pipelineResult.error, "pipeline");
-      const retryable = isRetryableError(pipelineResult.error);
 
-      await markRunFailed(
-        run.id,
-        pipelineResult.error?.message || "Pipeline execution failed",
-        errorCategory,
-        retryable
+      // 分类错误
+      const { category, retryable } = classifyError(
+        pipelineResult.stdout || "",
+        pipelineResult.stderr || "",
+        pipelineResult.error?.message || ""
       );
+
+      await handleFailure(run, {
+        message: pipelineResult.error?.message || "Pipeline execution failed",
+        category,
+        retryable,
+        stdoutPreview: pipelineResult.stdout,
+        stderrPreview: pipelineResult.stderr,
+        command: pipelineResult.error?.command,
+        inputPath: localInputPath,
+        outputDir,
+        workerStep: "execute-pipeline",
+      });
       stopHeartbeat();
       return;
     }
@@ -157,12 +263,12 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
 
     if (!artifactResult.success) {
       console.error(`[Worker] Artifact upload failed: ${artifactResult.error}`);
-      await markRunFailed(
-        run.id,
-        artifactResult.error || "Artifact upload failed",
-        "artifact_write",
-        true // transient error, retryable
-      );
+      await handleFailure(run, {
+        message: artifactResult.error || "Artifact upload failed",
+        category: "artifact_write",
+        retryable: true,
+        workerStep: "upload-artifacts",
+      });
       stopHeartbeat();
       return;
     }
@@ -170,23 +276,28 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
     console.log(`[Worker] Artifacts written: ${artifactResult.artifactTypes.join(", ")}`);
 
     // Step 6: 标记完成
+    const completedMetadata = {
+      ...run.metadata,
+      worker: "railway-worker",
+      workerStep: "completed",
+      workerResult: "artifacts-written-ok",
+      pipelineExecuted: true,
+      artifactWritten: true,
+      artifactWrittenAt: now,
+      artifactTypes: artifactResult.artifactTypes,
+      hasReport: true,
+      workerCompletedAt: now,
+      // 清理错误信息
+      error: null,
+      failedAt: null,
+    };
+
     await markRunCompleted(
       run.id,
       pipelineResult.hardScore ?? undefined,
       pipelineResult.semanticScore ?? undefined,
       pipelineResult.evidenceBroken ?? undefined,
-      {
-        ...run.metadata,
-        worker: "railway-worker",
-        workerStep: "completed",
-        workerResult: "artifacts-written-ok",
-        pipelineExecuted: true,
-        artifactWritten: true,
-        artifactWrittenAt: now,
-        artifactTypes: artifactResult.artifactTypes,
-        hasReport: true,
-        workerCompletedAt: now,
-      }
+      completedMetadata
     );
 
     console.log(`[Worker] Run ${run.id} completed successfully`);
@@ -198,15 +309,23 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
     console.error(`[Worker] Stack: ${err.stack}`);
     console.error(`[Worker] ==============================`);
 
-    const errorCategory = getErrorCategory(err, "process-run");
-    const retryable = isRetryableError(err);
-
-    await markRunFailed(
-      run.id,
-      err.message || "Unknown error",
-      errorCategory,
-      retryable
+    const { category, retryable } = classifyError(
+      err.stdout || "",
+      err.stderr || "",
+      err.message || ""
     );
+
+    await handleFailure(run, {
+      message: err.message || "Unknown error",
+      category,
+      retryable,
+      stdoutPreview: err.stdout?.toString(),
+      stderrPreview: err.stderr?.toString(),
+      command: err.cmd,
+      inputPath: path.join(WORKER_TMP_DIR, run.id, "input.csv"),
+      outputDir: path.join(WORKER_TMP_DIR, run.id, "output"),
+      workerStep: "process-run-exception",
+    });
   } finally {
     stopHeartbeat();
   }
