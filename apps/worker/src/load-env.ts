@@ -73,7 +73,7 @@ export function loadEnv(): Record<string, string> {
   ];
 
   for (const varName of varsToCheck) {
-    const value = loadedVars[varName] || process.env[varName];
+    const value = loadedVars[varName] || process.env[varName] || "";
     console.log(`  ${varName}: ${value ? "configured" : "NOT SET"}`);
   }
 
