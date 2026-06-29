@@ -31,6 +31,16 @@ export interface RunRecord {
   durationMs: number | null;
   metadata: any | null;
 
+  // Worker stability fields (Phase 3)
+  retryCount: number;
+  maxRetry: number;
+  lockedBy: string | null;
+  lockedAt: string | null;
+  heartbeatAt: string | null;
+  completedAt: string | null;
+  failedAt: string | null;
+  lastError: any | null;
+
   // Legacy compatibility fields
   case_name: string;
   count: number;
@@ -141,6 +151,16 @@ function getRunsFromLocal(): RunRecord[] {
         finishedAt: s.finishedAt || null,
         durationMs: s.duration_ms || s.durationMs || null,
         metadata,
+
+        // Worker stability fields (local mode defaults)
+        retryCount: s.retry_count ?? 0,
+        maxRetry: s.max_retry ?? 2,
+        lockedBy: null,
+        lockedAt: null,
+        heartbeatAt: null,
+        completedAt: s.finishedAt || null,
+        failedAt: null,
+        lastError: null,
 
         // Legacy compatibility
         case_name: name,
@@ -335,6 +355,16 @@ function mapSupabaseRunToRecord(row: any): RunRecord {
     finishedAt: row.finished_at || null,
     durationMs: row.metadata?.duration_ms ?? null,
     metadata: row.metadata || null,
+
+    // Worker stability fields
+    retryCount: row.retry_count ?? 0,
+    maxRetry: row.max_retry ?? 2,
+    lockedBy: row.locked_by ?? null,
+    lockedAt: row.locked_at ?? null,
+    heartbeatAt: row.heartbeat_at ?? null,
+    completedAt: row.completed_at ?? null,
+    failedAt: row.failed_at ?? null,
+    lastError: row.last_error ?? null,
 
     // Legacy compatibility
     case_name: row.case_name,

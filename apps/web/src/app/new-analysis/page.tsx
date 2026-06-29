@@ -25,6 +25,7 @@ export default function NewAnalysisPage() {
   const [uploading, setUploading] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
   const [result, setResult] = useState("");
+  const [createdCaseName, setCreatedCaseName] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const parseCsvCount = async (f: File): Promise<number> => {
@@ -90,16 +91,13 @@ export default function NewAnalysisPage() {
       if (data.ok) {
         if (data.mode === "cloud") {
           if (data.analysisMode === "worker") {
-            // Worker 模式：任务已创建，等待 Worker 处理
-            setResult("分析任务已创建，后台 Worker 正在处理。");
+            // Worker 模式：显示引导，不自动跳转
+            setCreatedCaseName(caseName);
+            setResult("created");
           } else {
-            // Inline MVP 模式
             setResult("线上分析任务已创建，后台分析 Worker 将在后续版本启用。");
+            setTimeout(() => { router.push("/runs"); }, 1500);
           }
-          setTimeout(() => {
-            router.push("/runs");
-            router.refresh();
-          }, 1500);
         } else {
           // Local 模式：跳转到详情页
           setResult("分析完成");
@@ -297,7 +295,32 @@ export default function NewAnalysisPage() {
           </button>
         </div>
 
-        {result && (
+        {result === "created" && createdCaseName && (
+          <div className="mt-md p-lg rounded-lg bg-surface-container-lowest border border-emerald-200 bg-emerald-50/30">
+            <div className="flex items-center gap-2 mb-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
+              <span className="text-body-md font-body-md text-on-surface font-medium">分析任务已创建，正在排队处理。</span>
+            </div>
+            <p className="text-label-md font-label-md text-on-surface-variant mb-md">
+              任务「{createdCaseName}」已提交，后台 Worker 将自动处理。
+            </p>
+            <div className="flex gap-sm">
+              <a
+                href={`/runs/${encodeURIComponent(createdCaseName)}`}
+                className="px-4 py-2 rounded-lg bg-primary-container text-white text-label-md font-label-md hover:bg-primary transition-colors"
+              >
+                查看任务状态
+              </a>
+              <a
+                href="/runs"
+                className="px-4 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface text-label-md font-label-md hover:bg-surface-container-low transition-colors"
+              >
+                返回 Runs 列表
+              </a>
+            </div>
+          </div>
+        )}
+        {result && result !== "created" && (
           <div className="mt-md text-body-md font-body-md text-on-surface-variant p-md rounded-lg bg-surface-container-lowest border border-outline-variant">
             {result}
           </div>

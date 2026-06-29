@@ -1,12 +1,94 @@
 import fs from "fs";
 import path from "path";
 import Sidebar from "@/components/Sidebar";
-import { CheckCircle, XCircle, Link, Clock } from "lucide-react";
+import { CheckCircle, XCircle, Link, Clock, AlertTriangle, FileText, Download, ChevronDown } from "lucide-react";
 import { isCloudMode } from "@/lib/data/storage-mode";
 import { getRunByCaseName } from "@/lib/data/runs-repository";
-import { getMarkdownReportByRunId, getSummaryArtifactByRunId } from "@/lib/data/artifacts-repository";
+import { getMarkdownReportByRunId, getSummaryArtifactByRunId, getArtifactsForRun, getArtifactDownloadUrl } from "@/lib/data/artifacts-repository";
 
 const ROOT = path.resolve(process.cwd(), "../..");
+
+function MetricCard({ label, value, accent }: { label: string; value: string; accent?: string }) {
+  return (
+    <div className="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
+      <div className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">{label}</div>
+      <div className={`text-headline-md font-headline-md ${accent || "text-on-surface"}`}>{value}</div>
+    </div>
+  );
+}
+
+function InfoField({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
+      <div className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">{label}</div>
+      <div className="text-body-md font-body-md text-on-surface truncate" title={value}>{value}</div>
+    </div>
+  );
+}
+
+function ErrorDetailsCard({ error, categoryLabels }: { error: any; categoryLabels: Record<string, string> }) {
+  const category = error.category || "unknown";
+  const retryable = error.retryable;
+
+  return (
+    <div className="bg-surface-container-lowest rounded-xl border border-red-200 overflow-hidden mb-xl">
+      <div className="px-lg py-md border-b border-red-200 bg-red-50/50 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <AlertTriangle size={18} className="text-red-600" />
+          <h3 className="text-title-lg font-title-lg text-red-800 font-semibold">错误详情</h3>
+        </div>
+        <span className="px-2 py-0.5 rounded text-label-sm font-label-sm bg-red-100 text-red-700 border border-red-200">
+          {categoryLabels[category] || category}
+        </span>
+      </div>
+      <div className="px-lg py-md space-y-sm">
+        <DetailRow label="错误消息" value={error.message || "-"} />
+        <DetailRow label="是否可重试" value={retryable ? "是" : "否"} />
+        <DetailRow label="失败步骤" value={error.workerStep || "-"} />
+        <DetailRow label="失败时间" value={error.failedAt ? new Date(error.failedAt).toLocaleString("zh-CN") : "-"} />
+        {error.exitCode != null && <DetailRow label="退出码" value={String(error.exitCode)} />}
+      </div>
+
+      {/* Expandable technical details using <details> for server component compatibility */}
+      <details className="border-t border-outline-variant group">
+        <summary className="px-lg py-sm flex items-center justify-between text-label-md font-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer list-none">
+          <span>展开技术详情</span>
+          <ChevronDown size={16} className="group-open:rotate-180 transition-transform" />
+        </summary>
+        <div className="px-lg pb-md space-y-sm">
+          {error.command && <DetailRow label="命令" value={error.command} mono />}
+          {error.inputPath && <DetailRow label="输入路径" value={error.inputPath} mono />}
+          {error.outputDir && <DetailRow label="输出目录" value={error.outputDir} mono />}
+          {error.stdoutPreview && (
+            <div>
+              <div className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">stdout</div>
+              <pre className="whitespace-pre-wrap font-mono text-label-md text-on-surface bg-surface-container-low rounded-lg p-md border border-outline-variant max-h-[300px] overflow-y-auto">
+                {error.stdoutPreview}
+              </pre>
+            </div>
+          )}
+          {error.stderrPreview && (
+            <div>
+              <div className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">stderr</div>
+              <pre className="whitespace-pre-wrap font-mono text-label-md text-on-surface bg-surface-container-low rounded-lg p-md border border-outline-variant max-h-[300px] overflow-y-auto">
+                {error.stderrPreview}
+              </pre>
+            </div>
+          )}
+        </div>
+      </details>
+    </div>
+  );
+}
+
+function DetailRow({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
+  return (
+    <div className="flex items-start gap-4">
+      <div className="text-label-sm font-label-sm text-on-surface-variant w-24 shrink-0 pt-0.5">{label}</div>
+      <div className={`text-body-md font-body-md text-on-surface flex-1 ${mono ? "font-mono text-label-md" : ""}`}>{value}</div>
+    </div>
+  );
+}
 
 function loadJson(p: string): any | null {
   try {
@@ -29,10 +111,22 @@ async function getCloudReport(caseName: string) {
   if (!run) return null;
 
   const { markdown, artifact: mdArtifact } = await getMarkdownReportByRunId(run.id);
-  const { summary, artifact: summaryArtifact } = await getSummaryArtifactByRunId(run.id);
+  const { summary } = await getSummaryArtifactByRunId(run.id);
+  const artifacts = await getArtifactsForRun(run.id);
 
   const metadata = run.metadata || {};
-  const isReal = metadata.workerResult === "artifacts-written-ok" || metadata.artifactWritten === true || metadata.worker === "cloud-worker";
+  const isReal = metadata.workerResult === "artifacts-written-ok" || metadata.artifactWritten === true || metadata.worker === "railway-worker";
+
+  // Build download URLs for artifacts
+  const artifactsWithUrls = await Promise.all(
+    artifacts.map(async (a) => {
+      let downloadUrl: string | null = null;
+      try {
+        downloadUrl = await getArtifactDownloadUrl(a.id);
+      } catch {}
+      return { ...a, downloadUrl };
+    })
+  );
 
   return {
     run,
@@ -41,6 +135,7 @@ async function getCloudReport(caseName: string) {
     metadata: mdArtifact?.metadata || {},
     summary,
     isRealAnalysis: isReal,
+    artifacts: artifactsWithUrls,
   };
 }
 
@@ -142,73 +237,134 @@ export default async function RunDetailPage({
       );
     }
 
-    const { run, reportContent, metadata, isRealAnalysis } = cloudData;
+    const { run, reportContent, isRealAnalysis, artifacts } = cloudData;
     const feedbackCount = run.feedbackCount || 0;
+    const runStatus = run.status || "pending";
+    const metadata = run.metadata || {};
+    const errorInfo = metadata.error || run.lastError || null;
+
+    const STATUS_CONFIG: Record<string, { label: string; class: string }> = {
+      completed: { label: "已完成", class: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+      running: { label: "处理中", class: "bg-blue-50 text-blue-700 border-blue-200" },
+      failed: { label: "失败", class: "bg-red-50 text-red-700 border-red-200" },
+      pending: { label: "排队中", class: "bg-gray-50 text-gray-600 border-gray-200" },
+    };
+    const statusCfg = STATUS_CONFIG[runStatus] || STATUS_CONFIG.pending;
+
+    const CATEGORY_LABELS: Record<string, string> = {
+      hard_validation: "硬性校验失败",
+      semantic_validation: "语义校验失败",
+      network: "网络错误",
+      training_data: "训练数据错误",
+      artifact_write: "产物写入错误",
+      ai_generation: "AI 生成错误",
+      storage: "存储错误",
+      unknown: "未知错误",
+    };
+
+    const ARTIFACT_LABELS: Record<string, string> = {
+      "summary-json": "运行摘要",
+      "overall-md": "完整 Markdown 报告",
+      "validation-json": "验证结果",
+      "segment-json": "分组结构",
+    };
 
     return (
       <div className="flex min-h-screen bg-surface">
         <Sidebar />
         <div className="ml-[280px] flex-1 p-margin-desktop">
+          {/* Header */}
           <div className="mb-xl">
             <div className="flex items-center space-x-sm mb-1">
               <h1 className="text-headline-lg font-headline-lg text-on-surface">
                 {caseName}
               </h1>
-              <span className="px-2 py-1 rounded-md text-label-sm font-label-sm border flex items-center bg-emerald-50 text-emerald-700 border-emerald-200">
-                <CheckCircle size={14} className="mr-1" />
-                已完成
+              <span className={`px-2 py-1 rounded-md text-label-sm font-label-sm border flex items-center ${statusCfg.class}`}>
+                {runStatus === "completed" ? <CheckCircle size={14} className="mr-1" /> :
+                 runStatus === "failed" ? <XCircle size={14} className="mr-1" /> :
+                 <Clock size={14} className="mr-1" />}
+                {statusCfg.label}
               </span>
               {isRealAnalysis && (
                 <span className="px-2 py-0.5 rounded text-label-sm font-label-sm bg-[#E7ECDD] text-[#2F6B3F] border border-[#CAD5B8]">
-                  真实分析
+                  real-pipeline
                 </span>
               )}
             </div>
             <p className="text-body-lg font-body-lg text-on-surface-variant">
-              {run.scenario || run.dataset} · {feedbackCount} 条反馈 · 生成于{" "}
-              {run.finishedAt
-                ? new Date(run.finishedAt).toLocaleString("zh-CN")
-                : run.updatedAt
-                  ? new Date(run.updatedAt).toLocaleString("zh-CN")
-                  : "-"}
+              {run.scenario || run.dataset} · {feedbackCount} 条反馈 · 更新于{" "}
+              {run.updatedAt ? new Date(run.updatedAt).toLocaleString("zh-CN") : "-"}
             </p>
           </div>
 
+          {/* Status Summary Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-md mb-xl">
-            <div className="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
-              <div className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">
-                硬性校验
-              </div>
-              <div className="text-headline-md font-headline-md text-on-surface">
-                {run.hardScore ?? "-"}
-              </div>
-            </div>
-            <div className="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
-              <div className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">
-                语义评分
-              </div>
-              <div className="text-headline-md font-headline-md text-emerald-600">
-                {run.semanticScore ?? "-"}
-              </div>
-            </div>
-            <div className="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
-              <div className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">
-                证据断裂
-              </div>
-              <div className="text-headline-md font-headline-md text-on-surface">
-                {run.evidenceBroken ?? 0}
-              </div>
-            </div>
-            <div className="bg-surface-container-lowest p-md rounded-lg border border-outline-variant card-shadow">
-              <div className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">
-                反馈数
-              </div>
-              <div className="text-headline-md font-headline-md text-on-surface">
-                {feedbackCount}
-              </div>
-            </div>
+            <MetricCard label="硬性校验" value={run.hardScore != null ? String(run.hardScore) : "-"} accent={run.hardScore != null && run.hardScore >= 85 ? "text-emerald-600" : "text-on-surface"} />
+            <MetricCard label="语义评分" value={run.semanticScore != null ? String(run.semanticScore) : "-"} accent={run.semanticScore != null && run.semanticScore >= 85 ? "text-emerald-600" : "text-on-surface"} />
+            <MetricCard label="反馈数" value={String(feedbackCount)} />
+            <MetricCard label="重试" value={`${run.retryCount ?? 0} / ${run.maxRetry ?? 2}`} />
           </div>
 
+          {/* Worker Info */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-md mb-xl">
+            <InfoField label="Worker" value={metadata.worker || "-"} />
+            <InfoField label="Worker 步骤" value={metadata.workerStep || "-"} />
+            <InfoField label="心跳" value={run.heartbeatAt ? new Date(run.heartbeatAt).toLocaleString("zh-CN") : "-"} />
+            <InfoField label="锁定者" value={run.lockedBy || "-"} />
+          </div>
+
+          {/* Error Details (failed only) */}
+          {runStatus === "failed" && errorInfo && (
+            <ErrorDetailsCard error={errorInfo} categoryLabels={CATEGORY_LABELS} />
+          )}
+
+          {/* Artifacts List */}
+          {artifacts && artifacts.length > 0 && (
+            <div className="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden mb-xl">
+              <div className="px-lg py-md border-b border-outline-variant bg-surface-container-low">
+                <h3 className="text-title-lg font-title-lg text-on-surface font-semibold">
+                  报告产物
+                </h3>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-outline-variant/50">
+                      <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">类型</th>
+                      <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">文件名</th>
+                      <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">来源</th>
+                      <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold text-right">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-body-md font-body-md text-on-surface divide-y divide-outline-variant/50">
+                    {artifacts.map((a: any) => (
+                      <tr key={a.id} className="hover:bg-surface-container-low transition-colors">
+                        <td className="px-lg py-md">
+                          <span className="inline-flex items-center gap-1.5">
+                            <FileText size={14} className="text-on-surface-variant" />
+                            {ARTIFACT_LABELS[a.artifactType] || a.artifactType}
+                          </span>
+                        </td>
+                        <td className="px-lg py-md text-on-surface-variant font-mono text-label-md">{a.fileName}</td>
+                        <td className="px-lg py-md text-on-surface-variant">{a.metadata?.source || "-"}</td>
+                        <td className="px-lg py-md text-right">
+                          {a.downloadUrl ? (
+                            <a href={a.downloadUrl} target="_blank" rel="noopener noreferrer" className="text-primary font-label-md hover:underline inline-flex items-center gap-1">
+                              <Download size={14} /> 下载
+                            </a>
+                          ) : (
+                            <span className="text-on-surface-variant font-label-md">-</span>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* Report Content */}
           {reportContent ? (
             <div className="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg mb-xl">
               <h3 className="text-title-lg font-title-lg text-on-surface mb-md">
@@ -221,7 +377,7 @@ export default async function RunDetailPage({
           ) : (
             <div className="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg mb-xl text-center">
               <p className="text-body-lg font-body-lg text-on-surface-variant">
-                报告内容暂未生成
+                {runStatus === "failed" ? "该分析失败，无报告产物。" : "报告内容暂未生成"}
               </p>
             </div>
           )}

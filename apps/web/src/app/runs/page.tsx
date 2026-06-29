@@ -11,6 +11,8 @@ import {
   getRunStatusBadgeClass,
   getRunStatusLabel,
   hasRunReportArtifact,
+  isStaleRunning,
+  getWorkerStep,
   type RunDisplayStatus,
   type RunLike,
 } from "@/lib/run-status";
@@ -158,16 +160,22 @@ export default function RunsPage() {
                     反馈数
                   </th>
                   <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
+                    状态
+                  </th>
+                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
                     硬性校验
                   </th>
                   <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
                     语义评分
                   </th>
                   <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
-                    状态
+                    重试
                   </th>
                   <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
-                    耗时
+                    Worker 步骤
+                  </th>
+                  <th className="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
+                    心跳
                   </th>
                   <th className="py-3 px-lg text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold text-right">
                     操作
@@ -195,6 +203,16 @@ export default function RunsPage() {
                     const semanticScore = getRunSemanticScore(run as RunLike);
                     const status = getRunDisplayStatus(run as RunLike);
                     const hasReport = hasRunReportArtifact(run as RunLike);
+                    const stale = isStaleRunning(run as RunLike);
+                    const workerStep = getWorkerStep(run as RunLike);
+                    const retryCount = (run as any).retryCount ?? 0;
+                    const maxRetry = (run as any).maxRetry ?? 2;
+                    const heartbeatAt = (run as any).heartbeatAt as string | null | undefined;
+
+                    const statusBadgeClass = stale
+                      ? "bg-[#FEF3C7] text-[#92400E] border-[#FCD34D]"
+                      : getRunStatusBadgeClass(status);
+                    const statusLabel = stale ? "可能卡住" : getRunStatusLabel(status);
 
                     return (
                       <tr
@@ -204,7 +222,9 @@ export default function RunsPage() {
                         <td className="py-4 px-lg text-body-md font-body-md text-on-surface font-medium">
                           <div className="flex items-center gap-2">
                             <FolderOpen size={16} className="text-on-surface-variant/60" />
-                            <span>{caseName}</span>
+                            <a href={`/runs/${encodeURIComponent(caseName)}`} className="hover:underline">
+                              {caseName}
+                            </a>
                           </div>
                         </td>
                         <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
@@ -212,6 +232,11 @@ export default function RunsPage() {
                         </td>
                         <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
                           {getFeedbackCount(run)}
+                        </td>
+                        <td className="py-4 px-4">
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold border ${statusBadgeClass}`}>
+                            {statusLabel}
+                          </span>
                         </td>
                         <td className="py-4 px-4">
                           <span className="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high text-primary">
@@ -223,28 +248,41 @@ export default function RunsPage() {
                             {semanticScore !== null ? semanticScore : "未生成"}
                           </span>
                         </td>
-                        <td className="py-4 px-4">
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm font-bold border ${getRunStatusBadgeClass(status)}`}>
-                            {getRunStatusLabel(status)}
-                          </span>
-                        </td>
                         <td className="py-4 px-4 text-body-md font-body-md text-on-surface-variant">
-                          {formatDuration(getDuration(run))}
+                          {retryCount} / {maxRetry}
+                        </td>
+                        <td className="py-4 px-4 text-label-md font-label-md text-on-surface-variant max-w-[160px] truncate" title={workerStep || undefined}>
+                          {workerStep || "-"}
+                        </td>
+                        <td className="py-4 px-4 text-label-md font-label-md text-on-surface-variant">
+                          {status === "running" && heartbeatAt
+                            ? new Date(heartbeatAt).toLocaleTimeString("zh-CN")
+                            : "-"}
                         </td>
                         <td className="py-4 px-lg text-right">
                           {hasReport ? (
                             <a
                               href={`/runs/${encodeURIComponent(caseName)}`}
-                              className="text-on-surface font-label-md font-medium hover:underline transition-colors"
+                              className="text-primary font-label-md font-medium hover:underline transition-colors"
                             >
                               查看报告
                             </a>
                           ) : status === "running" ? (
-                            <span className="text-on-surface-variant font-label-md">处理中...</span>
+                            <span className="text-blue-600 font-label-md flex items-center justify-end gap-1">
+                              <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse inline-block" />
+                              处理中
+                            </span>
                           ) : status === "failed" ? (
-                            <span className="text-[#8A2F2F] font-label-md">查看错误</span>
+                            <a
+                              href={`/runs/${encodeURIComponent(caseName)}`}
+                              className="text-[#8A2F2F] font-label-md font-medium hover:underline transition-colors"
+                            >
+                              查看错误
+                            </a>
+                          ) : status === "pending" ? (
+                            <span className="text-on-surface-variant font-label-md">排队中</span>
                           ) : (
-                            <span className="text-on-surface-variant font-label-md">报告未生成</span>
+                            <span className="text-on-surface-variant font-label-md">报告待生成</span>
                           )}
                         </td>
                       </tr>

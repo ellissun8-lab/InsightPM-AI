@@ -31,6 +31,16 @@ export type RunListItem = {
   durationMs?: number | null;
   metadata?: any | null;
 
+  // Worker stability fields (Phase 3)
+  retryCount?: number;
+  maxRetry?: number;
+  lockedBy?: string | null;
+  lockedAt?: string | null;
+  heartbeatAt?: string | null;
+  completedAt?: string | null;
+  failedAt?: string | null;
+  lastError?: any | null;
+
   // legacy compatibility
   case_name?: string;
   count?: number;

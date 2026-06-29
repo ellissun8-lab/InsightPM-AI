@@ -302,3 +302,44 @@ export function getRunHardValidationLabel(run: RunLike): string {
 export function hasRunReportArtifact(run: RunLike): boolean {
   return hasCompletedArtifact(run);
 }
+
+/**
+ * Check if a running task is stale (heartbeat > 10 min ago)
+ */
+export function isStaleRunning(run: RunLike): boolean {
+  const status = normalizeStatus(run.status);
+  if (status !== "running") return false;
+
+  const heartbeatAt =
+    (run as Record<string, unknown>).heartbeatAt ??
+    readPath(run, ["metadata", "heartbeatAt"]) ??
+    readPath(run, ["heartbeat_at"]);
+  if (typeof heartbeatAt !== "string" || !heartbeatAt) return false;
+
+  const heartbeatTime = new Date(heartbeatAt).getTime();
+  if (!Number.isFinite(heartbeatTime)) return false;
+
+  return Date.now() - heartbeatTime > 10 * 60 * 1000;
+}
+
+/**
+ * Get worker step display text
+ */
+export function getWorkerStep(run: RunLike): string | null {
+  const metadata = asRecord(run.metadata);
+  if (metadata && typeof metadata.workerStep === "string") return metadata.workerStep;
+  const ws = (run as Record<string, unknown>).workerStep;
+  if (typeof ws === "string") return ws;
+  return null;
+}
+
+/**
+ * Get error info from run (metadata.error or lastError)
+ */
+export function getRunError(run: RunLike): Record<string, unknown> | null {
+  const metaError = readPath(run, ["metadata", "error"]);
+  if (asRecord(metaError)) return asRecord(metaError);
+  const lastError = (run as Record<string, unknown>).lastError;
+  if (asRecord(lastError)) return asRecord(lastError);
+  return null;
+}
