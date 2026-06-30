@@ -32,6 +32,7 @@ import { getScenarioDisplayName } from "@/lib/report-display";
 
 interface Props {
   caseName: string;
+  runId?: string;
   allRuns: RunMeta[];
   summary: any;
   hardVal: any;
@@ -793,14 +794,9 @@ function TabDownloads({
 }) {
   const artifacts = [
     { icon: <FileText size={24} />, title: "完整 Markdown", desc: "完整分析报告 Markdown 格式", type: "overall-md" },
-    { icon: <FileJson size={24} />, title: "完整 JSON", desc: "完整分析结果结构化数据", type: "overall-json" },
-    { icon: <PieChart size={24} />, title: "分组 JSON", desc: "当前分组结构化数据", type: "segment-json", needsSegment: true },
-    { icon: <FileText size={24} />, title: "分组 Markdown", desc: "当前分组 Markdown 报告", type: "segment-md", needsSegment: true },
-    { icon: <ShieldCheck size={24} />, title: "硬性校验 JSON", desc: "43 项硬校验结果", type: "hard-validation-json" },
-    { icon: <Brain size={24} />, title: "语义校验 JSON", desc: "语义校验结果", type: "semantic-validation-json" },
-    { icon: <CheckCircle size={24} />, title: "校验汇总", desc: "校验汇总报告", type: "validation-summary-json" },
-    { icon: <Table size={24} />, title: "证据链 CSV", desc: "证据链对照表", type: "evidence-chain-csv" },
-    { icon: <Sparkles size={24} />, title: "报告洞察 JSON", desc: "报告级执行洞察", type: "report-insight-json" },
+    { icon: <FileJson size={24} />, title: "运行摘要 JSON", desc: "运行摘要结构化数据", type: "summary-json" },
+    { icon: <ShieldCheck size={24} />, title: "验证结果 JSON", desc: "校验汇总报告", type: "validation-json" },
+    { icon: <PieChart size={24} />, title: "分组结构 JSON", desc: "分组与聚类结构化数据", type: "segment-json" },
   ];
   return (
     <div className="space-y-6 pb-12 max-w-7xl mx-auto">
@@ -812,11 +808,10 @@ function TabDownloads({
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
         {artifacts.map((a, i) => {
-          const disabled = a.needsSegment && !segmentId;
           return (
             <div
               key={i}
-              className={`bg-surface-container-lowest border border-outline-variant rounded-[24px] p-5 hover:shadow-md transition-all flex flex-col items-start gap-3 group ${disabled ? "opacity-50" : ""}`}
+              className="bg-surface-container-lowest border border-outline-variant rounded-[24px] p-5 hover:shadow-md transition-all flex flex-col items-start gap-3 group"
             >
               <div className="w-12 h-12 rounded-xl bg-surface-variant flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
                 {a.icon}
@@ -826,16 +821,10 @@ function TabDownloads({
                 <p className="text-xs text-on-surface-variant mt-1">{a.desc}</p>
               </div>
               <button
-                onClick={() => {
-                  if (disabled) {
-                    return;
-                  }
-                  onDownload(a.type);
-                }}
-                disabled={disabled}
-                className="mt-auto pt-2 w-full text-left text-primary text-xs font-semibold flex items-center gap-1 hover:underline disabled:text-on-surface-variant/60 disabled:cursor-not-allowed"
+                onClick={() => onDownload(a.type)}
+                className="mt-auto pt-2 w-full text-left text-primary text-xs font-semibold flex items-center gap-1 hover:underline"
               >
-                <Download size={14} /> {disabled ? "需选择分组" : "下载"}
+                <Download size={14} /> 下载
               </button>
             </div>
           );
@@ -887,11 +876,18 @@ export default function AnalysisReportClient(props: Props) {
 
   const handleDownload = useCallback(
     (type: string) => {
+      // Use runId for cloud artifact download API
+      if (props.runId) {
+        const url = `/api/artifacts/${props.runId}/download?type=${type}`;
+        window.location.href = url;
+        return;
+      }
+      // Fallback to local mode
       const segment = props.selectedSegmentId || "";
       const url = `/api/reports/${props.caseName}/download?type=${type}&segment=${segment}`;
       window.location.href = url;
     },
-    [props.caseName, props.selectedSegmentId]
+    [props.runId, props.caseName, props.selectedSegmentId]
   );
 
   const [isGeneratingSegInsight, setIsGeneratingSegInsight] = useState(false);

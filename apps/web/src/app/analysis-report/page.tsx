@@ -46,16 +46,37 @@ export default function AnalysisReportPage() {
       const isReal = meta.workerResult === "artifacts-written-ok" || meta.artifactWritten === true || meta.worker === "railway-worker";
       setIsRealAnalysis(isReal);
 
-      // 尝试获取真实 artifacts
+      // 尝试获取真实 artifacts（使用 runId，不是 caseName）
       let realMarkdown = null;
       let realSummary = null;
+      let realSegmentJson = null;
 
       if (isReal && selectedRunId) {
         try {
-          const artRes = await fetch(`/api/artifacts/${selectedRunId}`, { cache: "no-store" });
-          const artData = await artRes.json();
-          realMarkdown = artData.markdown || null;
-          realSummary = artData.summary || null;
+          // Fetch markdown
+          const mdRes = await fetch(`/api/artifacts/${selectedRunId}/preview?type=overall-md`, { cache: "no-store" });
+          if (mdRes.ok) {
+            const mdData = await mdRes.json();
+            realMarkdown = mdData.content || null;
+          }
+        } catch {}
+
+        try {
+          // Fetch summary
+          const sumRes = await fetch(`/api/artifacts/${selectedRunId}/preview?type=summary-json`, { cache: "no-store" });
+          if (sumRes.ok) {
+            const sumData = await sumRes.json();
+            realSummary = sumData.content || null;
+          }
+        } catch {}
+
+        try {
+          // Fetch segment-json for segment view
+          const segRes = await fetch(`/api/artifacts/${selectedRunId}/preview?type=segment-json`, { cache: "no-store" });
+          if (segRes.ok) {
+            const segData = await segRes.json();
+            realSegmentJson = segData.content || null;
+          }
         } catch {}
       }
 
@@ -69,10 +90,22 @@ export default function AnalysisReportPage() {
       const segments = realSummary?.segments ?? realSummary?.reportSegments ?? meta.segments ?? [];
       const evidenceItems = realSummary?.evidenceItems ?? realSummary?.evidence ?? meta.evidenceItems ?? [];
       const overallMd = realMarkdown || meta.markdown || null;
+      const segmentJson = realSegmentJson || null;
+
+      // Parse segment-json to get segments and clusters for the segment view
+      let parsedSegments: any[] = [];
+      let parsedClusters: any[] = [];
+      if (segmentJson) {
+        // segment-json structure: { segments: [...], issue_clusters: [...] }
+        // or nested: { segments: { segments: [...] } }
+        const segData = segmentJson.segments || segmentJson;
+        parsedSegments = Array.isArray(segData) ? segData : (segData?.segments || []);
+        parsedClusters = segmentJson.issue_clusters || segData?.issue_clusters || [];
+      }
 
       const reportOptions = runs.map((run) => ({ value: run.id || "", label: `${run.caseName || run.case_name || "未命名"}`, run }));
 
-      setReportData({ caseName, feedbackCount, hardScore, semanticScore, evidenceBroken, overallMd, topIssues, segments, evidenceItems, reportOptions, selectedRun, isReal });
+      setReportData({ caseName, feedbackCount, hardScore, semanticScore, evidenceBroken, overallMd, topIssues, segments, evidenceItems, reportOptions, selectedRun, isReal, segmentJson, runId: selectedRunId, parsedSegments, parsedClusters });
     };
 
     fetchData();
@@ -140,18 +173,49 @@ export default function AnalysisReportPage() {
       </div>
       <AnalysisReportClient
         caseName={reportData.caseName}
+        runId={reportData.runId}
         allRuns={allRuns}
         summary={{ case_name: reportData.caseName, count: reportData.feedbackCount, status: "completed", timestamp: reportData.selectedRun?.updatedAt || "", hardValidation: { score: reportData.hardScore }, semanticValidation: { score: reportData.semanticScore, evidenceBroken: reportData.evidenceBroken } }}
         hardVal={{ score: reportData.hardScore, pass_count: 41, warning_count: 1, fail_count: 0 }}
         semVal={{ semanticScore: reportData.semanticScore, criticalIssues: 0, evidenceBroken: reportData.evidenceBroken }}
         overallMd={reportData.overallMd}
-        clusters={reportData.topIssues.map((issue: any, i: number) => ({ cluster_id: `cluster-${i}`, name: issue.name, summary: issue.summary, feedback_count: issue.count, evidence_feedback_ids: [], priority: i === 0 ? "P0" : "P1", opportunity_score: 90 - i * 5, recommendation: issue.recommendation || issue.summary, impact: issue.severity, action: "", score: 90 - i * 5, segment_name: issue.name, segment_id: `seg-${i}` }))}
-        segments={reportData.segments.map((seg: any, i: number) => ({ segmentId: `seg-${i}`, name: seg.name, type: "business", businessGoal: "", feedbackCount: seg.feedbackCount, p0Count: seg.p0Count || 0, status: seg.status || "已完成", summary: seg.summary || "", recommendation: seg.recommendation || "" }))}
+        clusters={reportData.parsedClusters.length > 0
+          ? reportData.parsedClusters.map((c: any) => ({
+              cluster_id: c.cluster_id || c.id,
+              name: c.name,
+              summary: c.summary,
+              feedback_count: c.feedback_count,
+              evidence_feedback_ids: c.evidence_feedback_ids || [],
+              priority: c.priority || "P1",
+              opportunity_score: c.opportunity_score || 50,
+              recommendation: c.recommendation || "",
+              impact: c.impact || "",
+              action: c.action || "",
+              score: c.opportunity_score || 50,
+              segment_name: c.segment_name || "",
+              segment_id: c.segment_id || "",
+            }))
+          : reportData.topIssues.map((issue: any, i: number) => ({ cluster_id: `cluster-${i}`, name: issue.name, summary: issue.summary, feedback_count: issue.count, evidence_feedback_ids: [], priority: i === 0 ? "P0" : "P1", opportunity_score: 90 - i * 5, recommendation: issue.recommendation || issue.summary, impact: issue.severity, action: "", score: 90 - i * 5, segment_name: issue.name, segment_id: `seg-${i}` }))
+        }
+        segments={reportData.parsedSegments.length > 0
+          ? reportData.parsedSegments.map((seg: any) => ({
+              segmentId: seg.segment_id || seg.id,
+              name: seg.name,
+              type: seg.segment_type || "business",
+              businessGoal: seg.business_goal || "",
+              feedbackCount: seg.feedback_count || 0,
+              p0Count: seg.p0Count || 0,
+              status: seg.status || "已完成",
+              summary: seg.summary || "",
+              recommendation: seg.recommendation || "",
+            }))
+          : reportData.segments.map((seg: any, i: number) => ({ segmentId: `seg-${i}`, name: seg.name, type: "business", businessGoal: "", feedbackCount: seg.feedbackCount, p0Count: seg.p0Count || 0, status: seg.status || "已完成", summary: seg.summary || "", recommendation: seg.recommendation || "" }))
+        }
         selectedSegmentId={null}
         segmentData={null}
         segmentMd={null}
-        segmentCount={reportData.segments.length}
-        clusterCount={reportData.topIssues.length}
+        segmentCount={reportData.parsedSegments.length || reportData.segments.length}
+        clusterCount={reportData.parsedClusters.length || reportData.topIssues.length}
         brokenEvidenceCount={reportData.evidenceBroken}
         evidenceTrace={reportData.evidenceItems.map((item: any) => ({ segment: item.issue, cluster: item.issue, evidenceIds: [], count: 1, excerpt: item.evidence, status: "Pass" }))}
       />
