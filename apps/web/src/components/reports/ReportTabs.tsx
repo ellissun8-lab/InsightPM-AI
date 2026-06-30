@@ -1,6 +1,6 @@
 "use client";
 
-const TABS = ["综合诊断", "分组视图", "证据链", "完整 Markdown", "下载"] as const;
+const TABS = ["完整报告", "分组视图", "证据链", "综合诊断", "下载"] as const;
 export type Tab = (typeof TABS)[number];
 
 interface ReportTabsProps {

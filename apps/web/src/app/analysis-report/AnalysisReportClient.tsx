@@ -861,7 +861,7 @@ function TabDownloads({
 /* ──────────── Main ──────────── */
 
 export default function AnalysisReportClient(props: Props) {
-  const [activeTab, setActiveTab] = useState<Tab>("综合诊断");
+  const [activeTab, setActiveTab] = useState<Tab>("完整报告");
   const [isGeneratingInsight, setIsGeneratingInsight] = useState(false);
   const [insight, setInsight] = useState<any>(null);
   const [showInsightModal, setShowInsightModal] = useState(false);
@@ -1103,17 +1103,8 @@ export default function AnalysisReportClient(props: Props) {
 
           {/* Tab Content */}
           <div className="mt-6">
-            {activeTab === "综合诊断" && (
-              <TabDashboard
-                clusters={clusters}
-                segments={segments}
-                evidenceTrace={evidenceTrace}
-                hardVal={hardVal}
-                semVal={semVal}
-                brokenEvidenceCount={brokenEvidenceCount}
-                overallMd={overallMd}
-                caseName={caseName}
-              />
+            {activeTab === "完整报告" && (
+              <TabMarkdown overallMd={overallMd} />
             )}
             {activeTab === "分组视图" && (
               <TabSegment
@@ -1132,8 +1123,17 @@ export default function AnalysisReportClient(props: Props) {
             {activeTab === "证据链" && (
               <TabEvidence evidenceTrace={evidenceTrace} />
             )}
-            {activeTab === "完整 Markdown" && (
-              <TabMarkdown overallMd={overallMd} />
+            {activeTab === "综合诊断" && (
+              <TabDashboard
+                clusters={clusters}
+                segments={segments}
+                evidenceTrace={evidenceTrace}
+                hardVal={hardVal}
+                semVal={semVal}
+                brokenEvidenceCount={brokenEvidenceCount}
+                overallMd={overallMd}
+                caseName={caseName}
+              />
             )}
             {activeTab === "下载" && (
               <TabDownloads
