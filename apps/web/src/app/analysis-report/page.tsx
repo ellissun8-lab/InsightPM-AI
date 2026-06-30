@@ -82,9 +82,9 @@ export default function AnalysisReportPage() {
   if (runs.length === 0) return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="max-w-md text-center">
-        <h2 className="text-headline-md font-headline-md text-on-surface mb-sm">暂无已完成的分析</h2>
-        <p className="text-body-lg font-body-lg text-on-surface-variant mb-lg">请先创建并完成一个分析任务。</p>
-        <a href="/new-analysis" className="inline-flex items-center gap-2 px-6 py-3 bg-primary-container text-white rounded-lg font-label-md text-label-md hover:bg-primary transition-colors">新建分析</a>
+        <h2 className="text-headline-md font-headline-md text-on-surface mb-sm">暂无可查看的分析报告</h2>
+        <p className="text-body-lg font-body-lg text-on-surface-variant mb-lg">创建一个分析任务，完成后即可在此查看报告。</p>
+        <a href="/new-analysis" className="inline-flex items-center gap-2 px-6 py-3 bg-primary-container text-white rounded-lg font-label-md text-label-md hover:bg-primary transition-colors">新建分析任务</a>
       </div>
     </div>
   );
@@ -96,7 +96,7 @@ export default function AnalysisReportPage() {
     <div>
       {/* Report selector */}
       <div className="fixed top-0 left-[280px] right-0 h-16 bg-surface border-b border-outline-variant z-20 flex items-center px-8 gap-4">
-        <label className="text-label-md font-label-md text-on-surface-variant">切换报告：</label>
+        <label className="text-label-md font-label-md text-on-surface-variant">分析任务：</label>
         <select value={selectedRunId} onChange={(e) => setSelectedRunId(e.target.value)} className="bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-2 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary">
           {reportData.reportOptions.map((opt: any) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
         </select>
@@ -116,25 +116,25 @@ export default function AnalysisReportPage() {
             href={`/api/artifacts/${selectedRunId}/download?type=overall-md`}
             className="px-3 py-1.5 rounded text-label-sm font-label-sm bg-surface-container-lowest border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors inline-flex items-center gap-1"
           >
-            下载报告
+            下载完整报告
           </a>
           <a
             href={`/api/artifacts/${selectedRunId}/download?type=summary-json`}
             className="px-3 py-1.5 rounded text-label-sm font-label-sm bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors inline-flex items-center gap-1"
           >
-            摘要 JSON
+            下载运行摘要
           </a>
           <a
             href={`/api/artifacts/${selectedRunId}/download?type=validation-json`}
             className="px-3 py-1.5 rounded text-label-sm font-label-sm bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors inline-flex items-center gap-1"
           >
-            验证 JSON
+            下载验证结果
           </a>
           <a
             href={`/api/artifacts/${selectedRunId}/download?type=segment-json`}
             className="px-3 py-1.5 rounded text-label-sm font-label-sm bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors inline-flex items-center gap-1"
           >
-            分组 JSON
+            下载分组结构
           </a>
         </div>
       </div>

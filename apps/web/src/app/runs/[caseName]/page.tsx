@@ -31,6 +31,17 @@ function ErrorDetailsCard({ error, categoryLabels }: { error: any; categoryLabel
   const category = error.category || "unknown";
   const retryable = error.retryable;
 
+  const ERROR_EXPLANATIONS: Record<string, string> = {
+    semantic_validation: "语义校验未通过，说明报告内容与原始反馈的证据一致性不足。",
+    hard_validation: "硬性校验未通过，通常是输入格式或结构性规则不满足。",
+    storage: "文件下载或存储访问失败。",
+    ai_generation: "AI 分析生成失败。",
+    network: "AI 服务或存储访问超时，系统将自动重试。",
+    training_data: "训练数据处理失败。",
+    artifact_write: "报告产物写入失败，系统将自动重试。",
+    unknown: "系统处理时发生未知错误。",
+  };
+
   return (
     <div className="bg-surface-container-lowest rounded-xl border border-red-200 overflow-hidden mb-xl">
       <div className="px-lg py-md border-b border-red-200 bg-red-50/50 flex items-center justify-between">
@@ -42,15 +53,22 @@ function ErrorDetailsCard({ error, categoryLabels }: { error: any; categoryLabel
           {categoryLabels[category] || category}
         </span>
       </div>
-      <div className="px-lg py-md space-y-sm">
-        <DetailRow label="错误消息" value={error.message || "-"} />
-        <DetailRow label="是否可重试" value={retryable ? "是" : "否"} />
-        <DetailRow label="失败步骤" value={error.workerStep || "-"} />
-        <DetailRow label="失败时间" value={error.failedAt ? new Date(error.failedAt).toLocaleString("zh-CN") : "-"} />
-        {error.exitCode != null && <DetailRow label="退出码" value={String(error.exitCode)} />}
+      <div className="px-lg py-md">
+        <p className="text-body-md font-body-md text-on-surface mb-md">
+          {ERROR_EXPLANATIONS[category] || ERROR_EXPLANATIONS.unknown}
+        </p>
+        <p className="text-label-md font-label-md text-on-surface-variant mb-md">
+          {retryable ? "该错误可自动重试，系统将自动处理。" : "该错误通常需要修正输入或检查配置。"}
+        </p>
+        <div className="space-y-sm">
+          <DetailRow label="错误消息" value={error.message || "-"} />
+          <DetailRow label="失败步骤" value={error.workerStep || "-"} />
+          <DetailRow label="失败时间" value={error.failedAt ? new Date(error.failedAt).toLocaleString("zh-CN") : "-"} />
+          {error.exitCode != null && <DetailRow label="退出码" value={String(error.exitCode)} />}
+        </div>
       </div>
 
-      {/* Expandable technical details using <details> for server component compatibility */}
+      {/* Expandable technical details - collapsed by default */}
       <details className="border-t border-outline-variant group">
         <summary className="px-lg py-sm flex items-center justify-between text-label-md font-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer list-none">
           <span>展开技术详情</span>
@@ -252,12 +270,20 @@ export default async function RunDetailPage({
       unknown: "未知错误",
     };
 
+    const STATUS_DESC: Record<string, string> = {
+      pending: "任务已创建，等待处理。",
+      running: "正在分析，可能需要几分钟。",
+      completed: "分析完成，可以查看报告。",
+      failed: "分析失败，请查看错误原因。",
+    };
+
     return (
       <div className="flex min-h-screen bg-surface">
         <Sidebar />
         <div className="ml-[280px] flex-1 p-margin-desktop">
           {/* Header */}
           <div className="mb-xl">
+            <p className="text-label-md font-label-md text-on-surface-variant mb-1">分析任务详情</p>
             <div className="flex items-center space-x-sm mb-1">
               <h1 className="text-headline-lg font-headline-lg text-on-surface">
                 {caseName}
@@ -278,6 +304,20 @@ export default async function RunDetailPage({
               {run.scenario || run.dataset} · {feedbackCount} 条反馈 · 更新于{" "}
               {run.updatedAt ? new Date(run.updatedAt).toLocaleString("zh-CN") : "-"}
             </p>
+            <p className="text-body-md font-body-md text-on-surface-variant mt-1">
+              {STATUS_DESC[runStatus] || ""}
+            </p>
+            {/* CTA buttons for completed */}
+            {runStatus === "completed" && reportContent && (
+              <div className="flex gap-sm mt-md">
+                <button
+                  onClick={() => { const el = document.getElementById("report-section"); el?.scrollIntoView({ behavior: "smooth" }); }}
+                  className="px-4 py-2 rounded-lg bg-primary-container text-white text-label-md font-label-md hover:bg-primary transition-colors cursor-pointer"
+                >
+                  查看完整报告
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Status Summary Grid */}
@@ -319,9 +359,9 @@ export default async function RunDetailPage({
 
           {/* Report Content */}
           {reportContent ? (
-            <div className="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg mb-xl">
+            <div id="report-section" className="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg mb-xl">
               <h3 className="text-title-lg font-title-lg text-on-surface mb-md">
-                分析报告
+                完整报告
               </h3>
               <pre className="whitespace-pre-wrap font-body-md text-body-md text-on-surface bg-surface-container-low rounded-lg p-md border border-outline-variant max-h-[600px] overflow-y-auto">
                 {reportContent}

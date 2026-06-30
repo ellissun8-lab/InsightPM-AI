@@ -121,7 +121,7 @@ export default function NewAnalysisPage() {
             新建分析任务
           </h2>
           <p className="text-body-lg font-body-lg text-on-surface-variant">
-            上传数据并配置您的 AI 分析流水线。
+            上传 CSV 后，系统会自动分析用户反馈，生成产品问题分组、证据引用、优先级判断和 Markdown 报告。
           </p>
         </div>
 
@@ -135,9 +135,23 @@ export default function NewAnalysisPage() {
                 <FileUp size={20} className="text-on-surface-variant" />
               </div>
               <div className="p-lg flex-1 flex flex-col">
-                <p className="text-body-md font-body-md text-on-surface-variant mb-md">
-                  支持 raw customer feedback CSV 格式.
+                <p className="text-body-md font-body-md text-on-surface-variant mb-sm">
+                  支持 CSV 格式的用户反馈数据。系统会自动识别反馈文本列。
                 </p>
+                <p className="text-label-md font-label-md text-on-surface-variant mb-md">
+                  建议字段：feedback_text（必需）、source、user_role、product_area、created_at
+                </p>
+                <details className="mb-md">
+                  <summary className="text-label-md font-label-md text-primary cursor-pointer hover:underline">
+                    查看示例 CSV 格式
+                  </summary>
+                  <pre className="mt-sm whitespace-pre-wrap font-mono text-label-md text-on-surface-variant bg-surface-container-low rounded-lg p-md border border-outline-variant overflow-x-auto">
+{`feedback_id,source,user_role,product_area,feedback_text,created_at
+FB001,survey,运营负责人,BI报表,"续费看板金额和明细对不上",2026-06-01
+FB002,support,销售经理,导出,"导出的字段顺序不固定",2026-06-02
+FB003,interview,产品经理,分析报告,"希望能导出 PDF 格式的报告",2026-06-03`}
+                  </pre>
+                </details>
                 <div
                   onClick={() => inputRef.current?.click()}
                   className="flex-1 border-2 border-dashed border-outline-variant rounded-lg bg-surface-container-low hover:bg-surface-container-high/50 transition-colors flex flex-col items-center justify-center p-xl cursor-pointer group"

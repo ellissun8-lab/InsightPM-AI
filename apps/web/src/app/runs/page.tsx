@@ -176,7 +176,7 @@ function RunsPageInner() {
               <Search size={16} className="text-on-surface-variant mr-2 shrink-0" />
               <input
                 className="bg-transparent border-none p-0 focus:ring-0 text-body-md text-on-surface w-full placeholder:text-on-surface-variant/70 outline-none min-w-[120px]"
-                placeholder="搜索案例名称..."
+                placeholder="搜索任务名、文件名或场景…"
                 type="text"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
@@ -258,8 +258,20 @@ function RunsPageInner() {
                 )}
                 {!loading && runs.length === 0 && (
                   <tr>
-                    <td colSpan={10} className="py-8 px-6 text-center text-on-surface-variant">
-                      {hasActiveFilters ? "没有找到匹配的运行记录。请调整筛选条件。" : "还没有分析任务，去新建一个。"}
+                    <td colSpan={10} className="py-12 px-6 text-center">
+                      {hasActiveFilters ? (
+                        <>
+                          <p className="text-body-lg font-body-lg text-on-surface mb-sm">没有找到匹配的运行记录。</p>
+                          <p className="text-body-md font-body-md text-on-surface-variant mb-md">请调整搜索词、状态筛选或时间范围。</p>
+                          <button onClick={clearFilters} className="text-primary font-label-md hover:underline cursor-pointer">清空筛选条件</button>
+                        </>
+                      ) : (
+                        <>
+                          <p className="text-body-lg font-body-lg text-on-surface mb-sm">还没有分析任务。</p>
+                          <p className="text-body-md font-body-md text-on-surface-variant mb-md">上传一份 CSV，系统会自动生成反馈分析报告。</p>
+                          <a href="/new-analysis" className="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-white rounded-lg font-label-md hover:bg-primary transition-colors">新建分析任务</a>
+                        </>
+                      )}
                     </td>
                   </tr>
                 )}
