@@ -7,7 +7,7 @@
 
 // Prompt 版本号
 // 修改 prompt 后必须递增版本号
-export const PROMPT_VERSION = "ai-analysis-v1.1";
+export const PROMPT_VERSION = "ai-analysis-v1.2";
 export const VALIDATION_PROMPT_VERSION = "semantic-validation-v1.1";
 
 // 模型版本（从环境变量读取，不硬编码）

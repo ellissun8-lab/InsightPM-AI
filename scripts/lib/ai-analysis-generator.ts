@@ -477,6 +477,27 @@ ${feedbackTexts.map((f) => `[${f.id}] ${f.text}`).join("\n")}
 
     console.log(`[AIAnalysis] Generated ${analysis.segments.length} segments, ${analysis.issue_clusters.length} clusters`);
 
+    // Coverage guard: check if output covers enough feedback
+    const coveredEvidenceIds = new Set<string>();
+    for (const cluster of analysis.issue_clusters) {
+      for (const eid of cluster.evidence_feedback_ids || []) {
+        coveredEvidenceIds.add(eid);
+      }
+    }
+    const coverageRatio = coveredEvidenceIds.size / normalizedItems.length;
+    console.log(`[AIAnalysis] Coverage: ${coveredEvidenceIds.size}/${normalizedItems.length} feedback covered (${(coverageRatio * 100).toFixed(1)}%)`);
+
+    // Log coverage warnings
+    if (feedbackCount >= 150 && analysis.segments.length < 3) {
+      console.warn(`[AIAnalysis] WARNING: Only ${analysis.segments.length} segments for ${feedbackCount} feedbacks (expected ${expectedSegments})`);
+    }
+    if (feedbackCount >= 150 && analysis.issue_clusters.length < 8) {
+      console.warn(`[AIAnalysis] WARNING: Only ${analysis.issue_clusters.length} clusters for ${feedbackCount} feedbacks (expected ${expectedClusters})`);
+    }
+    if (coverageRatio < 0.3) {
+      console.warn(`[AIAnalysis] WARNING: Low coverage ${(coverageRatio * 100).toFixed(1)}% - many feedbacks not represented in evidence`);
+    }
+
     return { success: true, analysis };
   } catch (err: any) {
     console.error(`[AIAnalysis] Error:`, err.message);
