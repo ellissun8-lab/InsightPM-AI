@@ -585,19 +585,25 @@ function TabSegment({
                   {seg.status || "已完成"}
                 </span>
               </div>
-              <div className="grid grid-cols-2 gap-4 mb-3">
+              {seg.businessGoal && (
+                <p className="text-body-md text-on-surface-variant mb-3">{seg.businessGoal}</p>
+              )}
+              <div className="grid grid-cols-3 gap-4 mb-3">
                 <div>
                   <span className="text-label-sm text-on-surface-variant">反馈数</span>
                   <p className="text-headline-md font-headline-md text-on-surface">{seg.feedbackCount || 0}</p>
                 </div>
                 <div>
-                  <span className="text-label-sm text-on-surface-variant">P0 数量</span>
-                  <p className="text-headline-md font-headline-md text-on-surface">{seg.p0Count || 0}</p>
+                  <span className="text-label-sm text-on-surface-variant">聚类数</span>
+                  <p className="text-headline-md font-headline-md text-on-surface">{seg.clusterCount || (seg as any).issueClusterIds?.length || 0}</p>
+                </div>
+                <div>
+                  <span className="text-label-sm text-on-surface-variant">聚类 ID</span>
+                  <p className="text-body-md font-body-md text-on-surface-variant font-mono text-xs">
+                    {((seg as any).issueClusterIds || []).join(", ") || "-"}
+                  </p>
                 </div>
               </div>
-              {seg.summary && (
-                <p className="text-body-md text-on-surface-variant mb-2">{seg.summary}</p>
-              )}
               {seg.recommendation && (
                 <p className="text-body-sm text-primary">建议：{seg.recommendation}</p>
               )}
@@ -605,7 +611,7 @@ function TabSegment({
           ))}
         </div>
       ) : (
-        <EmptyState message="该报告暂无可用分组分析数据。请确认 pipeline 已生成 segment analysis JSON 和 Markdown。" />
+        <EmptyState message="分组结构解析失败，请查看完整 Markdown。" />
       )}
     </div>
   );
