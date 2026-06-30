@@ -1,7 +1,7 @@
-# Cloud Real Pipeline Phase 4 Freeze
+# Cloud Real Pipeline Phase 5 Freeze
 
 > **冻结日期**: 2026-06-30
-> **状态**: 生产 Railway Worker 端到端验收通过（含 Worker 稳定性 + 产品体验）
+> **状态**: 生产 Railway Worker 端到端验收通过（含 Worker 稳定性 + 产品体验 + 质量监控）
 
 ---
 
@@ -96,6 +96,12 @@ Worker: railway-worker
 - ✅ /new-analysis 新手引导/CSV示例/上传后引导
 - ✅ Artifact Preview API（白名单 + JSON pretty + Markdown）
 - ✅ Artifact Download API（白名单 + Content-Disposition）
+- ✅ 运行指标监控（durationMs/stepDurations/slowSteps/aiModel/validationModel）
+- ✅ 成本可观测性结构（tokenUsage/costEstimatedUsd，当前为 null）
+- ✅ /quality 质量与运行概览页面
+- ✅ /api/quality/summary 质量统计 API（成功率/评分趋势/失败分类/慢步骤）
+- ✅ Prompt/模型版本管理（promptVersion/validationPromptVersion/aiConfig）
+- ✅ 200/500/1000 条压力测试通过（500 completed, H=95 S=99）
 
 ---
 
@@ -170,6 +176,10 @@ DEEPSEEK_VALIDATION_MODEL=deepseek-chat
 ## 关键提交
 
 ```
+55bf7cb feat: add prompt versioning and load quality tuning
+923c0cd test: add scale load validation results
+d9054a9 feat: add quality trends and failure analytics
+bfc2f8f feat: add run metrics and cost monitoring
 a1c2f85 feat: polish onboarding empty states and copy
 1ab1db9 fix: correct artifact filter pagination totals
 aeca439 feat: add runs search filters and pagination
@@ -187,4 +197,4 @@ e96b86e fix: support python3 and railway env propagation
 
 ---
 
-*Cloud Real Pipeline Phase 4 生产验收通过，进入 Freeze 状态。*
+*Cloud Real Pipeline Phase 5 生产验收通过，进入 Freeze 状态。*
