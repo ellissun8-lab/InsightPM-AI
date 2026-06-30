@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
-const ALLOWED_TYPES = new Set(["summary-json", "overall-md", "validation-json", "segment-json"]);
+const ALLOWED_TYPES = new Set(["summary-json", "overall-md", "validation-json", "segment-json", "deck-pptx"]);
 
 export async function GET(
   request: Request,
