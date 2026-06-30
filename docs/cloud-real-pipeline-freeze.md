@@ -1,7 +1,7 @@
-# Cloud Real Pipeline Phase 3 Freeze
+# Cloud Real Pipeline Phase 4 Freeze
 
-> **冻结日期**: 2026-06-29
-> **状态**: 生产 Railway Worker 端到端验收通过（含 Worker 稳定性）
+> **冻结日期**: 2026-06-30
+> **状态**: 生产 Railway Worker 端到端验收通过（含 Worker 稳定性 + 产品体验）
 
 ---
 
@@ -88,6 +88,14 @@ Worker: railway-worker
 - ✅ 错误分类（7 级优先级，semantic > hard > network > training > artifact > ai > unknown）
 - ✅ 锁清理（failed/retry 均清空 locked_by/locked_at）
 - ✅ 终态保护（completed/failed 不可覆盖 + trigger 防护）
+- ✅ /runs 搜索/状态筛选/artifact筛选/时间筛选/排序/分页
+- ✅ /runs 空状态引导（新建分析/清空筛选）
+- ✅ /runs/[caseName] 状态摘要/错误详情/artifact列表/预览面板
+- ✅ /runs/[caseName] 用户可读错误解释（8种分类）
+- ✅ /analysis-report 下载按钮（完整报告/运行摘要/验证结果/分组结构）
+- ✅ /new-analysis 新手引导/CSV示例/上传后引导
+- ✅ Artifact Preview API（白名单 + JSON pretty + Markdown）
+- ✅ Artifact Download API（白名单 + Content-Disposition）
 
 ---
 
@@ -162,6 +170,12 @@ DEEPSEEK_VALIDATION_MODEL=deepseek-chat
 ## 关键提交
 
 ```
+a1c2f85 feat: polish onboarding empty states and copy
+1ab1db9 fix: correct artifact filter pagination totals
+aeca439 feat: add runs search filters and pagination
+3d8865d fix: use direct Supabase queries in artifact preview/download APIs
+f8cb3d8 feat: add artifact preview and download
+b8b047e feat: improve run status and artifact UX
 b6b2b17 fix: classify semantic validation failures correctly
 c577092 fix: preserve pipeline failure details and finalize run status
 399c548 fix: create training data directories during promote
@@ -173,4 +187,4 @@ e96b86e fix: support python3 and railway env propagation
 
 ---
 
-*Cloud Real Pipeline Phase 3 生产验收通过，进入 Freeze 状态。*
+*Cloud Real Pipeline Phase 4 生产验收通过，进入 Freeze 状态。*

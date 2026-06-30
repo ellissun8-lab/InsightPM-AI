@@ -310,12 +310,12 @@ export default async function RunDetailPage({
             {/* CTA buttons for completed */}
             {runStatus === "completed" && reportContent && (
               <div className="flex gap-sm mt-md">
-                <button
-                  onClick={() => { const el = document.getElementById("report-section"); el?.scrollIntoView({ behavior: "smooth" }); }}
-                  className="px-4 py-2 rounded-lg bg-primary-container text-white text-label-md font-label-md hover:bg-primary transition-colors cursor-pointer"
+                <a
+                  href="#report-section"
+                  className="px-4 py-2 rounded-lg bg-primary-container text-white text-label-md font-label-md hover:bg-primary transition-colors"
                 >
                   查看完整报告
-                </button>
+                </a>
               </div>
             )}
           </div>

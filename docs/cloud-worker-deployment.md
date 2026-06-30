@@ -1,7 +1,7 @@
 # Cloud Worker 部署指南
 
-> **版本**: Phase 3 Production
-> **状态**: Railway 部署成功（含 Worker 稳定性）
+> **版本**: Phase 4 Production
+> **状态**: Railway 部署成功（含 Worker 稳定性 + 产品体验）
 
 ---
 
@@ -308,4 +308,4 @@ locked_at:     null
 
 ---
 
-*Cloud Worker 部署指南 - Phase 3 Production*
+*Cloud Worker 部署指南 - Phase 4 Production*
