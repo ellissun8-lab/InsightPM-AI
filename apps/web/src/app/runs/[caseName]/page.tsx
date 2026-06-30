@@ -378,6 +378,18 @@ export default async function RunDetailPage({
                     </div>
                   </div>
                   <div>
+                    <div className="text-label-sm font-label-sm text-on-surface-variant">Prompt 版本</div>
+                    <div className="text-body-md font-body-md text-on-surface font-medium">
+                      {metadata.aiConfig?.promptVersion || "未记录"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-label-sm font-label-sm text-on-surface-variant">校验 Prompt 版本</div>
+                    <div className="text-body-md font-body-md text-on-surface font-medium">
+                      {metadata.aiConfig?.validationPromptVersion || "未记录"}
+                    </div>
+                  </div>
+                  <div>
                     <div className="text-label-sm font-label-sm text-on-surface-variant">Token 使用量</div>
                     <div className="text-body-md font-body-md text-on-surface font-medium">
                       {run.metrics.tokenUsage?.totalTokens != null

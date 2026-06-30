@@ -1,9 +1,10 @@
-import { type RunRecord, updateRunStatus, markRunCompleted, markRunFailed } from "./supabase.js";
+import { type RunRecord, updateRunStatus, markRunCompleted, markRunFailed, getSupabaseClient } from "./supabase.js";
 import { runPipeline } from "./pipeline-runner.js";
 import { discoverArtifacts, uploadAndRecordArtifacts } from "./artifacts.js";
 import { downloadFromStorage } from "./storage-downloader.js";
 import { startHeartbeat, updateHeartbeat, stopHeartbeat } from "./heartbeat.js";
 import { buildMetricsFromSummary } from "./cost-estimator.js";
+import { getAiConfig } from "./ai-config.js";
 import * as path from "path";
 import * as os from "os";
 
@@ -121,6 +122,18 @@ async function handleFailure(
   const ok = await markRunFailed(run.id, errorPayload, retryable);
   if (!ok) {
     console.error(`[Worker] markRunFailed RPC failed for run ${run.id}`);
+  }
+
+  // Also write aiConfig for failed runs (for traceability)
+  try {
+    const aiConfig = getAiConfig();
+    const client = getSupabaseClient();
+    await client
+      .from("runs")
+      .update({ metadata: { ...run.metadata, aiConfig, error: errorPayload } })
+      .eq("id", run.id);
+  } catch (err: any) {
+    console.warn(`[Worker] Failed to write aiConfig for failed run: ${err.message}`);
   }
 }
 
@@ -271,6 +284,7 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
     }
 
     // Step 6: 标记完成
+    const aiConfig = getAiConfig();
     const completedMetadata = {
       ...run.metadata,
       worker: "railway-worker",
@@ -283,6 +297,7 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
       hasReport: true,
       workerCompletedAt: now,
       metrics: metrics || run.metadata?.metrics || null,
+      aiConfig,
       // 清理错误信息
       error: null,
       failedAt: null,
