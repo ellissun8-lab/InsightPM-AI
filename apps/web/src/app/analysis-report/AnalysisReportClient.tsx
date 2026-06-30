@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 import ReportTabs, { type Tab } from "@/components/reports/ReportTabs";
@@ -738,7 +738,7 @@ function TabEvidence({ evidenceTrace }: { evidenceTrace: any[] }) {
 
 /* ──────────── Tab 4: 完整 Markdown ──────────── */
 
-function TabMarkdown({ overallMd }: { overallMd: string | null }) {
+function TabMarkdown({ overallMd, onSwitchToSegments }: { overallMd: string | null; onSwitchToSegments?: () => void }) {
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
     if (overallMd) {
@@ -757,6 +757,27 @@ function TabMarkdown({ overallMd }: { overallMd: string | null }) {
     a.click();
     URL.revokeObjectURL(url);
   };
+
+  if (!overallMd) {
+    return (
+      <div className="pb-12 max-w-7xl mx-auto">
+        <div className="bg-surface-container-lowest rounded-[24px] border border-outline-variant shadow-diffused p-8 text-center">
+          <FileText size={48} className="text-on-surface-variant mx-auto mb-4 opacity-50" />
+          <h3 className="text-title-lg font-title-lg text-on-surface mb-2">该分析任务暂无完整 Markdown 报告</h3>
+          <p className="text-body-md text-on-surface-variant mb-4">请查看分组视图获取结构化分析数据。</p>
+          {onSwitchToSegments && (
+            <button
+              onClick={onSwitchToSegments}
+              className="px-4 py-2 rounded-lg bg-primary-container text-white text-label-md font-label-md hover:bg-primary transition-colors"
+            >
+              查看分组视图
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="pb-12 max-w-7xl mx-auto">
       <div className="bg-surface-container-lowest rounded-[24px] border border-outline-variant shadow-diffused flex flex-col h-[600px]">
@@ -780,7 +801,7 @@ function TabMarkdown({ overallMd }: { overallMd: string | null }) {
           </div>
         </div>
         <div className="flex-1 p-5 bg-surface-container-low overflow-y-auto font-mono text-sm text-on-surface-variant whitespace-pre-wrap">
-          {overallMd || "暂无 Markdown 报告。请先运行分析生成报告。"}
+          {overallMd}
         </div>
       </div>
     </div>
@@ -861,13 +882,38 @@ function TabDownloads({
 /* ──────────── Main ──────────── */
 
 export default function AnalysisReportClient(props: Props) {
-  const [activeTab, setActiveTab] = useState<Tab>("完整报告");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // URL tab param support: ?tab=markdown|segments|evidence|diagnosis|download
+  const TAB_URL_MAP: Record<string, Tab> = {
+    markdown: "完整报告",
+    segments: "分组视图",
+    evidence: "证据链",
+    diagnosis: "综合诊断",
+    download: "下载",
+  };
+
+  const getInitialTab = (): Tab => {
+    const tabParam = searchParams.get("tab");
+    if (tabParam && TAB_URL_MAP[tabParam]) return TAB_URL_MAP[tabParam];
+    return "完整报告";
+  };
+
+  const [activeTab, setActiveTab] = useState<Tab>(getInitialTab);
   const [isGeneratingInsight, setIsGeneratingInsight] = useState(false);
   const [insight, setInsight] = useState<any>(null);
   const [showInsightModal, setShowInsightModal] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
-  const router = useRouter();
-  const searchParams = useSearchParams();
+
+  // Reset to "完整报告" when switching reports
+  const prevRunIdRef = useRef(props.runId);
+  useEffect(() => {
+    if (prevRunIdRef.current !== props.runId) {
+      prevRunIdRef.current = props.runId;
+      setActiveTab("完整报告");
+    }
+  }, [props.runId]);
 
   const showToast = useCallback((msg: string) => {
     setToast(msg);
@@ -1104,7 +1150,10 @@ export default function AnalysisReportClient(props: Props) {
           {/* Tab Content */}
           <div className="mt-6">
             {activeTab === "完整报告" && (
-              <TabMarkdown overallMd={overallMd} />
+              <TabMarkdown
+                overallMd={overallMd}
+                onSwitchToSegments={() => setActiveTab("分组视图")}
+              />
             )}
             {activeTab === "分组视图" && (
               <TabSegment
