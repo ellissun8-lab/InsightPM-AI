@@ -159,13 +159,21 @@ function RunsPageInner() {
               查看并管理历史 AI 分析执行记录。
             </p>
           </div>
-          <a
-            href="/new-analysis"
-            className="bg-primary-container text-white px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-primary transition-colors flex items-center gap-2 shadow-diffused"
-          >
-            <Play size={18} />
-            新建分析
-          </a>
+          <div className="flex items-center gap-3">
+            <a
+              href="/quality"
+              className="bg-surface-container-lowest border border-outline-variant text-on-surface px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-surface-container-low transition-colors flex items-center gap-2"
+            >
+              质量概览
+            </a>
+            <a
+              href="/new-analysis"
+              className="bg-primary-container text-white px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-primary transition-colors flex items-center gap-2 shadow-diffused"
+            >
+              <Play size={18} />
+              新建分析
+            </a>
+          </div>
         </div>
 
         {/* Filter Bar */}
