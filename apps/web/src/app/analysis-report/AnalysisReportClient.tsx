@@ -1002,19 +1002,16 @@ function TabDownloads({
   caseName,
   segmentId,
   onDownload,
-  pptGenerated,
 }: {
   caseName: string;
   segmentId: string | null;
   onDownload: (type: string) => void;
-  pptGenerated?: boolean;
 }) {
   const artifacts = [
     { icon: <FileText size={24} />, title: "完整 Markdown", desc: "完整分析报告 Markdown 格式", type: "overall-md" },
     { icon: <FileJson size={24} />, title: "运行摘要 JSON", desc: "运行摘要结构化数据", type: "summary-json" },
     { icon: <ShieldCheck size={24} />, title: "验证结果 JSON", desc: "校验汇总报告", type: "validation-json" },
     { icon: <PieChart size={24} />, title: "分组结构 JSON", desc: "分组与聚类结构化数据", type: "segment-json" },
-    { icon: <Sparkles size={24} />, title: "PPT 报告", desc: pptGenerated ? "演示文稿已生成" : "请先点击「生成报告洞察和 PPT」", type: "deck-pptx", needsGenerate: !pptGenerated },
   ];
   return (
     <div className="space-y-6 pb-12 max-w-7xl mx-auto">
@@ -1040,10 +1037,9 @@ function TabDownloads({
               </div>
               <button
                 onClick={() => onDownload(a.type)}
-                disabled={(a as any).needsGenerate}
-                className="mt-auto pt-2 w-full text-left text-primary text-xs font-semibold flex items-center gap-1 hover:underline disabled:text-on-surface-variant/50 disabled:cursor-not-allowed"
+                className="mt-auto pt-2 w-full text-left text-primary text-xs font-semibold flex items-center gap-1 hover:underline"
               >
-                <Download size={14} /> {(a as any).needsGenerate ? "需先生成" : "下载"}
+                <Download size={14} /> 下载
               </button>
             </div>
           );
@@ -1138,39 +1134,25 @@ export default function AnalysisReportClient(props: Props) {
   const [segInsight, setSegInsight] = useState<any>(null);
   const [showSegInsightModal, setShowSegInsightModal] = useState(false);
 
-  const [pptGenerated, setPptGenerated] = useState(false);
-
   const handleGenerateInsight = useCallback(async () => {
     setIsGeneratingInsight(true);
     try {
-      // Cloud mode: use runId-based API that generates both insights + PPT
-      if (props.runId) {
-        const res = await fetch(`/api/insights/${props.runId}/generate`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "生成失败");
-        setPptGenerated(true);
-        showToast("报告洞察和 PPT 已生成");
-      } else {
-        // Local mode fallback
-        const res = await fetch(`/api/reports/${props.caseName}/generate-insight`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ scope: "report" }),
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "生成失败");
-        setInsight(data.insight);
-        setShowInsightModal(true);
-      }
+      const res = await fetch(`/api/reports/${props.caseName}/generate-insight`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ scope: "report" }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "生成失败");
+      setInsight(data.insight);
+      setShowInsightModal(true);
+      showToast("报告洞察已生成");
     } catch (err: any) {
-      showToast(err.message || "生成洞察失败");
+      showToast(err.message || "报告洞察生成失败，请稍后重试。");
     } finally {
       setIsGeneratingInsight(false);
     }
-  }, [props.caseName, props.runId, showToast]);
+  }, [props.caseName, showToast]);
 
   const handleGenerateSegInsight = useCallback(async () => {
     if (!props.selectedSegmentId) return;
@@ -1274,7 +1256,7 @@ export default function AnalysisReportClient(props: Props) {
                   className="px-md py-sm rounded-lg bg-primary text-on-primary font-title-lg text-title-lg hover:opacity-90 transition-opacity flex items-center gap-xs shadow-diffused disabled:opacity-50"
                 >
                   <span className="material-symbols-outlined text-[18px]">auto_awesome</span>{" "}
-                  {isGeneratingInsight ? "正在生成报告洞察和 PPT…" : "生成报告洞察和 PPT"}
+                  {isGeneratingInsight ? "正在生成报告洞察…" : "生成报告洞察"}
                 </button>
               </div>
             </div>
@@ -1394,7 +1376,6 @@ export default function AnalysisReportClient(props: Props) {
                 caseName={caseName}
                 segmentId={selectedSegmentId}
                 onDownload={handleDownload}
-                pptGenerated={pptGenerated}
               />
             )}
           </div>
