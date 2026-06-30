@@ -75,7 +75,7 @@ export default function MarketingPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-4 bg-cream-bg rounded-lg editorial-border">
                     <div className="font-label-sm text-label-sm text-on-surface-variant mb-2">处理样本量</div>
-                    <div className="font-title-lg text-title-lg text-near-black">4,200 <span className="text-sm font-normal text-outline">条</span></div>
+                    <div className="font-title-lg text-title-lg text-near-black">24,000 <span className="text-sm font-normal text-outline">条</span></div>
                   </div>
                   <div className="p-4 bg-cream-bg rounded-lg editorial-border">
                     <div className="font-label-sm text-label-sm text-on-surface-variant mb-2">识别高优议题</div>
