@@ -176,6 +176,7 @@ export default function AnalysisReportPage() {
       <AnalysisReportClient
         caseName={reportData.caseName}
         runId={reportData.runId}
+        segmentJson={reportData.segmentJson}
         allRuns={allRuns}
         summary={{ case_name: reportData.caseName, count: reportData.feedbackCount, status: "completed", timestamp: reportData.selectedRun?.updatedAt || "", hardValidation: { score: reportData.hardScore }, semanticValidation: { score: reportData.semanticScore, evidenceBroken: reportData.evidenceBroken } }}
         hardVal={{ score: reportData.hardScore, pass_count: 41, warning_count: 1, fail_count: 0 }}

@@ -33,6 +33,7 @@ import { getScenarioDisplayName } from "@/lib/report-display";
 interface Props {
   caseName: string;
   runId?: string;
+  segmentJson?: any;
   allRuns: RunMeta[];
   summary: any;
   hardVal: any;
@@ -518,6 +519,7 @@ function TabSegment({
   semVal,
   isGeneratingSegInsight,
   onGenerateSegInsight,
+  segmentJson,
 }: {
   segments: SegmentMeta[];
   selectedSegmentId: string | null;
@@ -529,90 +531,275 @@ function TabSegment({
   semVal: any;
   isGeneratingSegInsight: boolean;
   onGenerateSegInsight: () => void;
+  segmentJson?: any;
 }) {
-  const router = useRouter();
+  const [activeSegmentId, setActiveSegmentId] = useState<string | null>(selectedSegmentId);
+
+  // Parse segments from segment-json
+  const rawSegments = (() => {
+    if (!segmentJson) return [];
+    const segData = segmentJson.segments || segmentJson;
+    return Array.isArray(segData) ? segData : (segData?.segments || []);
+  })();
+
+  if (rawSegments.length === 0) {
+    return (
+      <div className="pb-12 max-w-7xl mx-auto">
+        <EmptyState message="分组结构解析失败，请查看完整报告。" />
+      </div>
+    );
+  }
 
   return (
     <div className="pb-12 max-w-7xl mx-auto">
-      {/* Segment Selector */}
-      {segments.length > 0 && (
-        <div className="flex flex-wrap gap-2 mb-6">
-          {segments.map((s) => (
-            <button
-              key={s.segmentId}
-              onClick={() =>
-                router.push(
-                  `/analysis-report?case=${caseName}&segment=${s.segmentId}`
-                )
-              }
-              className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
-                selectedSegmentId === s.segmentId
-                  ? "bg-primary text-on-primary border-primary"
-                  : "bg-surface-container-lowest text-on-surface-variant border-outline-variant hover:bg-surface-container-low"
-              }`}
-            >
-              {s.name}
-            </button>
-          ))}
-          {selectedSegmentId && (
-            <button
-              onClick={onGenerateSegInsight}
-              disabled={isGeneratingSegInsight}
-              className="px-3 py-1.5 rounded-full text-xs font-medium border border-outline-variant bg-surface-container-high text-on-surface hover:bg-surface-container transition-colors disabled:opacity-50 ml-2 flex items-center gap-1"
-            >
-              <Sparkles size={12} />
-              {isGeneratingSegInsight ? "生成中..." : "生成当前分组洞察"}
-            </button>
-          )}
-        </div>
-      )}
+      {/* Segment Selector Pills */}
+      <div className="flex flex-wrap gap-2 mb-6">
+        {rawSegments.map((seg: any) => (
+          <button
+            key={seg.segment_id}
+            onClick={() => setActiveSegmentId(activeSegmentId === seg.segment_id ? null : seg.segment_id)}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+              activeSegmentId === seg.segment_id
+                ? "bg-primary text-on-primary border-primary"
+                : "bg-surface-container-lowest text-on-surface-variant border-outline-variant hover:bg-surface-container-low"
+            }`}
+          >
+            {seg.name}
+          </button>
+        ))}
+      </div>
 
-      {segmentData ? (
-        <SegmentReportView
-          segmentData={segmentData}
-          segmentMd={segmentMd}
+      {/* Segment Reports */}
+      {activeSegmentId ? (
+        <SegmentFullReport
+          segment={rawSegments.find((s: any) => s.segment_id === activeSegmentId)}
           overallMd={overallMd}
-          hardVal={hardVal}
-          semVal={semVal}
         />
-      ) : segments.length > 0 ? (
-        <div className="space-y-4">
-          {segments.map((seg, i) => (
-            <div key={seg.segmentId || i} className="bg-surface-container-lowest rounded-xl border border-outline-variant p-6">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-title-lg font-title-lg text-on-surface">{seg.name}</h3>
-                <span className="px-2 py-0.5 rounded text-label-sm font-label-sm bg-[#E7ECDD] text-[#2F6B3F] border border-[#CAD5B8]">
-                  {seg.status || "已完成"}
-                </span>
-              </div>
-              {seg.businessGoal && (
-                <p className="text-body-md text-on-surface-variant mb-3">{seg.businessGoal}</p>
-              )}
-              <div className="grid grid-cols-3 gap-4 mb-3">
-                <div>
-                  <span className="text-label-sm text-on-surface-variant">反馈数</span>
-                  <p className="text-headline-md font-headline-md text-on-surface">{seg.feedbackCount || 0}</p>
-                </div>
-                <div>
-                  <span className="text-label-sm text-on-surface-variant">聚类数</span>
-                  <p className="text-headline-md font-headline-md text-on-surface">{seg.clusterCount || (seg as any).issueClusterIds?.length || 0}</p>
-                </div>
-                <div>
-                  <span className="text-label-sm text-on-surface-variant">聚类 ID</span>
-                  <p className="text-body-md font-body-md text-on-surface-variant font-mono text-xs">
-                    {((seg as any).issueClusterIds || []).join(", ") || "-"}
-                  </p>
-                </div>
-              </div>
-              {seg.recommendation && (
-                <p className="text-body-sm text-primary">建议：{seg.recommendation}</p>
-              )}
-            </div>
+      ) : (
+        <div className="space-y-6">
+          {rawSegments.map((seg: any) => (
+            <SegmentFullReport key={seg.segment_id} segment={seg} overallMd={overallMd} />
           ))}
         </div>
-      ) : (
-        <EmptyState message="分组结构解析失败，请查看完整 Markdown。" />
       )}
+    </div>
+  );
+}
+
+/* ──────────── Segment Full Report ──────────── */
+
+function SegmentFullReport({ segment, overallMd }: { segment: any; overallMd: string | null }) {
+  // Lazy-load parser to avoid SSR issues
+  const { parseSegmentReport } = require("@/lib/segment-report-parser") as { parseSegmentReport: (seg: any, md: string | null) => any };
+  const report: any = parseSegmentReport(segment, overallMd);
+
+  return (
+    <div className="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden">
+      {/* Header */}
+      <div className="px-lg py-md border-b border-outline-variant bg-surface-container-low">
+        <h3 className="text-title-lg font-title-lg text-on-surface font-semibold">
+          分组分析报告：{report.title}
+        </h3>
+      </div>
+
+      <div className="px-lg py-md space-y-lg">
+        {/* 分析范围 */}
+        <section>
+          <h4 className="text-body-md font-body-md text-on-surface font-semibold mb-2">分析范围</h4>
+          <div className="grid grid-cols-2 gap-2 text-label-md">
+            <div><span className="text-on-surface-variant">分组 ID：</span><span className="text-on-surface">{report.id}</span></div>
+            <div><span className="text-on-surface-variant">分组类型：</span><span className="text-on-surface">{report.type}</span></div>
+            <div className="col-span-2"><span className="text-on-surface-variant">业务目标：</span><span className="text-on-surface">{report.businessGoal || "暂无"}</span></div>
+            <div><span className="text-on-surface-variant">反馈数量：</span><span className="text-on-surface">{report.feedbackCount}</span></div>
+            <div><span className="text-on-surface-variant">聚类数量：</span><span className="text-on-surface">{report.clusterCount}</span></div>
+          </div>
+        </section>
+
+        {/* 核心结论 */}
+        {report.clusters.length > 0 && (
+          <section>
+            <h4 className="text-body-md font-body-md text-on-surface font-semibold mb-2">核心结论</h4>
+            <p className="text-label-md text-on-surface-variant mb-2">
+              本分组共识别 {report.clusterCount} 个问题，按机会分排序，Top {Math.min(3, report.clusters.length)} 问题为：
+            </p>
+            <ol className="list-decimal pl-5 space-y-1">
+              {report.clusters.slice(0, 3).map((c: any, i: number) => (
+                <li key={i} className="text-body-md text-on-surface">
+                  <strong>{c.title}</strong>
+                  {c.opportunityScore != null && `（机会分 ${c.opportunityScore}，${c.priority}）`}
+                  {c.summary && ` — ${c.summary}`}
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
+        {/* 高频问题概览 */}
+        {report.clusters.length > 0 && (
+          <section>
+            <h4 className="text-body-md font-body-md text-on-surface font-semibold mb-2">高频问题概览</h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="border-b border-outline-variant/50">
+                    <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">排名</th>
+                    <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">问题名称</th>
+                    <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold text-right">反馈数</th>
+                    <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold text-center">优先级</th>
+                    <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold text-right">机会分</th>
+                  </tr>
+                </thead>
+                <tbody className="text-body-md font-body-md text-on-surface divide-y divide-outline-variant/50">
+                  {report.clusters.map((c: any, i: number) => (
+                    <tr key={i} className="hover:bg-surface-container-low transition-colors">
+                      <td className="px-lg py-sm">{i + 1}</td>
+                      <td className="px-lg py-sm font-medium">{c.title}</td>
+                      <td className="px-lg py-sm text-right">{c.feedbackCount ?? "-"}</td>
+                      <td className="px-lg py-sm text-center">
+                        <span className={`px-2 py-0.5 rounded text-label-sm font-label-sm border ${
+                          c.priority === "P0" ? "bg-red-50 text-red-700 border-red-200" :
+                          c.priority === "P1" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                          "bg-surface-variant text-on-surface-variant border-outline-variant"
+                        }`}>{c.priority}</span>
+                      </td>
+                      <td className="px-lg py-sm text-right font-mono">{c.opportunityScore ?? "-"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        )}
+
+        {/* 高优先级机会 */}
+        {report.clusters.filter((c: any) => c.priority === "P0" || c.priority === "P1").length > 0 && (
+          <section>
+            <h4 className="text-body-md font-body-md text-on-surface font-semibold mb-2">高优先级机会</h4>
+            <div className="space-y-3">
+              {report.clusters.filter((c: any) => c.priority === "P0" || c.priority === "P1").map((c: any, i: number) => (
+                <div key={i} className="p-md rounded-lg border border-outline-variant bg-surface-container-low">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className={`px-2 py-0.5 rounded text-label-sm font-label-sm border ${
+                      c.priority === "P0" ? "bg-red-50 text-red-700 border-red-200" : "bg-amber-50 text-amber-700 border-amber-200"
+                    }`}>{c.priority}</span>
+                    <span className="text-body-md font-body-md text-on-surface font-medium">{c.title}</span>
+                    {c.opportunityScore != null && (
+                      <span className="text-label-md text-on-surface-variant">机会分 {c.opportunityScore}</span>
+                    )}
+                  </div>
+                  {c.summary && <p className="text-label-md text-on-surface-variant">{c.summary}</p>}
+                  {c.recommendation && <p className="text-label-md text-primary mt-1">建议：{c.recommendation}</p>}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 问题详情 */}
+        {report.clusters.length > 0 && (
+          <section>
+            <h4 className="text-body-md font-body-md text-on-surface font-semibold mb-2">问题详情</h4>
+            <div className="space-y-3">
+              {report.clusters.map((c: any, i: number) => (
+                <details key={i} className="border border-outline-variant rounded-lg group">
+                  <summary className="px-lg py-sm flex items-center justify-between text-body-md font-body-md text-on-surface cursor-pointer hover:bg-surface-container-low transition-colors">
+                    <div className="flex items-center gap-2">
+                      <span className={`px-2 py-0.5 rounded text-label-sm font-label-sm border ${
+                        c.priority === "P0" ? "bg-red-50 text-red-700 border-red-200" :
+                        c.priority === "P1" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                        "bg-surface-variant text-on-surface-variant border-outline-variant"
+                      }`}>{c.priority}</span>
+                      <span className="font-medium">{c.title}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-label-md text-on-surface-variant">
+                      {c.opportunityScore != null && <span>机会分 {c.opportunityScore}</span>}
+                      {c.feedbackCount != null && <span>{c.feedbackCount} 条</span>}
+                    </div>
+                  </summary>
+                  <div className="px-lg pb-md space-y-2 text-label-md">
+                    {c.summary && <div><span className="text-on-surface-variant">摘要：</span><span className="text-on-surface">{c.summary}</span></div>}
+                    {c.evidenceIds.length > 0 && (
+                      <div><span className="text-on-surface-variant">证据反馈：</span><span className="text-on-surface font-mono">{c.evidenceIds.join(", ")}</span></div>
+                    )}
+                    {c.suggestedMetrics && <div><span className="text-on-surface-variant">建议指标：</span><span className="text-on-surface">{c.suggestedMetrics}</span></div>}
+                    {c.recommendation && <div><span className="text-on-surface-variant">建议动作：</span><span className="text-on-surface">{c.recommendation}</span></div>}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 建议行动 */}
+        {report.actions.length > 0 && (
+          <section>
+            <h4 className="text-body-md font-body-md text-on-surface font-semibold mb-2">建议行动</h4>
+            <ol className="list-decimal pl-5 space-y-1">
+              {report.actions.map((a: any, i: number) => (
+                <li key={i} className="text-body-md text-on-surface">
+                  [{a.priority}] <strong>{a.title}</strong>
+                  {a.recommendation && ` — ${a.recommendation}`}
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
+        {/* 风险提醒 */}
+        {report.risks.length > 0 && (
+          <section>
+            <h4 className="text-body-md font-body-md text-on-surface font-semibold mb-2">风险提醒</h4>
+            <ul className="list-disc pl-5 space-y-1">
+              {report.risks.map((r: string, i: number) => (
+                <li key={i} className="text-label-md text-on-surface-variant">{r}</li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* 需要进一步验证 */}
+        {report.validationQuestions.length > 0 && (
+          <section>
+            <h4 className="text-body-md font-body-md text-on-surface font-semibold mb-2">需要进一步验证</h4>
+            <ul className="list-disc pl-5 space-y-1">
+              {report.validationQuestions.map((q: string, i: number) => (
+                <li key={i} className="text-label-md text-on-surface-variant">{q}</li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* 给老板看的摘要 */}
+        {(report.bossSummary.core.length > 0 || report.bossSummary.consequences.length > 0) && (
+          <section>
+            <h4 className="text-body-md font-body-md text-on-surface font-semibold mb-2">给老板看的摘要</h4>
+            {report.bossSummary.core.length > 0 && (
+              <div className="mb-2">
+                <span className="text-label-md text-on-surface-variant font-semibold">核心问题：</span>
+                <ul className="list-disc pl-5 mt-1">
+                  {report.bossSummary.core.map((item: string, i: number) => <li key={i} className="text-label-md text-on-surface">{item}</li>)}
+                </ul>
+              </div>
+            )}
+            {report.bossSummary.consequences.length > 0 && (
+              <div className="mb-2">
+                <span className="text-label-md text-on-surface-variant font-semibold">直接后果：</span>
+                <ul className="list-disc pl-5 mt-1">
+                  {report.bossSummary.consequences.map((item: string, i: number) => <li key={i} className="text-label-md text-on-surface">{item}</li>)}
+                </ul>
+              </div>
+            )}
+            {report.bossSummary.opportunities.length > 0 && (
+              <div className="mb-2">
+                <span className="text-label-md text-on-surface-variant font-semibold">关键机会：</span>
+                <ul className="list-disc pl-5 mt-1">
+                  {report.bossSummary.opportunities.map((item: string, i: number) => <li key={i} className="text-label-md text-on-surface">{item}</li>)}
+                </ul>
+              </div>
+            )}
+          </section>
+        )}
+      </div>
     </div>
   );
 }
@@ -1167,6 +1354,7 @@ export default function AnalysisReportClient(props: Props) {
                 semVal={semVal}
                 isGeneratingSegInsight={isGeneratingSegInsight}
                 onGenerateSegInsight={handleGenerateSegInsight}
+                segmentJson={(props as any).segmentJson}
               />
             )}
             {activeTab === "证据链" && (
