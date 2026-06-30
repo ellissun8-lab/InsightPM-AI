@@ -336,6 +336,120 @@ export default async function RunDetailPage({
             <InfoField label="锁定者" value={run.lockedBy || "-"} />
           </div>
 
+          {/* Run Metrics */}
+          {run.metrics && (
+            <div className="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden mb-xl">
+              <div className="px-lg py-md border-b border-outline-variant bg-surface-container-low">
+                <h3 className="text-title-lg font-title-lg text-on-surface font-semibold">运行指标</h3>
+              </div>
+              <div className="px-lg py-md">
+                {/* Summary grid */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-md mb-md">
+                  <div>
+                    <div className="text-label-sm font-label-sm text-on-surface-variant">总耗时</div>
+                    <div className="text-body-md font-body-md text-on-surface font-medium">
+                      {run.metrics.durationSeconds != null ? `${run.metrics.durationSeconds}s` : "-"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-label-sm font-label-sm text-on-surface-variant">反馈数量</div>
+                    <div className="text-body-md font-body-md text-on-surface font-medium">
+                      {run.metrics.feedbackCount ?? feedbackCount ?? "-"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-label-sm font-label-sm text-on-surface-variant">平均每条耗时</div>
+                    <div className="text-body-md font-body-md text-on-surface font-medium">
+                      {run.metrics.durationSeconds != null && feedbackCount > 0
+                        ? `${(run.metrics.durationSeconds / feedbackCount).toFixed(1)}s`
+                        : "-"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-label-sm font-label-sm text-on-surface-variant">AI 模型</div>
+                    <div className="text-body-md font-body-md text-on-surface font-medium">
+                      {run.metrics.aiModel || "未统计"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-label-sm font-label-sm text-on-surface-variant">校验模型</div>
+                    <div className="text-body-md font-body-md text-on-surface font-medium">
+                      {run.metrics.validationModel || "未统计"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-label-sm font-label-sm text-on-surface-variant">Token 使用量</div>
+                    <div className="text-body-md font-body-md text-on-surface font-medium">
+                      {run.metrics.tokenUsage?.totalTokens != null
+                        ? run.metrics.tokenUsage.totalTokens.toLocaleString()
+                        : "未统计"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-label-sm font-label-sm text-on-surface-variant">估算成本</div>
+                    <div className="text-body-md font-body-md text-on-surface font-medium">
+                      {run.metrics.costEstimatedUsd != null
+                        ? `$${run.metrics.costEstimatedUsd.toFixed(4)}`
+                        : "未统计"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-label-sm font-label-sm text-on-surface-variant">慢步骤</div>
+                    <div className="text-body-md font-body-md text-on-surface font-medium">
+                      {run.metrics.slowSteps?.length > 0
+                        ? run.metrics.slowSteps.join(", ")
+                        : "无"}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step durations table */}
+                {run.metrics.stepDurations?.length > 0 && (
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left">
+                      <thead>
+                        <tr className="border-b border-outline-variant/50">
+                          <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">步骤</th>
+                          <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold text-center">状态</th>
+                          <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold text-right">耗时</th>
+                          <th className="px-lg py-sm text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold text-center">慢步骤</th>
+                        </tr>
+                      </thead>
+                      <tbody className="text-body-md font-body-md text-on-surface divide-y divide-outline-variant/50">
+                        {run.metrics.stepDurations.map((step: any, i: number) => (
+                          <tr key={i} className="hover:bg-surface-container-low transition-colors">
+                            <td className="px-lg py-sm font-mono text-label-md">{step.step}</td>
+                            <td className="px-lg py-sm text-center">
+                              <span className={`inline-flex items-center px-2 py-0.5 rounded text-label-sm font-label-sm ${
+                                step.status === "pass" ? "bg-emerald-50 text-emerald-700" :
+                                step.status === "fail" || step.status === "FAIL" ? "bg-red-50 text-red-700" :
+                                "bg-surface-variant text-on-surface-variant"
+                              }`}>
+                                {step.status}
+                              </span>
+                            </td>
+                            <td className="px-lg py-sm text-right font-mono text-label-md">
+                              {step.durationMs != null
+                                ? step.durationMs < 1000
+                                  ? `${step.durationMs}ms`
+                                  : `${(step.durationMs / 1000).toFixed(1)}s`
+                                : "-"}
+                            </td>
+                            <td className="px-lg py-sm text-center">
+                              {step.slowStep && (
+                                <span className="text-yellow-600 text-label-sm">⚠</span>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Error Details (failed only) */}
           {runStatus === "failed" && errorInfo && (
             <ErrorDetailsCard error={errorInfo} categoryLabels={CATEGORY_LABELS} />

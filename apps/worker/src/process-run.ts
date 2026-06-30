@@ -3,6 +3,7 @@ import { runPipeline } from "./pipeline-runner.js";
 import { discoverArtifacts, uploadAndRecordArtifacts } from "./artifacts.js";
 import { downloadFromStorage } from "./storage-downloader.js";
 import { startHeartbeat, updateHeartbeat, stopHeartbeat } from "./heartbeat.js";
+import { buildMetricsFromSummary } from "./cost-estimator.js";
 import * as path from "path";
 import * as os from "os";
 
@@ -258,6 +259,17 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
 
     console.log(`[Worker] Artifacts written: ${artifactResult.artifactTypes.join(", ")}`);
 
+    // Step 5.5: 提取运行指标
+    let metrics: Record<string, any> | null = null;
+    if (pipelineResult.summary) {
+      try {
+        metrics = buildMetricsFromSummary(pipelineResult.summary, feedbackCount);
+        console.log(`[Worker] Metrics: duration=${metrics.durationSeconds}s, steps=${metrics.stepDurations.length}, slowSteps=${metrics.slowSteps.length}`);
+      } catch (err: any) {
+        console.warn(`[Worker] Failed to build metrics: ${err.message}`);
+      }
+    }
+
     // Step 6: 标记完成
     const completedMetadata = {
       ...run.metadata,
@@ -270,6 +282,7 @@ export async function processRun(run: RunRecord, loadedVars?: Record<string, str
       artifactTypes: artifactResult.artifactTypes,
       hasReport: true,
       workerCompletedAt: now,
+      metrics: metrics || run.metadata?.metrics || null,
       // 清理错误信息
       error: null,
       failedAt: null,

@@ -40,6 +40,7 @@ export interface RunRecord {
   completedAt: string | null;
   failedAt: string | null;
   lastError: any | null;
+  metrics: any | null;
 
   // Legacy compatibility fields
   case_name: string;
@@ -463,6 +464,7 @@ function getRunsFromLocal(): RunRecord[] {
         completedAt: s.finishedAt || null,
         failedAt: null,
         lastError: null,
+        metrics: s.metrics || metadata?.metrics || null,
 
         // Legacy compatibility
         case_name: name,
@@ -543,7 +545,7 @@ async function getRunsFromSupabase(): Promise<{ data: RunRecord[]; error: any }>
 }
 
 async function getRunByCaseNameFromSupabase(caseName: string): Promise<RunRecord | null> {
-  const supabase = await getSupabaseClient();
+  const supabase = await getAdminClient();
   const { data, error } = await supabase.from("runs").select("*").eq("case_name", caseName).single();
   if (error || !data) return null;
   return mapSupabaseRunToRecord(data);
@@ -667,6 +669,7 @@ function mapSupabaseRunToRecord(row: any): RunRecord {
     completedAt: row.completed_at ?? null,
     failedAt: row.failed_at ?? null,
     lastError: row.last_error ?? null,
+    metrics: row.metadata?.metrics ?? null,
 
     // Legacy compatibility
     case_name: row.case_name,
